@@ -83,6 +83,7 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -92,6 +93,8 @@ body {
     color: var(--gray-800);
     background-color: var(--white);
     overflow-x: hidden;
+    position: relative;
+    width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -265,6 +268,17 @@ img {
     overflow: hidden;
 }
 
+.hero-section .container {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.hero-section .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .hero-overlay {
     position: absolute;
     top: 0;
@@ -329,11 +343,6 @@ img {
 @keyframes pulse {
     0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
     50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.2; }
-}
-
-.hero-section .container {
-    position: relative;
-    z-index: 2;
 }
 
 .min-vh-hero {
@@ -503,6 +512,7 @@ img {
     justify-content: center;
     align-items: center;
     padding: 40px;
+    overflow: hidden;
 }
 
 .product-glow-ring {
@@ -1026,6 +1036,7 @@ img {
     padding: 100px 0 80px;
     background: var(--white);
     position: relative;
+    overflow: hidden;
 }
 
 .mission-section::before {
@@ -1087,6 +1098,7 @@ img {
 .services-section {
     padding: var(--section-padding);
     background: var(--forest-green-pale);
+    overflow: hidden;
 }
 
 .services-section .section-title {
