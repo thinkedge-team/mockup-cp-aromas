@@ -3,6 +3,21 @@
    Custom JavaScript
    ======================================== */
 
+// ========== PRELOADER ==========
+window.addEventListener('load', function() {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        // Add a small delay for smooth transition
+        setTimeout(function() {
+            preloader.classList.add('hidden');
+            // Remove from DOM after animation completes
+            setTimeout(function() {
+                preloader.style.display = 'none';
+            }, 600);
+        }, 800);
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     
     // ========== INITIALIZATION ==========
