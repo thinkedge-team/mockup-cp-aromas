@@ -210,6 +210,50 @@ img {
     box-shadow: none;
 }
 
+/* Hamburger icon - default (di hero, background gelap) */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Hamburger icon - scrolled (background putih) */
+.navbar.scrolled .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33, 37, 41, 0.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Mobile menu dropdown styling */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background: var(--white);
+        padding: 20px;
+        margin-top: 15px;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-lg);
+        border: 1px solid rgba(34, 139, 34, 0.1);
+    }
+    
+    .navbar-collapse .navbar-nav {
+        gap: 5px;
+    }
+    
+    .navbar-collapse .nav-link {
+        color: var(--gray-700) !important;
+        padding: 12px 16px !important;
+        border-radius: var(--radius-sm);
+    }
+    
+    .navbar-collapse .nav-link:hover,
+    .navbar-collapse .nav-link.active {
+        color: var(--white) !important;
+        background: linear-gradient(135deg, var(--forest-green) 0%, var(--forest-green-dark) 100%);
+    }
+    
+    .navbar-collapse .btn-contact {
+        margin-top: 15px;
+        width: 100%;
+        text-align: center;
+    }
+}
+
 /* ========== HERO SECTION - NEW DESIGN ========== */
 .hero-section {
     position: relative;
@@ -2025,28 +2069,6 @@ img {
 @media (max-width: 768px) {
     :root {
         --section-padding: 60px 0;
-    }
-    
-    .navbar-collapse {
-        background: var(--white);
-        padding: 20px;
-        margin-top: 15px;
-        border-radius: var(--radius-md);
-        box-shadow: var(--shadow-lg);
-    }
-    
-    .navbar-nav {
-        gap: 5px;
-    }
-    
-    .nav-link {
-        padding: 12px 16px !important;
-    }
-    
-    .btn-contact {
-        margin-top: 15px;
-        width: 100%;
-        text-align: center;
     }
     
     .hero-section {
