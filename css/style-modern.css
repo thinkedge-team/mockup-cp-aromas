@@ -1,0 +1,101 @@
+/* ========================================
+   VMOND CIPTA SEJATI - MODERN UI DESIGN
+   Industrial Excellence Meets Digital Innovation
+   ======================================== */
+
+/* ========== CSS RESET & BASE ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Modern Color Palette */
+    --navy-deep: #0A1628;
+    --navy-main: #1A365D;
+    --gold-accent: #FFB800;
+    --gold-light: #FFC933;
+    --steel-blue: #4A90E2;
+    --mint-green: #00D4AA;
+    --slate-gray: #64748B;
+    --pure-white: #FFFFFF;
+    --glass-white: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, #0A1628 0%, #1A365D 50%, #FFB800 100%);
+    --gradient-mesh: radial-gradient(circle at 50% 50%, #1A365D 0%, #0A1628 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    --gradient-gold: linear-gradient(135deg, #FFB800 0%, #FFC933 100%);
+    
+    /* Spacing */
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 80px;
+    --space-4xl: 120px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #0A1628;
+    background: #ffffff;
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+/* Navigation - Keep existing but enhance */
+.navbar {
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(10, 22, 40, 0.95) !important;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Add animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Modern utility classes */
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
