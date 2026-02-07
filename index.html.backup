@@ -1,0 +1,1402 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <title>
+            Vmond Cipta Sejati - Leading Food Manufacturing Company in Indonesia
+        </title>
+
+        <!-- SEO Meta Tags -->
+        <meta
+            name="description"
+            content="Vmond Cipta Sejati is a trusted Indonesian food manufacturing company with 15+ years of excellence. Producer of AROMAS cooking oil and quality food products."
+        />
+        <parameter name="keywords"
+            content="vmond cipta sejati, food manufacturing indonesia, aromas cooking oil, food production, indonesian food manufacturer, palm oil producer, manufacturing excellence"
+        />
+        <meta
+            name="author"
+            content="Vmond Cipta Sejati"
+        />
+        <meta
+            name="robots"
+            content="index, follow"
+        />
+
+        <!-- Open Graph / Facebook -->
+        <meta
+            property="og:type"
+            content="website"
+        />
+        <meta
+            property="og:url"
+            content="https://vmondciptasejati.com/"
+        />
+        <meta
+            property="og:title"
+            content="Vmond Cipta Sejati - Leading Food Manufacturing Company"
+        />
+        <meta
+            property="og:description"
+            content="Trusted Indonesian food manufacturing company with 15+ years of excellence in producing quality food products including AROMAS cooking oil."
+        />
+        <meta
+            property="og:image"
+            content="https://vmondciptasejati.com/assets/images/LOGO_VMOND_CIPTA_SEJATI.png"
+        />
+        <meta
+            property="og:locale"
+            content="id_ID"
+        />
+        <meta
+            property="og:site_name"
+            content="Vmond Cipta Sejati"
+        />
+
+        <!-- Twitter -->
+        <meta
+            name="twitter:card"
+            content="summary_large_image"
+        />
+        <meta
+            name="twitter:url"
+            content="https://vmondciptasejati.com/"
+        />
+        <meta
+            name="twitter:title"
+            content="Vmond Cipta Sejati - Food Manufacturing Excellence"
+        />
+        <meta
+            name="twitter:description"
+            content="Leading Indonesian food manufacturer producing quality products for over 15 years. Home of AROMAS premium cooking oil."
+        />
+        <meta
+            name="twitter:image"
+            content="https://vmondciptasejati.com/assets/images/LOGO_VMOND_CIPTA_SEJATI.png"
+        />
+
+        <!-- Theme Color -->
+        <meta
+            name="theme-color"
+            content="#1A365D"
+        />
+        <meta
+            name="msapplication-TileColor"
+            content="#1A365D"
+        />
+
+        <!-- Bootstrap 5 CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+
+        <!-- Bootstrap Icons -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+            rel="stylesheet"
+        />
+
+        <!-- Google Fonts -->
+        <link
+            rel="preconnect"
+            href="https://fonts.googleapis.com"
+        />
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Poppins:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- AOS - Animate On Scroll Library -->
+        <link
+            href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+            rel="stylesheet"
+        />
+
+        <!-- Custom CSS -->
+        <link
+            rel="stylesheet"
+            href="css/style.css"
+        />
+    </head>
+    <body>
+        <!-- ========== PRELOADER ========== -->
+        <div
+            id="preloader"
+            class="preloader"
+        >
+            <div class="preloader-inner">
+                <div class="preloader-logo">
+                    <img src="assets/images/LOGO_VMOND_CIPTA_SEJATI.png" alt="Vmond Cipta Sejati" style="max-width: 200px; max-height: 80px;">
+                </div>
+                <div class="preloader-spinner">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                </div>
+                <p class="preloader-text">Loading...</p>
+            </div>
+        </div>
+        <!-- ========== HEADER / NAVIGATION ========== -->
+        <header id="header">
+            <nav class="navbar navbar-expand-lg fixed-top">
+                <div class="container">
+                    <!-- Logo -->
+                    <a
+                        class="navbar-brand"
+                        href="#home"
+                    >
+                        <img src="assets/images/LOGO_VMOND_CIPTA_SEJATI.png" alt="Vmond Cipta Sejati" class="brand-logo">
+                    </a>
+
+                    <!-- Mobile Toggle Button -->
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav"
+                        aria-controls="navbarNav"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Navigation Menu -->
+                    <div
+                        class="collapse navbar-collapse"
+                        id="navbarNav"
+                    >
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link active"
+                                    href="#home"
+                                    >HOME</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="#product"
+                                    >PRODUCT</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="#certificate"
+                                    >CERTIFICATE</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="#promo"
+                                    >PROMO</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="#machine"
+                                    >OUR MACHINE</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="#contact"
+                                    >CONTACT US</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="#portofolio"
+                                    >PORTOFOLIO</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="#partnership"
+                                    >PARTNERSHIP</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- ========== HERO SECTION ========== -->
+        <section
+            id="home"
+            class="hero-section"
+        >
+            <div class="hero-overlay"></div>
+
+            <!-- Decorative Elements -->
+            <div class="hero-decoration">
+                <div class="decoration-circle circle-1"></div>
+                <div class="decoration-circle circle-2"></div>
+                <div class="decoration-circle circle-3"></div>
+            </div>
+
+            <div class="container">
+                <div class="row align-items-center min-vh-hero">
+                    <!-- Left Content -->
+                    <div class="col-lg-5 col-md-6 order-lg-1 order-2">
+                        <div
+                            class="hero-content-left"
+                            data-aos="fade-right"
+                        >
+                            <span class="hero-badge">
+                                <i class="bi bi-award-fill"></i> Manufacturing Excellence
+                            </span>
+                            <h1 class="hero-main-title">
+                                <span class="text-gradient">VMOND CIPTA SEJATI</span>
+                            </h1>
+                            <p class="hero-description">
+                                Building Indonesia's Manufacturing Future. A trusted food manufacturing company with over 15 years of excellence in producing quality products for Indonesian families and businesses nationwide.
+                            </p>
+
+                            <!-- Feature Pills -->
+                            <div class="hero-pills">
+                                <span class="pill"
+                                    ><i class="bi bi-check-circle-fill"></i>
+                                    ISO Certified</span
+                                >
+                                <span class="pill"
+                                    ><i class="bi bi-check-circle-fill"></i>
+                                    Halal MUI</span
+                                >
+                                <span class="pill"
+                                    ><i class="bi bi-check-circle-fill"></i>
+                                    BPOM Certified</span
+                                >
+                            </div>
+
+                            <!-- CTA Buttons -->
+                            <div class="hero-actions">
+                                <a
+                                    href="#product"
+                                    class="btn-primary-hero"
+                                >
+                                    <i class="bi bi-box-seam-fill"></i>
+                                    <span>Our Products</span>
+                                </a>
+                                <a
+                                    href="#partnership"
+                                    class="btn-secondary-hero"
+                                >
+                                    <i class="bi bi-handshake-fill"></i>
+                                    <span>Partner With Us</span>
+                                </a>
+                            </div>
+
+                            <!-- Trust Badges -->
+                            <div class="hero-trust">
+                                <div class="trust-item">
+                                    <strong>15+</strong>
+                                    <span>Years Experience</span>
+                                </div>
+                                <div class="trust-divider"></div>
+                                <div class="trust-item">
+                                    <strong>1M+</strong>
+                                    <span>Customers Served</span>
+                                </div>
+                                <div class="trust-divider"></div>
+                                <div class="trust-item">
+                                    <strong>500+</strong>
+                                    <span>Distribution Partners</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Center/Right Company Visual -->
+                    <div class="col-lg-7 col-md-6 order-lg-2 order-1">
+                        <div
+                            class="hero-product-wrapper"
+                            data-aos="fade-left"
+                            data-aos-delay="200"
+                        >
+                            <!-- Product Glow Effect -->
+                            <div class="product-glow-ring"></div>
+
+                            <!-- Main Company Logo -->
+                            <img
+                                src="assets/images/LOGO_VMOND_CIPTA_SEJATI.png"
+                                alt="Vmond Cipta Sejati"
+                                class="hero-product-img"
+                                style="max-width: 80%; filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5)) brightness(1.1);"
+                            />
+
+                            <!-- Floating Feature Cards -->
+                            <div
+                                class="floating-card card-1"
+                                data-aos="fade-down"
+                                data-aos-delay="400"
+                            >
+                                <div class="floating-icon">
+                                    <i class="bi bi-gear-fill"></i>
+                                </div>
+                                <div class="floating-text">
+                                    <strong>Advanced</strong>
+                                    <span>Technology</span>
+                                </div>
+                            </div>
+
+                            <div
+                                class="floating-card card-2"
+                                data-aos="fade-up"
+                                data-aos-delay="500"
+                            >
+                                <div class="floating-icon">
+                                    <i class="bi bi-shield-check-fill"></i>
+                                </div>
+                                <div class="floating-text">
+                                    <strong>Quality</strong>
+                                    <span>Guaranteed</span>
+                                </div>
+                            </div>
+
+                            <div
+                                class="floating-card card-3"
+                                data-aos="fade-left"
+                                data-aos-delay="600"
+                            >
+                                <div class="floating-icon">
+                                    <i class="bi bi-globe-asia-australia"></i>
+                                </div>
+                                <div class="floating-text">
+                                    <strong>Nationwide</strong>
+                                    <span>Distribution</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <span>Scroll Down</span>
+            </div>
+        </section>
+
+
+
+
+
+        <!-- ========== CERTIFICATE SECTION ========== -->
+        <section
+            id="certificate"
+            class="certificate-section py-5 bg-light"
+        >
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-up">
+                    <h2 class="section-title">
+                        CERTIFICATIONS & COMPLIANCE
+                    </h2>
+                    <p class="section-subtitle">
+                        Vmond Cipta Sejati maintains the highest standards in food safety and quality management, 
+                        certified by national and international regulatory bodies.
+                    </p>
+                </div>
+
+                <div class="row g-4 justify-content-center">
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="certificate-card">
+                            <div class="certificate-icon">
+                                <i class="bi bi-shield-fill-check"></i>
+                            </div>
+                            <h4>BPOM RI</h4>
+                            <p class="certificate-number">MD 123456789</p>
+                            <p class="certificate-desc">
+                                Registered with Indonesian Food and Drug Monitoring Agency, ensuring product safety and quality standards.
+                            </p>
+                            <span class="certificate-badge valid">
+                                <i class="bi bi-check-circle-fill"></i> Valid
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="certificate-card">
+                            <div class="certificate-icon text-success">
+                                <i class="bi bi-patch-check-fill"></i>
+                            </div>
+                            <h4>HALAL MUI</h4>
+                            <p class="certificate-number">ID12345678910111</p>
+                            <p class="certificate-desc">
+                                Certified Halal by Majelis Ulama Indonesia, guaranteeing compliance with Islamic dietary laws.
+                            </p>
+                            <span class="certificate-badge valid">
+                                <i class="bi bi-check-circle-fill"></i> Valid
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="certificate-card">
+                            <div class="certificate-icon text-primary">
+                                <i class="bi bi-award-fill"></i>
+                            </div>
+                            <h4>ISO 22000:2018</h4>
+                            <p class="certificate-number">FSMS-2023-001</p>
+                            <p class="certificate-desc">
+                                International Food Safety Management System certification, ensuring comprehensive quality control.
+                            </p>
+                            <span class="certificate-badge valid">
+                                <i class="bi bi-check-circle-fill"></i> Valid
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                        <div class="certificate-card">
+                            <div class="certificate-icon text-warning">
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <h4>GMP</h4>
+                            <p class="certificate-number">GMP-ID-2023</p>
+                            <p class="certificate-desc">
+                                Good Manufacturing Practice certification, maintaining hygiene and production standards.
+                            </p>
+                            <span class="certificate-badge valid">
+                                <i class="bi bi-check-circle-fill"></i> Valid
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-5" data-aos="fade-up">
+                    <a href="#contact" class="btn btn-primary btn-lg">
+                        Request Certificate Documents
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PRODUCT SECTION ========== -->
+        <section
+            id="product"
+            class="product-section py-5"
+        >
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <div class="product-image-wrapper">
+                            <img
+                                src="assets/images/aromas-product.png"
+                                alt="AROMAS Cooking Oil"
+                                class="img-fluid product-img"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <div class="product-content">
+                            <span class="product-badge">FLAGSHIP PRODUCT</span>
+                            <h2 class="product-title">
+                                AROMAS<br />
+                                <span class="product-subtitle">Premium Cooking Oil</span>
+                            </h2>
+                            <p class="product-description">
+                                AROMAS is our flagship premium cooking oil brand, produced with advanced technology 
+                                and strict quality control to deliver the best cooking experience for Indonesian families. 
+                                Made from selected palm oil with international food safety standards.
+                            </p>
+                            
+                            <div class="product-features">
+                                <div class="feature-item">
+                                    <i class="bi bi-check-circle-fill text-success"></i>
+                                    <span>Low cholesterol & heart-healthy</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="bi bi-check-circle-fill text-success"></i>
+                                    <span>Crystal clear & odorless</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="bi bi-check-circle-fill text-success"></i>
+                                    <span>High smoke point for repeated frying</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="bi bi-check-circle-fill text-success"></i>
+                                    <span>Enriched with natural Vitamin E</span>
+                                </div>
+                            </div>
+
+                            <div class="product-variants mt-4">
+                                <h5>Available Sizes:</h5>
+                                <div class="variants-list">
+                                    <span class="variant-badge">250ml</span>
+                                    <span class="variant-badge">500ml</span>
+                                    <span class="variant-badge">1L</span>
+                                    <span class="variant-badge">2L</span>
+                                    <span class="variant-badge">5L</span>
+                                    <span class="variant-badge">18L (Bulk)</span>
+                                </div>
+                            </div>
+
+                            <div class="product-cta mt-4">
+                                <a href="#contact" class="btn btn-primary btn-lg">Request Quote</a>
+                                <a href="#certificate" class="btn btn-outline-primary btn-lg ms-2">View Certificates</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PROMO SECTION ========== -->
+        <section
+            id="promo"
+            class="promo-section py-5"
+            style="background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-navy-dark) 100%);"
+        >
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <div class="promo-content text-white">
+                            <span class="promo-badge">SPECIAL OFFER</span>
+                            <h2 class="display-4 fw-bold mb-4">
+                                B2B Partnership Opportunities
+                            </h2>
+                            <p class="lead mb-4">
+                                Join our growing network of business partners and enjoy exclusive benefits 
+                                for bulk orders, competitive pricing, and guaranteed supply chain.
+                            </p>
+                            
+                            <div class="promo-benefits">
+                                <div class="benefit-row">
+                                    <i class="bi bi-check-circle-fill text-warning"></i>
+                                    <span>Competitive wholesale pricing for bulk orders</span>
+                                </div>
+                                <div class="benefit-row">
+                                    <i class="bi bi-check-circle-fill text-warning"></i>
+                                    <span>Flexible payment terms & credit facilities</span>
+                                </div>
+                                <div class="benefit-row">
+                                    <i class="bi bi-check-circle-fill text-warning"></i>
+                                    <span>Dedicated account manager support</span>
+                                </div>
+                                <div class="benefit-row">
+                                    <i class="bi bi-check-circle-fill text-warning"></i>
+                                    <span>Priority delivery & logistics support</span>
+                                </div>
+                                <div class="benefit-row">
+                                    <i class="bi bi-check-circle-fill text-warning"></i>
+                                    <span>Marketing & promotional support</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-5">
+                                <a href="#contact" class="btn btn-warning btn-lg me-3">
+                                    <i class="bi bi-envelope-fill me-2"></i>Contact for Details
+                                </a>
+                                <a href="#partnership" class="btn btn-outline-light btn-lg">
+                                    Learn More
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <div class="promo-features">
+                            <div class="feature-box">
+                                <div class="feature-icon">
+                                    <i class="bi bi-truck"></i>
+                                </div>
+                                <h4>Nationwide Distribution</h4>
+                                <p>Reliable delivery across all provinces in Indonesia</p>
+                            </div>
+                            <div class="feature-box">
+                                <div class="feature-icon">
+                                    <i class="bi bi-box-seam"></i>
+                                </div>
+                                <h4>Bulk Order Discounts</h4>
+                                <p>Save up to 20% on large volume orders</p>
+                            </div>
+                            <div class="feature-box">
+                                <div class="feature-icon">
+                                    <i class="bi bi-calendar-check"></i>
+                                </div>
+                                <h4>Flexible Terms</h4>
+                                <p>30-60 day payment terms for qualified partners</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== OUR MACHINE SECTION ========== -->
+        <section
+            id="our-machine"
+            class="machine-section py-5 bg-light"
+        >
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-up">
+                    <h2 class="section-title">OUR PRODUCTION MACHINES</h2>
+                    <p class="section-subtitle">
+                        State-of-the-art machinery and technology for premium quality production
+                    </p>
+                </div>
+
+                <!-- Main Carousel -->
+                <div id="machineCarousel" class="carousel slide" data-bs-ride="carousel" data-aos="fade-up">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#machineCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Machine 1"></button>
+                        <button type="button" data-bs-target="#machineCarousel" data-bs-slide-to="1" aria-label="Machine 2"></button>
+                        <button type="button" data-bs-target="#machineCarousel" data-bs-slide-to="2" aria-label="Machine 3"></button>
+                        <button type="button" data-bs-target="#machineCarousel" data-bs-slide-to="3" aria-label="Machine 4"></button>
+                        <button type="button" data-bs-target="#machineCarousel" data-bs-slide-to="4" aria-label="Machine 5"></button>
+                        <button type="button" data-bs-target="#machineCarousel" data-bs-slide-to="5" aria-label="Machine 6"></button>
+                        <button type="button" data-bs-target="#machineCarousel" data-bs-slide-to="6" aria-label="Machine 7"></button>
+                        <button type="button" data-bs-target="#machineCarousel" data-bs-slide-to="7" aria-label="Machine 8"></button>
+                        <button type="button" data-bs-target="#machineCarousel" data-bs-slide-to="8" aria-label="Machine 9"></button>
+                    </div>
+                    
+                    <div class="carousel-inner rounded-3 shadow-lg">
+                        <div class="carousel-item active">
+                            <img src="assets/images/machine-1.jpeg" class="d-block w-100" alt="Production Machine 1" style="height: 500px; object-fit: cover;">
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-3">
+                                <h5>Advanced Refining System</h5>
+                                <p>High-capacity oil refining equipment for premium quality output</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="assets/images/machine-2.jpeg" class="d-block w-100" alt="Production Machine 2" style="height: 500px; object-fit: cover;">
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-3">
+                                <h5>Automated Filtration Unit</h5>
+                                <p>State-of-the-art filtration technology for crystal clear oil</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="assets/images/machine-3.jpeg" class="d-block w-100" alt="Production Machine 3" style="height: 500px; object-fit: cover;">
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-3">
+                                <h5>Quality Control Laboratory</h5>
+                                <p>Advanced testing equipment ensuring product standards</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="assets/images/machine-4.jpeg" class="d-block w-100" alt="Production Machine 4" style="height: 500px; object-fit: cover;">
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-3">
+                                <h5>Automated Bottling Line</h5>
+                                <p>High-speed bottling system with precision filling</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="assets/images/machine-5.jpeg" class="d-block w-100" alt="Production Machine 5" style="height: 500px; object-fit: cover;">
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-3">
+                                <h5>Packaging Automation</h5>
+                                <p>Efficient packaging system for various product sizes</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="assets/images/machine-6.jpeg" class="d-block w-100" alt="Production Machine 6" style="height: 500px; object-fit: cover;">
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-3">
+                                <h5>Storage & Distribution Center</h5>
+                                <p>Temperature-controlled storage facilities</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="assets/images/machine-7.jpeg" class="d-block w-100" alt="Production Machine 7" style="height: 500px; object-fit: cover;">
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-3">
+                                <h5>Processing Equipment</h5>
+                                <p>Modern processing machinery for optimal results</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="assets/images/machine-8.jpeg" class="d-block w-100" alt="Production Machine 8" style="height: 500px; object-fit: cover;">
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-3">
+                                <h5>Sterilization System</h5>
+                                <p>Industrial-grade sterilization for food safety</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="assets/images/machine-9.jpeg" class="d-block w-100" alt="Production Machine 9" style="height: 500px; object-fit: cover;">
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-3">
+                                <h5>Waste Management Unit</h5>
+                                <p>Eco-friendly waste processing and recycling system</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-control-prev" type="button" data-bs-target="#machineCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#machineCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+                <!-- Thumbnail Navigation -->
+                <div class="machine-thumbnails mt-4" data-aos="fade-up">
+                    <div class="row g-2">
+                        <div class="col">
+                            <img src="assets/images/machine-1.jpeg" class="img-thumbnail cursor-pointer" data-bs-target="#machineCarousel" data-bs-slide-to="0" alt="Machine 1" style="height: 80px; width: 100%; object-fit: cover;">
+                        </div>
+                        <div class="col">
+                            <img src="assets/images/machine-2.jpeg" class="img-thumbnail cursor-pointer" data-bs-target="#machineCarousel" data-bs-slide-to="1" alt="Machine 2" style="height: 80px; width: 100%; object-fit: cover;">
+                        </div>
+                        <div class="col">
+                            <img src="assets/images/machine-3.jpeg" class="img-thumbnail cursor-pointer" data-bs-target="#machineCarousel" data-bs-slide-to="2" alt="Machine 3" style="height: 80px; width: 100%; object-fit: cover;">
+                        </div>
+                        <div class="col">
+                            <img src="assets/images/machine-4.jpeg" class="img-thumbnail cursor-pointer" data-bs-target="#machineCarousel" data-bs-slide-to="3" alt="Machine 4" style="height: 80px; width: 100%; object-fit: cover;">
+                        </div>
+                        <div class="col">
+                            <img src="assets/images/machine-5.jpeg" class="img-thumbnail cursor-pointer" data-bs-target="#machineCarousel" data-bs-slide-to="4" alt="Machine 5" style="height: 80px; width: 100%; object-fit: cover;">
+                        </div>
+                        <div class="col">
+                            <img src="assets/images/machine-6.jpeg" class="img-thumbnail cursor-pointer" data-bs-target="#machineCarousel" data-bs-slide-to="5" alt="Machine 6" style="height: 80px; width: 100%; object-fit: cover;">
+                        </div>
+                        <div class="col">
+                            <img src="assets/images/machine-7.jpeg" class="img-thumbnail cursor-pointer" data-bs-target="#machineCarousel" data-bs-slide-to="6" alt="Machine 7" style="height: 80px; width: 100%; object-fit: cover;">
+                        </div>
+                        <div class="col">
+                            <img src="assets/images/machine-8.jpeg" class="img-thumbnail cursor-pointer" data-bs-target="#machineCarousel" data-bs-slide-to="7" alt="Machine 8" style="height: 80px; width: 100%; object-fit: cover;">
+                        </div>
+                        <div class="col">
+                            <img src="assets/images/machine-9.jpeg" class="img-thumbnail cursor-pointer" data-bs-target="#machineCarousel" data-bs-slide-to="8" alt="Machine 9" style="height: 80px; width: 100%; object-fit: cover;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-5" data-aos="fade-up">
+                    <p class="text-muted">
+                        <i class="bi bi-building me-2"></i>
+                        Visit our production facility for a complete tour and quality assurance demonstration
+                    </p>
+                    <a href="#contact" class="btn btn-primary">Schedule Factory Visit</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PORTOFOLIO SECTION ========== -->
+        <section
+            id="portofolio"
+            class="portfolio-section py-5 bg-light"
+        >
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-up">
+                    <h2 class="section-title">OUR PORTFOLIO & ACHIEVEMENTS</h2>
+                    <p class="section-subtitle">
+                        A track record of excellence in food manufacturing industry
+                    </p>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stat-box text-center">
+                            <div class="stat-icon">
+                                <i class="bi bi-calendar-check"></i>
+                            </div>
+                            <h3 class="stat-number">15+</h3>
+                            <p class="stat-label">Years of Excellence</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stat-box text-center">
+                            <div class="stat-icon">
+                                <i class="bi bi-box-seam"></i>
+                            </div>
+                            <h3 class="stat-number">1M+</h3>
+                            <p class="stat-label">Products Distributed Monthly</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="stat-box text-center">
+                            <div class="stat-icon">
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <h3 class="stat-number">500+</h3>
+                            <p class="stat-label">Business Partners</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                        <div class="stat-box text-center">
+                            <div class="stat-icon">
+                                <i class="bi bi-award"></i>
+                            </div>
+                            <h3 class="stat-number">10+</h3>
+                            <p class="stat-label">Industry Awards</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievement Timeline -->
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="text-center mb-4" data-aos="fade-up">Milestone Timeline</h3>
+                        <div class="timeline">
+                            <div class="timeline-item" data-aos="fade-right">
+                                <div class="timeline-year">2024</div>
+                                <div class="timeline-content">
+                                    <h5>Top Brand Award</h5>
+                                    <p>AROMAS recognized as Top Brand in cooking oil category by Frontier Consulting Group</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item" data-aos="fade-left">
+                                <div class="timeline-year">2023</div>
+                                <div class="timeline-content">
+                                    <h5>ISO 22000:2018 Certification</h5>
+                                    <p>Achieved international food safety management system certification</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item" data-aos="fade-right">
+                                <div class="timeline-year">2022</div>
+                                <div class="timeline-content">
+                                    <h5>Production Expansion</h5>
+                                    <p>Opened new production facility with 5000 tons monthly capacity</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item" data-aos="fade-left">
+                                <div class="timeline-year">2020</div>
+                                <div class="timeline-content">
+                                    <h5>National Distribution Network</h5>
+                                    <p>Expanded distribution to all 34 provinces in Indonesia</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item" data-aos="fade-right">
+                                <div class="timeline-year">2015</div>
+                                <div class="timeline-content">
+                                    <h5>AROMAS Brand Launch</h5>
+                                    <p>Successfully launched AROMAS premium cooking oil brand</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item" data-aos="fade-left">
+                                <div class="timeline-year">2010</div>
+                                <div class="timeline-content">
+                                    <h5>Company Establishment</h5>
+                                    <p>Vmond Cipta Sejati founded with vision to become leading food manufacturer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success Stories Grid -->
+                <div class="row g-4 mt-5">
+                    <div class="col-12">
+                        <h3 class="text-center mb-4" data-aos="fade-up">Featured Projects</h3>
+                    </div>
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <i class="bi bi-building-fill-gear"></i>
+                            </div>
+                            <h4>Modern Factory Setup</h4>
+                            <p>State-of-the-art production facility equipped with automated systems and quality control laboratories</p>
+                            <span class="project-badge">Completed 2022</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <i class="bi bi-globe-asia-australia"></i>
+                            </div>
+                            <h4>Export Market Penetration</h4>
+                            <p>Successfully entered Southeast Asian markets including Malaysia, Singapore, and Philippines</p>
+                            <span class="project-badge">Ongoing</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <i class="bi bi-recycle"></i>
+                            </div>
+                            <h4>Sustainability Initiative</h4>
+                            <p>Implemented eco-friendly production processes reducing waste by 40% and energy consumption by 30%</p>
+                            <span class="project-badge">Completed 2023</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PARTNERSHIP SECTION ========== -->
+        <section
+            id="partnership"
+            class="partnership-section py-5"
+        >
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-up">
+                    <h2 class="section-title">BECOME OUR PARTNER</h2>
+                    <p class="section-subtitle">
+                        Join our network of trusted partners and grow your business with us
+                    </p>
+                </div>
+
+                <!-- Partnership Types -->
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="partnership-card">
+                            <div class="partnership-icon">
+                                <i class="bi bi-shop-window"></i>
+                            </div>
+                            <h4>Retail Distribution</h4>
+                            <p>Partner with us to distribute AROMAS products in modern retail stores, supermarkets, and convenience stores nationwide.</p>
+                            <ul class="partnership-benefits">
+                                <li><i class="bi bi-check2"></i> Exclusive territory rights</li>
+                                <li><i class="bi bi-check2"></i> Marketing support materials</li>
+                                <li><i class="bi bi-check2"></i> Promotional programs</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="partnership-card featured">
+                            <div class="partnership-badge">POPULAR</div>
+                            <div class="partnership-icon">
+                                <i class="bi bi-building"></i>
+                            </div>
+                            <h4>B2B Wholesale</h4>
+                            <p>Become our wholesale partner and supply AROMAS products to restaurants, hotels, catering services, and food industries.</p>
+                            <ul class="partnership-benefits">
+                                <li><i class="bi bi-check2"></i> Competitive bulk pricing</li>
+                                <li><i class="bi bi-check2"></i> Flexible payment terms</li>
+                                <li><i class="bi bi-check2"></i> Priority logistics support</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="partnership-card">
+                            <div class="partnership-icon">
+                                <i class="bi bi-globe-americas"></i>
+                            </div>
+                            <h4>Export Partnership</h4>
+                            <p>Expand to international markets by becoming our export distribution partner in Southeast Asia and beyond.</p>
+                            <ul class="partnership-benefits">
+                                <li><i class="bi bi-check2"></i> Export documentation support</li>
+                                <li><i class="bi bi-check2"></i> International standards compliance</li>
+                                <li><i class="bi bi-check2"></i> Dedicated export team</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Partnership Benefits Section -->
+                <div class="row align-items-center mb-5">
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <h3 class="mb-4">Why Partner With Us?</h3>
+                        <div class="benefit-list">
+                            <div class="benefit-item">
+                                <div class="benefit-icon-sm">
+                                    <i class="bi bi-trophy-fill"></i>
+                                </div>
+                                <div>
+                                    <h5>Established Brand</h5>
+                                    <p>AROMAS is a trusted and recognized brand in the Indonesian market</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon-sm">
+                                    <i class="bi bi-shield-check"></i>
+                                </div>
+                                <div>
+                                    <h5>Quality Assurance</h5>
+                                    <p>All products certified by BPOM, Halal MUI, and ISO 22000</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon-sm">
+                                    <i class="bi bi-graph-up-arrow"></i>
+                                </div>
+                                <div>
+                                    <h5>Growth Opportunity</h5>
+                                    <p>Be part of Indonesia's growing food manufacturing industry</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon-sm">
+                                    <i class="bi bi-headset"></i>
+                                </div>
+                                <div>
+                                    <h5>Dedicated Support</h5>
+                                    <p>24/7 customer service and account manager assistance</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <div class="partnership-cta-box">
+                            <h3>Ready to Partner?</h3>
+                            <p>Fill out the partnership inquiry form and our team will contact you within 24 hours to discuss opportunities.</p>
+                            <form class="partnership-form">
+                                <input type="text" class="form-control mb-3" placeholder="Your Name" required>
+                                <input type="email" class="form-control mb-3" placeholder="Email Address" required>
+                                <input type="tel" class="form-control mb-3" placeholder="Phone Number" required>
+                                <select class="form-select mb-3" required>
+                                    <option value="">Select Partnership Type</option>
+                                    <option value="retail">Retail Distribution</option>
+                                    <option value="b2b">B2B Wholesale</option>
+                                    <option value="export">Export Partnership</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary w-100 btn-lg">
+                                    <i class="bi bi-send-fill me-2"></i>Submit Partnership Inquiry
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current Partners Logos -->
+                <div class="partners-showcase" data-aos="fade-up">
+                    <h4 class="text-center mb-4">Our Trusted Partners</h4>
+                    <div class="partners-logos-grid">
+                        <div class="partner-logo-item">
+                            <i class="bi bi-shop"></i>
+                            <span>Indomaret</span>
+                        </div>
+                        <div class="partner-logo-item">
+                            <i class="bi bi-shop"></i>
+                            <span>Alfamart</span>
+                        </div>
+                        <div class="partner-logo-item">
+                            <i class="bi bi-cart4"></i>
+                            <span>Hypermart</span>
+                        </div>
+                        <div class="partner-logo-item">
+                            <i class="bi bi-bag"></i>
+                            <span>Giant</span>
+                        </div>
+                        <div class="partner-logo-item">
+                            <i class="bi bi-basket"></i>
+                            <span>Superindo</span>
+                        </div>
+                        <div class="partner-logo-item">
+                            <i class="bi bi-globe"></i>
+                            <span>Tokopedia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- ========== CONTACT US SECTION ========== -->
+        <section
+            id="contact"
+            class="contact-section py-5"
+        >
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-up">
+                    <h2 class="section-title">GET IN TOUCH WITH US</h2>
+                    <p class="section-subtitle">
+                        We're here to help with product inquiries, business partnerships, or any questions you may have
+                    </p>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Contact Information -->
+                    <div class="col-lg-5" data-aos="fade-right">
+                        <div class="contact-info-wrapper">
+                            <h3 class="mb-4">Contact Information</h3>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h5>Head Office</h5>
+                                    <p>
+                                        Jl. Industri Raya No. 123<br>
+                                        Kawasan Industri MM2100<br>
+                                        Cikarang Barat, Bekasi 17520<br>
+                                        Jawa Barat, Indonesia
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="bi bi-telephone-fill"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h5>Phone</h5>
+                                    <p>
+                                        Office: +62 21 8998 7654<br>
+                                        Sales: +62 811 8888 9999<br>
+                                        WhatsApp: +62 812 7777 8888
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="bi bi-envelope-fill"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h5>Email</h5>
+                                    <p>
+                                        General: info@vmondciptasejati.com<br>
+                                        Sales: sales@vmondciptasejati.com<br>
+                                        Support: support@vmondciptasejati.com
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="bi bi-clock-fill"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h5>Business Hours</h5>
+                                    <p>
+                                        Monday - Friday: 08:00 - 17:00 WIB<br>
+                                        Saturday: 08:00 - 12:00 WIB<br>
+                                        Sunday & Holidays: Closed
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="social-links mt-4">
+                                <h5 class="mb-3">Follow Us</h5>
+                                <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" class="social-link"><i class="bi bi-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="col-lg-7" data-aos="fade-left">
+                        <div class="contact-form-wrapper">
+                            <h3 class="mb-4">Send Us a Message</h3>
+                            <form id="contactForm">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="name" class="form-label">Full Name *</label>
+                                        <input type="text" class="form-control" id="name" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="company" class="form-label">Company Name</label>
+                                        <input type="text" class="form-control" id="company">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Email Address *</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="phone" class="form-label">Phone Number *</label>
+                                        <input type="tel" class="form-control" id="phone" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="subject" class="form-label">Subject *</label>
+                                        <select class="form-select" id="subject" required>
+                                            <option value="">Select a subject...</option>
+                                            <option value="product">Product Inquiry</option>
+                                            <option value="partnership">Business Partnership</option>
+                                            <option value="bulk">Bulk Order Request</option>
+                                            <option value="distribution">Distribution Opportunity</option>
+                                            <option value="factory">Factory Visit Request</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="message" class="form-label">Message *</label>
+                                        <textarea class="form-control" id="message" rows="5" required></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                                            <i class="bi bi-send-fill me-2"></i>Send Message
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map Section -->
+                <div class="row mt-5">
+                    <div class="col-12" data-aos="fade-up">
+                        <div class="map-container rounded-3 overflow-hidden shadow">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126920.19207033298!2d107.07708524999999!3d-6.2607632!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698fa07d7f9d6f%3A0x6be5e8de5c8e20ea!2sMM2100%20Industrial%20Town!5e0!3m2!1sen!2sid!4v1234567890"
+                                width="100%" 
+                                height="400" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== FOOTER ========== -->
+        <footer
+            id="footer"
+            class="footer-section"
+            style="background: linear-gradient(135deg, var(--primary-navy-dark) 0%, #000 100%);"
+        >
+            <div class="container">
+                <div class="footer-top">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                            <div class="footer-brand">
+                                <a href="#" class="footer-logo d-flex align-items-center mb-3">
+                                    <img 
+                                        src="assets/images/LOGO_VMOND_CIPTA_SEJATI.png" 
+                                        alt="Vmond Cipta Sejati" 
+                                        style="height: 50px;"
+                                    >
+                                </a>
+                                <p class="text-light">
+                                    Leading food manufacturing company in Indonesia, producing premium quality 
+                                    cooking oil under the AROMAS brand. Committed to excellence, innovation, 
+                                    and sustainable practices since 2010.
+                                </p>
+                                <div class="footer-certifications mt-3">
+                                    <span class="cert-badge"><i class="bi bi-patch-check-fill"></i> BPOM</span>
+                                    <span class="cert-badge"><i class="bi bi-patch-check-fill"></i> HALAL</span>
+                                    <span class="cert-badge"><i class="bi bi-patch-check-fill"></i> ISO 22000</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-2 col-md-6 col-6 mb-4 mb-lg-0">
+                            <h5 class="text-warning">Quick Links</h5>
+                            <ul class="footer-links">
+                                <li><a href="#home">Home</a></li>
+                                <li><a href="#product">Product</a></li>
+                                <li><a href="#certificate">Certificate</a></li>
+                                <li><a href="#promo">Promo</a></li>
+                                <li><a href="#our-machine">Our Machine</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="col-lg-2 col-md-6 col-6 mb-4 mb-lg-0">
+                            <h5 class="text-warning">Company</h5>
+                            <ul class="footer-links">
+                                <li><a href="#portofolio">Portfolio</a></li>
+                                <li><a href="#partnership">Partnership</a></li>
+                                <li><a href="#contact">Contact Us</a></li>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">News & Events</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6">
+                            <h5 class="text-warning">Contact Info</h5>
+                            <ul class="footer-contact">
+                                <li class="text-light">
+                                    <i class="bi bi-geo-alt-fill text-warning"></i> 
+                                    Jl. Industri Raya No. 123, Kawasan Industri MM2100, 
+                                    Cikarang Barat, Bekasi 17520
+                                </li>
+                                <li class="text-light">
+                                    <i class="bi bi-envelope-fill text-warning"></i>
+                                    info@vmondciptasejati.com
+                                </li>
+                                <li class="text-light">
+                                    <i class="bi bi-telephone-fill text-warning"></i> 
+                                    +62 21 8998 7654
+                                </li>
+                                <li class="text-light">
+                                    <i class="bi bi-whatsapp text-warning"></i> 
+                                    +62 811 8888 9999
+                                </li>
+                            </ul>
+                            <div class="footer-social mt-3">
+                                <a href="#" class="text-light"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="text-light"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="text-light"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" class="text-light"><i class="bi bi-youtube"></i></a>
+                                <a href="#" class="text-light"><i class="bi bi-tiktok"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="footer-divider" style="border-color: rgba(255,255,255,0.1);">
+
+                <div class="footer-bottom">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <p class="copyright text-light mb-2 mb-md-0">
+                                &copy; 2026 <strong>Vmond Cipta Sejati</strong>. All Rights Reserved.
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <ul class="footer-legal">
+                                <li><a href="#" class="text-light">Terms & Conditions</a></li>
+                                <li><a href="#" class="text-light">Privacy Policy</a></li>
+                                <li><a href="#" class="text-light">Sitemap</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Back to Top Button -->
+        <button
+            id="backToTop"
+            class="back-to-top"
+        >
+            <i class="bi bi-arrow-up"></i>
+        </button>
+
+        <!-- WhatsApp Floating Button -->
+        <a
+            href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20bertanya%20tentang%20produk"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="whatsapp-float"
+            aria-label="Chat via WhatsApp"
+        >
+            <i class="bi bi-whatsapp"></i>
+            <span class="whatsapp-tooltip">Chat dengan Kami</span>
+        </a>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- AOS - Animate On Scroll Library -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+        <!-- Custom JS -->
+        <script src="js/script.js"></script>
+
+        <!-- Initialize AOS -->
+        <script>
+            AOS.init({
+                duration: 800,
+                easing: "ease-out-cubic",
+                once: true,
+                offset: 50,
+                delay: 100,
+            });
+        </script>
+    </body>
+</html>
