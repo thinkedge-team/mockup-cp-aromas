@@ -123,6 +123,12 @@
             rel="stylesheet"
         />
 
+        <!-- Leaflet CSS -->
+        <link
+            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+            rel="stylesheet"
+        />
+
         <!-- Custom CSS -->
         <link
             rel="stylesheet"
@@ -219,6 +225,20 @@
                                     class="nav-link"
                                     href="#blog"
                                     >Blog</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="#branches"
+                                    >Cabang</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="#faq"
+                                    >FAQ</a
                                 >
                             </li>
                         </ul>
@@ -1086,6 +1106,285 @@
             </div>
         </section>
 
+        <!-- ========== INTERACTIVE BRANCH SECTION ========== -->
+        <section
+            id="interactive-branches"
+            class="interactive-branch-section"
+        >
+            <div class="container">
+                <!-- Header -->
+                <div
+                    class="branch-header"
+                    data-aos="fade-up"
+                >
+                    <h2 class="section-title">
+                        Cabang <span class="italic">Kami</span>
+                    </h2>
+                    <p class="branch-desc">
+                        Temukan lokasi AROMAS terdekat dengan peta interaktif
+                    </p>
+                </div>
+
+                <!-- Interactive Map with Cards Inside -->
+                <div class="interactive-map-container" data-aos="fade-up" data-aos-delay="100">
+                    <div id="interactiveMap"></div>
+                    
+                    <!-- Fixed Info Cards at Bottom with Arrows -->
+                    <div class="cards-wrapper" data-aos="fade-up" data-aos-delay="200">
+                        <!-- Arrow Navigation -->
+                        <button class="card-arrow card-arrow-left" id="cardArrowLeft">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+                        
+                        <div class="info-cards-container" id="infoCards">
+                            <!-- Cards will be rendered by JavaScript -->
+                        </div>
+                        
+                        <button class="card-arrow card-arrow-right" id="cardArrowRight">
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== FAQ SECTION ========== -->
+        <section
+            id="faq"
+            class="faq-section"
+        >
+            <div class="container">
+                <div
+                    class="faq-header"
+                    data-aos="fade-up"
+                >
+                    <h2 class="section-title">
+                        Pertanyaan <span class="italic">Umum</span> tentang
+                        AROMAS
+                    </h2>
+                    <p class="faq-desc">
+                        Temukan jawaban untuk pertanyaan yang sering diajukan
+                        tentang produk dan layanan AROMAS.
+                    </p>
+                </div>
+
+                <div class="row g-4 mt-4">
+                    <div
+                        class="col-lg-6"
+                        data-aos="fade-up"
+                        data-aos-delay="100"
+                    >
+                        <div class="faq-accordion">
+                            <div class="faq-item">
+                                <div class="faq-header">
+                                    <span class="faq-icon"
+                                        ><i class="bi bi-question-circle"></i
+                                    ></span>
+                                    <span class="faq-title"
+                                        >Apa keunggulan minyak goreng AROMAS dibandingkan dengan merek lain?</span
+                                    >
+                                    <span class="faq-toggle"
+                                        ><i class="bi bi-plus-lg"></i
+                                    ></span>
+                                </div>
+                                <div class="faq-content">
+                                    <p>
+                                        Minyak goreng AROMAS diproduksi dengan
+                                        teknologi modern melalui proses
+                                        penyulingan multi-tahap yang menghasilkan
+                                        minyak yang jernih, tidak berbau, dan
+                                        memiliki titik asap tinggi. AROMAS juga
+                                        kaya akan vitamin E alami dan telah
+                                        teruji memiliki kandungan lemak jenuh
+                                        yang lebih rendah dibandingkan merek lain.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-header">
+                                    <span class="faq-icon"
+                                        ><i class="bi bi-question-circle"></i
+                                    ></span>
+                                    <span class="faq-title"
+                                        >Apakah produk AROMAS sudah bersertifikat Halal dan BPOM?</span
+                                    >
+                                    <span class="faq-toggle"
+                                        ><i class="bi bi-plus-lg"></i
+                                    ></span>
+                                </div>
+                                <div class="faq-content">
+                                    <p>
+                                        Ya, semua produk AROMAS telah memiliki
+                                        sertifikasi Halal dari Majelis Ulama
+                                        Indonesia (MUI) dan izin edar dari Badan
+                                        Pengawas Obat dan Makanan (BPOM). Selain
+                                        itu, AROMAS juga telah tersertifikasi ISO
+                                        22000:2018 untuk manajemen keamanan pangan.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-header">
+                                    <span class="faq-icon"
+                                        ><i class="bi bi-question-circle"></i
+                                    ></span>
+                                    <span class="faq-title"
+                                        >Berapa lama masa penyimpanan minyak goreng AROMAS?</span
+                                    >
+                                    <span class="faq-toggle"
+                                        ><i class="bi bi-plus-lg"></i
+                                    ></span>
+                                </div>
+                                <div class="faq-content">
+                                    <p>
+                                        Minyak goreng AROMAS memiliki masa
+                                        penyimpanan hingga 18 bulan sejak tanggal
+                                        produksi. Pastikan untuk menyimpan di
+                                        tempat yang kering, sejuk, dan terlindung
+                                        dari sinar matahari langsung untuk menjaga
+                                        kualitas minyak.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-header">
+                                    <span class="faq-icon"
+                                        ><i class="bi bi-question-circle"></i
+                                    ></span>
+                                    <span class="faq-title"
+                                        >Bagaimana cara menyimpan minyak goreng AROMAS agar tahan lama?</span
+                                    >
+                                    <span class="faq-toggle"
+                                        ><i class="bi bi-plus-lg"></i
+                                    ></span>
+                                </div>
+                                <div class="faq-content">
+                                    <p>
+                                        Simpan minyak goreng AROMAS di tempat
+                                        yang kering dan sejuk dengan suhu ruangan
+                                        (20-25°C). Jauhkan dari sinar matahari
+                                        langsung dan sumber panas. Tutup rapat
+                                        wadah setiap kali digunakan untuk
+                                        mencegah oksidasi. Hindari menyimpan
+                                        minyak yang sudah dipakai karena dapat
+                                        menurunkan kualitasnya.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="col-lg-6"
+                        data-aos="fade-up"
+                        data-aos-delay="200"
+                    >
+                        <div class="faq-accordion">
+                            <div class="faq-item">
+                                <div class="faq-header">
+                                    <span class="faq-icon"
+                                        ><i class="bi bi-question-circle"></i
+                                    ></span>
+                                    <span class="faq-title"
+                                        >Apakah minyak goreng AROMAS aman untuk kesehatan jantung?</span
+                                    >
+                                    <span class="faq-toggle"
+                                        ><i class="bi bi-plus-lg"></i
+                                    ></span>
+                                </div>
+                                <div class="faq-content">
+                                    <p>
+                                        Ya, AROMAS diformulasikan dengan
+                                        kandungan lemak jenuh yang lebih rendah
+                                        dibandingkan minyak goreng konvensional.
+                                        Minyak goreng AROMAS juga mengandung
+                                        vitamin E alami sebagai antioksidan yang
+                                        membantu menjaga kesehatan jantung dan
+                                        pembuluh darah. Namun, tetap disarankan
+                                        untuk mengonsumsinya secara seimbang.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-header">
+                                    <span class="faq-icon"
+                                        ><i class="bi bi-question-circle"></i
+                                    ></span>
+                                    <span class="faq-title"
+                                        >Di mana saya bisa membeli produk AROMAS?</span
+                                    >
+                                    <span class="faq-toggle"
+                                        ><i class="bi bi-plus-lg"></i
+                                    ></span>
+                                </div>
+                                <div class="faq-content">
+                                    <p>
+                                        Produk AROMAS tersedia di berbagai toko
+                                        dan supermarket di seluruh Indonesia seperti
+                                        Indomaret, Alfamart, Hypermart, Giant,
+                                        Superindo, dan banyak lagi. Anda juga bisa
+                                        membeli melalui platform e-commerce seperti
+                                        Tokopedia, Shopee, dan Lazada.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-header">
+                                    <span class="faq-icon"
+                                        ><i class="bi bi-question-circle"></i
+                                    ></span>
+                                    <span class="faq-title"
+                                        >Apakah AROMAS melayani pengiriman ke seluruh Indonesia?</span
+                                    >
+                                    <span class="faq-toggle"
+                                        ><i class="bi bi-plus-lg"></i
+                                    ></span>
+                                </div>
+                                <div class="faq-content">
+                                    <p>
+                                        Ya, AROMAS memiliki jaringan distribusi yang
+                                        luas mencakup seluruh Indonesia. Kami
+                                        bekerja sama dengan berbagai mitra logistik
+                                        untuk memastikan produk dapat dikirim
+                                        dengan aman dan tepat waktu ke lokasi Anda.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-header">
+                                    <span class="faq-icon"
+                                        ><i class="bi bi-question-circle"></i
+                                    ></span>
+                                    <span class="faq-title"
+                                        >Bagaimana cara menjadi distributor AROMAS?</span
+                                    >
+                                    <span class="faq-toggle"
+                                        ><i class="bi bi-plus-lg"></i
+                                    ></span>
+                                </div>
+                                <div class="faq-content">
+                                    <p>
+                                        Kami menyambut baik kerjasama dengan
+                                        distributor baru. Hubungi kami melalui
+                                        email di info@aromas.co.id atau telepon
+                                        (021) 1234-5678 untuk informasi lebih
+                                        lanjut mengenai program kemitraan dan
+                                        keuntungan menjadi distributor AROMAS.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- ========== CONTACT / CTA SECTION ========== -->
         <section
             id="contact"
@@ -1236,6 +1535,9 @@
 
         <!-- AOS - Animate On Scroll Library -->
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
         <!-- Custom JS -->
         <script src="js/script.js"></script>
