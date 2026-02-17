@@ -168,89 +168,51 @@ function createInactiveMarker() {
 
 // Create Eye-Catching Popup Content
 function createPopupContent(branch) {
-    const statusClass = branch.isOpen ? "open" : "closed";
-    const statusText = branch.isOpen ? "Buka Sekarang" : "Tutup";
-    const statusIcon = branch.isOpen ? "bi-clock-fill" : "bi-clock";
-
+    const isOpen = checkBranchStatus(branch);
+    const statusClass = isOpen ? "open" : "closed";
+    const statusText = isOpen ? "Buka" : "Tutup";
     return `
         <div class="aromas-popup">
-            <!-- Popup Header with Product -->
-            <div class="popup-header-section">
-                <div class="popup-product-badge">
-                    <img src="assets/images/aromas-hero.png" alt="AROMAS" class="popup-product-mini">
+            <div class="popup-accent-bar"></div>
+            <div class="popup-main-row">
+                <div class="popup-dot-icon">
+                    <img src="assets/images/aromas-hero.png" alt="AROMAS">
                 </div>
-                <div class="popup-header-content">
-                    <h3 class="popup-branch-name">${branch.nama_cabang}</h3>
-                    <div class="popup-badges">
-                        <span class="popup-badge badge-${statusClass}">
-                            <i class="${statusIcon}"></i> ${statusText}
-                        </span>
-                        <span class="popup-badge badge-category">
-                            <i class="bi bi-star-fill"></i> ${branch.kategori}
-                        </span>
+                <div class="popup-main-info">
+                    <p class="popup-branch-name">${branch.nama_cabang}</p>
+                    <div class="popup-meta-row">
+                        <span class="popup-status-dot ${statusClass}"></span>
+                        <span class="popup-status-text ${statusClass}">${statusText}</span>
+                        <span class="popup-meta-sep">·</span>
+                        <span>${branch.operatingHours.open}–${branch.operatingHours.close}</span>
                     </div>
                 </div>
             </div>
-            
-            <!-- Divider with brand color -->
-            <div class="popup-divider"></div>
-            
-            <!-- Popup Body -->
-            <div class="popup-body-section">
-                <div class="popup-info-row">
-                    <div class="popup-icon-wrapper">
-                        <i class="bi bi-geo-alt-fill"></i>
-                    </div>
-                    <div class="popup-info-text">
-                        <span class="info-label">Alamat</span>
-                        <p>${branch.alamat}</p>
-                    </div>
-                </div>
-                
-                <div class="popup-info-row">
-                    <div class="popup-icon-wrapper">
-                        <i class="bi bi-telephone-fill"></i>
-                    </div>
-                    <div class="popup-info-text">
-                        <span class="info-label">Telepon</span>
-                        <p>${branch.phone}</p>
-                    </div>
-                </div>
-                
-                <div class="popup-info-row">
-                    <div class="popup-icon-wrapper">
-                        <i class="bi bi-clock-history"></i>
-                    </div>
-                    <div class="popup-info-text">
-                        <span class="info-label">Jam Operasional</span>
-                        <p>${branch.operatingHours.days}, ${branch.operatingHours.open} - ${branch.operatingHours.close}</p>
-                    </div>
-                </div>
+            <div class="popup-thin-divider"></div>
+            <div class="popup-address-row">
+                <i class="bi bi-geo-alt-fill"></i>
+                <span>${branch.alamat}</span>
             </div>
-            
-            <!-- Action Buttons -->
             <div class="popup-actions-section">
                 <a href="https://wa.me/${branch.whatsapp}" target="_blank" class="popup-btn popup-btn-whatsapp">
-                    <i class="bi bi-whatsapp"></i>
-                    <span>WhatsApp</span>
+                    <i class="bi bi-whatsapp"></i><span>WhatsApp</span>
                 </a>
                 <a href="${branch.mapLink}" target="_blank" class="popup-btn popup-btn-directions">
-                    <i class="bi bi-map-fill"></i>
-                    <span>Petunjuk Arah</span>
+                    <i class="bi bi-map-fill"></i><span>Arah</span>
                 </a>
             </div>
-        </div>
-    `;
+        </div>`;
 }
 
 // Create Radius Circle - Pink/Red Semi-Transparent
 function createRadiusCircle(lat, lng) {
     return L.circle([lat, lng], {
         radius: 500,
-        color: "rgba(255, 105, 180, 0.6)",
-        fillColor: "rgba(255, 105, 180, 0.3)",
-        fillOpacity: 0.3,
-        weight: 2,
+        color: "rgba(212, 160, 23, 0.55)",
+        fillColor: "rgba(212, 160, 23, 0.1)",
+        fillOpacity: 0.1,
+        weight: 1.5,
+        dashArray: "6 4",
         className: "leaflet-interactive-circle",
     });
 }
@@ -258,44 +220,76 @@ function createRadiusCircle(lat, lng) {
 // Render Info Cards
 function renderInfoCards() {
     const container = document.getElementById("infoCards");
-
     if (!container) return;
 
     container.innerHTML = branches
-        .map(
-            (branch) => `
+        .map((branch) => {
+            const isOpen = checkBranchStatus(branch);
+            const statusClass = isOpen ? "open" : "closed";
+            const statusText = isOpen ? "Buka" : "Tutup";
+            return `
         <div class="info-card" data-id="${branch.id}">
             <div class="card-image">
-                <img src="${branch.foto_url}" alt="${branch.nama_cabang}" class="card-photo">
+                <img src="${branch.foto_url}" alt="${branch.nama_cabang}" class="card-photo" loading="lazy">
             </div>
             <div class="card-info">
+                <span class="card-status-badge ${statusClass}">
+                    <span class="card-status-dot"></span>
+                    ${statusText} · ${branch.operatingHours.open}–${branch.operatingHours.close}
+                </span>
                 <h3 class="card-name">${branch.nama_cabang}</h3>
                 <span class="card-category">${branch.kategori}</span>
-                <p class="card-address">${branch.alamat}</p>
+                <p class="card-address">
+                    <i class="bi bi-geo-alt-fill"></i>${branch.alamat}
+                </p>
                 <div class="card-actions">
                     <a href="https://wa.me/${branch.whatsapp}" target="_blank" class="card-btn card-btn-wa">
-                        <i class="bi bi-whatsapp"></i>
+                        <i class="bi bi-whatsapp"></i><span>WA</span>
                     </a>
                     <a href="${branch.mapLink}" target="_blank" class="card-btn card-btn-maps">
-                        <i class="bi bi-google-maps"></i>
+                        <i class="bi bi-map-fill"></i><span>Arah</span>
                     </a>
                 </div>
             </div>
-        </div>
-    `,
-        )
+        </div>`;
+        })
         .join("");
 
-    // Add click listeners - activate card on click
+    // Click to activate card
     container.querySelectorAll(".info-card").forEach((card) => {
         card.addEventListener("click", function (e) {
-            // Don't trigger if clicking on a button or link
             if (e.target.closest(".card-btn")) return;
-
-            const branchId = parseInt(this.dataset.id);
-            console.log("Card clicked:", branchId);
-            setActiveBranch(branchId, true); // true = programmatic scroll
+            setActiveBranch(parseInt(this.dataset.id), true);
         });
+    });
+
+    // Init dots after cards are rendered
+    renderCardDots();
+}
+
+// Render pagination dots into #cardsDots (in HTML)
+function renderCardDots() {
+    const dotsEl = document.getElementById("cardsDots");
+    if (!dotsEl) return;
+    dotsEl.innerHTML = branches
+        .map(
+            (_, i) =>
+                `<span class="cards-dot${i === 0 ? " active" : ""}" data-index="${i}"></span>`,
+        )
+        .join("");
+    dotsEl.querySelectorAll(".cards-dot").forEach((dot) => {
+        dot.addEventListener("click", () => {
+            const idx = parseInt(dot.dataset.index);
+            window.currentBranchIndex = idx;
+            setActiveBranch(branches[idx].id, true);
+        });
+    });
+}
+
+// Sync active dot with current branch
+function updateCardDots(index) {
+    document.querySelectorAll(".cards-dot").forEach((d, i) => {
+        d.classList.toggle("active", i === index);
     });
 }
 
@@ -311,6 +305,10 @@ function setActiveBranch(branchId, scrollIntoView = false) {
 
     // Update current branch index globally
     window.currentBranchIndex = branches.findIndex((b) => b.id === branchId);
+
+    // Sync dots
+    if (typeof updateCardDots === "function")
+        updateCardDots(window.currentBranchIndex);
 
     // Reset all cards
     document.querySelectorAll(".info-card").forEach((card) => {
@@ -474,11 +472,15 @@ function initInteractiveMap() {
         scrollWheelZoom: true,
     });
 
-    // Add OpenStreetMap Tiles (default, light style)
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
+    // CartoDB Positron — clean minimal look
+    L.tileLayer(
+        "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+        {
+            attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+            subdomains: "abcd",
+            maxZoom: 19,
+        },
+    ).addTo(map);
 
     // Reset markers and circles
     markers = {};
@@ -492,8 +494,8 @@ function initInteractiveMap() {
 
         // Bind eye-catching popup to marker
         marker.bindPopup(createPopupContent(branch), {
-            maxWidth: 350,
-            minWidth: 300,
+            maxWidth: 240,
+            minWidth: 230,
             className: "custom-leaflet-popup",
             closeButton: true,
             autoClose: false,
