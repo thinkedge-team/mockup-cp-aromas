@@ -1,0 +1,1313 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Produk - AROMAS Minyak Goreng Sawit Premium</title>
+    <meta name="description" content="Produk AROMAS – Minyak goreng sawit berkualitas dalam kemasan Botol, Jeriken, dan BIB untuk kebutuhan rumah tangga hingga industri." />
+    <meta name="keywords" content="produk aromas, minyak goreng botol, minyak goreng jeriken, minyak goreng BIB, minyak goreng sawit Indonesia" />
+    <meta name="author" content="AROMAS Indonesia" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0d3320" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+    /* ============================================================
+       AROMAS — PRODUCTS PAGE — COMPLETE SELF-CONTAINED STYLES
+       ============================================================ */
+    :root {
+        --gold: #d4a017; --gold-dark: #b8860b; --gold-light: #f4c430; --amber: #ffbf00;
+        --green: #228b22; --green-dark: #0d3320; --green-darker: #1a2e1a; --green-light: #15412a;
+        --green-pale: #e8f5e9; --green-muted: #2e7d32;
+        --white: #ffffff; --off-white: #fffdf7;
+        --gray-100: #f5f5f5; --gray-200: #eeeeee; --gray-300: #e0e0e0;
+        --gray-400: #bdbdbd; --gray-500: #9e9e9e; --gray-600: #757575;
+        --gray-700: #616161; --gray-800: #424242; --gray-900: #212121;
+        --font-body: "Poppins", sans-serif;
+        --font-display: "Playfair Display", serif;
+        --sp: 100px 0; --tr: .3s ease;
+        --r-sm: 8px; --r-md: 12px; --r-lg: 20px; --r-xl: 30px;
+        --sh-sm: 0 2px 8px rgba(0,0,0,.08);
+        --sh-md: 0 4px 20px rgba(0,0,0,.10);
+        --sh-lg: 0 8px 40px rgba(0,0,0,.15);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;overflow-x:hidden;}
+    body{font-family:var(--font-body);font-size:16px;line-height:1.6;color:var(--gray-800);background:var(--white);overflow-x:hidden;}
+    h1,h2,h3,h4,h5,h6{font-family:var(--font-body);font-weight:600;line-height:1.3;color:var(--gray-900);}
+    a{text-decoration:none;color:inherit;transition:var(--tr);}
+    img{max-width:100%;height:auto;}
+    .italic{font-family:var(--font-display);font-style:italic;font-weight:600;color:var(--green);}
+    .text-gradient{background:linear-gradient(135deg,var(--gold),var(--amber) 50%,var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .section-title{font-size:2.4rem;margin-bottom:1.2rem;}
+    .section-desc{font-size:1.05rem;color:var(--gray-600);line-height:1.7;}
+
+    /* PRELOADER */
+    .preloader{position:fixed;inset:0;background:linear-gradient(135deg,#1a2e1a,#0d3320 50%,#15412a);z-index:99999;display:flex;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s ease;}
+    .preloader.hidden{opacity:0;visibility:hidden;}
+    .pl-inner{text-align:center;}
+    .pl-logo{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:28px;animation:plPulse 2s ease-in-out infinite;}
+    .pl-logo i{font-size:2.8rem;color:var(--gold);filter:drop-shadow(0 0 10px rgba(212,160,23,.5));}
+    .pl-logo span{font-size:2.2rem;font-weight:700;color:#fff;letter-spacing:2px;}
+    .pl-spinner{position:relative;width:72px;height:72px;margin:0 auto 18px;}
+    .sp-ring{position:absolute;width:100%;height:100%;border-radius:50%;border:3px solid transparent;}
+    .sp-ring:nth-child(1){border-top-color:var(--gold);animation:spRot 1.5s linear infinite;}
+    .sp-ring:nth-child(2){width:54px;height:54px;top:9px;left:9px;border-right-color:var(--gold-light);animation:spRot 1.2s linear infinite reverse;}
+    .sp-ring:nth-child(3){width:36px;height:36px;top:18px;left:18px;border-bottom-color:#fff;animation:spRot 1s linear infinite;}
+    .pl-text{color:rgba(255,255,255,.75);font-size:.85rem;letter-spacing:3px;text-transform:uppercase;animation:plFade 1.5s ease-in-out infinite;}
+    @keyframes spRot{to{transform:rotate(360deg);}}
+    @keyframes plPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+    @keyframes plFade{0%,100%{opacity:.4;}50%{opacity:1;}}
+
+    /* NAVBAR */
+    .navbar{padding:15px 0;background:transparent;transition:var(--tr);}
+    .navbar.scrolled{background:var(--white);box-shadow:var(--sh-md);padding:10px 0;}
+    .navbar-brand{font-size:1.5rem;font-weight:700;color:#fff !important;display:flex;align-items:center;gap:8px;transition:var(--tr);}
+    .navbar.scrolled .navbar-brand{color:var(--green-dark) !important;}
+    .navbar-brand i{color:var(--gold);font-size:1.8rem;}
+    .navbar-nav{gap:10px;}
+    .nav-link{font-size:.95rem;font-weight:500;color:rgba(255,255,255,.9) !important;padding:8px 16px !important;border-radius:var(--r-xl);transition:var(--tr);}
+    .navbar.scrolled .nav-link{color:var(--gray-700) !important;}
+    .nav-link:hover,.nav-link.active{color:#fff !important;background:linear-gradient(135deg,var(--green),var(--green-dark));}
+    .navbar.scrolled .nav-link:hover,.navbar.scrolled .nav-link.active{color:#fff !important;}
+    .btn-nav-contact{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff !important;padding:10px 24px;border-radius:var(--r-xl);font-weight:500;border:none;box-shadow:0 4px 15px rgba(212,160,23,.3);transition:var(--tr);}
+    .btn-nav-contact:hover{background:linear-gradient(135deg,var(--gold-dark),#8b6914);transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,160,23,.4);}
+    .navbar-toggler{border:none;padding:8px;}
+    .navbar-toggler:focus{box-shadow:none;}
+    .navbar-toggler-icon{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");}
+    .navbar.scrolled .navbar-toggler-icon{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33,37,41,.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");}
+    @media(max-width:991.98px){
+        .navbar-collapse{background:#fff;padding:20px;margin-top:15px;border-radius:var(--r-md);box-shadow:var(--sh-lg);border:1px solid rgba(34,139,34,.1);}
+        .navbar-collapse .nav-link{color:var(--gray-700) !important;padding:12px 16px !important;border-radius:var(--r-sm);}
+        .navbar-collapse .nav-link:hover,.navbar-collapse .nav-link.active{color:#fff !important;background:linear-gradient(135deg,var(--green),var(--green-dark));}
+        .navbar-collapse .btn-nav-contact{margin-top:15px;width:100%;text-align:center;}
+    }
+
+    /* PRODUCTS HERO */
+    .prod-hero{position:relative;min-height:72vh;display:flex;align-items:center;background:linear-gradient(135deg,#1a2e1a 0%,#0d3320 55%,#15412a 100%);padding:130px 0 80px;overflow:hidden;}
+    .prod-hero-overlay{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 65% 45%,rgba(212,160,23,.16) 0%,transparent 55%),radial-gradient(ellipse at 15% 75%,rgba(34,85,51,.28) 0%,transparent 45%);}
+    .hero-deco{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+    .deco-c{position:absolute;border-radius:50%;border:1px solid rgba(212,160,23,.18);}
+    .dc1{width:650px;height:650px;top:-220px;right:-130px;animation:rotSlow 38s linear infinite;}
+    .dc2{width:420px;height:420px;bottom:-160px;left:-110px;border-color:rgba(34,139,34,.18);animation:rotSlow 30s linear infinite reverse;}
+    .dc3{width:220px;height:220px;top:50%;left:50%;transform:translate(-50%,-50%);border-color:rgba(244,196,48,.12);animation:pRing 4.5s ease-in-out infinite;}
+    @keyframes rotSlow{to{transform:rotate(360deg);}}
+    @keyframes pRing{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.45;}50%{transform:translate(-50%,-50%) scale(1.3);opacity:.15;}}
+    .prod-hero .container{position:relative;z-index:2;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;padding:8px 22px;border-radius:50px;font-size:.83rem;font-weight:600;letter-spacing:.5px;margin-bottom:22px;box-shadow:0 4px 16px rgba(212,160,23,.4);}
+    .hero-title{font-size:clamp(2.1rem,5vw,3.6rem);font-weight:700;color:#fff;line-height:1.18;margin-bottom:18px;}
+    .hero-desc{font-size:1.05rem;color:rgba(255,255,255,.78);line-height:1.8;max-width:560px;margin:0 auto 36px;}
+    .hero-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:36px;}
+    .chip{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.09);backdrop-filter:blur(10px);border:1px solid rgba(212,160,23,.28);color:#fff;padding:9px 18px;border-radius:50px;font-size:.84rem;font-weight:500;cursor:pointer;transition:all .25s ease;}
+    .chip:hover,.chip.active{background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-color:transparent;box-shadow:0 4px 16px rgba(212,160,23,.45);}
+    .chip i{font-size:1rem;}
+    .scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;color:rgba(255,255,255,.45);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;animation:cueF 2.4s ease-in-out infinite;}
+    @keyframes cueF{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-7px);}}
+    .mouse-ico{width:22px;height:36px;border:2px solid rgba(212,160,23,.45);border-radius:18px;display:flex;justify-content:center;padding-top:6px;}
+    .wheel-dot{width:3px;height:6px;background:var(--gold);border-radius:2px;animation:wScroll 2s ease-in-out infinite;}
+    @keyframes wScroll{0%,100%{transform:translateY(0);opacity:1;}50%{transform:translateY(6px);opacity:.25;}}
+
+    /* BREADCRUMB */
+    .bc-strip{background:#f5f9f5;border-bottom:1px solid rgba(34,139,34,.1);padding:13px 0;}
+    .breadcrumb{margin:0;}
+    .breadcrumb-item a{color:var(--green);font-size:.87rem;}
+    .breadcrumb-item.active{color:var(--gray-600);font-size:.87rem;}
+    .breadcrumb-item+.breadcrumb-item::before{color:var(--gray-400);}
+
+    /* FILTER TABS */
+    .filter-section{padding:56px 0 24px;background:var(--white);}
+    .filter-wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+    .filter-tabs{display:flex;gap:10px;flex-wrap:wrap;}
+    .ftab{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:50px;font-size:.88rem;font-weight:600;border:2px solid rgba(34,139,34,.2);background:transparent;color:var(--gray-700);cursor:pointer;transition:all .25s ease;}
+    .ftab:hover{border-color:var(--green);color:var(--green);}
+    .ftab.active{background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(34,139,34,.3);}
+    .ftab i{font-size:1.05rem;}
+    .result-count{font-size:.9rem;color:var(--gray-500);font-weight:500;white-space:nowrap;}
+    .result-count strong{color:var(--green);font-weight:700;}
+
+    /* CATEGORY SECTION */
+    .cat-section{padding:32px 0 80px;background:var(--white);}
+    .cat-header{display:flex;align-items:flex-end;gap:16px;margin-bottom:36px;padding-bottom:20px;border-bottom:2px solid var(--gray-200);position:relative;}
+    .cat-header::after{content:'';position:absolute;bottom:-2px;left:0;width:80px;height:2px;background:linear-gradient(90deg,var(--green),var(--gold));}
+    .cat-icon-wrap{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--green),var(--green-dark));display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#fff;flex-shrink:0;box-shadow:0 4px 16px rgba(34,139,34,.3);}
+    .cat-header-info{}
+    .cat-label{font-size:.72rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;}
+    .cat-title{font-size:1.7rem;font-weight:700;color:var(--gray-900);margin:0;}
+    .cat-desc-row{margin-bottom:32px;}
+    .cat-desc-row p{color:var(--gray-600);font-size:.97rem;line-height:1.75;max-width:720px;}
+
+    /* PRODUCT CARD */
+    .prod-card{background:#fff;border-radius:18px;border:1px solid rgba(34,139,34,.1);box-shadow:0 4px 20px rgba(0,0,0,.06);height:100%;transition:all .32s ease;position:relative;overflow:hidden;cursor:pointer;}
+    .prod-card::before{content:'';position:absolute;inset:0;border-radius:18px;background:linear-gradient(135deg,rgba(34,139,34,.04),transparent 60%);pointer-events:none;z-index:0;}
+    .prod-card:hover{transform:translateY(-8px);box-shadow:0 18px 52px rgba(34,139,34,.16);border-color:rgba(34,139,34,.3);}
+    .card-img-wrap{position:relative;overflow:hidden;border-radius:18px 18px 0 0;background:linear-gradient(135deg,#f5faf5,#fafff5);height:230px;}
+    .card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;filter:brightness(.95) saturate(1.05);}
+    .prod-card:hover .card-img-wrap img{transform:scale(1.08);filter:brightness(1) saturate(1.1);}
+    .card-badge{position:absolute;top:14px;left:14px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;padding:4px 12px;border-radius:20px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;box-shadow:0 2px 10px rgba(212,160,23,.4);z-index:10;}
+    .card-body-inner{padding:22px 22px 24px;position:relative;z-index:1;}
+    .card-sizes{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+    .size-tag{display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;font-size:.73rem;font-weight:600;background:var(--green-pale);color:var(--green-dark);border:1px solid rgba(34,139,34,.2);}
+    .size-tag.highlight{background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;border-color:transparent;}
+    .card-name{font-size:1.1rem;font-weight:700;color:var(--gray-900);margin-bottom:8px;}
+    .card-tagline{font-size:.85rem;color:var(--gray-500);margin-bottom:14px;line-height:1.5;}
+    .card-features{list-style:none;padding:0;margin:0 0 18px;display:flex;flex-direction:column;gap:7px;}
+    .card-features li{display:flex;align-items:flex-start;gap:9px;font-size:.82rem;color:var(--gray-600);line-height:1.5;}
+    .card-features li i{color:var(--green);font-size:.88rem;margin-top:2px;flex-shrink:0;}
+    .card-footer-row{display:flex;align-items:center;gap:10px;border-top:1px solid var(--gray-200);padding-top:16px;margin-top:4px;}
+    .btn-detail{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;padding:9px 20px;border-radius:10px;font-size:.83rem;font-weight:600;transition:all .25s ease;flex:1;justify-content:center;}
+    .btn-detail:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(34,139,34,.35);color:#fff;}
+    .btn-wa-card{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all .25s ease;flex-shrink:0;}
+    .btn-wa-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(37,211,102,.4);color:#fff;}
+
+    /* SIZES GRID (Botol) */
+    .sizes-showcase{background:linear-gradient(135deg,#f5f9f5,#fffdf7);border-radius:20px;padding:32px;border:1px solid rgba(34,139,34,.1);margin-bottom:20px;}
+    .sizes-title{font-size:1rem;font-weight:700;color:var(--gray-900);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+    .sizes-title i{color:var(--gold);}
+    .sizes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:14px;}
+    .size-item{text-align:center;padding:18px 10px;background:#fff;border-radius:14px;border:1px solid rgba(34,139,34,.12);transition:all .25s ease;cursor:default;}
+    .size-item:hover{border-color:var(--green);box-shadow:0 4px 16px rgba(34,139,34,.12);transform:translateY(-3px);}
+    .size-vol{font-size:1.15rem;font-weight:700;color:var(--green-dark);line-height:1;}
+    .size-unit{font-size:.7rem;color:var(--gray-500);margin-top:3px;}
+
+    /* MODAL / DETAIL DRAWER */
+    .prod-modal{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:all .3s ease;}
+    .prod-modal.open{opacity:1;visibility:visible;}
+    .modal-backdrop{position:absolute;inset:0;background:rgba(13,51,32,.6);backdrop-filter:blur(6px);z-index:1;}
+    .modal-box{position:relative;z-index:10001;background:#fff;border-radius:24px;max-width:760px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.3);transform:translateY(30px) scale(.97);transition:transform .35s cubic-bezier(.22,1,.36,1);}
+    .prod-modal.open .modal-box{transform:translateY(0) scale(1);}
+    .modal-box::-webkit-scrollbar{width:6px;}
+    .modal-box::-webkit-scrollbar-track{background:transparent;}
+    .modal-box::-webkit-scrollbar-thumb{background:rgba(34,139,34,.3);border-radius:3px;}
+    .modal-header-band{height:5px;background:linear-gradient(90deg,var(--green),var(--gold),var(--green));border-radius:24px 24px 0 0;}
+    .modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:var(--gray-100);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--gray-600);transition:all .2s ease;z-index:20;}
+    .modal-close:hover{background:var(--green);color:#fff;transform:rotate(90deg);}
+    .modal-inner{padding:28px 32px 32px;}
+    .modal-tag{font-size:.72rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
+    .modal-title{font-size:1.7rem;font-weight:700;color:var(--gray-900);margin-bottom:6px;}
+    .modal-sub{font-size:.95rem;color:var(--gray-500);margin-bottom:24px;}
+    .modal-img-band{background:linear-gradient(135deg,#f5faf5,#fffdf7);border-radius:16px;padding:28px;text-align:center;margin-bottom:26px;}
+    /* MODAL IMAGE FIX */
+    .modal-img-band img{max-height:250px;width:100%;object-fit:contain;filter:drop-shadow(0 10px 28px rgba(0,0,0,.14));}
+    .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;}
+    .detail-item{background:var(--green-pale);border-radius:12px;padding:14px 18px;border:1px solid rgba(34,139,34,.15);}
+    .detail-item-label{font-size:.7rem;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+    .detail-item-val{font-size:.95rem;font-weight:600;color:var(--gray-900);}
+    .modal-sizes-wrap{margin-bottom:24px;}
+    .modal-sizes-title{font-size:.95rem;font-weight:700;color:var(--gray-900);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+    .modal-sizes-title i{color:var(--gold);}
+    .modal-sizes{display:flex;flex-wrap:wrap;gap:8px;}
+    .modal-size{padding:8px 18px;border-radius:24px;border:2px solid rgba(34,139,34,.2);font-size:.88rem;font-weight:600;color:var(--green-dark);background:#fff;transition:all .2s ease;cursor:default;}
+    .modal-size:hover{background:var(--green);color:#fff;border-color:var(--green);}
+    .modal-feat-title{font-size:.95rem;font-weight:700;color:var(--gray-900);margin-bottom:14px;}
+    .modal-feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;}
+    .modal-feat-item{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:#f9f9f9;border-radius:10px;border:1px solid var(--gray-200);}
+    .modal-feat-item i{color:var(--green);font-size:1rem;margin-top:1px;flex-shrink:0;}
+    .modal-feat-item span{font-size:.83rem;color:var(--gray-700);line-height:1.5;}
+    .modal-actions{display:flex;gap:12px;flex-wrap:wrap;}
+    .btn-modal-primary{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;padding:13px 28px;border-radius:12px;font-weight:700;font-size:.95rem;transition:all .28s ease;flex:1;justify-content:center;}
+    .btn-modal-primary:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(34,139,34,.38);color:#fff;}
+    .btn-modal-wa{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;padding:13px 24px;border-radius:12px;font-weight:700;font-size:.95rem;transition:all .28s ease;}
+    .btn-modal-wa:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(37,211,102,.38);color:#fff;}
+
+    /* BANNER — KEUNGGULAN */
+    .kelebihan-section{padding:var(--sp);background:linear-gradient(135deg,#1a2e1a,#0d3320 55%,#15412a);position:relative;overflow:hidden;}
+    .kelebihan-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(212,160,23,.12) 0%,transparent 55%),radial-gradient(ellipse at 70% 80%,rgba(34,139,34,.18) 0%,transparent 45%);pointer-events:none;}
+    .kelebihan-section .container{position:relative;z-index:2;}
+    .kel-card{background:rgba(255,255,255,.07);backdrop-filter:blur(12px);border:1px solid rgba(212,160,23,.2);border-radius:18px;padding:30px 24px;height:100%;transition:all .3s ease;text-align:center;}
+    .kel-card:hover{background:rgba(255,255,255,.12);border-color:rgba(212,160,23,.42);transform:translateY(-6px);}
+    .kel-icon{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-size:1.7rem;color:#fff;margin:0 auto 20px;box-shadow:0 6px 20px rgba(212,160,23,.35);}
+    .kel-card h4{color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:10px;}
+    .kel-card p{color:rgba(255,255,255,.68);font-size:.88rem;line-height:1.7;margin:0;}
+
+    /* CTA STRIP */
+    .cta-strip{background:linear-gradient(135deg,var(--gold),var(--gold-dark));padding:68px 0;position:relative;overflow:hidden;}
+    .cta-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(255,255,255,.12) 0%,transparent 60%);pointer-events:none;}
+    .cta-strip .container{position:relative;z-index:2;}
+    .cta-strip h2{color:#fff;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;margin-bottom:10px;}
+    .cta-strip p{color:rgba(255,255,255,.82);font-size:1rem;margin:0;}
+    .btn-cta-w{display:inline-flex;align-items:center;gap:9px;background:#fff;color:var(--gold-dark);font-weight:700;padding:14px 34px;border-radius:12px;font-size:.97rem;transition:all .28s ease;box-shadow:0 4px 16px rgba(0,0,0,.14);}
+    .btn-cta-w:hover{background:var(--green-dark);color:var(--gold);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.2);}
+    .btn-cta-ol{display:inline-flex;align-items:center;gap:9px;background:transparent;color:#fff;border:2px solid rgba(255,255,255,.65);font-weight:600;padding:14px 30px;border-radius:12px;font-size:.97rem;transition:all .28s ease;}
+    .btn-cta-ol:hover{background:rgba(255,255,255,.14);border-color:#fff;color:#fff;transform:translateY(-3px);}
+
+    /* FOOTER */
+    .footer-section{background:var(--gray-900);color:#fff;padding-top:60px;}
+    .footer-top{padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.1);}
+    .footer-logo{font-size:1.5rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+    .footer-logo i{color:var(--gold);}
+    .footer-brand p{color:var(--gray-400);font-size:.9rem;}
+    .footer-section h5{color:#fff;font-size:1rem;font-weight:600;margin-bottom:20px;}
+    .footer-links{list-style:none;padding:0;margin:0;}
+    .footer-links li{margin-bottom:11px;}
+    .footer-links a{color:var(--gray-400);font-size:.9rem;transition:var(--tr);}
+    .footer-links a:hover{color:var(--gold);padding-left:5px;}
+    .footer-contact{list-style:none;padding:0;margin:0;}
+    .footer-contact li{color:var(--gray-400);font-size:.9rem;margin-bottom:11px;display:flex;align-items:flex-start;gap:10px;}
+    .footer-contact i{color:var(--gold);margin-top:3px;}
+    .footer-social{display:flex;gap:11px;margin-top:18px;}
+    .footer-social a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;transition:var(--tr);}
+    .footer-social a:hover{background:linear-gradient(135deg,var(--gold),var(--gold-dark));transform:translateY(-3px);}
+    .footer-bottom{padding:24px 0;}
+    .copyright{color:var(--gray-500);font-size:.84rem;margin:0;}
+    .footer-legal{list-style:none;padding:0;margin:0;display:flex;gap:24px;}
+    .footer-legal a{color:var(--gray-500);font-size:.84rem;}
+    .footer-legal a:hover{color:var(--gold);}
+
+    /* BACK TO TOP & WA */
+    .back-to-top{position:fixed;bottom:30px;right:30px;width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;border:none;font-size:1.2rem;cursor:pointer;opacity:0;visibility:hidden;transition:var(--tr);z-index:999;box-shadow:0 4px 20px rgba(34,139,34,.3);}
+    .back-to-top.show{opacity:1;visibility:visible;}
+    .back-to-top:hover{background:linear-gradient(135deg,var(--gold),var(--gold-dark));transform:translateY(-5px);box-shadow:0 6px 25px rgba(212,160,23,.4);}
+    .wa-float{position:fixed;bottom:100px;right:30px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.8rem;text-decoration:none;z-index:998;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:var(--tr);animation:waPulse 2s ease-in-out infinite;}
+    .wa-float:hover{transform:scale(1.1);color:#fff;}
+    .wa-float:hover .wa-tip{opacity:1;visibility:visible;transform:translateX(-10px);}
+    .wa-tip{position:absolute;right:70px;background:var(--gray-900);color:#fff;padding:8px 14px;border-radius:8px;font-size:.83rem;font-weight:500;white-space:nowrap;opacity:0;visibility:hidden;transition:var(--tr);pointer-events:none;}
+    .wa-tip::after{content:'';position:absolute;right:-6px;top:50%;transform:translateY(-50%);border-width:6px;border-style:solid;border-color:transparent transparent transparent var(--gray-900);}
+    @keyframes waPulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.4);}50%{box-shadow:0 4px 30px rgba(37,211,102,.6),0 0 0 10px rgba(37,211,102,.1);}}
+
+    /* AOS */
+    [data-aos]{opacity:0;transition:opacity .7s ease,transform .7s ease;}
+    [data-aos="fade-up"]{transform:translateY(30px);}
+    [data-aos="fade-right"]{transform:translateX(-30px);}
+    [data-aos="fade-left"]{transform:translateX(30px);}
+    [data-aos="zoom-in"]{transform:scale(.9);}
+    [data-aos].aos-animate{opacity:1;transform:none;}
+
+    /* HIDDEN CLASS for filter */
+    .cat-block{transition:all .4s ease;}
+    .cat-block.hidden-cat{display:none;}
+
+    /* RESPONSIVE */
+    @media(max-width:991.98px){
+        .prod-hero{min-height:auto;padding:110px 0 72px;}
+        .detail-grid{grid-template-columns:1fr;}
+        .modal-feat-grid{grid-template-columns:1fr;}
+        .wa-float{width:55px;height:55px;font-size:1.5rem;bottom:90px;right:20px;}
+        .wa-tip{display:none;}
+    }
+    @media(max-width:767.98px){
+        :root{--sp:70px 0;}
+        .hero-title{font-size:2rem;}
+        .scroll-cue{display:none;}
+        .filter-wrap{flex-direction:column;align-items:flex-start;}
+        .sizes-grid{grid-template-columns:repeat(4,1fr);}
+        .back-to-top{bottom:16px;right:16px;}
+    }
+    @media(max-width:575.98px){
+        .hero-title{font-size:1.75rem;}
+        .modal-inner{padding:20px 18px 24px;}
+        .modal-actions{flex-direction:column;}
+        .btn-modal-primary,.btn-modal-wa{width:100%;justify-content:center;}
+        .sizes-grid{grid-template-columns:repeat(3,1fr);}
+        .wa-float{width:50px;height:50px;font-size:1.4rem;bottom:80px;right:14px;}
+        .back-to-top{width:44px;height:44px;font-size:1rem;}
+    }
+    </style>
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div id="preloader" class="preloader">
+        <div class="pl-inner">
+            <div class="pl-logo"><i class="bi bi-droplet-fill"></i><span>AROMAS</span></div>
+            <div class="pl-spinner">
+                <div class="sp-ring"></div><div class="sp-ring"></div><div class="sp-ring"></div>
+            </div>
+            <p class="pl-text">Memuat Produk...</p>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-droplet-fill"></i> AROMAS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">Tentang Kami</a></li>
+
+                    <li class="nav-item"><a class="nav-link active" href="product.html">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="portfolio.html">Portofolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="partnership.html">Kemitraan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#gallery">Galeri</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#blog">Blog</a></li>
+
+                </ul>
+                <a href="index.html#contact" class="btn btn-nav-contact">Hubungi Kami</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="prod-hero">
+        <div class="prod-hero-overlay"></div>
+        <div class="hero-deco">
+            <div class="deco-c dc1"></div>
+            <div class="deco-c dc2"></div>
+            <div class="deco-c dc3"></div>
+        </div>
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10" data-aos="fade-up">
+                    <span class="hero-badge"><i class="bi bi-box-seam-fill"></i> Produk Kami</span>
+                    <h1 class="hero-title">
+                        Pilihan Kemasan untuk<br />
+                        <span class="italic text-gradient">Setiap Kebutuhan</span>
+                    </h1>
+                    <p class="hero-desc">
+                        Dari skala rumah tangga hingga industri, AROMAS hadir dalam tiga varian
+                        kemasan — Botol, Jeriken, dan BIB — dengan ukuran yang fleksibel dan
+                        kualitas yang konsisten di setiap tetes.
+                    </p>
+                    <div class="hero-chips">
+                        <span class="chip active" data-filter="all">
+                            <i class="bi bi-grid-fill"></i> Semua Produk
+                        </span>
+                        <span class="chip" data-filter="botol">
+                            <i class="bi bi-droplet-half"></i> Botol
+                        </span>
+                        <span class="chip" data-filter="jeriken">
+                            <i class="bi bi-bucket-fill"></i> Jeriken / Refill
+                        </span>
+                        <span class="chip" data-filter="bib">
+                            <i class="bi bi-box-fill"></i> BIB
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-cue">
+            <div class="mouse-ico"><div class="wheel-dot"></div></div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- BREADCRUMB -->
+    <div class="bc-strip">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house-door-fill me-1"></i>Beranda</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Produk</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- FILTER TABS -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-wrap">
+                <div class="filter-tabs">
+                    <button class="ftab active" data-filter="all"><i class="bi bi-grid-fill"></i> Semua</button>
+                    <button class="ftab" data-filter="botol"><i class="bi bi-droplet-half"></i> Botol</button>
+                    <button class="ftab" data-filter="jeriken"><i class="bi bi-bucket-fill"></i> Jeriken / Refill</button>
+                    <button class="ftab" data-filter="bib"><i class="bi bi-box-fill"></i> BIB</button>
+                </div>
+                <span class="result-count">Menampilkan <strong id="prodCount">3</strong> kategori produk</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         PRODUCTS CATEGORIES
+    ═══════════════════════════════════════════════ -->
+    <section class="cat-section">
+        <div class="container">
+
+            <!-- ─── KATEGORI 1: BOTOL ─── -->
+            <div class="cat-block" id="cat-botol" data-cat="botol">
+                <div class="cat-header" data-aos="fade-up">
+                    <div class="cat-icon-wrap"><i class="bi bi-droplet-half"></i></div>
+                    <div class="cat-header-info">
+                        <div class="cat-label">Kemasan Primer</div>
+                        <h2 class="cat-title">Botol</h2>
+                    </div>
+                </div>
+                <div class="cat-desc-row" data-aos="fade-up" data-aos-delay="80">
+                    <p>Kemasan botol plastik HDPE berkualitas tinggi — jernih, ringan, dan mudah dituang. Ideal untuk konsumsi rumah tangga harian dengan berbagai pilihan ukuran dari 200 ml hingga 2.000 ml untuk menyesuaikan kebutuhan keluarga Anda.</p>
+                </div>
+
+                <!-- Sizes showcase -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-5" data-aos="fade-right" data-aos-delay="100">
+                        <div class="sizes-showcase">
+                            <div class="sizes-title"><i class="bi bi-rulers"></i> Ukuran Tersedia</div>
+                            <div class="sizes-grid">
+                                <div class="size-item"><div class="size-vol">200</div><div class="size-unit">ml</div></div>
+                                <div class="size-item"><div class="size-vol">220</div><div class="size-unit">ml</div></div>
+                                <div class="size-item"><div class="size-vol">400</div><div class="size-unit">ml</div></div>
+                                <div class="size-item"><div class="size-vol">750</div><div class="size-unit">ml</div></div>
+                                <div class="size-item"><div class="size-vol">800</div><div class="size-unit">ml</div></div>
+                                <div class="size-item"><div class="size-vol">900</div><div class="size-unit">ml</div></div>
+                                <div class="size-item"><div class="size-vol">1.000</div><div class="size-unit">ml</div></div>
+                                <div class="size-item highlight"><div class="size-vol" style="color:#fff;">2.000</div><div class="size-unit" style="color:rgba(255,255,255,.7);">ml</div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7" data-aos="fade-left" data-aos-delay="120">
+                        <div class="row g-4">
+                            <!-- Card Botol Kecil -->
+                            <div class="col-sm-6">
+                                <div class="prod-card" onclick="openModal('botol-kecil')">
+                                    <div class="card-img-wrap">
+                                        <span class="card-badge">Rumah Tangga</span>
+                                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop" alt="AROMAS Botol Kecil" />
+                                    </div>
+                                    <div class="card-body-inner">
+                                        <div class="card-sizes">
+                                            <span class="size-tag">200 ml</span>
+                                            <span class="size-tag">220 ml</span>
+                                            <span class="size-tag">400 ml</span>
+                                        </div>
+                                        <div class="card-name">AROMAS Botol Mini</div>
+                                        <div class="card-tagline">Praktis untuk pemakaian harian & perjalanan</div>
+                                        <ul class="card-features">
+                                            <li><i class="bi bi-check-circle-fill"></i>Kemasan HDPE food-grade</li>
+                                            <li><i class="bi bi-check-circle-fill"></i>Tutup anti-tumpah presisi</li>
+                                            <li><i class="bi bi-check-circle-fill"></i>Cocok untuk warung & kafe kecil</li>
+                                        </ul>
+                                        <div class="card-footer-row">
+                                            <span class="btn-detail"><i class="bi bi-eye"></i> Detail Produk</span>
+                                            <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20AROMAS%20Botol%20Mini" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card Botol Besar -->
+                            <div class="col-sm-6">
+                                <div class="prod-card" onclick="openModal('botol-besar')">
+                                    <div class="card-img-wrap">
+                                        <span class="card-badge" style="background:linear-gradient(135deg,var(--green),var(--green-dark));">Populer</span>
+                                        <img src="https://images.unsplash.com/photo-1563991655280-cb95c90ca2fb?w=400&h=300&fit=crop" alt="AROMAS Botol Besar" />
+                                    </div>
+                                    <div class="card-body-inner">
+                                        <div class="card-sizes">
+                                            <span class="size-tag">750 ml</span>
+                                            <span class="size-tag">800 ml</span>
+                                            <span class="size-tag">900 ml</span>
+                                            <span class="size-tag highlight">1 L</span>
+                                            <span class="size-tag highlight">2 L</span>
+                                        </div>
+                                        <div class="card-name">AROMAS Botol Standar</div>
+                                        <div class="card-tagline">Pilihan utama keluarga Indonesia</div>
+                                        <ul class="card-features">
+                                            <li><i class="bi bi-check-circle-fill"></i>Ukuran ekonomis keluarga</li>
+                                            <li><i class="bi bi-check-circle-fill"></i>Ergonomis, mudah digenggam</li>
+                                            <li><i class="bi bi-check-circle-fill"></i>Label informasi gizi lengkap</li>
+                                        </ul>
+                                        <div class="card-footer-row">
+                                            <span class="btn-detail"><i class="bi bi-eye"></i> Detail Produk</span>
+                                            <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20AROMAS%20Botol%20Standar" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── DIVIDER ─── -->
+            <hr style="border:0;border-top:1px solid var(--gray-200);margin:60px 0;" class="cat-block" data-cat="all-div">
+
+            <!-- ─── KATEGORI 2: JERIKEN ─── -->
+            <div class="cat-block" id="cat-jeriken" data-cat="jeriken">
+                <div class="cat-header" data-aos="fade-up">
+                    <div class="cat-icon-wrap" style="background:linear-gradient(135deg,var(--gold),var(--gold-dark));"><i class="bi bi-bucket-fill"></i></div>
+                    <div class="cat-header-info">
+                        <div class="cat-label">Kemasan Isi Ulang</div>
+                        <h2 class="cat-title">Jeriken / Refill</h2>
+                    </div>
+                </div>
+                <div class="cat-desc-row" data-aos="fade-up" data-aos-delay="80">
+                    <p>Jeriken AROMAS dirancang untuk kebutuhan kapasitas tinggi — usaha kuliner, katering, kantin, hingga industri makanan. Material food-grade tahan lama dengan pegangan ergonomis dan tutup ulir yang aman dari kebocoran.</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="prod-card" onclick="openModal('jeriken-5')">
+                            <div class="card-img-wrap" style="height:200px;">
+                                <span class="card-badge" style="background:linear-gradient(135deg,var(--gold),var(--gold-dark));">Refill</span>
+                                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop" alt="AROMAS Jeriken 5L" />
+                            </div>
+                            <div class="card-body-inner">
+                                <div class="card-sizes">
+                                    <span class="size-tag highlight">5 Liter</span>
+                                </div>
+                                <div class="card-name">AROMAS Jeriken 5L</div>
+                                <div class="card-tagline">Ideal untuk usaha kecil & warung makan</div>
+                                <ul class="card-features">
+                                    <li><i class="bi bi-check-circle-fill"></i>Handle ergonomis mudah dituang</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Tutup ulir anti-bocor</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Plastik HDPE food-grade tebal</li>
+                                </ul>
+                                <div class="card-footer-row">
+                                    <span class="btn-detail"><i class="bi bi-eye"></i> Detail Produk</span>
+                                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20Jeriken%205L" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="180">
+                        <div class="prod-card" onclick="openModal('jeriken-15')">
+                            <div class="card-img-wrap" style="height:200px;">
+                                <span class="card-badge" style="background:linear-gradient(135deg,var(--gold),var(--gold-dark));">Best Value</span>
+                                <img src="https://images.unsplash.com/photo-1563991655280-cb95c90ca2fb?w=400&h=300&fit=crop" alt="AROMAS Jeriken 15L" />
+                            </div>
+                            <div class="card-body-inner">
+                                <div class="card-sizes">
+                                    <span class="size-tag highlight">15 Liter</span>
+                                    <span class="size-tag highlight">18 Liter</span>
+                                </div>
+                                <div class="card-name">AROMAS Jeriken 15/18L</div>
+                                <div class="card-tagline">Untuk restoran, katering & kantin sekolah</div>
+                                <ul class="card-features">
+                                    <li><i class="bi bi-check-circle-fill"></i>Volume besar, efisiensi tinggi</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Label SNI & halal terpasang</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Stacking-friendly, mudah disimpan</li>
+                                </ul>
+                                <div class="card-footer-row">
+                                    <span class="btn-detail"><i class="bi bi-eye"></i> Detail Produk</span>
+                                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20Jeriken%2015-18L" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="260">
+                        <div class="prod-card" onclick="openModal('jeriken-20')">
+                            <div class="card-img-wrap" style="height:200px;">
+                                <span class="card-badge" style="background:linear-gradient(135deg,#1a6b3a,#0d3320);">Industri</span>
+                                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop" alt="AROMAS Jeriken 20L" />
+                            </div>
+                            <div class="card-body-inner">
+                                <div class="card-sizes">
+                                    <span class="size-tag highlight">20 Liter</span>
+                                </div>
+                                <div class="card-name">AROMAS Jeriken 20L</div>
+                                <div class="card-tagline">Solusi industri makanan skala besar</div>
+                                <ul class="card-features">
+                                    <li><i class="bi bi-check-circle-fill"></i>Kapasitas terbesar jeriken AROMAS</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Dinding tebal tahan tekanan</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Cocok untuk hotel & pabrik makanan</li>
+                                </ul>
+                                <div class="card-footer-row">
+                                    <span class="btn-detail"><i class="bi bi-eye"></i> Detail Produk</span>
+                                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20Jeriken%2020L" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── DIVIDER ─── -->
+            <hr style="border:0;border-top:1px solid var(--gray-200);margin:60px 0;" class="cat-block" data-cat="all-div2">
+
+            <!-- ─── KATEGORI 3: BIB ─── -->
+            <div class="cat-block" id="cat-bib" data-cat="bib">
+                <div class="cat-header" data-aos="fade-up">
+                    <div class="cat-icon-wrap" style="background:linear-gradient(135deg,#1a6b3a,#0d3320);"><i class="bi bi-box-fill"></i></div>
+                    <div class="cat-header-info">
+                        <div class="cat-label">Kemasan Industri</div>
+                        <h2 class="cat-title">BIB — Bag in Box</h2>
+                    </div>
+                </div>
+                <div class="cat-desc-row" data-aos="fade-up" data-aos-delay="80">
+                    <p>Bag in Box (BIB) adalah solusi kemasan premium berbasis kantong fleksibel berlapis multi-layer di dalam dus karton kokoh. Teknologi modern yang menjaga kualitas minyak lebih lama, meminimasi kontak udara, serta mudah didistribusikan dan disimpan dalam skala besar.</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="prod-card" onclick="openModal('bib-15')">
+                            <div class="card-img-wrap" style="height:200px;background:linear-gradient(135deg,#f0f4f0,#e8f0e8);">
+                                <span class="card-badge" style="background:linear-gradient(135deg,#1a6b3a,#0d3320);">BIB</span>
+                                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop" alt="AROMAS BIB 15L" />
+                            </div>
+                            <div class="card-body-inner">
+                                <div class="card-sizes">
+                                    <span class="size-tag highlight">15 Liter</span>
+                                </div>
+                                <div class="card-name">AROMAS BIB 15L</div>
+                                <div class="card-tagline">Pilihan ekonomis distribusi menengah</div>
+                                <ul class="card-features">
+                                    <li><i class="bi bi-check-circle-fill"></i>Lapisan kantong multi-layer</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Kran dispenser built-in</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Dus karton double-wall kuat</li>
+                                </ul>
+                                <div class="card-footer-row">
+                                    <span class="btn-detail"><i class="bi bi-eye"></i> Detail Produk</span>
+                                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20BIB%2015L" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="180">
+                        <div class="prod-card" onclick="openModal('bib-18')">
+                            <div class="card-img-wrap" style="height:200px;background:linear-gradient(135deg,#f0f4f0,#e8f0e8);">
+                                <span class="card-badge" style="background:linear-gradient(135deg,#1a6b3a,#0d3320);">Best Seller</span>
+                                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop" alt="AROMAS BIB 18L" />
+                            </div>
+                            <div class="card-body-inner">
+                                <div class="card-sizes">
+                                    <span class="size-tag highlight">18 Liter</span>
+                                </div>
+                                <div class="card-name">AROMAS BIB 18L</div>
+                                <div class="card-tagline">Pilihan terpopuler untuk distribusi B2B</div>
+                                <ul class="card-features">
+                                    <li><i class="bi bi-check-circle-fill"></i>Umur simpan lebih panjang</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Minim oksidasi, minyak lebih tahan</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Ideal minimarket & supermarket</li>
+                                </ul>
+                                <div class="card-footer-row">
+                                    <span class="btn-detail"><i class="bi bi-eye"></i> Detail Produk</span>
+                                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20BIB%2018L" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="260">
+                        <div class="prod-card" onclick="openModal('bib-20')">
+                            <div class="card-img-wrap" style="height:200px;background:linear-gradient(135deg,#f0f4f0,#e8f0e8);">
+                                <span class="card-badge" style="background:linear-gradient(135deg,#1a6b3a,#0d3320);">Industri</span>
+                                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop" alt="AROMAS BIB 20L" />
+                            </div>
+                            <div class="card-body-inner">
+                                <div class="card-sizes">
+                                    <span class="size-tag highlight">20 Liter</span>
+                                </div>
+                                <div class="card-name">AROMAS BIB 20L</div>
+                                <div class="card-tagline">Kapasitas maksimal untuk kebutuhan industri</div>
+                                <ul class="card-features">
+                                    <li><i class="bi bi-check-circle-fill"></i>Mudah ditumpuk & dipindahkan</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Label barcode distribusi lengkap</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Cocok untuk hotel, catering & pabrik</li>
+                                </ul>
+                                <div class="card-footer-row">
+                                    <span class="btn-detail"><i class="bi bi-eye"></i> Detail Produk</span>
+                                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20BIB%2020L" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /bib -->
+        </div><!-- /container -->
+    </section>
+
+    <!-- ═══ KEUNGGULAN PRODUK ═══ -->
+    <section class="kelebihan-section">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title" style="color:#fff;">Mengapa Memilih <span class="italic text-gradient">AROMAS?</span></h2>
+                <p class="section-desc" style="color:rgba(255,255,255,.7);max-width:560px;margin:0 auto;">
+                    Kualitas bukan sekadar janji — ini adalah standar yang kami jaga di setiap tetes produk.
+                </p>
+            </div>
+            <div class="row g-4">
+                <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+                    <div class="kel-card">
+                        <div class="kel-icon"><i class="bi bi-award-fill"></i></div>
+                        <h4>Halal & Bersertifikat</h4>
+                        <p>Bersertifikasi Halal MUI, BPOM, dan ISO 22000 — jaminan keamanan pangan yang tidak perlu diragukan.</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
+                    <div class="kel-card">
+                        <div class="kel-icon"><i class="bi bi-droplet-fill"></i></div>
+                        <h4>Jernih & Tidak Berbau</h4>
+                        <p>Proses penyulingan multi-tahap menghasilkan minyak yang bening sempurna tanpa bau tengik.</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
+                    <div class="kel-card">
+                        <div class="kel-icon"><i class="bi bi-heart-fill"></i></div>
+                        <h4>Kaya Vitamin E</h4>
+                        <p>Mengandung Vitamin E alami yang bermanfaat sebagai antioksidan untuk mendukung kesehatan keluarga.</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="320">
+                    <div class="kel-card">
+                        <div class="kel-icon"><i class="bi bi-arrow-repeat"></i></div>
+                        <h4>Tahan Digunakan Ulang</h4>
+                        <p>Titik asap tinggi memungkinkan penggunaan berulang dengan kualitas yang tetap terjaga.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section class="cta-strip">
+        <div class="container">
+            <div class="row align-items-center gy-4">
+                <div class="col-lg-7" data-aos="fade-right">
+                    <h2>Butuh Penawaran Harga Khusus?</h2>
+                    <p>Hubungi tim sales kami untuk mendapatkan harga terbaik sesuai volume pesanan Anda.</p>
+                </div>
+                <div class="col-lg-5 text-lg-end" data-aos="fade-left">
+                    <div class="d-flex gap-3 flex-wrap justify-content-lg-end">
+                        <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20tanya%20harga%20produk" target="_blank" class="btn-cta-w">
+                            <i class="bi bi-whatsapp"></i> Tanya via WhatsApp
+                        </a>
+                        <a href="index.html#contact" class="btn-cta-ol">
+                            <i class="bi bi-envelope-fill"></i> Kirim Pesan
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-top">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                        <div class="footer-brand">
+                            <a href="index.html" class="footer-logo"><i class="bi bi-droplet-fill"></i> AROMAS</a>
+                            <p>Minyak goreng premium berkualitas tinggi untuk keluarga Indonesia. Diproduksi dengan teknologi modern dan standar keamanan pangan internasional.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-6 mb-4 mb-lg-0">
+                        <h5>Menu</h5>
+                        <ul class="footer-links">
+                            <li><a href="index.html">Beranda</a></li>
+                            <li><a href="about.html">Tentang Kami</a></li>
+                            <li><a href="products.html">Produk</a></li>
+                            <li><a href="index.html#blog">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-6 mb-4 mb-lg-0">
+                        <h5>Produk</h5>
+                        <ul class="footer-links">
+                            <li><a href="#">AROMAS Botol</a></li>
+                            <li><a href="#">AROMAS Jeriken</a></li>
+                            <li><a href="#">AROMAS BIB</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <h5>Hubungi Kami</h5>
+                        <ul class="footer-contact">
+                            <li><i class="bi bi-geo-alt"></i> Jl. Industri Raya No. 123, Kawasan Industri, Jakarta 12345</li>
+                            <li><i class="bi bi-envelope"></i> <a href="mailto:info@aromas.co.id">info@aromas.co.id</a></li>
+                            <li><i class="bi bi-telephone"></i> (021) 1234-5678</li>
+                            <li><i class="bi bi-whatsapp"></i> +62 812-3456-7890</li>
+                        </ul>
+                        <div class="footer-social">
+                            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                            <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p class="copyright">&copy; 2026 AROMAS. Hak Cipta Dilindungi.</p></div>
+                    <div class="col-md-6 text-md-end">
+                        <ul class="footer-legal">
+                            <li><a href="#">Syarat &amp; Ketentuan</a></li>
+                            <li><a href="#">Kebijakan Privasi</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top" aria-label="Kembali ke atas"><i class="bi bi-arrow-up"></i></button>
+    <a href="https://wa.me/6281234567890?text=Halo%20AROMAS" target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="Chat WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+        <span class="wa-tip">Chat dengan Kami</span>
+    </a>
+
+    <!-- ═══════════════════════════════
+         PRODUCT DETAIL MODALS
+    ═══════════════════════════════ -->
+
+    <!-- Modal: Botol Mini -->
+    <div class="prod-modal" id="modal-botol-kecil" role="dialog" aria-modal="true" aria-label="Detail AROMAS Botol Mini">
+        <div class="modal-backdrop" onclick="closeModal('botol-kecil')"></div>
+        <div class="modal-box">
+            <div class="modal-header-band"></div>
+            <button class="modal-close" onclick="closeModal('botol-kecil')"><i class="bi bi-x-lg"></i></button>
+            <div class="modal-inner">
+                <div class="modal-tag">Kemasan Botol · Rumah Tangga</div>
+                <div class="modal-title">AROMAS Botol Mini</div>
+                <div class="modal-sub">Minyak goreng sawit premium untuk pemakaian harian dan kebutuhan ringan</div>
+                <div class="modal-img-band">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=300&fit=crop" alt="AROMAS Botol Mini" />
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-item"><div class="detail-item-label">Jenis Produk</div><div class="detail-item-val">Minyak Goreng Sawit</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Jenis Kemasan</div><div class="detail-item-val">Botol Plastik HDPE</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Sertifikasi</div><div class="detail-item-val">Halal MUI · BPOM · SNI</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Segmen</div><div class="detail-item-val">Rumah Tangga · Warung</div></div>
+                </div>
+                <div class="modal-sizes-wrap">
+                    <div class="modal-sizes-title"><i class="bi bi-rulers"></i> Ukuran Tersedia</div>
+                    <div class="modal-sizes">
+                        <span class="modal-size">200 ml</span>
+                        <span class="modal-size">220 ml</span>
+                        <span class="modal-size">400 ml</span>
+                    </div>
+                </div>
+                <div class="modal-feat-title">Keunggulan Produk</div>
+                <div class="modal-feat-grid">
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Kemasan HDPE food-grade aman & higienis</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Tutup presisi anti-tumpah untuk keamanan</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Warna cerah memudahkan identifikasi isi</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Cocok untuk warung, kafe kecil & bekal</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Kaya Vitamin E alami — antioksidan alami</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Minyak jernih, bebas bau, tahan lama</span></div>
+                </div>
+                <div class="modal-actions">
+                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20pesan%20AROMAS%20Botol%20Mini" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> Pesan via WhatsApp</a>
+                    <a href="index.html#contact" class="btn-modal-primary"><i class="bi bi-envelope-fill"></i> Minta Penawaran</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Botol Standar -->
+    <div class="prod-modal" id="modal-botol-besar" role="dialog" aria-modal="true" aria-label="Detail AROMAS Botol Standar">
+        <div class="modal-backdrop" onclick="closeModal('botol-besar')"></div>
+        <div class="modal-box">
+            <div class="modal-header-band"></div>
+            <button class="modal-close" onclick="closeModal('botol-besar')"><i class="bi bi-x-lg"></i></button>
+            <div class="modal-inner">
+                <div class="modal-tag">Kemasan Botol · Keluarga · Populer</div>
+                <div class="modal-title">AROMAS Botol Standar</div>
+                <div class="modal-sub">Pilihan utama jutaan keluarga Indonesia — ukuran ekonomis untuk pemakaian harian</div>
+                <div class="modal-img-band">
+                    <img src="https://images.unsplash.com/photo-1563991655280-cb95c90ca2fb?w=500&h=300&fit=crop" alt="AROMAS Botol Standar" />
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-item"><div class="detail-item-label">Jenis Produk</div><div class="detail-item-val">Minyak Goreng Sawit</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Jenis Kemasan</div><div class="detail-item-val">Botol Plastik HDPE</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Sertifikasi</div><div class="detail-item-val">Halal MUI · BPOM · SNI · ISO 22000</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Segmen</div><div class="detail-item-val">Rumah Tangga · Retail</div></div>
+                </div>
+                <div class="modal-sizes-wrap">
+                    <div class="modal-sizes-title"><i class="bi bi-rulers"></i> Ukuran Tersedia</div>
+                    <div class="modal-sizes">
+                        <span class="modal-size">750 ml</span>
+                        <span class="modal-size">800 ml</span>
+                        <span class="modal-size">900 ml</span>
+                        <span class="modal-size" style="background:var(--green);color:#fff;border-color:var(--green);">1.000 ml</span>
+                        <span class="modal-size" style="background:var(--green);color:#fff;border-color:var(--green);">2.000 ml</span>
+                    </div>
+                </div>
+                <div class="modal-feat-title">Keunggulan Produk</div>
+                <div class="modal-feat-grid">
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Desain ergonomis, mudah digenggam & dituang</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Label gizi & informasi produk lengkap</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Titik asap tinggi, ideal untuk semua teknik masak</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Warna keemasan alami, bebas pemutih kimia</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Tahan panas hingga 230°C, minim busa</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Tersedia di seluruh minimarket & supermarket</span></div>
+                </div>
+                <div class="modal-actions">
+                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20pesan%20AROMAS%20Botol%20Standar" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> Pesan via WhatsApp</a>
+                    <a href="index.html#contact" class="btn-modal-primary"><i class="bi bi-envelope-fill"></i> Minta Penawaran</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Jeriken 5L -->
+    <div class="prod-modal" id="modal-jeriken-5" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" onclick="closeModal('jeriken-5')"></div>
+        <div class="modal-box">
+            <div class="modal-header-band" style="background:linear-gradient(90deg,var(--gold),var(--green),var(--gold));"></div>
+            <button class="modal-close" onclick="closeModal('jeriken-5')"><i class="bi bi-x-lg"></i></button>
+            <div class="modal-inner">
+                <div class="modal-tag">Jeriken / Refill · Usaha Kecil</div>
+                <div class="modal-title">AROMAS Jeriken 5L</div>
+                <div class="modal-sub">Isi ulang praktis untuk warung makan, kafe, dan usaha kecil</div>
+                <div class="modal-img-band" style="background:linear-gradient(135deg,#fffbf0,#fff8e7);">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=300&fit=crop" alt="Jeriken 5L" />
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-item"><div class="detail-item-label">Isi Netto</div><div class="detail-item-val">5 Liter</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Jenis Kemasan</div><div class="detail-item-val">Jeriken HDPE Food-Grade</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Sertifikasi</div><div class="detail-item-val">Halal MUI · BPOM · SNI</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Segmen</div><div class="detail-item-val">Warung · Kafe · UMKM</div></div>
+                </div>
+                <div class="modal-feat-title">Keunggulan Produk</div>
+                <div class="modal-feat-grid">
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Handle ergonomis mudah dituang ke wajan</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Tutup ulir rapat, anti-bocor & anti-tumpah</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Material HDPE tebal, tahan tekanan & panas</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Ukuran kompak, mudah disimpan di dapur kecil</span></div>
+                </div>
+                <div class="modal-actions">
+                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20pesan%20AROMAS%20Jeriken%205L" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> Pesan via WhatsApp</a>
+                    <a href="index.html#contact" class="btn-modal-primary"><i class="bi bi-envelope-fill"></i> Minta Penawaran</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Jeriken 15/18L -->
+    <div class="prod-modal" id="modal-jeriken-15" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" onclick="closeModal('jeriken-15')"></div>
+        <div class="modal-box">
+            <div class="modal-header-band" style="background:linear-gradient(90deg,var(--gold),var(--green),var(--gold));"></div>
+            <button class="modal-close" onclick="closeModal('jeriken-15')"><i class="bi bi-x-lg"></i></button>
+            <div class="modal-inner">
+                <div class="modal-tag">Jeriken / Refill · Restoran & Katering</div>
+                <div class="modal-title">AROMAS Jeriken 15L / 18L</div>
+                <div class="modal-sub">Volume menengah untuk restoran, katering, dan kantin sekolah/kantor</div>
+                <div class="modal-img-band" style="background:linear-gradient(135deg,#fffbf0,#fff8e7);">
+                    <img src="https://images.unsplash.com/photo-1563991655280-cb95c90ca2fb?w=500&h=300&fit=crop" alt="Jeriken 15-18L" />
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-item"><div class="detail-item-label">Ukuran Tersedia</div><div class="detail-item-val">15 Liter · 18 Liter</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Jenis Kemasan</div><div class="detail-item-val">Jeriken HDPE Food-Grade</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Sertifikasi</div><div class="detail-item-val">Halal MUI · BPOM · SNI · ISO 22000</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Segmen</div><div class="detail-item-val">Restoran · Katering · Kantin</div></div>
+                </div>
+                <div class="modal-feat-title">Keunggulan Produk</div>
+                <div class="modal-feat-grid">
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Volume besar = lebih hemat biaya per liter</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Label SNI & Halal terpasang jelas di badan</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Stacking-friendly, efisien penyimpanan gudang</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Handle kuat untuk pemindahan mudah</span></div>
+                </div>
+                <div class="modal-actions">
+                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20pesan%20AROMAS%20Jeriken%2015-18L" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> Pesan via WhatsApp</a>
+                    <a href="index.html#contact" class="btn-modal-primary"><i class="bi bi-envelope-fill"></i> Minta Penawaran</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Jeriken 20L -->
+    <div class="prod-modal" id="modal-jeriken-20" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" onclick="closeModal('jeriken-20')"></div>
+        <div class="modal-box">
+            <div class="modal-header-band" style="background:linear-gradient(90deg,var(--green-dark),var(--gold),var(--green-dark));"></div>
+            <button class="modal-close" onclick="closeModal('jeriken-20')"><i class="bi bi-x-lg"></i></button>
+            <div class="modal-inner">
+                <div class="modal-tag">Jeriken / Refill · Industri Skala Besar</div>
+                <div class="modal-title">AROMAS Jeriken 20L</div>
+                <div class="modal-sub">Solusi industri makanan — hotel, pabrik pengolahan, dan distributor besar</div>
+                <div class="modal-img-band" style="background:linear-gradient(135deg,#fffbf0,#fff8e7);">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=300&fit=crop" alt="Jeriken 20L" />
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-item"><div class="detail-item-label">Isi Netto</div><div class="detail-item-val">20 Liter</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Jenis Kemasan</div><div class="detail-item-val">Jeriken HDPE Industrial</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Sertifikasi</div><div class="detail-item-val">Halal MUI · BPOM · SNI · ISO 22000</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Segmen</div><div class="detail-item-val">Hotel · Pabrik · Distributor</div></div>
+                </div>
+                <div class="modal-feat-title">Keunggulan Produk</div>
+                <div class="modal-feat-grid">
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Kapasitas maksimal, ideal volume besar</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Dinding jeriken tebal tahan benturan</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Cocok untuk sistem pompa & dispenser industri</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Harga per liter paling ekonomis di lini jeriken</span></div>
+                </div>
+                <div class="modal-actions">
+                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20pesan%20AROMAS%20Jeriken%2020L" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> Pesan via WhatsApp</a>
+                    <a href="index.html#contact" class="btn-modal-primary"><i class="bi bi-envelope-fill"></i> Minta Penawaran</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: BIB 15L -->
+    <div class="prod-modal" id="modal-bib-15" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" onclick="closeModal('bib-15')"></div>
+        <div class="modal-box">
+            <div class="modal-header-band" style="background:linear-gradient(90deg,#1a6b3a,var(--gold-light),#1a6b3a);"></div>
+            <button class="modal-close" onclick="closeModal('bib-15')"><i class="bi bi-x-lg"></i></button>
+            <div class="modal-inner">
+                <div class="modal-tag">BIB — Bag in Box · Distribusi Menengah</div>
+                <div class="modal-title">AROMAS BIB 15L</div>
+                <div class="modal-sub">Kemasan teknologi modern yang menjaga kualitas minyak lebih lama dari jeriken konvensional</div>
+                <div class="modal-img-band" style="background:linear-gradient(135deg,#f0f8f0,#e8f5e8);">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=300&fit=crop" alt="BIB 15L" />
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-item"><div class="detail-item-label">Isi Netto</div><div class="detail-item-val">15 Liter</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Jenis Kemasan</div><div class="detail-item-val">Bag in Box (Kantong + Karton)</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Sertifikasi</div><div class="detail-item-val">Halal MUI · BPOM · SNI</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Segmen</div><div class="detail-item-val">Minimarket · Distributor · HORECA</div></div>
+                </div>
+                <div class="modal-feat-title">Keunggulan Teknologi BIB</div>
+                <div class="modal-feat-grid">
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Lapisan kantong multi-layer anti-oksidasi</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Kran dispenser built-in, tuang tanpa corong</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Dus karton double-wall tahan benturan & cuaca</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Minim kontak udara, minyak lebih awet</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Mudah ditumpuk, efisien ruang gudang</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Label barcode distribusi lengkap</span></div>
+                </div>
+                <div class="modal-actions">
+                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20pesan%20AROMAS%20BIB%2015L" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> Pesan via WhatsApp</a>
+                    <a href="index.html#contact" class="btn-modal-primary"><i class="bi bi-envelope-fill"></i> Minta Penawaran</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: BIB 18L -->
+    <div class="prod-modal" id="modal-bib-18" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" onclick="closeModal('bib-18')"></div>
+        <div class="modal-box">
+            <div class="modal-header-band" style="background:linear-gradient(90deg,#1a6b3a,var(--gold-light),#1a6b3a);"></div>
+            <button class="modal-close" onclick="closeModal('bib-18')"><i class="bi bi-x-lg"></i></button>
+            <div class="modal-inner">
+                <div class="modal-tag">BIB — Bag in Box · Best Seller</div>
+                <div class="modal-title">AROMAS BIB 18L</div>
+                <div class="modal-sub">Produk BIB terpopuler — keseimbangan sempurna antara volume dan kemudahan distribusi</div>
+                <div class="modal-img-band" style="background:linear-gradient(135deg,#f0f8f0,#e8f5e8);">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=300&fit=crop" alt="BIB 18L" />
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-item"><div class="detail-item-label">Isi Netto</div><div class="detail-item-val">18 Liter</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Jenis Kemasan</div><div class="detail-item-val">Bag in Box (Kantong + Karton)</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Sertifikasi</div><div class="detail-item-val">Halal MUI · BPOM · SNI · ISO 22000</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Segmen</div><div class="detail-item-val">Supermarket · Minimarket · HORECA</div></div>
+                </div>
+                <div class="modal-feat-title">Keunggulan Teknologi BIB</div>
+                <div class="modal-feat-grid">
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Umur simpan lebih panjang vs jeriken biasa</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Minim oksidasi, kualitas minyak terjaga</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Sistem kran presisi, tidak ada sisa minyak</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Ideal untuk display & penjualan retail</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Karton kuat, tahan pengiriman jarak jauh</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Best seller di jaringan minimarket nasional</span></div>
+                </div>
+                <div class="modal-actions">
+                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20pesan%20AROMAS%20BIB%2018L" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> Pesan via WhatsApp</a>
+                    <a href="index.html#contact" class="btn-modal-primary"><i class="bi bi-envelope-fill"></i> Minta Penawaran</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: BIB 20L -->
+    <div class="prod-modal" id="modal-bib-20" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" onclick="closeModal('bib-20')"></div>
+        <div class="modal-box">
+            <div class="modal-header-band" style="background:linear-gradient(90deg,#0d3320,var(--gold-light),#0d3320);"></div>
+            <button class="modal-close" onclick="closeModal('bib-20')"><i class="bi bi-x-lg"></i></button>
+            <div class="modal-inner">
+                <div class="modal-tag">BIB — Bag in Box · Industri</div>
+                <div class="modal-title">AROMAS BIB 20L</div>
+                <div class="modal-sub">Kapasitas tertinggi lini BIB — dirancang untuk operasional industri berskala besar</div>
+                <div class="modal-img-band" style="background:linear-gradient(135deg,#f0f8f0,#e8f5e8);">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=300&fit=crop" alt="BIB 20L" />
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-item"><div class="detail-item-label">Isi Netto</div><div class="detail-item-val">20 Liter</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Jenis Kemasan</div><div class="detail-item-val">Bag in Box (Kantong + Karton)</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Sertifikasi</div><div class="detail-item-val">Halal MUI · BPOM · SNI · ISO 22000</div></div>
+                    <div class="detail-item"><div class="detail-item-label">Segmen</div><div class="detail-item-val">Hotel · Pabrik Makanan · Distributor</div></div>
+                </div>
+                <div class="modal-feat-title">Keunggulan Teknologi BIB</div>
+                <div class="modal-feat-grid">
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Volume terbesar, nilai ekonomis tertinggi</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Mudah ditumpuk untuk efisiensi penyimpanan</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Label lengkap untuk keperluan distribusi besar</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Cocok diintegrasikan dengan sistem dapur industri</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Kantong multi-layer menjaga kejernihan minyak</span></div>
+                    <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Tersedia program harga khusus mitra distributor</span></div>
+                </div>
+                <div class="modal-actions">
+                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20pesan%20AROMAS%20BIB%2020L" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> Pesan via WhatsApp</a>
+                    <a href="index.html#contact" class="btn-modal-primary"><i class="bi bi-envelope-fill"></i> Minta Penawaran</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+    /* ============================================================
+       AROMAS — PRODUCTS PAGE — COMPLETE SCRIPTS
+       ============================================================ */
+
+    // ── PRELOADER
+    window.addEventListener('load', function () {
+        var pl = document.getElementById('preloader');
+        if (!pl) return;
+        setTimeout(function () {
+            pl.classList.add('hidden');
+            setTimeout(function () { pl.style.display = 'none'; }, 650);
+        }, 800);
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        initNavbar();
+        initBackToTop();
+        initMobileMenu();
+        initScrollAnimations();
+        initFilter();
+        initHeroChips();
+        console.log('AROMAS Products page ready!');
+    });
+
+    // ── NAVBAR
+    function initNavbar() {
+        var nav = document.getElementById('navbar');
+        if (!nav) return;
+        window.addEventListener('scroll', function () {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+    }
+
+    // ── BACK TO TOP
+    function initBackToTop() {
+        var btn = document.getElementById('backToTop');
+        if (!btn) return;
+        window.addEventListener('scroll', function () {
+            btn.classList.toggle('show', window.scrollY > 500);
+        }, { passive: true });
+        btn.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // ── MOBILE MENU
+    function initMobileMenu() {
+        var tog = document.querySelector('.navbar-toggler');
+        var col = document.querySelector('.navbar-collapse');
+        if (!tog || !col) return;
+        document.addEventListener('click', function (e) {
+            if (!col.contains(e.target) && !tog.contains(e.target) && col.classList.contains('show')) {
+                var bs = bootstrap.Collapse.getInstance(col);
+                if (bs) bs.hide();
+            }
+        });
+    }
+
+    // ── AOS-LIKE SCROLL ANIMATIONS
+    function initScrollAnimations() {
+        var els = document.querySelectorAll('[data-aos]');
+        if (!els.length) return;
+        var obs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                var delay = parseInt(entry.target.getAttribute('data-aos-delay') || 0);
+                setTimeout(function () {
+                    entry.target.classList.add('aos-animate');
+                }, delay);
+                obs.unobserve(entry.target);
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        els.forEach(function (el) { obs.observe(el); });
+    }
+
+    // ── FILTER TABS (section filter)
+    function initFilter() {
+        var tabs = document.querySelectorAll('.ftab');
+        var countEl = document.getElementById('prodCount');
+
+        tabs.forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                var filter = this.dataset.filter;
+
+                // Update active state
+                tabs.forEach(function (t) { t.classList.remove('active'); });
+                this.classList.add('active');
+
+                // Filter category blocks
+                var blocks = document.querySelectorAll('.cat-block');
+                var count = 0;
+
+                blocks.forEach(function (block) {
+                    var cat = block.dataset.cat;
+                    if (filter === 'all' || cat === filter || cat === 'all-div' || cat === 'all-div2') {
+                        block.classList.remove('hidden-cat');
+                        block.style.display = '';
+                        if (cat !== 'all-div' && cat !== 'all-div2') count++;
+                    } else {
+                        block.classList.add('hidden-cat');
+                        block.style.display = 'none';
+                    }
+                });
+
+                // Hide dividers when single filter
+                if (filter !== 'all') {
+                    document.querySelectorAll('[data-cat="all-div"], [data-cat="all-div2"]').forEach(function (d) {
+                        d.style.display = 'none';
+                    });
+                }
+
+                if (countEl) countEl.textContent = filter === 'all' ? '3' : '1';
+
+                // Scroll to products section
+                var catSec = document.querySelector('.cat-section');
+                if (catSec) {
+                    var offsetPos = catSec.getBoundingClientRect().top + window.pageYOffset - 100;
+                    window.scrollTo({ top: offsetPos, behavior: 'smooth' });
+                }
+            });
+        });
+    }
+
+    // ── HERO CHIPS (filter dari hero section)
+    function initHeroChips() {
+        var chips = document.querySelectorAll('.chip[data-filter]');
+        chips.forEach(function (chip) {
+            chip.addEventListener('click', function () {
+                var filter = this.dataset.filter;
+                chips.forEach(function (c) { c.classList.remove('active'); });
+                this.classList.add('active');
+
+                // Sync with filter tabs
+                var matchTab = document.querySelector('.ftab[data-filter="' + filter + '"]');
+                if (matchTab) matchTab.click();
+            });
+        });
+    }
+
+    // ── MODAL OPEN
+    function openModal(id) {
+        var modal = document.getElementById('modal-' + id);
+        if (!modal) return;
+        document.body.style.overflow = 'hidden';
+        modal.classList.add('open');
+        modal.focus();
+    }
+
+    // ── MODAL CLOSE
+    function closeModal(id) {
+        var modal = document.getElementById('modal-' + id);
+        if (!modal) return;
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // ── CLOSE MODAL ON ESC
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.prod-modal.open').forEach(function (m) {
+                m.classList.remove('open');
+            });
+            document.body.style.overflow = '';
+        }
+    });
+    </script>
+</body>
+</html>

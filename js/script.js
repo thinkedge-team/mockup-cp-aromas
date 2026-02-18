@@ -654,9 +654,12 @@ function updateActiveNavLink() {
     });
 
     navLinks.forEach((link) => {
-        link.classList.remove("active");
-        if (link.getAttribute("href") === `#${currentSection}`) {
-            link.classList.add("active");
+        const href = link.getAttribute("href");
+        if (href && href.startsWith("#")) {
+            link.classList.remove("active");
+            if (href === `#${currentSection}`) {
+                link.classList.add("active");
+            }
         }
     });
 }

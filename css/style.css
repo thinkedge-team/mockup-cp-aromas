@@ -260,6 +260,13 @@ img {
     margin-bottom: 1.5rem;
 }
 
+.section-desc {
+    font-size: 1.1rem;
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin-bottom: 3rem;
+}
+
 /* ========== HEADER / NAVIGATION ========== */
 .navbar {
     padding: 15px 0;
@@ -3231,6 +3238,19 @@ img {
 }
 
 /* ========== INTERACTIVE BRANCH SECTION ========== */
+/* About Hero Section */
+.about-hero-section {
+    position: relative;
+    padding: 200px 0 120px;
+    background: linear-gradient(135deg, #0d3320 0%, #15412a 100%);
+    color: var(--white);
+    text-align: center;
+    overflow: hidden;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
 /* Style untuk interactive maps dengan cards overlay */
 
 .interactive-branch-section {
@@ -3262,7 +3282,7 @@ img {
 .interactive-map-container {
     position: relative;
     width: 100%;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 400px);
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);

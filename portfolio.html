@@ -1,0 +1,1888 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portofolio - AROMAS Mitra Terpercaya Industri & Retail</title>
+    <meta name="description" content="Portofolio AROMAS – Dipercaya oleh ribuan mitra dari skala UMKM, Retail, Horeca, hingga Industri Manufaktur di seluruh Indonesia." />
+    <meta name="keywords" content="portofolio aromas, mitra aromas, supplier minyak goreng, distributor minyak goreng, klien aromas" />
+    <meta name="author" content="AROMAS Indonesia" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Portofolio AROMAS – Mitra Terpercaya" />
+    <meta property="og:description" content="Dipercaya ribuan mitra dari UMKM, Retail, Horeca, hingga Industri Manufaktur di Indonesia." />
+    <meta name="theme-color" content="#0d3320" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <style>
+    /* ============================================================
+       AROMAS PORTFOLIO PAGE - FULLY CONSISTENT WITH index.html
+       ============================================================ */
+
+    /* ========== CSS VARIABLES (Same as index.html) ========== */
+    :root {
+        --primary-gold: #d4a017;
+        --primary-gold-dark: #b8860b;
+        --primary-gold-light: #f4c430;
+        --dark-gold: #8b6914;
+        --light-gold: #fff8e7;
+        --amber: #ffbf00;
+        --forest-green: #228b22;
+        --forest-green-dark: #0d3320;
+        --forest-green-darker: #1a2e1a;
+        --forest-green-light: #15412a;
+        --forest-green-pale: #e8f5e9;
+        --forest-green-muted: #2e7d32;
+        --white: #ffffff;
+        --off-white: #fffdf7;
+        --gray-100: #f5f5f5;
+        --gray-200: #eeeeee;
+        --gray-300: #e0e0e0;
+        --gray-400: #bdbdbd;
+        --gray-500: #9e9e9e;
+        --gray-600: #757575;
+        --gray-700: #616161;
+        --gray-800: #424242;
+        --gray-900: #212121;
+        --font-primary: "Poppins", sans-serif;
+        --font-secondary: "Playfair Display", serif;
+        --section-padding: 100px 0;
+        --transition-fast: 0.2s ease;
+        --transition-normal: 0.3s ease;
+        --transition-slow: 0.5s ease;
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 20px;
+        --radius-xl: 30px;
+        --shadow-sm: 0 2px 8px rgba(0,0,0,.08);
+        --shadow-md: 0 4px 20px rgba(0,0,0,.10);
+        --shadow-lg: 0 8px 40px rgba(0,0,0,.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { font-family: var(--font-primary); font-size: 16px; line-height: 1.6; color: var(--gray-800); background: var(--white); overflow-x: hidden; }
+    h1,h2,h3,h4,h5,h6 { font-family: var(--font-primary); font-weight: 600; line-height: 1.3; color: var(--gray-900); }
+    a { text-decoration: none; color: inherit; transition: var(--transition-normal); }
+    img { max-width: 100%; height: auto; }
+
+    .italic { font-family: var(--font-secondary); font-style: italic; font-weight: 500; color: var(--forest-green); }
+    .text-gradient {
+        background: linear-gradient(135deg, var(--primary-gold) 0%, var(--amber) 50%, var(--primary-gold-light) 100%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .section-title { font-size: 2.5rem; margin-bottom: 1.5rem; }
+
+    /* ========== PRELOADER ========== */
+    .preloader { position: fixed; inset: 0; background: linear-gradient(135deg, var(--forest-green-darker) 0%, var(--forest-green-dark) 50%, var(--forest-green-light) 100%); z-index: 99999; display: flex; align-items: center; justify-content: center; transition: opacity .6s ease, visibility .6s ease; }
+    .preloader.hidden { opacity: 0; visibility: hidden; }
+    .preloader-inner { text-align: center; }
+    .preloader-logo { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 30px; animation: preloaderPulse 2s ease-in-out infinite; }
+    .preloader-logo i { font-size: 3rem; color: var(--primary-gold); filter: drop-shadow(0 0 10px rgba(212,160,23,.5)); }
+    .preloader-logo span { font-size: 2.5rem; font-weight: 700; color: var(--white); letter-spacing: 2px; }
+    .preloader-spinner { position: relative; width: 80px; height: 80px; margin: 0 auto 20px; }
+    .spinner-ring { position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 3px solid transparent; }
+    .spinner-ring:nth-child(1) { border-top-color: var(--primary-gold); animation: spinnerRotate 1.5s linear infinite; }
+    .spinner-ring:nth-child(2) { width: 60px; height: 60px; top: 10px; left: 10px; border-right-color: var(--primary-gold-light); animation: spinnerRotate 1.2s linear infinite reverse; }
+    .spinner-ring:nth-child(3) { width: 40px; height: 40px; top: 20px; left: 20px; border-bottom-color: var(--white); animation: spinnerRotate 1s linear infinite; }
+    .preloader-text { color: rgba(255,255,255,.8); font-size: .9rem; letter-spacing: 3px; text-transform: uppercase; animation: preloaderFade 1.5s ease-in-out infinite; }
+    @keyframes spinnerRotate { to { transform: rotate(360deg); } }
+    @keyframes preloaderPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    @keyframes preloaderFade { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
+
+    /* ========== NAVBAR (Identical to index.html) ========== */
+    .navbar { padding: 15px 0; background: transparent; transition: var(--transition-normal); }
+    .navbar.scrolled { background: var(--white); box-shadow: var(--shadow-md); padding: 10px 0; }
+    .navbar-brand { font-size: 1.5rem; font-weight: 700; color: var(--white) !important; display: flex; align-items: center; gap: 8px; transition: var(--transition-normal); }
+    .navbar.scrolled .navbar-brand { color: var(--forest-green-dark) !important; }
+    .navbar-brand i { color: var(--primary-gold); font-size: 1.8rem; }
+    .navbar-nav { gap: 10px; }
+    .nav-link { font-size: .95rem; font-weight: 500; color: rgba(255,255,255,.9) !important; padding: 8px 16px !important; border-radius: var(--radius-xl); transition: var(--transition-normal); }
+    .navbar.scrolled .nav-link { color: var(--gray-700) !important; }
+    .nav-link:hover, .nav-link.active { color: var(--white) !important; background: linear-gradient(135deg, var(--forest-green) 0%, var(--forest-green-dark) 100%); }
+    .btn-contact { background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-dark) 100%); color: var(--white); padding: 10px 24px; border-radius: var(--radius-xl); font-weight: 500; border: none; box-shadow: 0 4px 15px rgba(212,160,23,.3); }
+    .btn-contact:hover { background: linear-gradient(135deg, var(--primary-gold-dark) 0%, var(--dark-gold) 100%); color: var(--white); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,160,23,.4); }
+    .navbar-toggler { border: none; padding: 8px; }
+    .navbar-toggler:focus { box-shadow: none; }
+    .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+    .navbar.scrolled .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33,37,41,.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+    @media (max-width: 991.98px) {
+        .navbar-collapse { background: var(--white); padding: 20px; margin-top: 15px; border-radius: var(--radius-md); box-shadow: var(--shadow-lg); border: 1px solid rgba(34,139,34,.1); }
+        .navbar-collapse .nav-link { color: var(--gray-700) !important; padding: 12px 16px !important; border-radius: var(--radius-sm); }
+        .navbar-collapse .nav-link:hover, .navbar-collapse .nav-link.active { color: var(--white) !important; background: linear-gradient(135deg, var(--forest-green), var(--forest-green-dark)); }
+        .navbar-collapse .btn-contact { margin-top: 15px; width: 100%; text-align: center; }
+    }
+
+    /* ========== PORTFOLIO HERO ========== */
+    .portfolio-hero {
+        position: relative;
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, #1a2e1a 0%, #0d3320 55%, #15412a 100%);
+        padding: 140px 0 90px;
+        overflow: hidden;
+    }
+    .hero-overlay {
+        position: absolute; inset: 0; pointer-events: none;
+        background:
+            radial-gradient(ellipse at 65% 45%, rgba(212,160,23,.18) 0%, transparent 55%),
+            radial-gradient(ellipse at 15% 75%, rgba(34,85,51,.28) 0%, transparent 45%);
+    }
+    .hero-decoration { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .deco-circle { position: absolute; border-radius: 50%; border: 1px solid rgba(212,160,23,.18); }
+    .dc1 { width: 650px; height: 650px; top: -200px; right: -120px; animation: rotSlow 38s linear infinite; }
+    .dc2 { width: 420px; height: 420px; bottom: -150px; left: -110px; border-color: rgba(34,139,34,.18); animation: rotSlow 30s linear infinite reverse; }
+    .dc3 { width: 220px; height: 220px; top: 50%; left: 50%; transform: translate(-50%,-50%); border-color: rgba(244,196,48,.12); animation: pRing 4.5s ease-in-out infinite; }
+    @keyframes rotSlow { to { transform: rotate(360deg); } }
+    @keyframes pRing { 0%,100% { transform: translate(-50%,-50%) scale(1); opacity: .45; } 50% { transform: translate(-50%,-50%) scale(1.3); opacity: .15; } }
+
+    .portfolio-hero .container { position: relative; z-index: 2; }
+    .hero-badge {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
+        color: var(--white); padding: 9px 24px; border-radius: 50px;
+        font-size: .84rem; font-weight: 600; letter-spacing: .5px;
+        margin-bottom: 24px; box-shadow: 0 4px 16px rgba(212,160,23,.42);
+    }
+    .hero-main-title { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 700; color: var(--white); line-height: 1.18; margin-bottom: 20px; }
+    .hero-description { font-size: 1.08rem; color: rgba(255,255,255,.78); line-height: 1.8; max-width: 580px; margin: 0 auto 40px; }
+
+    /* Stat pills in hero */
+    .hero-stats { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 44px; }
+    .hero-stat-pill {
+        display: flex; align-items: center; gap: 12px;
+        background: rgba(255,255,255,.09); backdrop-filter: blur(12px);
+        border: 1px solid rgba(212,160,23,.28); border-radius: 16px;
+        padding: 14px 22px; transition: all .3s ease;
+    }
+    .hero-stat-pill:hover { background: rgba(255,255,255,.14); border-color: rgba(212,160,23,.5); transform: translateY(-3px); }
+    .hero-stat-icon { width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark)); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--white); flex-shrink: 0; }
+    .hero-stat-info strong { display: block; font-size: 1.4rem; font-weight: 700; color: var(--primary-gold); line-height: 1; }
+    .hero-stat-info span { font-size: .76rem; color: rgba(255,255,255,.65); }
+
+    /* Filter chips in hero */
+    .hero-filter-chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .hchip {
+        display: inline-flex; align-items: center; gap: 7px;
+        background: rgba(255,255,255,.09); backdrop-filter: blur(10px);
+        border: 1px solid rgba(212,160,23,.25); color: rgba(255,255,255,.85);
+        padding: 10px 20px; border-radius: 50px; font-size: .85rem; font-weight: 500;
+        cursor: pointer; transition: all .25s ease;
+    }
+    .hchip:hover, .hchip.active {
+        background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
+        border-color: transparent; color: var(--white);
+        box-shadow: 0 4px 18px rgba(212,160,23,.48);
+    }
+
+    /* Scroll indicator */
+    .scroll-cue { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,.45); font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; animation: cueF 2.4s ease-in-out infinite; }
+    @keyframes cueF { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-7px); } }
+    .mouse-ico { width: 22px; height: 36px; border: 2px solid rgba(212,160,23,.45); border-radius: 18px; display: flex; justify-content: center; padding-top: 6px; }
+    .wheel-dot { width: 3px; height: 6px; background: var(--primary-gold); border-radius: 2px; animation: wScroll 2s ease-in-out infinite; }
+    @keyframes wScroll { 0%,100% { transform: translateY(0); opacity: 1; } 50% { transform: translateY(6px); opacity: .25; } }
+
+    /* ========== BREADCRUMB ========== */
+    .bc-strip { background: #f5f9f5; border-bottom: 1px solid rgba(34,139,34,.1); padding: 13px 0; }
+    .breadcrumb { margin: 0; }
+    .breadcrumb-item a { color: var(--forest-green); font-size: .87rem; }
+    .breadcrumb-item.active { color: var(--gray-600); font-size: .87rem; }
+    .breadcrumb-item + .breadcrumb-item::before { color: var(--gray-400); }
+
+    /* ========== FILTER SECTION ========== */
+    .filter-section { padding: 60px 0 30px; background: var(--white); }
+    .filter-wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .filter-tabs { display: flex; gap: 10px; flex-wrap: wrap; }
+    .ftab {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 10px 22px; border-radius: 50px; font-size: .88rem; font-weight: 600;
+        border: 2px solid rgba(34,139,34,.2); background: transparent; color: var(--gray-700);
+        cursor: pointer; transition: all .25s ease;
+    }
+    .ftab:hover { border-color: var(--forest-green); color: var(--forest-green); }
+    .ftab.active { background: linear-gradient(135deg, var(--forest-green), var(--forest-green-dark)); color: var(--white); border-color: transparent; box-shadow: 0 4px 16px rgba(34,139,34,.3); }
+    .result-count { font-size: .9rem; color: var(--gray-500); font-weight: 500; white-space: nowrap; }
+    .result-count strong { color: var(--forest-green); font-weight: 700; }
+
+    /* ========== PORTFOLIO GRID ========== */
+    .portfolio-section { padding: 40px 0 100px; background: var(--white); }
+
+    /* Category Section Header */
+    .cat-section-header {
+        display: flex; align-items: center; gap: 20px;
+        margin-bottom: 40px; padding-bottom: 20px;
+        border-bottom: 2px solid var(--gray-200); position: relative;
+    }
+    .cat-section-header::after {
+        content: ''; position: absolute; bottom: -2px; left: 0;
+        width: 100px; height: 2px;
+        background: linear-gradient(90deg, var(--forest-green), var(--primary-gold));
+    }
+    .cat-icon-wrap {
+        width: 58px; height: 58px; border-radius: 16px; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.6rem; color: var(--white);
+        box-shadow: 0 4px 16px rgba(34,139,34,.3);
+    }
+    .cat-icon-wrap.green { background: linear-gradient(135deg, var(--forest-green), var(--forest-green-dark)); }
+    .cat-icon-wrap.gold { background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark)); }
+    .cat-icon-wrap.slate { background: linear-gradient(135deg, #607d8b, #455a64); }
+    .cat-icon-wrap.pink { background: linear-gradient(135deg, #e91e63, #c2185b); }
+
+    .cat-label { font-size: .72rem; font-weight: 700; color: var(--primary-gold); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 5px; }
+    .cat-title { font-size: 1.8rem; font-weight: 700; color: var(--gray-900); margin: 0; }
+    .cat-desc { color: var(--gray-600); font-size: .97rem; line-height: 1.75; margin-bottom: 32px; max-width: 700px; }
+
+    /* Portfolio Card */
+    .port-card {
+        background: var(--white); border-radius: 20px;
+        border: 1px solid rgba(34,139,34,.1); box-shadow: var(--shadow-sm);
+        height: 100%; transition: all .32s cubic-bezier(.22,1,.36,1);
+        position: relative; overflow: hidden; cursor: pointer;
+    }
+    .port-card::before {
+        content: ''; position: absolute; inset: 0; border-radius: 20px;
+        background: linear-gradient(135deg, rgba(34,139,34,.04), transparent 60%);
+        pointer-events: none; z-index: 0;
+    }
+    .port-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 22px 60px rgba(34,139,34,.16);
+        border-color: rgba(34,139,34,.28);
+    }
+
+    /* Card Image */
+    .card-img-wrap {
+        position: relative; overflow: hidden; border-radius: 20px 20px 0 0;
+        height: 230px; background: linear-gradient(135deg, #f5faf5, #fafff5);
+    }
+    .card-img-wrap img {
+        width: 100%; height: 100%; object-fit: cover;
+        transition: transform .5s ease; filter: brightness(.9) saturate(1.05);
+    }
+    .port-card:hover .card-img-wrap img { transform: scale(1.08); filter: brightness(.95) saturate(1.1); }
+
+    /* Category Badge */
+    .card-badge {
+        position: absolute; top: 16px; left: 16px;
+        padding: 5px 14px; border-radius: 20px;
+        font-size: .7rem; font-weight: 700; text-transform: uppercase;
+        letter-spacing: .5px; color: var(--white);
+        box-shadow: 0 2px 10px rgba(0,0,0,.2); z-index: 5;
+    }
+    .badge-retail { background: linear-gradient(135deg, #ff9800, #f57c00); }
+    .badge-horeca { background: linear-gradient(135deg, #e91e63, #c2185b); }
+    .badge-industri { background: linear-gradient(135deg, #607d8b, #455a64); }
+    .badge-catering { background: linear-gradient(135deg, #9c27b0, #6a1b9a); }
+
+    /* Rating stars */
+    .card-rating {
+        position: absolute; bottom: 14px; right: 14px;
+        display: flex; align-items: center; gap: 4px;
+        background: rgba(0,0,0,.45); backdrop-filter: blur(8px);
+        border-radius: 20px; padding: 4px 10px; z-index: 5;
+    }
+    .card-rating .stars { color: var(--primary-gold); font-size: .8rem; }
+    .card-rating span { color: var(--white); font-size: .72rem; font-weight: 600; }
+
+    /* Card body */
+    .card-body-inner { padding: 24px; position: relative; z-index: 1; }
+    .card-name { font-size: 1.15rem; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
+    .card-tagline { font-size: .84rem; color: var(--gray-500); margin-bottom: 16px; line-height: 1.5; }
+    .card-meta { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .card-meta-item { display: flex; align-items: center; gap: 9px; font-size: .83rem; color: var(--gray-600); }
+    .card-meta-item i { color: var(--forest-green); font-size: .9rem; width: 16px; flex-shrink: 0; }
+    .card-divider { border: none; border-top: 1px solid var(--gray-200); margin: 0 0 16px; }
+
+    /* Tags row */
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .tag-pill {
+        display: inline-flex; align-items: center; gap: 5px;
+        padding: 4px 12px; border-radius: 20px; font-size: .73rem; font-weight: 600;
+        background: var(--forest-green-pale); color: var(--forest-green-dark);
+        border: 1px solid rgba(34,139,34,.2);
+    }
+
+    /* Card footer */
+    .card-actions { display: flex; gap: 10px; }
+    .btn-detail {
+        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        background: linear-gradient(135deg, var(--forest-green), var(--forest-green-dark));
+        color: var(--white); padding: 10px 22px; border-radius: var(--radius-md);
+        font-size: .84rem; font-weight: 600; transition: all .25s ease; flex: 1;
+    }
+    .btn-detail:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(34,139,34,.35); color: var(--white); }
+    .btn-wa-card {
+        width: 42px; height: 42px; border-radius: var(--radius-md); flex-shrink: 0;
+        background: linear-gradient(135deg, #25d366, #128c7e);
+        color: var(--white); display: flex; align-items: center; justify-content: center;
+        font-size: 1.1rem; transition: all .25s ease;
+    }
+    .btn-wa-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,211,102,.4); color: var(--white); }
+
+    /* Category section wrapper */
+    .cat-block { transition: all .35s ease; }
+    .cat-block.hidden-cat { display: none !important; }
+
+    /* ========== TESTIMONIAL TICKER ========== */
+    .testimonial-section {
+        background: var(--forest-green-pale);
+        padding: var(--section-padding);
+        overflow: hidden;
+    }
+    .testi-header { text-align: center; margin-bottom: 60px; }
+    .testi-card {
+        background: var(--white); border-radius: 20px;
+        padding: 32px; border: 1px solid rgba(34,139,34,.1);
+        box-shadow: var(--shadow-sm); height: 100%;
+        transition: all .3s ease; position: relative;
+    }
+    .testi-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: rgba(34,139,34,.2); }
+    .testi-quote-icon { font-size: 3rem; color: var(--primary-gold); opacity: .3; line-height: 1; margin-bottom: 16px; font-family: Georgia, serif; }
+    .testi-text { font-size: .97rem; color: var(--gray-700); line-height: 1.8; margin-bottom: 24px; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: 14px; }
+    .testi-avatar {
+        width: 52px; height: 52px; border-radius: 50%; overflow: hidden;
+        border: 3px solid var(--primary-gold); flex-shrink: 0;
+    }
+    .testi-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .testi-name { font-size: .95rem; font-weight: 700; color: var(--gray-900); margin-bottom: 2px; }
+    .testi-role { font-size: .78rem; color: var(--gray-500); }
+    .testi-rating { display: flex; gap: 3px; margin-top: 6px; }
+    .testi-rating i { color: var(--primary-gold); font-size: .78rem; }
+
+    /* ========== IMPACT SECTION (same as index.html) ========== */
+    .impact-section {
+        position: relative; padding: var(--section-padding);
+        background: linear-gradient(135deg, var(--forest-green-darker) 0%, var(--forest-green-dark) 50%, var(--forest-green-light) 100%);
+    }
+    .impact-overlay {
+        position: absolute; inset: 0; pointer-events: none;
+        background:
+            radial-gradient(ellipse at 30% 50%, rgba(212,160,23,.15) 0%, transparent 50%),
+            radial-gradient(ellipse at 70% 80%, rgba(34,139,34,.2) 0%, transparent 40%);
+    }
+    .impact-section .container { position: relative; z-index: 2; }
+    .impact-card {
+        background: rgba(255,255,255,.1); border-radius: var(--radius-md);
+        overflow: hidden; backdrop-filter: blur(10px);
+        border: 1px solid rgba(212,160,23,.2); transition: var(--transition-normal);
+    }
+    .impact-card:hover { transform: translateY(-5px); background: rgba(255,255,255,.15); border-color: rgba(212,160,23,.4); }
+    .impact-img { width: 100%; height: 140px; object-fit: cover; }
+    .impact-stat { padding: 20px; text-align: center; color: var(--white); }
+    .impact-stat h3 { font-size: 2.5rem; font-weight: 700; color: var(--primary-gold); margin-bottom: 5px; }
+    .impact-stat p { font-size: .9rem; color: rgba(255,255,255,.8); margin: 0; }
+
+    /* ========== KEUNGGULAN SECTION ========== */
+    .keunggulan-section {
+        padding: var(--section-padding);
+        background: linear-gradient(135deg, var(--forest-green-darker) 0%, var(--forest-green-dark) 55%, var(--forest-green-light) 100%);
+        position: relative; overflow: hidden;
+    }
+    .keunggulan-section::before {
+        content: ''; position: absolute; inset: 0; pointer-events: none;
+        background: radial-gradient(ellipse at 30% 50%, rgba(212,160,23,.12) 0%, transparent 55%),
+                    radial-gradient(ellipse at 70% 80%, rgba(34,139,34,.18) 0%, transparent 45%);
+    }
+    .keunggulan-section .container { position: relative; z-index: 2; }
+    .kel-card {
+        background: rgba(255,255,255,.07); backdrop-filter: blur(12px);
+        border: 1px solid rgba(212,160,23,.2); border-radius: 18px;
+        padding: 32px 24px; height: 100%; transition: all .3s ease; text-align: center;
+    }
+    .kel-card:hover { background: rgba(255,255,255,.12); border-color: rgba(212,160,23,.42); transform: translateY(-6px); }
+    .kel-icon {
+        width: 64px; height: 64px; border-radius: 16px;
+        background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.7rem; color: var(--white); margin: 0 auto 20px;
+        box-shadow: 0 6px 20px rgba(212,160,23,.35);
+    }
+    .kel-card h4 { color: var(--white); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .kel-card p { color: rgba(255,255,255,.68); font-size: .88rem; line-height: 1.7; margin: 0; }
+
+    /* ========== MITRA LOGOS ========== */
+    .mitra-section { padding: 80px 0; background: var(--white); }
+    .mitra-logos { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 40px; margin-top: 50px; }
+    .mitra-logo { display: flex; align-items: center; gap: 8px; font-size: 1.2rem; font-weight: 700; color: var(--gray-600); opacity: .65; transition: var(--transition-normal); }
+    .mitra-logo:hover { opacity: 1; color: var(--forest-green); }
+    .mitra-logo i { font-size: 1.5rem; color: var(--primary-gold); }
+
+    /* ========== CTA SECTION ========== */
+    .cta-section { padding: 80px 0; background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-dark) 100%); position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,.12) 0%, transparent 60%); pointer-events: none; }
+    .cta-section .container { position: relative; z-index: 2; }
+    .cta-section h2 { color: var(--white); font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; margin-bottom: 10px; }
+    .cta-section p { color: rgba(255,255,255,.82); font-size: 1rem; margin: 0; }
+    .btn-cta-white {
+        display: inline-flex; align-items: center; gap: 9px;
+        background: var(--white); color: var(--primary-gold-dark); font-weight: 700;
+        padding: 15px 36px; border-radius: var(--radius-md); font-size: .97rem;
+        transition: all .28s ease; box-shadow: 0 4px 16px rgba(0,0,0,.14);
+    }
+    .btn-cta-white:hover { background: var(--forest-green-dark); color: var(--primary-gold); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.2); }
+    .btn-cta-outline {
+        display: inline-flex; align-items: center; gap: 9px;
+        background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.65);
+        font-weight: 600; padding: 15px 32px; border-radius: var(--radius-md); font-size: .97rem;
+        transition: all .28s ease;
+    }
+    .btn-cta-outline:hover { background: rgba(255,255,255,.14); border-color: var(--white); color: var(--white); transform: translateY(-3px); }
+
+    /* ========== FOOTER (same as index.html) ========== */
+    .footer-section { background: var(--gray-900); color: var(--white); padding-top: 60px; }
+    .footer-top { padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .footer-logo { font-size: 1.5rem; font-weight: 700; color: var(--white); display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
+    .footer-logo i { color: var(--primary-gold); }
+    .footer-brand p { color: var(--gray-400); font-size: .9rem; }
+    .footer-section h5 { color: var(--white); font-size: 1rem; font-weight: 600; margin-bottom: 20px; }
+    .footer-links { list-style: none; padding: 0; margin: 0; }
+    .footer-links li { margin-bottom: 12px; }
+    .footer-links a { color: var(--gray-400); font-size: .9rem; transition: var(--transition-normal); }
+    .footer-links a:hover { color: var(--primary-gold); padding-left: 5px; }
+    .footer-contact { list-style: none; padding: 0; margin: 0; }
+    .footer-contact li { color: var(--gray-400); font-size: .9rem; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; }
+    .footer-contact i { color: var(--primary-gold); margin-top: 3px; }
+    .footer-social { display: flex; gap: 12px; margin-top: 20px; }
+    .footer-social a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 1rem; transition: var(--transition-normal); }
+    .footer-social a:hover { background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark)); transform: translateY(-3px); }
+    .footer-bottom { padding: 25px 0; }
+    .copyright { color: var(--gray-500); font-size: .85rem; margin: 0; }
+    .footer-legal { list-style: none; padding: 0; margin: 0; display: flex; gap: 25px; }
+    .footer-legal a { color: var(--gray-500); font-size: .85rem; }
+    .footer-legal a:hover { color: var(--primary-gold); }
+
+    /* ========== BACK TO TOP & WHATSAPP ========== */
+    .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--forest-green), var(--forest-green-dark)); color: var(--white); border: none; font-size: 1.2rem; cursor: pointer; opacity: 0; visibility: hidden; transition: var(--transition-normal); z-index: 999; box-shadow: 0 4px 20px rgba(34,139,34,.3); }
+    .back-to-top.show { opacity: 1; visibility: visible; }
+    .back-to-top:hover { background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark)); transform: translateY(-5px); box-shadow: 0 6px 25px rgba(212,160,23,.4); }
+    .whatsapp-float { position: fixed; bottom: 100px; right: 30px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #25d366 0%, #128c7e 100%); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; text-decoration: none; z-index: 998; box-shadow: 0 4px 20px rgba(37,211,102,.4); transition: var(--transition-normal); animation: waPulse 2s ease-in-out infinite; }
+    .whatsapp-float:hover { transform: scale(1.1); color: var(--white); }
+    .whatsapp-float:hover .wa-tooltip { opacity: 1; visibility: visible; transform: translateX(-10px); }
+    .wa-tooltip { position: absolute; right: 70px; background: var(--gray-900); color: var(--white); padding: 8px 15px; border-radius: var(--radius-sm); font-size: .85rem; font-weight: 500; white-space: nowrap; opacity: 0; visibility: hidden; transition: var(--transition-normal); pointer-events: none; }
+    .wa-tooltip::after { content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); border-width: 6px; border-style: solid; border-color: transparent transparent transparent var(--gray-900); }
+    @keyframes waPulse { 0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,.4); } 50% { box-shadow: 0 4px 30px rgba(37,211,102,.6), 0 0 0 10px rgba(37,211,102,.1); } }
+
+    /* ========== MODAL ========== */
+    .port-modal { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; visibility: hidden; transition: all .3s ease; }
+    .port-modal.open { opacity: 1; visibility: visible; }
+    .modal-backdrop { position: absolute; inset: 0; background: rgba(13,51,32,.65); backdrop-filter: blur(8px); z-index: 1; }
+    .modal-box {
+        position: relative; z-index: 10001; background: var(--white);
+        border-radius: 24px; max-width: 780px; width: 100%; max-height: 90vh;
+        overflow-y: auto; box-shadow: 0 24px 80px rgba(0,0,0,.3);
+        transform: translateY(30px) scale(.97); transition: transform .35s cubic-bezier(.22,1,.36,1);
+    }
+    .port-modal.open .modal-box { transform: translateY(0) scale(1); }
+    .modal-box::-webkit-scrollbar { width: 6px; }
+    .modal-box::-webkit-scrollbar-thumb { background: rgba(34,139,34,.3); border-radius: 3px; }
+    .modal-header-band { height: 5px; background: linear-gradient(90deg, var(--forest-green), var(--primary-gold), var(--forest-green)); border-radius: 24px 24px 0 0; }
+    .modal-close { position: absolute; top: 16px; right: 16px; width: 38px; height: 38px; border-radius: 50%; background: var(--gray-100); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--gray-600); transition: all .2s ease; z-index: 20; }
+    .modal-close:hover { background: var(--forest-green); color: var(--white); transform: rotate(90deg); }
+    .modal-inner { padding: 30px 36px 36px; }
+    .modal-cat-tag { font-size: .72rem; font-weight: 700; color: var(--primary-gold); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+    .modal-title { font-size: 1.8rem; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
+    .modal-sub { font-size: .95rem; color: var(--gray-500); margin-bottom: 26px; }
+    .modal-img-band { background: linear-gradient(135deg, #f5faf5, #fffdf7); border-radius: 16px; padding: 28px; text-align: center; margin-bottom: 28px; }
+    .modal-img-band img { max-height: 260px; width: 100%; object-fit: cover; border-radius: 12px; filter: drop-shadow(0 10px 28px rgba(0,0,0,.14)); }
+    .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+    .modal-detail { background: var(--forest-green-pale); border-radius: 12px; padding: 16px 20px; border: 1px solid rgba(34,139,34,.15); }
+    .modal-detail-label { font-size: .7rem; font-weight: 700; color: var(--forest-green-dark); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+    .modal-detail-val { font-size: .97rem; font-weight: 600; color: var(--gray-900); }
+    .modal-story-title { font-size: 1rem; font-weight: 700; color: var(--gray-900); margin-bottom: 12px; }
+    .modal-story { font-size: .94rem; color: var(--gray-600); line-height: 1.8; margin-bottom: 24px; }
+    .modal-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-modal-green { display: inline-flex; align-items: center; justify-content: center; gap: 9px; background: linear-gradient(135deg, var(--forest-green), var(--forest-green-dark)); color: var(--white); padding: 14px 30px; border-radius: var(--radius-md); font-weight: 700; font-size: .95rem; transition: all .28s ease; flex: 1; }
+    .btn-modal-green:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(34,139,34,.38); color: var(--white); }
+    .btn-modal-wa { display: inline-flex; align-items: center; gap: 9px; background: linear-gradient(135deg, #25d366, #128c7e); color: var(--white); padding: 14px 26px; border-radius: var(--radius-md); font-weight: 700; font-size: .95rem; transition: all .28s ease; }
+    .btn-modal-wa:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(37,211,102,.38); color: var(--white); }
+
+    /* ========== AOS ========== */
+    [data-aos] { opacity: 0; transition: opacity .7s ease, transform .7s ease; }
+    [data-aos="fade-up"] { transform: translateY(30px); }
+    [data-aos="fade-right"] { transform: translateX(-30px); }
+    [data-aos="fade-left"] { transform: translateX(30px); }
+    [data-aos="zoom-in"] { transform: scale(.9); }
+    [data-aos].aos-animate { opacity: 1; transform: none; }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 991.98px) {
+        .portfolio-hero { min-height: auto; padding: 120px 0 80px; }
+        .modal-grid { grid-template-columns: 1fr; }
+        .modal-inner { padding: 24px 24px 28px; }
+        .whatsapp-float { width: 55px; height: 55px; font-size: 1.6rem; bottom: 90px; right: 20px; }
+        .wa-tooltip { display: none; }
+    }
+    @media (max-width: 767.98px) {
+        :root { --section-padding: 70px 0; }
+        .hero-main-title { font-size: 2rem; }
+        .scroll-cue { display: none; }
+        .filter-wrap { flex-direction: column; align-items: flex-start; }
+        .section-title { font-size: 2rem; }
+    }
+    @media (max-width: 575.98px) {
+        .hero-stats { flex-direction: column; align-items: center; }
+        .hero-stat-pill { width: 100%; max-width: 280px; }
+        .modal-actions { flex-direction: column; }
+        .btn-modal-green, .btn-modal-wa { width: 100%; justify-content: center; }
+        .whatsapp-float { bottom: 80px; right: 14px; }
+        .back-to-top { bottom: 16px; right: 16px; }
+    }
+    </style>
+</head>
+<body>
+
+<!-- ========== PRELOADER ========== -->
+<div id="preloader" class="preloader">
+    <div class="preloader-inner">
+        <div class="preloader-logo">
+            <i class="bi bi-droplet-fill"></i>
+            <span>AROMAS</span>
+        </div>
+        <div class="preloader-spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+        </div>
+        <p class="preloader-text">Memuat Portofolio...</p>
+    </div>
+</div>
+
+<!-- ========== NAVBAR ========== -->
+<header id="header">
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-droplet-fill"></i> AROMAS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">Tentang Kami</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="product.html">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="portfolio.html">Portofolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="partnership.html">Kemitraan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#gallery">Galeri</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#blog">Blog</a></li>
+
+                </ul>
+                <a href="index.html#contact" class="btn btn-primary btn-contact">Hubungi Kami</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- ========== HERO SECTION ========== -->
+<section class="portfolio-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-decoration">
+        <div class="deco-circle dc1"></div>
+        <div class="deco-circle dc2"></div>
+        <div class="deco-circle dc3"></div>
+    </div>
+    <div class="container text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 col-md-10" data-aos="fade-up">
+                <span class="hero-badge"><i class="bi bi-briefcase-fill"></i> Portofolio Kemitraan</span>
+                <h1 class="hero-main-title">
+                    Dipercaya Ribuan Mitra<br />
+                    <span class="italic" style="font-family: var(--font-secondary); font-style: italic; background: linear-gradient(135deg,#d4a017,#ffbf00,#f4c430); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Di Seluruh Indonesia</span>
+                </h1>
+                <p class="hero-description">
+                    Dari UMKM hingga korporasi besar — AROMAS bangga menjadi bagian dari ribuan kisah sukses mitra bisnis kami di berbagai sektor industri.
+                </p>
+
+                <!-- Stats -->
+                <div class="hero-stats">
+                    <div class="hero-stat-pill">
+                        <div class="hero-stat-icon"><i class="bi bi-people-fill"></i></div>
+                        <div class="hero-stat-info">
+                            <strong>1Jt+</strong>
+                            <span>Pelanggan Setia</span>
+                        </div>
+                    </div>
+                    <div class="hero-stat-pill">
+                        <div class="hero-stat-icon"><i class="bi bi-building"></i></div>
+                        <div class="hero-stat-info">
+                            <strong>500+</strong>
+                            <span>Mitra Distribusi</span>
+                        </div>
+                    </div>
+                    <div class="hero-stat-pill">
+                        <div class="hero-stat-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div class="hero-stat-info">
+                            <strong>34</strong>
+                            <span>Provinsi Terjangkau</span>
+                        </div>
+                    </div>
+                    <div class="hero-stat-pill">
+                        <div class="hero-stat-icon"><i class="bi bi-star-fill"></i></div>
+                        <div class="hero-stat-info">
+                            <strong>4.9/5</strong>
+                            <span>Rating Kepuasan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter chips -->
+                <div class="hero-filter-chips">
+                    <span class="hchip active" data-filter="all"><i class="bi bi-grid-fill"></i> Semua Mitra</span>
+                    <span class="hchip" data-filter="retail"><i class="bi bi-shop"></i> Retail</span>
+                    <span class="hchip" data-filter="horeca"><i class="bi bi-cup-hot-fill"></i> Hotel & Resto</span>
+                    <span class="hchip" data-filter="industri"><i class="bi bi-buildings-fill"></i> Industri</span>
+                    <span class="hchip" data-filter="catering"><i class="bi bi-egg-fried"></i> Katering</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-cue">
+        <div class="mouse-ico"><div class="wheel-dot"></div></div>
+        <span>Scroll</span>
+    </div>
+</section>
+
+<!-- ========== BREADCRUMB ========== -->
+<div class="bc-strip">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house-door-fill me-1"></i>Beranda</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Portofolio</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<!-- ========== FILTER TABS ========== -->
+<section class="filter-section">
+    <div class="container">
+        <div class="filter-wrap">
+            <div class="filter-tabs">
+                <button class="ftab active" data-filter="all"><i class="bi bi-grid-fill"></i> Semua</button>
+                <button class="ftab" data-filter="retail"><i class="bi bi-shop"></i> Retail</button>
+                <button class="ftab" data-filter="horeca"><i class="bi bi-cup-hot-fill"></i> Hotel & Resto</button>
+                <button class="ftab" data-filter="industri"><i class="bi bi-buildings-fill"></i> Industri</button>
+                <button class="ftab" data-filter="catering"><i class="bi bi-egg-fried"></i> Katering</button>
+            </div>
+            <span class="result-count">Menampilkan <strong id="portCount">12</strong> mitra terpilih</span>
+        </div>
+    </div>
+</section>
+
+<!-- ========== PORTFOLIO GRID ========== -->
+<section class="portfolio-section">
+    <div class="container">
+
+        <!-- === RETAIL === -->
+        <div class="mb-5">
+            <div class="cat-section-header" data-aos="fade-right">
+                <div class="cat-icon-wrap green"><i class="bi bi-shop"></i></div>
+                <div>
+                    <div class="cat-label">Kategori</div>
+                    <div class="cat-title">Mitra Retail</div>
+                </div>
+            </div>
+            <p class="cat-desc" data-aos="fade-up">
+                Jaringan distribusi retail kami mencakup minimarket modern, supermarket, grosir tradisional, hingga platform e-commerce terkemuka di Indonesia.
+            </p>
+            <div class="row g-4">
+
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="retail" data-aos="fade-up" data-aos-delay="0">
+                    <div class="port-card" onclick="openModal('m1')">
+                        <div class="card-img-wrap">
+                            <span class="card-badge badge-retail">Retail</span>
+                            <div class="card-rating"><span class="stars">★★★★★</span><span>5.0</span></div>
+                            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&h=350&fit=crop" alt="Mart 88 Group" />
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-name">Mart 88 Group</div>
+                            <div class="card-tagline">Jaringan Minimarket Modern Terkemuka</div>
+                            <div class="card-meta">
+                                <div class="card-meta-item"><i class="bi bi-geo-alt-fill"></i> 50+ Cabang Jabodetabek</div>
+                                <div class="card-meta-item"><i class="bi bi-box-seam"></i> Botol 1L, 2L & Jeriken 5L</div>
+                                <div class="card-meta-item"><i class="bi bi-calendar-check"></i> Mitra sejak 2021</div>
+                                <div class="card-meta-item"><i class="bi bi-graph-up-arrow"></i> Volume > 10.000 L/bulan</div>
+                            </div>
+                            <hr class="card-divider" />
+                            <div class="card-tags">
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Supply Rutin</span>
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Private Label</span>
+                            </div>
+                            <div class="card-actions">
+                                <a class="btn-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</a>
+                                <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="retail" data-aos="fade-up" data-aos-delay="100">
+                    <div class="port-card" onclick="openModal('m2')">
+                        <div class="card-img-wrap">
+                            <span class="card-badge badge-retail">Retail</span>
+                            <div class="card-rating"><span class="stars">★★★★★</span><span>4.9</span></div>
+                            <img src="https://images.unsplash.com/photo-1604719312566-8912e9227f6a?w=600&h=350&fit=crop" alt="Toko Berkah" />
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-name">Toko Kelontong Berkah</div>
+                            <div class="card-tagline">Grosir Sembako Terpercaya Sejak 2015</div>
+                            <div class="card-meta">
+                                <div class="card-meta-item"><i class="bi bi-geo-alt-fill"></i> Pasar Induk Kramat Jati</div>
+                                <div class="card-meta-item"><i class="bi bi-box-seam"></i> Semua varian ukuran</div>
+                                <div class="card-meta-item"><i class="bi bi-calendar-check"></i> Mitra sejak 2015</div>
+                                <div class="card-meta-item"><i class="bi bi-graph-up-arrow"></i> Volume > 5.000 L/bulan</div>
+                            </div>
+                            <hr class="card-divider" />
+                            <div class="card-tags">
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Grosir</span>
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Tradisional</span>
+                            </div>
+                            <div class="card-actions">
+                                <a class="btn-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</a>
+                                <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="retail" data-aos="fade-up" data-aos-delay="200">
+                    <div class="port-card" onclick="openModal('m3')">
+                        <div class="card-img-wrap">
+                            <span class="card-badge badge-retail">E-Commerce</span>
+                            <div class="card-rating"><span class="stars">★★★★★</span><span>4.8</span></div>
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=350&fit=crop" alt="Online Retail" />
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-name">NusaMart Online</div>
+                            <div class="card-tagline">Platform Belanja Groceries Digital</div>
+                            <div class="card-meta">
+                                <div class="card-meta-item"><i class="bi bi-geo-alt-fill"></i> Layanan 15 Kota Besar</div>
+                                <div class="card-meta-item"><i class="bi bi-box-seam"></i> Botol 1L & 2L</div>
+                                <div class="card-meta-item"><i class="bi bi-calendar-check"></i> Mitra sejak 2022</div>
+                                <div class="card-meta-item"><i class="bi bi-graph-up-arrow"></i> Volume > 8.000 L/bulan</div>
+                            </div>
+                            <hr class="card-divider" />
+                            <div class="card-tags">
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Digital</span>
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Same-Day Delivery</span>
+                            </div>
+                            <div class="card-actions">
+                                <a class="btn-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</a>
+                                <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- === HORECA === -->
+        <div class="mb-5">
+            <div class="cat-section-header" data-aos="fade-right">
+                <div class="cat-icon-wrap pink"><i class="bi bi-cup-hot-fill"></i></div>
+                <div>
+                    <div class="cat-label">Kategori</div>
+                    <div class="cat-title">Hotel & Restoran</div>
+                </div>
+            </div>
+            <p class="cat-desc" data-aos="fade-up">
+                Dipercaya oleh hotel bintang lima, restoran premium, café kekinian, hingga food court berskala besar dengan standar kuliner internasional.
+            </p>
+            <div class="row g-4">
+
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="horeca" data-aos="fade-up" data-aos-delay="0">
+                    <div class="port-card" onclick="openModal('m4')">
+                        <div class="card-img-wrap">
+                            <span class="card-badge badge-horeca">Hotel ★★★★★</span>
+                            <div class="card-rating"><span class="stars">★★★★★</span><span>5.0</span></div>
+                            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=350&fit=crop" alt="Grand Hotel Horizon" />
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-name">Grand Hotel Horizon</div>
+                            <div class="card-tagline">Hotel Bintang 5 Standar Internasional</div>
+                            <div class="card-meta">
+                                <div class="card-meta-item"><i class="bi bi-geo-alt-fill"></i> Bandung & Jakarta</div>
+                                <div class="card-meta-item"><i class="bi bi-box-seam"></i> Jeriken 18L & BIB</div>
+                                <div class="card-meta-item"><i class="bi bi-calendar-check"></i> Mitra sejak 2019</div>
+                                <div class="card-meta-item"><i class="bi bi-graph-up-arrow"></i> Volume > 15.000 L/bulan</div>
+                            </div>
+                            <hr class="card-divider" />
+                            <div class="card-tags">
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Premium</span>
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Horeca</span>
+                            </div>
+                            <div class="card-actions">
+                                <a class="btn-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</a>
+                                <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="horeca" data-aos="fade-up" data-aos-delay="100">
+                    <div class="port-card" onclick="openModal('m5')">
+                        <div class="card-img-wrap">
+                            <span class="card-badge badge-horeca">Restoran</span>
+                            <div class="card-rating"><span class="stars">★★★★★</span><span>4.9</span></div>
+                            <img src="https://images.unsplash.com/photo-1559339352-73130fa2718e?w=600&h=350&fit=crop" alt="Cafe Senja" />
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-name">Cafe Senja Group</div>
+                            <div class="card-tagline">Chain Coffee Shop Kekinian Nasional</div>
+                            <div class="card-meta">
+                                <div class="card-meta-item"><i class="bi bi-geo-alt-fill"></i> 20 Outlet Nasional</div>
+                                <div class="card-meta-item"><i class="bi bi-box-seam"></i> Jeriken 5L</div>
+                                <div class="card-meta-item"><i class="bi bi-calendar-check"></i> Mitra sejak 2022</div>
+                                <div class="card-meta-item"><i class="bi bi-graph-up-arrow"></i> Volume > 3.000 L/bulan</div>
+                            </div>
+                            <hr class="card-divider" />
+                            <div class="card-tags">
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> F&B</span>
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Modern</span>
+                            </div>
+                            <div class="card-actions">
+                                <a class="btn-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</a>
+                                <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="horeca" data-aos="fade-up" data-aos-delay="200">
+                    <div class="port-card" onclick="openModal('m6')">
+                        <div class="card-img-wrap">
+                            <span class="card-badge badge-horeca">Food Court</span>
+                            <div class="card-rating"><span class="stars">★★★★½</span><span>4.7</span></div>
+                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=350&fit=crop" alt="Kelapa Muda Food Hall" />
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-name">Kelapa Muda Food Hall</div>
+                            <div class="card-tagline">Pusat Kuliner Modern Skala Besar</div>
+                            <div class="card-meta">
+                                <div class="card-meta-item"><i class="bi bi-geo-alt-fill"></i> 5 Mall Terkemuka Jakarta</div>
+                                <div class="card-meta-item"><i class="bi bi-box-seam"></i> BIB 20L & Jeriken 18L</div>
+                                <div class="card-meta-item"><i class="bi bi-calendar-check"></i> Mitra sejak 2020</div>
+                                <div class="card-meta-item"><i class="bi bi-graph-up-arrow"></i> Volume > 12.000 L/bulan</div>
+                            </div>
+                            <hr class="card-divider" />
+                            <div class="card-tags">
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Food Hall</span>
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> High Volume</span>
+                            </div>
+                            <div class="card-actions">
+                                <a class="btn-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</a>
+                                <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- === INDUSTRI === -->
+        <div class="mb-5">
+            <div class="cat-section-header" data-aos="fade-right">
+                <div class="cat-icon-wrap slate"><i class="bi bi-buildings-fill"></i></div>
+                <div>
+                    <div class="cat-label">Kategori</div>
+                    <div class="cat-title">Mitra Industri</div>
+                </div>
+            </div>
+            <p class="cat-desc" data-aos="fade-up">
+                Solusi supply minyak goreng curah dan kemasan besar untuk kebutuhan manufaktur makanan, pabrik snack, hingga usaha pengolahan skala industri.
+            </p>
+            <div class="row g-4">
+
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="industri" data-aos="fade-up" data-aos-delay="0">
+                    <div class="port-card" onclick="openModal('m7')">
+                        <div class="card-img-wrap">
+                            <span class="card-badge badge-industri">Manufaktur</span>
+                            <div class="card-rating"><span class="stars">★★★★★</span><span>5.0</span></div>
+                            <img src="https://images.unsplash.com/photo-1565514020176-db7936a5fa93?w=600&h=350&fit=crop" alt="IndoSnack Factory" />
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-name">IndoSnack Factory</div>
+                            <div class="card-tagline">Produsen Makanan Ringan Ekspor</div>
+                            <div class="card-meta">
+                                <div class="card-meta-item"><i class="bi bi-geo-alt-fill"></i> Kawasan Industri Cikarang</div>
+                                <div class="card-meta-item"><i class="bi bi-box-seam"></i> BIB 20L & Tangki Curah</div>
+                                <div class="card-meta-item"><i class="bi bi-calendar-check"></i> Mitra sejak 2018</div>
+                                <div class="card-meta-item"><i class="bi bi-graph-up-arrow"></i> Volume 20 Ton/bulan</div>
+                            </div>
+                            <hr class="card-divider" />
+                            <div class="card-tags">
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Industri Besar</span>
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Ekspor</span>
+                            </div>
+                            <div class="card-actions">
+                                <a class="btn-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</a>
+                                <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="industri" data-aos="fade-up" data-aos-delay="100">
+                    <div class="port-card" onclick="openModal('m8')">
+                        <div class="card-img-wrap">
+                            <span class="card-badge badge-industri">Pengolahan</span>
+                            <div class="card-rating"><span class="stars">★★★★★</span><span>4.8</span></div>
+                            <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=350&fit=crop" alt="Pabrik Mie" />
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-name">PT Mie Nusantara</div>
+                            <div class="card-tagline">Produsen Mie & Bakmi Lokal Terkemuka</div>
+                            <div class="card-meta">
+                                <div class="card-meta-item"><i class="bi bi-geo-alt-fill"></i> Bekasi, Jawa Barat</div>
+                                <div class="card-meta-item"><i class="bi bi-box-seam"></i> BIB 20L & Tangki Curah</div>
+                                <div class="card-meta-item"><i class="bi bi-calendar-check"></i> Mitra sejak 2017</div>
+                                <div class="card-meta-item"><i class="bi bi-graph-up-arrow"></i> Volume 15 Ton/bulan</div>
+                            </div>
+                            <hr class="card-divider" />
+                            <div class="card-tags">
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> B2B</span>
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Food Processing</span>
+                            </div>
+                            <div class="card-actions">
+                                <a class="btn-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</a>
+                                <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="industri" data-aos="fade-up" data-aos-delay="200">
+                    <div class="port-card" onclick="openModal('m9')">
+                        <div class="card-img-wrap">
+                            <span class="card-badge badge-industri">UMKM</span>
+                            <div class="card-rating"><span class="stars">★★★★★</span><span>4.9</span></div>
+                            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=350&fit=crop" alt="Warung Keripik" />
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-name">UMKM Keripik Singkong Ibu Sri</div>
+                            <div class="card-tagline">Keripik Artisan Rumahan Skala Ekspor</div>
+                            <div class="card-meta">
+                                <div class="card-meta-item"><i class="bi bi-geo-alt-fill"></i> Surabaya, Jawa Timur</div>
+                                <div class="card-meta-item"><i class="bi bi-box-seam"></i> Jeriken 18L</div>
+                                <div class="card-meta-item"><i class="bi bi-calendar-check"></i> Mitra sejak 2020</div>
+                                <div class="card-meta-item"><i class="bi bi-graph-up-arrow"></i> Volume 2 Ton/bulan</div>
+                            </div>
+                            <hr class="card-divider" />
+                            <div class="card-tags">
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> UMKM</span>
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Artisan</span>
+                            </div>
+                            <div class="card-actions">
+                                <a class="btn-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</a>
+                                <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- === CATERING === -->
+        <div class="mb-2">
+            <div class="cat-section-header" data-aos="fade-right">
+                <div class="cat-icon-wrap gold"><i class="bi bi-egg-fried"></i></div>
+                <div>
+                    <div class="cat-label">Kategori</div>
+                    <div class="cat-title">Jasa Boga & Katering</div>
+                </div>
+            </div>
+            <p class="cat-desc" data-aos="fade-up">
+                Solusi terpercaya untuk usaha katering pernikahan, katering korporat, kantin perusahaan, hingga dapur komunal skala besar.
+            </p>
+            <div class="row g-4">
+
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="catering" data-aos="fade-up" data-aos-delay="0">
+                    <div class="port-card" onclick="openModal('m10')">
+                        <div class="card-img-wrap">
+                            <span class="card-badge badge-catering">Katering Premium</span>
+                            <div class="card-rating"><span class="stars">★★★★★</span><span>5.0</span></div>
+                            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=350&fit=crop" alt="Catering Nusantara" />
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-name">Catering Nusantara</div>
+                            <div class="card-tagline">Spesialis Katering Pernikahan & Korporat</div>
+                            <div class="card-meta">
+                                <div class="card-meta-item"><i class="bi bi-geo-alt-fill"></i> Layanan Jabodetabek</div>
+                                <div class="card-meta-item"><i class="bi bi-box-seam"></i> Jeriken 18L & BIB 20L</div>
+                                <div class="card-meta-item"><i class="bi bi-calendar-check"></i> Mitra sejak 2020</div>
+                                <div class="card-meta-item"><i class="bi bi-graph-up-arrow"></i> Volume 500 porsi/hari</div>
+                            </div>
+                            <hr class="card-divider" />
+                            <div class="card-tags">
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Wedding</span>
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Corporate</span>
+                            </div>
+                            <div class="card-actions">
+                                <a class="btn-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</a>
+                                <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="catering" data-aos="fade-up" data-aos-delay="100">
+                    <div class="port-card" onclick="openModal('m11')">
+                        <div class="card-img-wrap">
+                            <span class="card-badge badge-catering">Kantin</span>
+                            <div class="card-rating"><span class="stars">★★★★½</span><span>4.7</span></div>
+                            <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&h=350&fit=crop" alt="Kantin Korporat" />
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-name">Dapur Karyawan Sejahtera</div>
+                            <div class="card-tagline">Pengelola Kantin Perusahaan Berskala Besar</div>
+                            <div class="card-meta">
+                                <div class="card-meta-item"><i class="bi bi-geo-alt-fill"></i> 12 Perusahaan BUMN & Swasta</div>
+                                <div class="card-meta-item"><i class="bi bi-box-seam"></i> BIB 20L & Jeriken 18L</div>
+                                <div class="card-meta-item"><i class="bi bi-calendar-check"></i> Mitra sejak 2019</div>
+                                <div class="card-meta-item"><i class="bi bi-graph-up-arrow"></i> Volume 2.000 porsi/hari</div>
+                            </div>
+                            <hr class="card-divider" />
+                            <div class="card-tags">
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Kantin</span>
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> BUMN</span>
+                            </div>
+                            <div class="card-actions">
+                                <a class="btn-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</a>
+                                <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="catering" data-aos="fade-up" data-aos-delay="200">
+                    <div class="port-card" onclick="openModal('m12')">
+                        <div class="card-img-wrap">
+                            <span class="card-badge badge-catering">Social</span>
+                            <div class="card-rating"><span class="stars">★★★★★</span><span>5.0</span></div>
+                            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=350&fit=crop" alt="Dapur Sosial" />
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-name">Yayasan Dapur Sosial</div>
+                            <div class="card-tagline">Program Makan Bergizi Komunitas</div>
+                            <div class="card-meta">
+                                <div class="card-meta-item"><i class="bi bi-geo-alt-fill"></i> 8 Kota di Indonesia</div>
+                                <div class="card-meta-item"><i class="bi bi-box-seam"></i> Jeriken 18L</div>
+                                <div class="card-meta-item"><i class="bi bi-calendar-check"></i> Mitra sejak 2021</div>
+                                <div class="card-meta-item"><i class="bi bi-graph-up-arrow"></i> 5.000 penerima manfaat</div>
+                            </div>
+                            <hr class="card-divider" />
+                            <div class="card-tags">
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> CSR</span>
+                                <span class="tag-pill"><i class="bi bi-check2-circle"></i> Sosial</span>
+                            </div>
+                            <div class="card-actions">
+                                <a class="btn-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</a>
+                                <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ========== TESTIMONIALS ========== -->
+<section class="testimonial-section">
+    <div class="container">
+        <div class="testi-header" data-aos="fade-up">
+            <h2 class="section-title">Apa Kata <span class="italic">Mitra Kami</span></h2>
+            <p class="section-desc" style="max-width: 600px; margin: 0 auto;">Kepercayaan mitra adalah motivasi terbesar kami untuk terus berinovasi dan memberikan yang terbaik.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+                <div class="testi-card">
+                    <div class="testi-quote-icon">"</div>
+                    <p class="testi-text">Kualitas minyak AROMAS sangat konsisten. Titik asap tinggi membuat gorengan kami renyah sempurna. Sudah 5 tahun setia memakai AROMAS!</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=100&h=100&fit=crop&crop=face" alt="Chef Rudi" /></div>
+                        <div>
+                            <div class="testi-name">Chef Rudi Santoso</div>
+                            <div class="testi-role">Executive Chef, Grand Hotel Horizon</div>
+                            <div class="testi-rating"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="testi-card">
+                    <div class="testi-quote-icon">"</div>
+                    <p class="testi-text">Supply selalu tepat waktu, tidak pernah ada kendala. Tim sales AROMAS sangat responsif dan profesional. Sangat direkomendasikan!</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&h=100&fit=crop&crop=face" alt="Bu Sari" /></div>
+                        <div>
+                            <div class="testi-name">Sari Dewi</div>
+                            <div class="testi-role">Owner, Catering Nusantara</div>
+                            <div class="testi-rating"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="testi-card">
+                    <div class="testi-quote-icon">"</div>
+                    <p class="testi-text">Sebagai produsen snack ekspor, kami butuh minyak dengan kualitas stabil. AROMAS memenuhi standar kami bahkan melebihi ekspektasi.</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Pak Budi" /></div>
+                        <div>
+                            <div class="testi-name">Budi Hartono</div>
+                            <div class="testi-role">Direktur Produksi, IndoSnack Factory</div>
+                            <div class="testi-rating"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== IMPACT SECTION ========== -->
+<section class="impact-section">
+    <div class="impact-overlay"></div>
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title text-white">Dampak <span class="italic" style="-webkit-text-fill-color:inherit; color: var(--primary-gold);">AROMAS</span></h2>
+            <p style="color:rgba(255,255,255,.7); max-width:520px; margin: 0 auto; font-size: 1rem;">Angka-angka nyata yang mencerminkan kepercayaan mitra dan pelanggan kami.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="impact-card">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=160&fit=crop" alt="Experience" class="impact-img" />
+                    <div class="impact-stat">
+                        <h3><span class="counter" data-target="15">0</span>+</h3>
+                        <p>Tahun Pengalaman</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="impact-card">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&h=160&fit=crop" alt="Partners" class="impact-img" />
+                    <div class="impact-stat">
+                        <h3><span class="counter" data-target="500">0</span>+</h3>
+                        <p>Mitra Distribusi</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="impact-card">
+                    <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=300&h=160&fit=crop" alt="Provinces" class="impact-img" />
+                    <div class="impact-stat">
+                        <h3><span class="counter" data-target="34">0</span></h3>
+                        <p>Provinsi Terjangkau</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="impact-card">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=160&fit=crop" alt="Customers" class="impact-img" />
+                    <div class="impact-stat">
+                        <h3><span class="counter" data-target="1000000">0</span>+</h3>
+                        <p>Pelanggan Setia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== KEUNGGULAN SECTION ========== -->
+<section class="keunggulan-section">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title" style="color:var(--white);">Mengapa Ribuan Mitra <span class="italic" style="-webkit-text-fill-color:inherit; color:var(--primary-gold);">Memilih AROMAS?</span></h2>
+            <p style="color:rgba(255,255,255,.7); max-width:560px; margin: 0 auto;">Kualitas bukan sekadar janji — ini standar yang kami jaga di setiap tetes produk dan setiap layanan.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+                <div class="kel-card">
+                    <div class="kel-icon"><i class="bi bi-award-fill"></i></div>
+                    <h4>Halal & Bersertifikat</h4>
+                    <p>Sertifikasi Halal MUI, BPOM RI, dan ISO 22000 — jaminan keamanan pangan tanpa kompromi.</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
+                <div class="kel-card">
+                    <div class="kel-icon"><i class="bi bi-truck"></i></div>
+                    <h4>Pengiriman Tepat Waktu</h4>
+                    <p>Jaringan logistik luas dengan tingkat ketepatan pengiriman 99% ke seluruh Indonesia.</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
+                <div class="kel-card">
+                    <div class="kel-icon"><i class="bi bi-headset"></i></div>
+                    <h4>Dukungan 24/7</h4>
+                    <p>Tim sales dan customer service siap membantu pertanyaan, pesanan, dan solusi bisnis Anda.</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="320">
+                <div class="kel-card">
+                    <div class="kel-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                    <h4>Harga Kompetitif</h4>
+                    <p>Program harga khusus untuk mitra volume tinggi dengan kontrak jangka panjang yang menguntungkan.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== MITRA LOGOS ========== -->
+<section class="mitra-section">
+    <div class="container">
+        <h3 class="text-center mb-2" style="font-size: 1rem; color: var(--gray-500); font-weight: 500;" data-aos="fade-up">Didistribusikan Melalui Jaringan Terkemuka</h3>
+        <div class="mitra-logos" data-aos="fade-up" data-aos-delay="100">
+            <div class="mitra-logo"><i class="bi bi-shop"></i><span>Indomaret</span></div>
+            <div class="mitra-logo"><i class="bi bi-shop"></i><span>Alfamart</span></div>
+            <div class="mitra-logo"><i class="bi bi-cart4"></i><span>Hypermart</span></div>
+            <div class="mitra-logo"><i class="bi bi-bag"></i><span>Giant</span></div>
+            <div class="mitra-logo"><i class="bi bi-basket"></i><span>Superindo</span></div>
+            <div class="mitra-logo"><i class="bi bi-globe"></i><span>Tokopedia</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section class="cta-section">
+    <div class="container">
+        <div class="row align-items-center gy-4">
+            <div class="col-lg-7" data-aos="fade-right">
+                <h2>Siap Bergabung<br /><span class="italic" style="-webkit-text-fill-color:inherit; color:var(--white);">Bersama Mitra AROMAS?</span></h2>
+                <p>Hubungi tim kami sekarang dan dapatkan penawaran harga khusus sesuai volume kebutuhan bisnis Anda.</p>
+            </div>
+            <div class="col-lg-5 text-lg-end" data-aos="fade-left">
+                <div class="d-flex gap-3 flex-wrap justify-content-lg-end">
+                    <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20menjadi%20mitra" target="_blank" class="btn-cta-white">
+                        <i class="bi bi-whatsapp"></i> Chat via WhatsApp
+                    </a>
+                    <a href="index.html#contact" class="btn-cta-outline">
+                        <i class="bi bi-envelope-fill"></i> Kirim Pesan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer id="footer" class="footer-section">
+    <div class="container">
+        <div class="footer-top">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-brand">
+                        <a href="index.html" class="footer-logo"><i class="bi bi-droplet-fill"></i> AROMAS</a>
+                        <p>Minyak goreng premium berkualitas tinggi untuk keluarga Indonesia. Diproduksi dengan teknologi modern dan standar keamanan pangan internasional.</p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-6 mb-4 mb-lg-0">
+                    <h5>Menu</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="about.html">Tentang Kami</a></li>
+                        <li><a href="index.html#services">Layanan</a></li>
+                        <li><a href="index.html#blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 col-6 mb-4 mb-lg-0">
+                    <h5>Produk</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">AROMAS Premium</a></li>
+                        <li><a href="#">AROMAS Gold</a></li>
+                        <li><a href="#">AROMAS Lite</a></li>
+                        <li><a href="#">AROMAS Bulk</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5>Hubungi Kami</h5>
+                    <ul class="footer-contact">
+                        <li><i class="bi bi-geo-alt"></i> Jl. Industri Raya No. 123, Kawasan Industri, Jakarta 12345</li>
+                        <li><i class="bi bi-envelope"></i> <a href="mailto:info@aromas.co.id">info@aromas.co.id</a></li>
+                        <li><i class="bi bi-telephone"></i> (021) 1234-5678</li>
+                        <li><i class="bi bi-whatsapp"></i> +62 812-3456-7890</li>
+                    </ul>
+                    <div class="footer-social">
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-whatsapp"></i></a>
+                        <a href="#"><i class="bi bi-tiktok"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="row align-items-center">
+                <div class="col-md-6"><p class="copyright">&copy; 2026 AROMAS. Hak Cipta Dilindungi.</p></div>
+                <div class="col-md-6 text-md-end">
+                    <ul class="footer-legal">
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Back to Top -->
+<button id="backToTop" class="back-to-top"><i class="bi bi-arrow-up"></i></button>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20bertanya%20tentang%20kemitraan" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat via WhatsApp">
+    <i class="bi bi-whatsapp"></i>
+    <span class="wa-tooltip">Chat dengan Kami</span>
+</a>
+
+<!-- ========== MODALS ========== -->
+
+<!-- Modal m1: Mart 88 -->
+<div class="port-modal" id="modal-m1">
+    <div class="modal-backdrop" onclick="closeModal('m1')"></div>
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('m1')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-header-band"></div>
+        <div class="modal-inner">
+            <div class="modal-cat-tag">Retail · Minimarket Modern</div>
+            <div class="modal-title">Mart 88 Group</div>
+            <div class="modal-sub">Jaringan minimarket modern dengan pertumbuhan tercepat di Jabodetabek</div>
+            <div class="modal-img-band"><img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=700&h=350&fit=crop" alt="Mart 88" /></div>
+            <div class="modal-grid">
+                <div class="modal-detail"><div class="modal-detail-label">Lokasi</div><div class="modal-detail-val">50+ Outlet Jabodetabek</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Tipe Kemitraan</div><div class="modal-detail-val">Supply Rutin + Private Label</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Produk</div><div class="modal-detail-val">Botol 1L, 2L & Jeriken 5L</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Volume Bulanan</div><div class="modal-detail-val">> 10.000 Liter</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Mitra Sejak</div><div class="modal-detail-val">2021 (4 Tahun)</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Rating</div><div class="modal-detail-val">⭐ 5.0 / 5.0</div></div>
+            </div>
+            <div class="modal-story-title">Kisah Kemitraan</div>
+            <p class="modal-story">Mart 88 membutuhkan pasokan minyak goreng berkualitas dengan harga kompetitif untuk lini produk private label mereka. AROMAS hadir memberikan solusi supply chain yang andal dengan ketepatan pengiriman 99% dan kualitas produk yang konsisten di setiap batch produksi.</p>
+            <div class="modal-actions">
+                <a href="index.html#contact" class="btn-modal-green"><i class="bi bi-handshake-fill"></i> Jadilah Mitra Kami</a>
+                <a href="https://wa.me/6281234567890" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal m2: Toko Kelontong Berkah -->
+<div class="port-modal" id="modal-m2">
+    <div class="modal-backdrop" onclick="closeModal('m2')"></div>
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('m2')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-header-band"></div>
+        <div class="modal-inner">
+            <div class="modal-cat-tag">Retail · Grosir Tradisional</div>
+            <div class="modal-title">Toko Kelontong Berkah</div>
+            <div class="modal-sub">Grosir sembako terpercaya yang melayani ratusan warung kecil di Jakarta Timur</div>
+            <div class="modal-img-band"><img src="https://images.unsplash.com/photo-1604719312566-8912e9227f6a?w=700&h=350&fit=crop" alt="Toko Kelontong Berkah" /></div>
+            <div class="modal-grid">
+                <div class="modal-detail"><div class="modal-detail-label">Lokasi</div><div class="modal-detail-val">Pasar Induk Kramat Jati</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Tipe Kemitraan</div><div class="modal-detail-val">Supply Grosir Tradisional</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Produk</div><div class="modal-detail-val">Semua varian ukuran</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Volume Bulanan</div><div class="modal-detail-val">> 5.000 Liter</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Mitra Sejak</div><div class="modal-detail-val">2015 (10 Tahun)</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Rating</div><div class="modal-detail-val">⭐ 4.9 / 5.0</div></div>
+            </div>
+            <div class="modal-story-title">Kata Pemilik Toko</div>
+            <p class="modal-story">"Sejak beralih ke AROMAS, pelanggan saya lebih puas karena minyaknya bening dan tidak cepat hitam. Penjualan minyak goreng di toko kami meningkat 30% berkat kualitas yang stabil dan harga yang bersaing. Pengiriman juga selalu tepat waktu sehingga stok aman."</p>
+            <div class="modal-actions">
+                <a href="index.html#contact" class="btn-modal-green"><i class="bi bi-handshake-fill"></i> Jadilah Mitra Kami</a>
+                <a href="https://wa.me/6281234567890" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal m3: NusaMart Online -->
+<div class="port-modal" id="modal-m3">
+    <div class="modal-backdrop" onclick="closeModal('m3')"></div>
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('m3')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-header-band"></div>
+        <div class="modal-inner">
+            <div class="modal-cat-tag">Retail · E-Commerce</div>
+            <div class="modal-title">NusaMart Online</div>
+            <div class="modal-sub">Platform belanja groceries digital dengan layanan pengiriman same-day</div>
+            <div class="modal-img-band"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&h=350&fit=crop" alt="NusaMart Online" /></div>
+            <div class="modal-grid">
+                <div class="modal-detail"><div class="modal-detail-label">Lokasi</div><div class="modal-detail-val">Layanan 15 Kota Besar</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Tipe Kemitraan</div><div class="modal-detail-val">Supply E-Commerce</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Produk</div><div class="modal-detail-val">Botol 1L & 2L</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Volume Bulanan</div><div class="modal-detail-val">> 8.000 Liter</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Mitra Sejak</div><div class="modal-detail-val">2022 (3 Tahun)</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Rating</div><div class="modal-detail-val">⭐ 4.8 / 5.0</div></div>
+            </div>
+            <div class="modal-story-title">Kisah Kemitraan Digital</div>
+            <p class="modal-story">"Dalam bisnis e-commerce, kecepatan dan ketahanan kemasan sangat krusial. Kemasan botol AROMAS sangat kokoh dan aman untuk pengiriman jarak jauh, meminimalisir risiko kebocoran hingga 0%. Desain kemasan yang premium juga terlihat menarik di katalog aplikasi kami."</p>
+            <div class="modal-actions">
+                <a href="index.html#contact" class="btn-modal-green"><i class="bi bi-handshake-fill"></i> Jadilah Mitra Kami</a>
+                <a href="https://wa.me/6281234567890" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal m4: Grand Hotel -->
+<div class="port-modal" id="modal-m4">
+    <div class="modal-backdrop" onclick="closeModal('m4')"></div>
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('m4')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-header-band" style="background:linear-gradient(90deg,#c2185b,#e91e63,#c2185b);"></div>
+        <div class="modal-inner">
+            <div class="modal-cat-tag">Horeca · Hotel Bintang 5</div>
+            <div class="modal-title">Grand Hotel Horizon</div>
+            <div class="modal-sub">Hotel mewah dengan standar kuliner internasional kelas dunia</div>
+            <div class="modal-img-band"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700&h=350&fit=crop" alt="Grand Hotel Horizon" /></div>
+            <div class="modal-grid">
+                <div class="modal-detail"><div class="modal-detail-label">Lokasi</div><div class="modal-detail-val">Bandung & Jakarta</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Tipe Kemitraan</div><div class="modal-detail-val">Supply Horeca Premium</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Produk</div><div class="modal-detail-val">Jeriken 18L & BIB 20L</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Volume Bulanan</div><div class="modal-detail-val">> 15.000 Liter</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Mitra Sejak</div><div class="modal-detail-val">2019 (6 Tahun)</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Rating</div><div class="modal-detail-val">⭐ 5.0 / 5.0</div></div>
+            </div>
+            <div class="modal-story-title">Testimoni Executive Chef</div>
+            <p class="modal-story">"Kualitas minyak AROMAS sangat konsisten dari batch ke batch. Titik asap yang tinggi membuat hasil gorengan kami renyah sempurna tanpa berminyak berlebih. Kami sangat merekomendasikan AROMAS untuk kebutuhan dapur profesional." — Chef Rudi Santoso, Executive Chef Grand Hotel Horizon.</p>
+            <div class="modal-actions">
+                <a href="index.html#contact" class="btn-modal-green"><i class="bi bi-handshake-fill"></i> Jadilah Mitra Kami</a>
+                <a href="https://wa.me/6281234567890" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal m5: Cafe Senja Group -->
+<div class="port-modal" id="modal-m5">
+    <div class="modal-backdrop" onclick="closeModal('m5')"></div>
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('m5')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-header-band" style="background:linear-gradient(90deg,#c2185b,#e91e63,#c2185b);"></div>
+        <div class="modal-inner">
+            <div class="modal-cat-tag">Horeca · Coffee Shop Chain</div>
+            <div class="modal-title">Cafe Senja Group</div>
+            <div class="modal-sub">Jaringan coffee shop kekinian yang tersebar di kota-kota besar Indonesia</div>
+            <div class="modal-img-band"><img src="https://images.unsplash.com/photo-1559339352-73130fa2718e?w=700&h=350&fit=crop" alt="Cafe Senja Group" /></div>
+            <div class="modal-grid">
+                <div class="modal-detail"><div class="modal-detail-label">Lokasi</div><div class="modal-detail-val">20 Outlet Nasional</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Tipe Kemitraan</div><div class="modal-detail-val">Supply Chain F&B</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Produk</div><div class="modal-detail-val">Jeriken 5L</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Volume Bulanan</div><div class="modal-detail-val">> 3.000 Liter</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Mitra Sejak</div><div class="modal-detail-val">2022 (3 Tahun)</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Rating</div><div class="modal-detail-val">⭐ 4.9 / 5.0</div></div>
+            </div>
+            <div class="modal-story-title">Testimoni Head Barista</div>
+            <p class="modal-story">"Kopi dan camilan adalah pasangan tak terpisahkan. AROMAS memberikan tekstur gorengan yang ringan dan crunch yang tahan lama untuk menu side dish kami, sempurna untuk mendampingi menu kopi signature kami. Tidak berminyak dan tidak mengubah rasa asli bahan makanan."</p>
+            <div class="modal-actions">
+                <a href="index.html#contact" class="btn-modal-green"><i class="bi bi-handshake-fill"></i> Jadilah Mitra Kami</a>
+                <a href="https://wa.me/6281234567890" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal m6: Kelapa Muda Food Hall -->
+<div class="port-modal" id="modal-m6">
+    <div class="modal-backdrop" onclick="closeModal('m6')"></div>
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('m6')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-header-band" style="background:linear-gradient(90deg,#c2185b,#e91e63,#c2185b);"></div>
+        <div class="modal-inner">
+            <div class="modal-cat-tag">Horeca · Food Court</div>
+            <div class="modal-title">Kelapa Muda Food Hall</div>
+            <div class="modal-sub">Destinasi kuliner modern yang menghimpun puluhan tenant makanan terbaik</div>
+            <div class="modal-img-band"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=700&h=350&fit=crop" alt="Kelapa Muda Food Hall" /></div>
+            <div class="modal-grid">
+                <div class="modal-detail"><div class="modal-detail-label">Lokasi</div><div class="modal-detail-val">5 Mall Terkemuka Jakarta</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Tipe Kemitraan</div><div class="modal-detail-val">Supply Food Court</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Produk</div><div class="modal-detail-val">BIB 20L & Jeriken 18L</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Volume Bulanan</div><div class="modal-detail-val">> 12.000 Liter</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Mitra Sejak</div><div class="modal-detail-val">2020 (5 Tahun)</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Rating</div><div class="modal-detail-val">⭐ 4.7 / 5.0</div></div>
+            </div>
+            <div class="modal-story-title">Manajemen Operasional</div>
+            <p class="modal-story">"Mengelola food court dengan puluhan tenant membutuhkan standar bahan baku yang seragam. AROMAS menjadi solusi satu pintu untuk kebutuhan minyak goreng semua tenant kami dengan sistem distribusi yang efisien. Kebersihan dan kualitas makanan tenant jadi lebih terjaga."</p>
+            <div class="modal-actions">
+                <a href="index.html#contact" class="btn-modal-green"><i class="bi bi-handshake-fill"></i> Jadilah Mitra Kami</a>
+                <a href="https://wa.me/6281234567890" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal m7: IndoSnack -->
+<div class="port-modal" id="modal-m7">
+    <div class="modal-backdrop" onclick="closeModal('m7')"></div>
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('m7')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-header-band" style="background:linear-gradient(90deg,#455a64,#607d8b,#455a64);"></div>
+        <div class="modal-inner">
+            <div class="modal-cat-tag">Industri · Manufaktur Makanan</div>
+            <div class="modal-title">IndoSnack Factory</div>
+            <div class="modal-sub">Produsen makanan ringan keripik singkong & kentang kelas ekspor</div>
+            <div class="modal-img-band"><img src="https://images.unsplash.com/photo-1565514020176-db7936a5fa93?w=700&h=350&fit=crop" alt="IndoSnack Factory" /></div>
+            <div class="modal-grid">
+                <div class="modal-detail"><div class="modal-detail-label">Lokasi</div><div class="modal-detail-val">Kawasan Industri Cikarang</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Tipe Kemitraan</div><div class="modal-detail-val">Supply Bahan Baku Industri</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Produk</div><div class="modal-detail-val">BIB 20L & Tangki Curah</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Volume Bulanan</div><div class="modal-detail-val">20 Ton</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Mitra Sejak</div><div class="modal-detail-val">2018 (7 Tahun)</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Rating</div><div class="modal-detail-val">⭐ 5.0 / 5.0</div></div>
+            </div>
+            <div class="modal-story-title">Solusi AROMAS untuk Industri</div>
+            <p class="modal-story">Kami menyediakan formulasi khusus dengan antioksidan tambahan untuk memperpanjang shelf-life produk snack mereka, sesuai standar ekspor ke negara-negara Asia Tenggara. Konsistensi kualitas antar batch menjadi kunci keberhasilan kemitraan ini selama 7 tahun.</p>
+            <div class="modal-actions">
+                <a href="index.html#contact" class="btn-modal-green"><i class="bi bi-handshake-fill"></i> Jadilah Mitra Kami</a>
+                <a href="https://wa.me/6281234567890" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal m8: PT Mie Nusantara -->
+<div class="port-modal" id="modal-m8">
+    <div class="modal-backdrop" onclick="closeModal('m8')"></div>
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('m8')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-header-band" style="background:linear-gradient(90deg,#455a64,#607d8b,#455a64);"></div>
+        <div class="modal-inner">
+            <div class="modal-cat-tag">Industri · Manufaktur Makanan</div>
+            <div class="modal-title">PT Mie Nusantara</div>
+            <div class="modal-sub">Produsen mie dan bakmi basah yang menyuplai ribuan pedagang bakso</div>
+            <div class="modal-img-band"><img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=700&h=350&fit=crop" alt="PT Mie Nusantara" /></div>
+            <div class="modal-grid">
+                <div class="modal-detail"><div class="modal-detail-label">Lokasi</div><div class="modal-detail-val">Bekasi, Jawa Barat</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Tipe Kemitraan</div><div class="modal-detail-val">Supply Manufaktur</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Produk</div><div class="modal-detail-val">BIB 20L & Tangki Curah</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Volume Bulanan</div><div class="modal-detail-val">15 Ton</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Mitra Sejak</div><div class="modal-detail-val">2017 (8 Tahun)</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Rating</div><div class="modal-detail-val">⭐ 4.8 / 5.0</div></div>
+            </div>
+            <div class="modal-story-title">Head of Production</div>
+            <p class="modal-story">"Tekstur mie yang kenyal dan tidak lengket sangat dipengaruhi oleh kualitas minyak saat proses produksi. AROMAS memberikan formulasi khusus yang membuat produk mie kami memiliki daya simpan lebih lama dan tekstur yang pas. Layanan teknis mereka juga sangat membantu."</p>
+            <div class="modal-actions">
+                <a href="index.html#contact" class="btn-modal-green"><i class="bi bi-handshake-fill"></i> Jadilah Mitra Kami</a>
+                <a href="https://wa.me/6281234567890" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal m9: UMKM Keripik Ibu Sri -->
+<div class="port-modal" id="modal-m9">
+    <div class="modal-backdrop" onclick="closeModal('m9')"></div>
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('m9')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-header-band" style="background:linear-gradient(90deg,#455a64,#607d8b,#455a64);"></div>
+        <div class="modal-inner">
+            <div class="modal-cat-tag">Industri · UMKM Kreatif</div>
+            <div class="modal-title">UMKM Keripik Singkong Ibu Sri</div>
+            <div class="modal-sub">Produk lokal kebanggaan daerah yang menembus pasar internasional</div>
+            <div class="modal-img-band"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&h=350&fit=crop" alt="UMKM Keripik Ibu Sri" /></div>
+            <div class="modal-grid">
+                <div class="modal-detail"><div class="modal-detail-label">Lokasi</div><div class="modal-detail-val">Surabaya, Jawa Timur</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Tipe Kemitraan</div><div class="modal-detail-val">Supply UMKM</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Produk</div><div class="modal-detail-val">Jeriken 18L</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Volume Bulanan</div><div class="modal-detail-val">2 Ton</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Mitra Sejak</div><div class="modal-detail-val">2020 (5 Tahun)</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Rating</div><div class="modal-detail-val">⭐ 4.9 / 5.0</div></div>
+            </div>
+            <div class="modal-story-title">Kisah Sukses UMKM</div>
+            <p class="modal-story">"Awalnya saya ragu bisa ekspor. Tapi keripik singkong kami kini bisa tembus pasar Singapura karena AROMAS menjamin sertifikasi halal dan keamanan pangan yang diakui internasional. Hasil gorengan juga lebih garing, warnanya cantik, dan tidak berbau tengik meski disimpan lama."</p>
+            <div class="modal-actions">
+                <a href="index.html#contact" class="btn-modal-green"><i class="bi bi-handshake-fill"></i> Jadilah Mitra Kami</a>
+                <a href="https://wa.me/6281234567890" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal m10: Catering Nusantara -->
+<div class="port-modal" id="modal-m10">
+    <div class="modal-backdrop" onclick="closeModal('m10')"></div>
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('m10')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-header-band" style="background:linear-gradient(90deg,#6a1b9a,#9c27b0,#6a1b9a);"></div>
+        <div class="modal-inner">
+            <div class="modal-cat-tag">Katering · Pernikahan & Korporat</div>
+            <div class="modal-title">Catering Nusantara</div>
+            <div class="modal-sub">Spesialis katering premium untuk pernikahan dan acara korporat berskala besar</div>
+            <div class="modal-img-band"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&h=350&fit=crop" alt="Catering Nusantara" /></div>
+            <div class="modal-grid">
+                <div class="modal-detail"><div class="modal-detail-label">Lokasi</div><div class="modal-detail-val">Jabodetabek Area</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Tipe Kemitraan</div><div class="modal-detail-val">Supply Jasa Boga</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Produk</div><div class="modal-detail-val">Jeriken 18L & BIB 20L</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Kapasitas</div><div class="modal-detail-val">500 Porsi/Hari</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Mitra Sejak</div><div class="modal-detail-val">2020 (5 Tahun)</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Rating</div><div class="modal-detail-val">⭐ 5.0 / 5.0</div></div>
+            </div>
+            <div class="modal-story-title">Kisah Kemitraan</div>
+            <p class="modal-story">Supply selalu tepat waktu tanpa pernah ada kendala meski di musim puncak pernikahan. Tim sales AROMAS sangat responsif dalam memberikan solusi ketika ada kebutuhan mendadak untuk event besar dengan ratusan hingga ribuan tamu undangan.</p>
+            <div class="modal-actions">
+                <a href="index.html#contact" class="btn-modal-green"><i class="bi bi-handshake-fill"></i> Jadilah Mitra Kami</a>
+                <a href="https://wa.me/6281234567890" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal m11: Dapur Karyawan Sejahtera -->
+<div class="port-modal" id="modal-m11">
+    <div class="modal-backdrop" onclick="closeModal('m11')"></div>
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('m11')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-header-band" style="background:linear-gradient(90deg,#6a1b9a,#9c27b0,#6a1b9a);"></div>
+        <div class="modal-inner">
+            <div class="modal-cat-tag">Katering · Kantin Karyawan</div>
+            <div class="modal-title">Dapur Karyawan Sejahtera</div>
+            <div class="modal-sub">Mitra penyedia makan siang terpercaya bagi ribuan karyawan pabrik dan kantor</div>
+            <div class="modal-img-band"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=700&h=350&fit=crop" alt="Dapur Karyawan Sejahtera" /></div>
+            <div class="modal-grid">
+                <div class="modal-detail"><div class="modal-detail-label">Lokasi</div><div class="modal-detail-val">12 Kantin BUMN & Swasta</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Tipe Kemitraan</div><div class="modal-detail-val">Supply Kantin</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Produk</div><div class="modal-detail-val">BIB 20L & Jeriken 18L</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Kapasitas</div><div class="modal-detail-val">2.000 Porsi/Hari</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Mitra Sejak</div><div class="modal-detail-val">2019 (6 Tahun)</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Rating</div><div class="modal-detail-val">⭐ 4.7 / 5.0</div></div>
+            </div>
+            <div class="modal-story-title">Manajer Operasional</div>
+            <p class="modal-story">"Menyajikan ribuan porsi makan siang karyawan setiap hari menuntut efisiensi tinggi dan kecepatan. Kemasan BIB 20L dari AROMAS sangat praktis untuk dapur besar kami, mudah dituang ke wajan besar dan meminimalisir limbah plastik. Kualitas masakan pun selalu terjaga."</p>
+            <div class="modal-actions">
+                <a href="index.html#contact" class="btn-modal-green"><i class="bi bi-handshake-fill"></i> Jadilah Mitra Kami</a>
+                <a href="https://wa.me/6281234567890" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal m12: Yayasan Dapur Sosial -->
+<div class="port-modal" id="modal-m12">
+    <div class="modal-backdrop" onclick="closeModal('m12')"></div>
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('m12')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-header-band" style="background:linear-gradient(90deg,#6a1b9a,#9c27b0,#6a1b9a);"></div>
+        <div class="modal-inner">
+            <div class="modal-cat-tag">Katering · Sosial & CSR</div>
+            <div class="modal-title">Yayasan Dapur Sosial</div>
+            <div class="modal-sub">Gerakan sosial yang menyediakan makanan bergizi untuk masyarakat yang membutuhkan</div>
+            <div class="modal-img-band"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=700&h=350&fit=crop" alt="Yayasan Dapur Sosial" /></div>
+            <div class="modal-grid">
+                <div class="modal-detail"><div class="modal-detail-label">Lokasi</div><div class="modal-detail-val">8 Kota di Indonesia</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Tipe Kemitraan</div><div class="modal-detail-val">Supply Program Sosial</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Produk</div><div class="modal-detail-val">Jeriken 18L</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Penerima Manfaat</div><div class="modal-detail-val">5.000 Orang</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Mitra Sejak</div><div class="modal-detail-val">2021 (4 Tahun)</div></div>
+                <div class="modal-detail"><div class="modal-detail-label">Rating</div><div class="modal-detail-val">⭐ 5.0 / 5.0</div></div>
+            </div>
+            <div class="modal-story-title">Ketua Yayasan</div>
+            <p class="modal-story">"Kami membutuhkan mitra yang peduli, bukan sekadar penjual. AROMAS tidak hanya sekadar supplier, tapi juga rutin mendukung program Jumat Berkah kami dengan harga khusus kemitraan sosial. Kualitas bintang lima untuk masyarakat yang membutuhkan, itu yang kami apresiasi."</p>
+            <div class="modal-actions">
+                <a href="index.html#contact" class="btn-modal-green"><i class="bi bi-handshake-fill"></i> Jadilah Mitra Kami</a>
+                <a href="https://wa.me/6281234567890" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+/* ============================================================
+   AROMAS PORTFOLIO PAGE SCRIPTS
+   ============================================================ */
+
+// PRELOADER
+window.addEventListener('load', function () {
+    var pl = document.getElementById('preloader');
+    if (!pl) return;
+    setTimeout(function () {
+        pl.classList.add('hidden');
+        setTimeout(function () { pl.style.display = 'none'; }, 650);
+    }, 900);
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    AOS.init({ duration: 700, once: true, offset: 60 });
+    initNavbar();
+    initBackToTop();
+    initMobileMenu();
+    initFilter();
+    initHeroChips();
+    initCounters();
+    console.log('AROMAS Portfolio page ready!');
+});
+
+// NAVBAR
+function initNavbar() {
+    var nav = document.getElementById('navbar');
+    if (!nav) return;
+    window.addEventListener('scroll', function () {
+        nav.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+}
+
+// BACK TO TOP
+function initBackToTop() {
+    var btn = document.getElementById('backToTop');
+    if (!btn) return;
+    window.addEventListener('scroll', function () {
+        btn.classList.toggle('show', window.scrollY > 500);
+    }, { passive: true });
+    btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// MOBILE MENU
+function initMobileMenu() {
+    var tog = document.querySelector('.navbar-toggler');
+    var col = document.querySelector('.navbar-collapse');
+    if (!tog || !col) return;
+    document.addEventListener('click', function (e) {
+        if (!col.contains(e.target) && !tog.contains(e.target) && col.classList.contains('show')) {
+            var bs = bootstrap.Collapse.getInstance(col);
+            if (bs) bs.hide();
+        }
+    });
+}
+
+// FILTER TABS
+function initFilter() {
+    var tabs = document.querySelectorAll('.ftab');
+    var countEl = document.getElementById('portCount');
+
+    tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+            var filter = this.dataset.filter;
+            tabs.forEach(function (t) { t.classList.remove('active'); });
+            this.classList.add('active');
+
+            var blocks = document.querySelectorAll('.cat-block');
+            var count = 0;
+            blocks.forEach(function (block) {
+                var cat = block.dataset.cat;
+                if (filter === 'all' || cat === filter) {
+                    block.classList.remove('hidden-cat');
+                    count++;
+                } else {
+                    block.classList.add('hidden-cat');
+                }
+            });
+            if (countEl) countEl.textContent = count;
+
+            // Scroll to portfolio section
+            var sec = document.querySelector('.portfolio-section');
+            if (sec) {
+                var offset = sec.getBoundingClientRect().top + window.pageYOffset - 90;
+                window.scrollTo({ top: offset, behavior: 'smooth' });
+            }
+        });
+    });
+}
+
+// HERO CHIPS sync with filter tabs
+function initHeroChips() {
+    var chips = document.querySelectorAll('.hchip[data-filter]');
+    chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+            var filter = this.dataset.filter;
+            chips.forEach(function (c) { c.classList.remove('active'); });
+            this.classList.add('active');
+            var matchTab = document.querySelector('.ftab[data-filter="' + filter + '"]');
+            if (matchTab) matchTab.click();
+        });
+    });
+}
+
+// COUNTER ANIMATION
+function initCounters() {
+    var counters = document.querySelectorAll('.counter');
+    var animated = false;
+    var impactSec = document.querySelector('.impact-section');
+    if (!impactSec) return;
+
+    var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting && !animated) {
+                animated = true;
+                counters.forEach(function (counter) {
+                    var target = parseInt(counter.getAttribute('data-target'));
+                    var duration = 2000;
+                    var increment = target / (duration / 16);
+                    var current = 0;
+                    function update() {
+                        current += increment;
+                        if (current < target) {
+                            if (target >= 1000000) {
+                                counter.textContent = Math.floor(current).toLocaleString('id-ID');
+                            } else {
+                                counter.textContent = Math.floor(current);
+                            }
+                            requestAnimationFrame(update);
+                        } else {
+                            if (target >= 1000000) {
+                                counter.textContent = target.toLocaleString('id-ID');
+                            } else {
+                                counter.textContent = target;
+                            }
+                        }
+                    }
+                    update();
+                });
+            }
+        });
+    }, { threshold: 0.4 });
+    obs.observe(impactSec);
+}
+
+// MODAL OPEN
+function openModal(id) {
+    var modal = document.getElementById('modal-' + id);
+    if (!modal) return;
+    document.body.style.overflow = 'hidden';
+    modal.classList.add('open');
+}
+
+// MODAL CLOSE
+function closeModal(id) {
+    var modal = document.getElementById('modal-' + id);
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+// CLOSE MODAL ON ESC
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.port-modal.open').forEach(function (m) {
+            m.classList.remove('open');
+        });
+        document.body.style.overflow = '';
+    }
+});
+</script>
+</body>
+</html>
