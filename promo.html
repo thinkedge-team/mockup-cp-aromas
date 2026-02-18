@@ -1,0 +1,1419 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promo & Penawaran - AROMAS Minyak Goreng Sawit Premium</title>
+    <meta name="description" content="Promo terkini AROMAS — Free ongkir area Ciater Tangerang Selatan, diskon pembelian pertama, program loyalitas, dan penawaran spesial lainnya." />
+    <meta name="theme-color" content="#0d3320" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+    :root {
+        --gold:#d4a017;--gold-dark:#b8860b;--gold-light:#f4c430;--amber:#ffbf00;
+        --green:#228b22;--green-dark:#0d3320;--green-darker:#1a2e1a;--green-light:#15412a;
+        --green-pale:#e8f5e9;
+        --white:#fff;--off-white:#fffdf7;
+        --gray-100:#f5f5f5;--gray-200:#eee;--gray-300:#e0e0e0;
+        --gray-400:#bdbdbd;--gray-500:#9e9e9e;--gray-600:#757575;
+        --gray-700:#616161;--gray-800:#424242;--gray-900:#212121;
+        --font-body:"Poppins",sans-serif;--font-display:"Playfair Display",serif;
+        --sp:100px 0;--tr:.3s ease;
+        --r-sm:8px;--r-md:12px;--r-lg:20px;--r-xl:30px;
+        --sh-sm:0 2px 8px rgba(0,0,0,.08);--sh-md:0 4px 20px rgba(0,0,0,.10);--sh-lg:0 8px 40px rgba(0,0,0,.15);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;overflow-x:hidden;}
+    body{font-family:var(--font-body);font-size:16px;line-height:1.6;color:var(--gray-800);background:var(--white);overflow-x:hidden;}
+    h1,h2,h3,h4,h5,h6{font-family:var(--font-body);font-weight:600;line-height:1.3;color:var(--gray-900);}
+    a{text-decoration:none;color:inherit;transition:var(--tr);}
+    img{max-width:100%;height:auto;}
+    .italic{font-family:var(--font-display);font-style:italic;font-weight:600;color:var(--green);}
+    .text-gradient{background:linear-gradient(135deg,var(--gold),var(--amber) 50%,var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+    /* PRELOADER */
+    .preloader{position:fixed;inset:0;background:linear-gradient(135deg,#1a2e1a,#0d3320 50%,#15412a);z-index:99999;display:flex;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s;}
+    .preloader.hidden{opacity:0;visibility:hidden;}
+    .pl-inner{text-align:center;}
+    .pl-logo{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:28px;animation:plPulse 2s ease-in-out infinite;}
+    .pl-logo i{font-size:2.8rem;color:var(--gold);}
+    .pl-logo span{font-size:2.2rem;font-weight:700;color:#fff;letter-spacing:2px;}
+    .pl-spinner{position:relative;width:72px;height:72px;margin:0 auto 18px;}
+    .sp-ring{position:absolute;width:100%;height:100%;border-radius:50%;border:3px solid transparent;}
+    .sp-ring:nth-child(1){border-top-color:var(--gold);animation:spRot 1.5s linear infinite;}
+    .sp-ring:nth-child(2){width:54px;height:54px;top:9px;left:9px;border-right-color:var(--gold-light);animation:spRot 1.2s linear infinite reverse;}
+    .sp-ring:nth-child(3){width:36px;height:36px;top:18px;left:18px;border-bottom-color:#fff;animation:spRot 1s linear infinite;}
+    .pl-text{color:rgba(255,255,255,.75);font-size:.85rem;letter-spacing:3px;text-transform:uppercase;animation:plFade 1.5s ease-in-out infinite;}
+    @keyframes spRot{to{transform:rotate(360deg);}}
+    @keyframes plPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+    @keyframes plFade{0%,100%{opacity:.4;}50%{opacity:1;}}
+
+    /* NAVBAR */
+    .navbar{padding:15px 0;background:transparent;transition:var(--tr);}
+    .navbar.scrolled{background:var(--white);box-shadow:var(--sh-md);padding:10px 0;}
+    .navbar-brand{font-size:1.5rem;font-weight:700;color:#fff !important;display:flex;align-items:center;gap:8px;}
+    .navbar.scrolled .navbar-brand{color:var(--green-dark) !important;}
+    .navbar-brand i{color:var(--gold);font-size:1.8rem;}
+    .navbar-nav{gap:10px;}
+    .nav-link{font-size:.95rem;font-weight:500;color:rgba(255,255,255,.9) !important;padding:8px 16px !important;border-radius:var(--r-xl);transition:var(--tr);}
+    .navbar.scrolled .nav-link{color:var(--gray-700) !important;}
+    .nav-link:hover,.nav-link.active{color:#fff !important;background:linear-gradient(135deg,var(--green),var(--green-dark));}
+    .btn-nav-contact{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff !important;padding:10px 24px;border-radius:var(--r-xl);font-weight:500;border:none;box-shadow:0 4px 15px rgba(212,160,23,.3);transition:var(--tr);}
+    .btn-nav-contact:hover{transform:translateY(-2px);}
+    .navbar-toggler{border:none;padding:8px;}
+    .navbar-toggler:focus{box-shadow:none;}
+    .navbar-toggler-icon{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");}
+    .navbar.scrolled .navbar-toggler-icon{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33,37,41,.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");}
+    @media(max-width:991.98px){
+        .navbar-collapse{background:#fff;padding:20px;margin-top:15px;border-radius:var(--r-md);box-shadow:var(--sh-lg);border:1px solid rgba(34,139,34,.1);}
+        .navbar-collapse .nav-link{color:var(--gray-700) !important;padding:12px 16px !important;border-radius:var(--r-sm);}
+        .navbar-collapse .nav-link:hover,.navbar-collapse .nav-link.active{color:#fff !important;background:linear-gradient(135deg,var(--green),var(--green-dark));}
+        .navbar-collapse .btn-nav-contact{margin-top:15px;width:100%;text-align:center;}
+    }
+
+    /* HERO */
+    .promo-hero{position:relative;min-height:78vh;display:flex;align-items:center;background:linear-gradient(135deg,#1a2e1a 0%,#0d3320 55%,#15412a 100%);padding:130px 0 80px;overflow:hidden;}
+    .hero-overlay{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 65% 45%,rgba(212,160,23,.18) 0%,transparent 55%),radial-gradient(ellipse at 15% 75%,rgba(34,85,51,.3) 0%,transparent 45%);}
+    .hero-deco{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+    .deco-c{position:absolute;border-radius:50%;border:1px solid rgba(212,160,23,.14);}
+    .dc1{width:680px;height:680px;top:-240px;right:-140px;animation:rotSlow 40s linear infinite;}
+    .dc2{width:440px;height:440px;bottom:-170px;left:-110px;border-color:rgba(34,139,34,.18);animation:rotSlow 32s linear infinite reverse;}
+    .hero-float-tag{position:absolute;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(212,160,23,.25);border-radius:12px;padding:10px 16px;color:#fff;font-size:.8rem;font-weight:600;pointer-events:none;animation:floatTag 6s ease-in-out infinite;}
+    .hft1{top:22%;left:4%;animation-delay:0s;}
+    .hft2{top:35%;right:5%;animation-delay:1.5s;}
+    .hft3{bottom:28%;left:7%;animation-delay:3s;}
+    .hft4{bottom:22%;right:8%;animation-delay:4.5s;}
+    @keyframes floatTag{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+    @keyframes rotSlow{to{transform:rotate(360deg);}}
+    .promo-hero .container{position:relative;z-index:2;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;padding:8px 22px;border-radius:50px;font-size:.83rem;font-weight:600;letter-spacing:.5px;margin-bottom:22px;box-shadow:0 4px 16px rgba(212,160,23,.4);}
+    .hero-title{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;color:#fff;line-height:1.16;margin-bottom:18px;}
+    .hero-desc{font-size:1.05rem;color:rgba(255,255,255,.78);line-height:1.8;max-width:580px;margin:0 auto 32px;}
+    .hero-promo-stats{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:28px;}
+    .hpstat{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:12px 20px;}
+    .hpstat i{font-size:1.4rem;color:var(--gold);}
+    .hpstat strong{display:block;font-size:1.1rem;font-weight:700;color:#fff;line-height:1;}
+    .hpstat span{font-size:.72rem;color:rgba(255,255,255,.6);margin-top:2px;}
+
+    /* Hero countdown */
+    .hero-countdown-wrap{display:inline-flex;align-items:center;gap:14px;background:rgba(0,0,0,.3);backdrop-filter:blur(14px);border:1px solid rgba(212,160,23,.3);border-radius:16px;padding:14px 24px;flex-wrap:wrap;justify-content:center;}
+    .hcd-label{font-size:.78rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.5px;}
+    .hcd-unit{text-align:center;}
+    .hcd-num{display:block;font-size:1.7rem;font-weight:700;color:var(--gold);line-height:1;}
+    .hcd-sub{display:block;font-size:.62rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}
+    .hcd-sep{font-size:1.5rem;color:rgba(212,160,23,.5);font-weight:700;margin-bottom:14px;}
+
+    /* Scroll cue */
+    .scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;color:rgba(255,255,255,.45);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;animation:cueF 2.4s ease-in-out infinite;}
+    @keyframes cueF{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-7px);}}
+    .mouse-ico{width:22px;height:36px;border:2px solid rgba(212,160,23,.45);border-radius:18px;display:flex;justify-content:center;padding-top:6px;}
+    .wheel-dot{width:3px;height:6px;background:var(--gold);border-radius:2px;animation:wScroll 2s ease-in-out infinite;}
+    @keyframes wScroll{0%,100%{transform:translateY(0);opacity:1;}50%{transform:translateY(6px);opacity:.25;}}
+
+    /* BREADCRUMB */
+    .bc-strip{background:#f5f9f5;border-bottom:1px solid rgba(34,139,34,.1);padding:13px 0;}
+    .breadcrumb{margin:0;}
+    .breadcrumb-item a{color:var(--green);font-size:.87rem;}
+    .breadcrumb-item.active{color:var(--gray-600);font-size:.87rem;}
+    .breadcrumb-item+.breadcrumb-item::before{color:var(--gray-400);}
+
+    /* FEATURED BANNER */
+    .featured-banner{background:linear-gradient(135deg,#fff8e1,#fffde7);border:2px solid rgba(212,160,23,.3);border-radius:24px;overflow:hidden;margin:48px 0 0;position:relative;}
+    .featured-banner::before{content:'🔥  PROMO UNGGULAN';position:absolute;top:0;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;padding:5px 24px;border-radius:0 0 14px 14px;font-size:.72rem;font-weight:700;letter-spacing:1px;white-space:nowrap;z-index:10;}
+    .banner-img-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;height:300px;}
+    .banner-img-grid img{width:100%;height:100%;object-fit:cover;display:block;}
+    .banner-content{padding:36px 38px;}
+    .banner-promo-type{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;padding:5px 14px;border-radius:20px;font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;}
+    .banner-title{font-size:2rem;font-weight:700;color:var(--gray-900);margin-bottom:10px;line-height:1.2;}
+    .banner-desc{font-size:.93rem;color:var(--gray-600);line-height:1.7;margin-bottom:18px;}
+    .banner-area{display:flex;align-items:flex-start;gap:10px;background:var(--green-pale);border-radius:12px;padding:12px 16px;margin-bottom:20px;border:1px solid rgba(34,139,34,.18);}
+    .banner-area i{color:var(--green);font-size:1.15rem;margin-top:2px;flex-shrink:0;}
+    .banner-area p{font-size:.88rem;color:var(--green-dark);font-weight:600;margin:0;line-height:1.5;}
+    .banner-countdown-row{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap;align-items:center;}
+    .bcd-label{font-size:.78rem;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;}
+    .bcd-unit{text-align:center;background:var(--green-dark);border-radius:10px;padding:10px 14px;min-width:60px;}
+    .bcd-num{display:block;font-size:1.35rem;font-weight:700;color:var(--gold);line-height:1;}
+    .bcd-sub{display:block;font-size:.6rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.5px;margin-top:3px;}
+    .banner-actions{display:flex;gap:12px;flex-wrap:wrap;}
+    .btn-wa-promo{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;padding:12px 28px;border-radius:12px;font-weight:700;font-size:.93rem;transition:var(--tr);}
+    .btn-wa-promo:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.38);color:#fff;}
+    .btn-detail-link{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;padding:12px 24px;border-radius:12px;font-weight:700;font-size:.93rem;transition:var(--tr);border:none;cursor:pointer;}
+    .btn-detail-link:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(34,139,34,.38);color:#fff;}
+
+    /* FILTER */
+    .filter-section{padding:56px 0 24px;background:var(--white);}
+    .filter-wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+    .filter-tabs{display:flex;gap:10px;flex-wrap:wrap;}
+    .ftab{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:50px;font-size:.86rem;font-weight:600;border:2px solid rgba(34,139,34,.18);background:transparent;color:var(--gray-700);cursor:pointer;transition:all .25s ease;}
+    .ftab:hover{border-color:var(--green);color:var(--green);}
+    .ftab.active{background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(34,139,34,.3);}
+    .result-count{font-size:.9rem;color:var(--gray-500);font-weight:500;white-space:nowrap;}
+    .result-count strong{color:var(--green);}
+
+    /* PROMO GRID */
+    .promos-section{padding:32px 0 100px;background:var(--white);}
+    .promo-item.hidden-promo{display:none !important;}
+
+    /* PROMO CARD */
+    .promo-card{background:#fff;border-radius:22px;overflow:hidden;border:1px solid var(--gray-200);box-shadow:var(--sh-sm);height:100%;transition:all .32s cubic-bezier(.22,1,.36,1);cursor:pointer;position:relative;}
+    .promo-card:hover{transform:translateY(-10px);box-shadow:0 22px 60px rgba(0,0,0,.13);border-color:rgba(34,139,34,.2);}
+    
+    /* Ribbon */
+    .promo-ribbon{position:absolute;top:18px;right:-8px;z-index:10;padding:5px 20px 5px 14px;border-radius:4px 0 0 4px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#fff;box-shadow:-2px 2px 8px rgba(0,0,0,.2);}
+    .promo-ribbon::after{content:'';position:absolute;bottom:-8px;right:0;border-width:8px 8px 0 0;border-style:solid;}
+    .ribbon-aktif{background:var(--green);}
+    .ribbon-aktif::after{border-color:var(--green-dark) transparent transparent transparent;}
+    .ribbon-terbatas{background:#e53935;}
+    .ribbon-terbatas::after{border-color:#b71c1c transparent transparent transparent;}
+    .ribbon-flash{background:var(--gold-dark);}
+    .ribbon-flash::after{border-color:#8b6914 transparent transparent transparent;}
+
+    /* Card image */
+    .promo-img-wrap{position:relative;height:220px;overflow:hidden;}
+    .promo-img-grid{display:grid;height:100%;}
+    .promo-img-grid.single{grid-template-columns:1fr;}
+    .promo-img-grid.double{grid-template-columns:1fr 1fr;gap:2px;}
+    .promo-img-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+    .promo-card:hover .promo-img-grid img{transform:scale(1.05);}
+    .promo-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 55%);}
+    .promo-type-badge{position:absolute;top:14px;left:14px;display:flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#fff;z-index:5;box-shadow:0 2px 12px rgba(0,0,0,.2);}
+    .ptb-ongkir{background:rgba(34,139,34,.9);}
+    .ptb-diskon{background:rgba(229,57,53,.9);}
+    .ptb-bundling{background:rgba(0,119,182,.9);}
+    .ptb-loyalitas{background:rgba(212,160,23,.9);}
+    .ptb-grosir{background:rgba(230,81,0,.9);}
+    .ptb-flash{background:rgba(212,160,23,.92);}
+
+    /* Discount bubble */
+    .discount-bubble{position:absolute;bottom:14px;left:14px;z-index:5;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;width:62px;height:62px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(212,160,23,.5);text-align:center;}
+    .disc-num{font-size:1.1rem;font-weight:700;line-height:1;}
+    .disc-off{font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+
+    /* Card Body */
+    .promo-body{padding:22px 22px 24px;}
+    .promo-validity{display:flex;align-items:center;gap:6px;font-size:.75rem;color:var(--gray-500);margin-bottom:10px;}
+    .promo-validity .valid-soon{color:#e53935;font-weight:700;}
+    .promo-name{font-size:1.08rem;font-weight:700;color:var(--gray-900);margin-bottom:6px;line-height:1.3;}
+    .promo-tagline{font-size:.84rem;color:var(--gray-500);margin-bottom:14px;line-height:1.5;}
+    
+    /* Card countdown */
+    .promo-countdown{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+    .pcd-unit{background:var(--green-dark);border-radius:8px;padding:7px 10px;text-align:center;min-width:50px;}
+    .pcd-num{display:block;font-size:1.05rem;font-weight:700;color:var(--gold);line-height:1;}
+    .pcd-sub{display:block;font-size:.6rem;color:rgba(255,255,255,.5);text-transform:uppercase;margin-top:2px;}
+
+    .promo-highlights{display:flex;flex-direction:column;gap:7px;margin-bottom:16px;}
+    .promo-hl{display:flex;align-items:flex-start;gap:8px;font-size:.82rem;color:var(--gray-600);}
+    .promo-hl i{color:var(--green);font-size:.82rem;margin-top:2px;flex-shrink:0;}
+    .promo-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+    .ptag{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:.72rem;font-weight:600;background:var(--green-pale);color:var(--green-dark);border:1px solid rgba(34,139,34,.18);}
+    .promo-footer{display:flex;gap:10px;padding-top:14px;border-top:1px solid var(--gray-200);}
+    .btn-promo-detail{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;padding:10px 20px;border-radius:var(--r-md);font-size:.83rem;font-weight:600;transition:var(--tr);flex:1;justify-content:center;border:none;cursor:pointer;}
+    .btn-promo-detail:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(34,139,34,.35);color:#fff;}
+    .btn-promo-wa{width:42px;height:42px;border-radius:var(--r-md);background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.05rem;transition:var(--tr);flex-shrink:0;border:none;cursor:pointer;}
+    .btn-promo-wa:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(37,211,102,.4);}
+
+    /* MODAL */
+    .promo-modal{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;visibility:hidden;transition:all .3s ease;}
+    .promo-modal.open{opacity:1;visibility:visible;}
+    .modal-backdrop{position:absolute;inset:0;background:rgba(10,30,20,.65);backdrop-filter:blur(8px);z-index:1;}
+    .modal-box{position:relative;z-index:2;background:#fff;border-radius:26px;max-width:800px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 30px 90px rgba(0,0,0,.3);transform:translateY(30px) scale(.97);transition:transform .38s cubic-bezier(.22,1,.36,1);}
+    .promo-modal.open .modal-box{transform:translateY(0) scale(1);}
+    .modal-box::-webkit-scrollbar{width:6px;}
+    .modal-box::-webkit-scrollbar-thumb{background:rgba(34,139,34,.3);border-radius:3px;}
+    .modal-header-band{height:5px;border-radius:26px 26px 0 0;}
+    .modal-close-btn{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--gray-600);transition:all .2s ease;z-index:20;box-shadow:var(--sh-sm);}
+    .modal-close-btn:hover{background:var(--green);color:#fff;transform:rotate(90deg);}
+    
+    /* Modal image */
+    .modal-img-area{height:300px;overflow:hidden;position:relative;}
+    .modal-img-area .img-grid{display:grid;height:100%;}
+    .modal-img-area .img-grid.single{grid-template-columns:1fr;}
+    .modal-img-area .img-grid.double{grid-template-columns:1fr 1fr;gap:3px;}
+    .modal-img-area .img-grid img{width:100%;height:100%;object-fit:cover;display:block;}
+    .modal-img-area .img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,51,32,.75) 0%,transparent 55%);}
+    .modal-img-content{position:absolute;bottom:0;left:0;right:0;padding:20px 28px;z-index:5;}
+
+    /* Modal content */
+    .modal-content-inner{padding:26px 30px 30px;}
+    .modal-type-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 14px;border-radius:20px;font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#fff;margin-bottom:10px;}
+    .modal-promo-name{font-size:1.7rem;font-weight:700;color:var(--gray-900);margin-bottom:6px;line-height:1.2;}
+    .modal-promo-sub{font-size:.95rem;color:var(--gray-500);margin-bottom:22px;}
+
+    /* Modal countdown */
+    .modal-countdown{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,var(--green-darker),var(--green-dark));border-radius:16px;padding:18px 22px;margin-bottom:22px;flex-wrap:wrap;}
+    .mcd-label{font-size:.78rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;}
+    .mcd-units{display:flex;gap:10px;flex-wrap:wrap;}
+    .mcd-unit{text-align:center;background:rgba(255,255,255,.1);border-radius:10px;padding:10px 14px;min-width:56px;}
+    .mcd-num{display:block;font-size:1.45rem;font-weight:700;color:var(--gold);line-height:1;}
+    .mcd-sub{display:block;font-size:.6rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px;margin-top:3px;}
+    .mcd-sep{color:rgba(212,160,23,.5);font-size:1.1rem;font-weight:700;margin-top:4px;}
+
+    /* Modal detail grid */
+    .modal-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px;}
+    .mdg-item{background:var(--green-pale);border-radius:12px;padding:14px 16px;border:1px solid rgba(34,139,34,.12);}
+    .mdg-label{font-size:.68rem;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+    .mdg-val{font-size:.9rem;font-weight:600;color:var(--gray-900);}
+
+    /* Terms */
+    .terms-title{font-size:.95rem;font-weight:700;color:var(--gray-900);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+    .terms-title i{color:var(--gold);}
+    .terms-list{list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:8px;}
+    .terms-list li{display:flex;align-items:flex-start;gap:9px;font-size:.85rem;color:var(--gray-600);line-height:1.5;}
+    .terms-list li i{color:var(--green);font-size:.85rem;margin-top:2px;flex-shrink:0;}
+    .modal-actions{display:flex;gap:12px;flex-wrap:wrap;}
+    .btn-modal-wa{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;padding:13px 26px;border-radius:12px;font-weight:700;font-size:.93rem;transition:var(--tr);}
+    .btn-modal-wa:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(37,211,102,.38);color:#fff;}
+    .btn-modal-green{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;padding:13px 26px;border-radius:12px;font-weight:700;font-size:.93rem;transition:var(--tr);flex:1;justify-content:center;}
+    .btn-modal-green:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(34,139,34,.38);color:#fff;}
+
+    /* HOW TO CLAIM */
+    .howto-section{padding:var(--sp);background:linear-gradient(180deg,#f5f9f5,var(--white));}
+    .sec-tag{display:inline-flex;align-items:center;gap:7px;background:var(--green-pale);color:var(--green-dark);padding:6px 16px;border-radius:20px;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;}
+    .step-card{display:flex;gap:20px;align-items:flex-start;padding:24px;background:#fff;border-radius:18px;border:1px solid rgba(34,139,34,.1);box-shadow:var(--sh-sm);height:100%;transition:var(--tr);}
+    .step-card:hover{box-shadow:var(--sh-md);transform:translateY(-4px);border-color:rgba(34,139,34,.25);}
+    .step-num{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;font-size:1.2rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 14px rgba(34,139,34,.3);}
+    .step-info h4{font-size:1rem;font-weight:700;color:var(--gray-900);margin-bottom:6px;}
+    .step-info p{font-size:.87rem;color:var(--gray-600);line-height:1.6;margin:0;}
+
+    /* NEWSLETTER */
+    .newsletter-section{padding:var(--sp);background:linear-gradient(135deg,var(--green-darker),var(--green-dark) 55%,var(--green-light));position:relative;overflow:hidden;}
+    .newsletter-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(212,160,23,.12) 0%,transparent 55%);pointer-events:none;}
+    .newsletter-section .container{position:relative;z-index:2;}
+    .nl-card{background:rgba(255,255,255,.07);backdrop-filter:blur(12px);border:1px solid rgba(212,160,23,.2);border-radius:24px;padding:48px;}
+    .nl-icon{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-size:1.7rem;color:#fff;margin-bottom:20px;}
+    .nl-title{font-size:1.8rem;font-weight:700;color:#fff;margin-bottom:10px;}
+    .nl-desc{color:rgba(255,255,255,.72);font-size:.97rem;line-height:1.7;margin-bottom:0;}
+    .nl-form-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+    .nl-input{flex:1;min-width:180px;padding:14px 20px;border-radius:12px;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.12);color:#fff;font-size:.93rem;font-family:var(--font-body);transition:var(--tr);}
+    .nl-input::placeholder{color:rgba(255,255,255,.45);}
+    .nl-input:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,.18);}
+    .nl-btn{display:inline-flex;align-items:center;gap:9px;color:#fff;padding:14px 28px;border-radius:12px;font-weight:700;font-size:.93rem;border:none;cursor:pointer;transition:var(--tr);white-space:nowrap;}
+    .nl-btn-wa{background:linear-gradient(135deg,#25d366,#128c7e);}
+    .nl-btn-email{background:linear-gradient(135deg,var(--green),var(--green-dark));}
+    .nl-btn:hover{transform:translateY(-2px);opacity:.9;}
+    .nl-note{font-size:.78rem;color:rgba(255,255,255,.5);margin-top:10px;}
+
+    /* CTA */
+    .cta-strip{background:linear-gradient(135deg,var(--gold),var(--gold-dark));padding:68px 0;position:relative;overflow:hidden;}
+    .cta-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(255,255,255,.12) 0%,transparent 60%);pointer-events:none;}
+    .cta-strip .container{position:relative;z-index:2;}
+    .cta-strip h2{color:#fff;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;margin-bottom:10px;}
+    .cta-strip p{color:rgba(255,255,255,.82);font-size:1rem;margin:0;}
+    .btn-cta-w{display:inline-flex;align-items:center;gap:9px;background:#fff;color:var(--gold-dark);font-weight:700;padding:14px 34px;border-radius:12px;font-size:.97rem;transition:var(--tr);}
+    .btn-cta-w:hover{background:var(--green-dark);color:var(--gold);transform:translateY(-3px);}
+    .btn-cta-ol{display:inline-flex;align-items:center;gap:9px;background:transparent;color:#fff;border:2px solid rgba(255,255,255,.65);font-weight:600;padding:14px 28px;border-radius:12px;font-size:.97rem;transition:var(--tr);}
+    .btn-cta-ol:hover{background:rgba(255,255,255,.14);border-color:#fff;color:#fff;transform:translateY(-3px);}
+
+    /* FOOTER */
+    .footer-section{background:var(--gray-900);color:#fff;padding-top:60px;}
+    .footer-top{padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.1);}
+    .footer-logo{font-size:1.5rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+    .footer-logo i{color:var(--gold);}
+    .footer-brand p{color:var(--gray-400);font-size:.9rem;}
+    .footer-section h5{color:#fff;font-size:1rem;font-weight:600;margin-bottom:20px;}
+    .footer-links{list-style:none;padding:0;margin:0;}
+    .footer-links li{margin-bottom:11px;}
+    .footer-links a{color:var(--gray-400);font-size:.9rem;transition:var(--tr);}
+    .footer-links a:hover{color:var(--gold);padding-left:5px;}
+    .footer-contact{list-style:none;padding:0;margin:0;}
+    .footer-contact li{color:var(--gray-400);font-size:.9rem;margin-bottom:11px;display:flex;align-items:flex-start;gap:10px;}
+    .footer-contact i{color:var(--gold);margin-top:3px;}
+    .footer-social{display:flex;gap:11px;margin-top:18px;}
+    .footer-social a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;transition:var(--tr);}
+    .footer-social a:hover{background:linear-gradient(135deg,var(--gold),var(--gold-dark));transform:translateY(-3px);}
+    .footer-bottom{padding:24px 0;}
+    .copyright{color:var(--gray-500);font-size:.84rem;margin:0;}
+    .footer-legal{list-style:none;padding:0;margin:0;display:flex;gap:24px;}
+    .footer-legal a{color:var(--gray-500);font-size:.84rem;}
+    .footer-legal a:hover{color:var(--gold);}
+
+    /* FLOAT BUTTONS */
+    .back-to-top{position:fixed;bottom:30px;right:30px;width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;border:none;font-size:1.2rem;cursor:pointer;opacity:0;visibility:hidden;transition:var(--tr);z-index:999;box-shadow:0 4px 20px rgba(34,139,34,.3);}
+    .back-to-top.show{opacity:1;visibility:visible;}
+    .back-to-top:hover{background:linear-gradient(135deg,var(--gold),var(--gold-dark));transform:translateY(-5px);}
+    .wa-float{position:fixed;bottom:100px;right:30px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.8rem;text-decoration:none;z-index:998;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:var(--tr);animation:waPulse 2s ease-in-out infinite;}
+    .wa-float:hover{transform:scale(1.1);color:#fff;}
+    .wa-float:hover .wa-tip{opacity:1;visibility:visible;transform:translateX(-10px);}
+    .wa-tip{position:absolute;right:70px;background:var(--gray-900);color:#fff;padding:8px 14px;border-radius:8px;font-size:.83rem;font-weight:500;white-space:nowrap;opacity:0;visibility:hidden;transition:var(--tr);pointer-events:none;}
+    .wa-tip::after{content:'';position:absolute;right:-6px;top:50%;transform:translateY(-50%);border:6px solid transparent;border-left-color:var(--gray-900);}
+    @keyframes waPulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.4);}50%{box-shadow:0 4px 30px rgba(37,211,102,.6),0 0 0 10px rgba(37,211,102,.1);}}
+
+    /* AOS */
+    [data-aos]{opacity:0;transition:opacity .7s ease,transform .7s ease;}
+    [data-aos="fade-up"]{transform:translateY(30px);}
+    [data-aos="fade-right"]{transform:translateX(-30px);}
+    [data-aos="fade-left"]{transform:translateX(30px);}
+    [data-aos="zoom-in"]{transform:scale(.9);}
+    [data-aos].aos-animate{opacity:1;transform:none;}
+
+    /* RESPONSIVE */
+    @media(max-width:991.98px){
+        .banner-img-grid{height:220px;}
+        .modal-detail-grid{grid-template-columns:1fr;}
+        .modal-img-area{height:240px;}
+    }
+    @media(max-width:767.98px){
+        :root{--sp:70px 0;}
+        .scroll-cue{display:none;}
+        .filter-wrap{flex-direction:column;align-items:flex-start;}
+        .banner-img-grid{height:180px;}
+        .banner-content{padding:22px 20px;}
+        .banner-title{font-size:1.5rem;}
+        .hft1,.hft2,.hft3,.hft4{display:none;}
+        .modal-content-inner{padding:20px 18px 24px;}
+        .modal-actions{flex-direction:column;}
+        .btn-modal-wa,.btn-modal-green{width:100%;justify-content:center;}
+        .nl-card{padding:28px 20px;}
+        .wa-float{right:16px;bottom:90px;}
+        .back-to-top{right:16px;bottom:16px;}
+    }
+    @media(max-width:575.98px){
+        .hero-title{font-size:1.9rem;}
+        .modal-detail-grid{grid-template-columns:1fr;}
+    }
+    </style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader" class="preloader">
+    <div class="pl-inner">
+        <div class="pl-logo"><i class="bi bi-droplet-fill"></i><span>AROMAS</span></div>
+        <div class="pl-spinner"><div class="sp-ring"></div><div class="sp-ring"></div><div class="sp-ring"></div></div>
+        <p class="pl-text">Memuat Promo...</p>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+    <div class="container">
+        <a class="navbar-brand" href="index.html"><i class="bi bi-droplet-fill"></i> AROMAS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">Tentang Kami</a></li>
+                <li class="nav-item"><a class="nav-link" href="product.html">Produk</a></li>
+                <li class="nav-item"><a class="nav-link active" href="promo.html">Promo</a></li>
+                <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="our-machine.html">Mesin</a></li>
+                <li class="nav-item"><a class="nav-link" href="portfolio.html">Portofolio</a></li>
+                <li class="nav-item"><a class="nav-link" href="partnership.html">Kemitraan</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact-us.html">Kontak</a></li>
+            </ul>
+            <a href="contact-us.html" class="btn btn-nav-contact">Hubungi Kami</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="promo-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-deco"><div class="deco-c dc1"></div><div class="deco-c dc2"></div></div>
+    <div class="hero-float-tag hft1"><i class="bi bi-truck me-1"></i> Free Ongkir Tangsel</div>
+    <div class="hero-float-tag hft2"><i class="bi bi-tag-fill me-1"></i> Diskon 15% New Member</div>
+    <div class="hero-float-tag hft3"><i class="bi bi-boxes me-1"></i> Bundling Hemat 3+1</div>
+    <div class="hero-float-tag hft4"><i class="bi bi-star-fill me-1"></i> Loyalty Points 2x</div>
+    <div class="container text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 col-md-11" data-aos="fade-up">
+                <span class="hero-badge"><i class="bi bi-lightning-charge-fill"></i> Penawaran Terbatas</span>
+                <h1 class="hero-title">
+                    Promo Spesial <span class="italic text-gradient">AROMAS</span><br />
+                    Jangan Sampai Ketinggalan!
+                </h1>
+                <p class="hero-desc">
+                    Dapatkan penawaran terbaik — free ongkir area Ciater & South Tangerang, diskon produk, bundling hemat,
+                    hingga program loyalitas eksklusif untuk pelanggan setia AROMAS di seluruh Indonesia.
+                </p>
+                <div class="hero-promo-stats" data-aos="fade-up" data-aos-delay="100">
+                    <div class="hpstat"><i class="bi bi-ticket-perforated-fill"></i><div><strong>6 Promo</strong><span>Aktif Saat Ini</span></div></div>
+                    <div class="hpstat"><i class="bi bi-geo-alt-fill"></i><div><strong>Tangsel & Ciater</strong><span>Area Free Ongkir</span></div></div>
+                    <div class="hpstat"><i class="bi bi-percent"></i><div><strong>Hingga 20%</strong><span>Diskon Produk</span></div></div>
+                </div>
+                <div class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="180">
+                    <div class="hero-countdown-wrap">
+                        <span class="hcd-label">⏰ Promo berakhir dalam</span>
+                        <div class="hcd-unit"><span class="hcd-num" id="hcd-h">00</span><span class="hcd-sub">Jam</span></div>
+                        <span class="hcd-sep">:</span>
+                        <div class="hcd-unit"><span class="hcd-num" id="hcd-m">00</span><span class="hcd-sub">Menit</span></div>
+                        <span class="hcd-sep">:</span>
+                        <div class="hcd-unit"><span class="hcd-num" id="hcd-s">00</span><span class="hcd-sub">Detik</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-cue"><div class="mouse-ico"><div class="wheel-dot"></div></div><span>Scroll</span></div>
+</section>
+
+<!-- BREADCRUMB -->
+<div class="bc-strip">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house-door-fill me-1"></i>Beranda</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Promo & Penawaran</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<!-- ═══ FEATURED BANNER — FREE ONGKIR ═══ -->
+<div class="container">
+    <div class="featured-banner" data-aos="fade-up">
+        <div class="row g-0">
+            <div class="col-lg-5">
+                <div class="banner-img-grid">
+                    <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=500&h=320&fit=crop" alt="AROMAS Delivery" />
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=320&fit=crop" alt="AROMAS Delivery 2" />
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="banner-content">
+                    <div class="banner-promo-type"><i class="bi bi-truck-front-fill"></i> Free Ongkir — Promo Unggulan</div>
+                    <h2 class="banner-title">Gratis Ongkos Kirim<br /><span class="italic" style="color:var(--green);">Area Ciater &amp; South Tangerang</span></h2>
+                    <p class="banner-desc">Pesan AROMAS sekarang dan nikmati pengiriman gratis ke seluruh area Ciater, Serpong, dan South Tangerang. Minimum pembelian 1 karton (12 botol 1L). Same-day delivery tersedia!</p>
+                    <div class="banner-area">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <p>Berlaku untuk: Ciater, Serpong, Serpong Utara, BSD, Pondok Aren, Ciputat, Pamulang — South Tangerang</p>
+                    </div>
+                    <div class="banner-countdown-row">
+                        <span class="bcd-label">Berakhir dalam:</span>
+                        <div class="bcd-unit"><span class="bcd-num" id="bcd-d">00</span><span class="bcd-sub">Hari</span></div>
+                        <div class="bcd-unit"><span class="bcd-num" id="bcd-h">00</span><span class="bcd-sub">Jam</span></div>
+                        <div class="bcd-unit"><span class="bcd-num" id="bcd-m">00</span><span class="bcd-sub">Menit</span></div>
+                        <div class="bcd-unit"><span class="bcd-num" id="bcd-s">00</span><span class="bcd-sub">Detik</span></div>
+                    </div>
+                    <div class="banner-actions">
+                        <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20order%20dengan%20free%20ongkir%20area%20Tangsel%20%26%20Ciater" target="_blank" class="btn-wa-promo"><i class="bi bi-whatsapp"></i> Pesan Sekarang</a>
+                        <button class="btn-detail-link" onclick="openPromoModal('p1')"><i class="bi bi-info-circle-fill"></i> Detail Promo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ FILTER ═══ -->
+<section class="filter-section">
+    <div class="container">
+        <div class="filter-wrap">
+            <div class="filter-tabs">
+                <button class="ftab active" data-filter="all"><i class="bi bi-grid-fill"></i> Semua Promo</button>
+                <button class="ftab" data-filter="ongkir"><i class="bi bi-truck"></i> Free Ongkir</button>
+                <button class="ftab" data-filter="diskon"><i class="bi bi-percent"></i> Diskon</button>
+                <button class="ftab" data-filter="bundling"><i class="bi bi-boxes"></i> Bundling</button>
+                <button class="ftab" data-filter="loyalitas"><i class="bi bi-star-fill"></i> Loyalitas</button>
+                <button class="ftab" data-filter="grosir"><i class="bi bi-building"></i> Grosir</button>
+            </div>
+            <span class="result-count">Menampilkan <strong id="promoCount">6</strong> promo aktif</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ PROMO GRID ═══ -->
+<section class="promos-section">
+    <div class="container">
+        <div class="row g-4" id="promoGrid">
+
+            <!-- PROMO 1: Free Ongkir -->
+            <div class="col-md-6 col-lg-4 promo-item" data-cat="ongkir" data-aos="fade-up" data-aos-delay="0">
+                <div class="promo-card" onclick="openPromoModal('p1')">
+                    <span class="promo-ribbon ribbon-aktif">Aktif</span>
+                    <div class="promo-img-wrap">
+                        <div class="promo-img-grid double">
+                            <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=400&h=260&fit=crop" alt="Delivery 1" />
+                            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=260&fit=crop" alt="Delivery 2" />
+                        </div>
+                        <div class="promo-img-overlay"></div>
+                        <span class="promo-type-badge ptb-ongkir"><i class="bi bi-truck-front-fill"></i> Free Ongkir</span>
+                    </div>
+                    <div class="promo-body">
+                        <div class="promo-validity"><i class="bi bi-calendar-event"></i> Berlaku s/d <strong class="ms-1 valid-soon">28 Feb 2026</strong></div>
+                        <div class="promo-name">Free Ongkir Area Ciater & Tangsel</div>
+                        <div class="promo-tagline">Gratis ongkos kirim ke seluruh wilayah South Tangerang & sekitarnya</div>
+                        <div class="promo-countdown">
+                            <div class="pcd-unit"><span class="pcd-num" id="c1-d">00</span><span class="pcd-sub">Hari</span></div>
+                            <div class="pcd-unit"><span class="pcd-num" id="c1-h">00</span><span class="pcd-sub">Jam</span></div>
+                            <div class="pcd-unit"><span class="pcd-num" id="c1-m">00</span><span class="pcd-sub">Mnt</span></div>
+                            <div class="pcd-unit"><span class="pcd-num" id="c1-s">00</span><span class="pcd-sub">Det</span></div>
+                        </div>
+                        <div class="promo-highlights">
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Min. pembelian 1 karton (12 botol 1L)</div>
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Area: Ciater, Serpong, BSD, Pondok Aren</div>
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Same-day delivery jika order sebelum jam 12</div>
+                        </div>
+                        <div class="promo-tags">
+                            <span class="ptag"><i class="bi bi-geo-alt-fill"></i> Tangsel</span>
+                            <span class="ptag"><i class="bi bi-truck"></i> Free Ongkir</span>
+                            <span class="ptag"><i class="bi bi-clock"></i> Same-Day</span>
+                        </div>
+                        <div class="promo-footer">
+                            <button class="btn-promo-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</button>
+                            <button class="btn-promo-wa" onclick="event.stopPropagation();window.open('https://wa.me/6281234567890?text=Halo,%20saya%20mau%20klaim%20promo%20Free%20Ongkir%20Tangsel%20AROMAS','_blank')"><i class="bi bi-whatsapp"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROMO 2: New Member 15% -->
+            <div class="col-md-6 col-lg-4 promo-item" data-cat="diskon" data-aos="fade-up" data-aos-delay="80">
+                <div class="promo-card" onclick="openPromoModal('p2')">
+                    <span class="promo-ribbon ribbon-terbatas">Terbatas</span>
+                    <div class="promo-img-wrap">
+                        <div class="promo-img-grid single">
+                            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=700&h=400&fit=crop" alt="New Member" />
+                        </div>
+                        <div class="promo-img-overlay"></div>
+                        <span class="promo-type-badge ptb-diskon"><i class="bi bi-percent"></i> Diskon</span>
+                        <div class="discount-bubble"><span class="disc-num">15%</span><span class="disc-off">OFF</span></div>
+                    </div>
+                    <div class="promo-body">
+                        <div class="promo-validity"><i class="bi bi-calendar-event"></i> Berlaku s/d <strong class="ms-1">31 Mar 2026</strong></div>
+                        <div class="promo-name">Diskon 15% Pembelian Pertama</div>
+                        <div class="promo-tagline">Khusus pelanggan baru AROMAS — langsung hemat 15% untuk semua produk</div>
+                        <div class="promo-highlights">
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Berlaku semua varian produk AROMAS</div>
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Min. pembelian Rp 200.000</div>
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Gunakan kode: <strong>NEWMEMBER15</strong></div>
+                        </div>
+                        <div class="promo-tags">
+                            <span class="ptag"><i class="bi bi-person-plus-fill"></i> New Member</span>
+                            <span class="ptag"><i class="bi bi-percent"></i> 15% OFF</span>
+                            <span class="ptag"><i class="bi bi-key-fill"></i> Kode Promo</span>
+                        </div>
+                        <div class="promo-footer">
+                            <button class="btn-promo-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</button>
+                            <button class="btn-promo-wa" onclick="event.stopPropagation();window.open('https://wa.me/6281234567890?text=Halo,%20saya%20pelanggan%20baru%20dan%20mau%20klaim%20diskon%2015%25%20NEWMEMBER15','_blank')"><i class="bi bi-whatsapp"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROMO 3: Bundling 3+1 -->
+            <div class="col-md-6 col-lg-4 promo-item" data-cat="bundling" data-aos="fade-up" data-aos-delay="160">
+                <div class="promo-card" onclick="openPromoModal('p3')">
+                    <span class="promo-ribbon ribbon-aktif">Aktif</span>
+                    <div class="promo-img-wrap">
+                        <div class="promo-img-grid double">
+                            <img src="https://images.unsplash.com/photo-1563991655280-cb95c90ca2fb?w=400&h=260&fit=crop" alt="Bundling 1" />
+                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=260&fit=crop" alt="Bundling 2" />
+                        </div>
+                        <div class="promo-img-overlay"></div>
+                        <span class="promo-type-badge ptb-bundling"><i class="bi bi-boxes"></i> Bundling</span>
+                    </div>
+                    <div class="promo-body">
+                        <div class="promo-validity"><i class="bi bi-calendar-event"></i> Berlaku s/d <strong class="ms-1">30 Apr 2026</strong></div>
+                        <div class="promo-name">Bundling Hemat: Beli 3 Gratis 1</div>
+                        <div class="promo-tagline">Beli 3 botol AROMAS 2L, gratis 1 botol AROMAS 1L senilai Rp 35.000</div>
+                        <div class="promo-highlights">
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Beli 3 botol ukuran 2L, gratis 1 botol 1L</div>
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Hemat senilai Rp 35.000 per transaksi</div>
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Bisa kombinasi varian berbeda</div>
+                        </div>
+                        <div class="promo-tags">
+                            <span class="ptag"><i class="bi bi-boxes"></i> 3+1 Gratis</span>
+                            <span class="ptag"><i class="bi bi-droplet-half"></i> Botol 2L</span>
+                            <span class="ptag"><i class="bi bi-coin"></i> Hemat 35rb</span>
+                        </div>
+                        <div class="promo-footer">
+                            <button class="btn-promo-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</button>
+                            <button class="btn-promo-wa" onclick="event.stopPropagation();window.open('https://wa.me/6281234567890?text=Halo,%20saya%20mau%20klaim%20promo%20Bundling%203%2B1%20AROMAS','_blank')"><i class="bi bi-whatsapp"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROMO 4: Loyalty 2x Points -->
+            <div class="col-md-6 col-lg-4 promo-item" data-cat="loyalitas" data-aos="fade-up" data-aos-delay="0">
+                <div class="promo-card" onclick="openPromoModal('p4')">
+                    <span class="promo-ribbon ribbon-aktif">Aktif</span>
+                    <div class="promo-img-wrap">
+                        <div class="promo-img-grid single">
+                            <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=700&h=400&fit=crop" alt="Loyalty" />
+                        </div>
+                        <div class="promo-img-overlay"></div>
+                        <span class="promo-type-badge ptb-loyalitas"><i class="bi bi-star-fill"></i> Loyalitas</span>
+                    </div>
+                    <div class="promo-body">
+                        <div class="promo-validity"><i class="bi bi-calendar-event"></i> Berlaku s/d <strong class="ms-1">31 Des 2026</strong></div>
+                        <div class="promo-name">Double Points — Loyalty Program 2x</div>
+                        <div class="promo-tagline">Setiap pembelian dapatkan 2x poin yang bisa ditukar hadiah menarik</div>
+                        <div class="promo-highlights">
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Setiap Rp 10.000 = 2 poin (biasanya 1)</div>
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Poin ditukar diskon atau produk gratis</div>
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Berlaku semua metode pembelian</div>
+                        </div>
+                        <div class="promo-tags">
+                            <span class="ptag"><i class="bi bi-star-fill"></i> 2x Points</span>
+                            <span class="ptag"><i class="bi bi-gift-fill"></i> Tukar Hadiah</span>
+                            <span class="ptag"><i class="bi bi-infinity"></i> Sepanjang 2026</span>
+                        </div>
+                        <div class="promo-footer">
+                            <button class="btn-promo-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</button>
+                            <button class="btn-promo-wa" onclick="event.stopPropagation();window.open('https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20tahu%20Program%20Loyalitas%202x%20Poin%20AROMAS','_blank')"><i class="bi bi-whatsapp"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROMO 5: Grosir 20% -->
+            <div class="col-md-6 col-lg-4 promo-item" data-cat="grosir" data-aos="fade-up" data-aos-delay="80">
+                <div class="promo-card" onclick="openPromoModal('p5')">
+                    <span class="promo-ribbon ribbon-aktif">Aktif</span>
+                    <div class="promo-img-wrap">
+                        <div class="promo-img-grid double">
+                            <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=400&h=260&fit=crop" alt="Grosir 1" />
+                            <img src="https://images.unsplash.com/photo-1604719312566-8912e9227f6a?w=400&h=260&fit=crop" alt="Grosir 2" />
+                        </div>
+                        <div class="promo-img-overlay"></div>
+                        <span class="promo-type-badge ptb-grosir"><i class="bi bi-building"></i> Grosir</span>
+                        <div class="discount-bubble"><span class="disc-num">20%</span><span class="disc-off">OFF</span></div>
+                    </div>
+                    <div class="promo-body">
+                        <div class="promo-validity"><i class="bi bi-calendar-event"></i> Berlaku s/d <strong class="ms-1">31 Mar 2026</strong></div>
+                        <div class="promo-name">Harga Grosir — Diskon s/d 20%</div>
+                        <div class="promo-tagline">Pembelian karton dalam jumlah besar dapat harga grosir spesial</div>
+                        <div class="promo-highlights">
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Min. 5 karton: diskon 10%</div>
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Min. 10 karton: diskon 15%</div>
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Min. 20 karton: diskon 20%</div>
+                        </div>
+                        <div class="promo-tags">
+                            <span class="ptag"><i class="bi bi-building"></i> Grosir</span>
+                            <span class="ptag"><i class="bi bi-percent"></i> Max 20%</span>
+                            <span class="ptag"><i class="bi bi-box-seam-fill"></i> Kartonan</span>
+                        </div>
+                        <div class="promo-footer">
+                            <button class="btn-promo-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</button>
+                            <button class="btn-promo-wa" onclick="event.stopPropagation();window.open('https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20harga%20grosir%20AROMAS','_blank')"><i class="bi bi-whatsapp"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROMO 6: Flash Sale Jeriken -->
+            <div class="col-md-6 col-lg-4 promo-item" data-cat="diskon" data-aos="fade-up" data-aos-delay="160">
+                <div class="promo-card" onclick="openPromoModal('p6')">
+                    <span class="promo-ribbon ribbon-flash">Flash Sale</span>
+                    <div class="promo-img-wrap">
+                        <div class="promo-img-grid single">
+                            <img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=700&h=400&fit=crop" alt="Flash Sale" />
+                        </div>
+                        <div class="promo-img-overlay"></div>
+                        <span class="promo-type-badge ptb-flash"><i class="bi bi-lightning-charge-fill"></i> Flash Sale</span>
+                        <div class="discount-bubble"><span class="disc-num">10%</span><span class="disc-off">OFF</span></div>
+                    </div>
+                    <div class="promo-body">
+                        <div class="promo-validity"><i class="bi bi-calendar-event"></i> Berakhir: <span class="valid-soon">22 Feb 2026</span></div>
+                        <div class="promo-name">Flash Sale Jeriken 5L & 20L</div>
+                        <div class="promo-tagline">Diskon 10% khusus Jeriken AROMAS 5L dan 20L — stok sangat terbatas!</div>
+                        <div class="promo-countdown">
+                            <div class="pcd-unit"><span class="pcd-num" id="c6-d">00</span><span class="pcd-sub">Hari</span></div>
+                            <div class="pcd-unit"><span class="pcd-num" id="c6-h">00</span><span class="pcd-sub">Jam</span></div>
+                            <div class="pcd-unit"><span class="pcd-num" id="c6-m">00</span><span class="pcd-sub">Mnt</span></div>
+                            <div class="pcd-unit"><span class="pcd-num" id="c6-s">00</span><span class="pcd-sub">Det</span></div>
+                        </div>
+                        <div class="promo-highlights">
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Jeriken 5L & 20L diskon 10%</div>
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Stok terbatas — first come first served</div>
+                            <div class="promo-hl"><i class="bi bi-check-circle-fill"></i> Pesan langsung via WhatsApp</div>
+                        </div>
+                        <div class="promo-tags">
+                            <span class="ptag"><i class="bi bi-lightning-charge-fill"></i> Flash Sale</span>
+                            <span class="ptag"><i class="bi bi-bucket-fill"></i> Jeriken</span>
+                            <span class="ptag"><i class="bi bi-exclamation-triangle-fill"></i> Stok Terbatas</span>
+                        </div>
+                        <div class="promo-footer">
+                            <button class="btn-promo-detail"><i class="bi bi-eye-fill"></i> Lihat Detail</button>
+                            <button class="btn-promo-wa" onclick="event.stopPropagation();window.open('https://wa.me/6281234567890?text=Halo,%20saya%20mau%20klaim%20Flash%20Sale%20Jeriken%20AROMAS','_blank')"><i class="bi bi-whatsapp"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══ HOW TO CLAIM ═══ -->
+<section class="howto-section">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <div class="d-flex justify-content-center mb-2">
+                <span class="sec-tag"><i class="bi bi-question-circle-fill"></i> Cara Klaim</span>
+            </div>
+            <h2 style="font-size:2.2rem;margin-bottom:12px;">Cara Mendapatkan <span class="italic text-gradient">Promo AROMAS</span></h2>
+            <p style="font-size:1rem;color:var(--gray-600);max-width:500px;margin:0 auto;">Proses klaim mudah dan cepat — langsung hubungi kami via WhatsApp atau order melalui channel resmi AROMAS.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <div class="step-info"><h4>Pilih Promo</h4><p>Temukan promo yang sesuai di halaman ini. Catat kode atau detail syarat promonya.</p></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <div class="step-info"><h4>Hubungi via WhatsApp</h4><p>Klik tombol WhatsApp dan sebutkan promo yang ingin diklaim beserta detail pesanan Anda.</p></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <div class="step-info"><h4>Konfirmasi & Bayar</h4><p>Tim kami konfirmasi pesanan dan kirimkan detail pembayaran dengan harga promo yang sudah diterapkan.</p></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <div class="step-info"><h4>Terima Pesanan</h4><p>Pesanan dikirim sesuai jadwal. Area Tangsel mendapat same-day delivery jika order sebelum jam 12.</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ NEWSLETTER ═══ -->
+<section class="newsletter-section">
+    <div class="container">
+        <div class="nl-card" data-aos="zoom-in">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-5">
+                    <div class="nl-icon"><i class="bi bi-bell-fill"></i></div>
+                    <h2 class="nl-title">Jangan Ketinggalan Promo Berikutnya!</h2>
+                    <p class="nl-desc">Daftarkan nomor WhatsApp Anda dan jadilah yang pertama mendapat notifikasi promo eksklusif, flash sale, dan penawaran terbatas dari AROMAS.</p>
+                </div>
+                <div class="col-lg-7">
+                    <div class="nl-form-row">
+                        <input type="text" class="nl-input" placeholder="Nama Lengkap Anda..." id="nl-name" />
+                        <input type="tel" class="nl-input" placeholder="Nomor WhatsApp (08xxx)" id="nl-phone" />
+                    </div>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <button class="nl-btn nl-btn-wa" onclick="handleNewsletterSubmit()"><i class="bi bi-whatsapp"></i> Daftar via WhatsApp</button>
+                        <button class="nl-btn nl-btn-email" onclick="handleEmailSubmit()"><i class="bi bi-envelope-fill"></i> Daftar via Email</button>
+                    </div>
+                    <p class="nl-note">🔒 Data Anda aman. Tidak ada spam — hanya info promo resmi AROMAS.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-strip">
+    <div class="container">
+        <div class="row align-items-center gy-4">
+            <div class="col-lg-7" data-aos="fade-right">
+                <h2>Ada Promo yang Menarik Perhatian Anda?</h2>
+                <p>Jangan tunda! Hubungi tim kami sekarang dan klaim keuntungan terbaik AROMAS untuk Anda.</p>
+            </div>
+            <div class="col-lg-5 text-lg-end" data-aos="fade-left">
+                <div class="d-flex gap-3 flex-wrap justify-content-lg-end">
+                    <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20tahu%20promo%20yang%20tersedia" target="_blank" class="btn-cta-w"><i class="bi bi-whatsapp"></i> Hubungi Sekarang</a>
+                    <a href="product.html" class="btn-cta-ol"><i class="bi bi-box-seam-fill"></i> Lihat Produk</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer-section">
+    <div class="container">
+        <div class="footer-top">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-brand">
+                        <a href="index.html" class="footer-logo"><i class="bi bi-droplet-fill"></i> AROMAS</a>
+                        <p>Minyak goreng premium berkualitas tinggi untuk keluarga Indonesia. Diproduksi dengan teknologi modern dan standar keamanan pangan internasional.</p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-6 mb-4 mb-lg-0">
+                    <h5>Menu</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="about.html">Tentang Kami</a></li>
+                        <li><a href="product.html">Produk</a></li>
+                        <li><a href="portfolio.html">Portofolio</a></li>
+                        <li><a href="partnership.html">Kemitraan</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 col-6 mb-4 mb-lg-0">
+                    <h5>Promo</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Free Ongkir Tangsel</a></li>
+                        <li><a href="#">Diskon New Member</a></li>
+                        <li><a href="#">Bundling 3+1</a></li>
+                        <li><a href="#">Program Loyalitas</a></li>
+                        <li><a href="#">Harga Grosir</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5>Hubungi Kami</h5>
+                    <ul class="footer-contact">
+                        <li><i class="bi bi-geo-alt"></i> Jl. Industri Raya No. 123, Kawasan Industri, Jakarta 12345</li>
+                        <li><i class="bi bi-envelope"></i> <a href="mailto:promo@aromas.co.id">promo@aromas.co.id</a></li>
+                        <li><i class="bi bi-telephone"></i> (021) 1234-5678</li>
+                        <li><i class="bi bi-whatsapp"></i> +62 812-3456-7890</li>
+                    </ul>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="row align-items-center">
+                <div class="col-md-6"><p class="copyright">&copy; 2026 AROMAS. Hak Cipta Dilindungi.</p></div>
+                <div class="col-md-6 text-md-end">
+                    <ul class="footer-legal"><li><a href="#">Syarat &amp; Ketentuan</a></li><li><a href="#">Kebijakan Privasi</a></li></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<button id="backToTop" class="back-to-top"><i class="bi bi-arrow-up"></i></button>
+<a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20tahu%20promo%20terbaru" target="_blank" class="wa-float">
+    <i class="bi bi-whatsapp"></i><span class="wa-tip">Info Promo</span>
+</a>
+
+<!-- ═══ MODALS ═══ -->
+
+<!-- Modal P1: Free Ongkir -->
+<div class="promo-modal" id="modal-p1">
+    <div class="modal-backdrop" onclick="closePromoModal('p1')"></div>
+    <div class="modal-box">
+        <div class="modal-header-band" style="background:linear-gradient(90deg,var(--green-dark),var(--green),var(--gold));"></div>
+        <button class="modal-close-btn" onclick="closePromoModal('p1')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-img-area">
+            <div class="img-grid double">
+                <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600&h=360&fit=crop" alt="Free Ongkir" />
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=360&fit=crop" alt="Delivery" />
+            </div>
+            <div class="img-overlay"></div>
+            <div class="modal-img-content">
+                <span class="modal-type-badge" style="background:rgba(34,139,34,.9);"><i class="bi bi-truck-front-fill me-1"></i> Free Ongkir</span>
+            </div>
+        </div>
+        <div class="modal-content-inner">
+            <div class="modal-promo-name">Gratis Ongkir Area Ciater &amp; South Tangerang</div>
+            <div class="modal-promo-sub">Pengiriman gratis ke seluruh wilayah Ciater, Serpong, dan South Tangerang — same-day delivery tersedia!</div>
+            <div class="modal-countdown">
+                <span class="mcd-label">⏰ Berakhir dalam:</span>
+                <div class="mcd-units">
+                    <div class="mcd-unit"><span class="mcd-num" id="m1-d">00</span><span class="mcd-sub">Hari</span></div>
+                    <span class="mcd-sep">:</span>
+                    <div class="mcd-unit"><span class="mcd-num" id="m1-h">00</span><span class="mcd-sub">Jam</span></div>
+                    <span class="mcd-sep">:</span>
+                    <div class="mcd-unit"><span class="mcd-num" id="m1-m">00</span><span class="mcd-sub">Menit</span></div>
+                    <span class="mcd-sep">:</span>
+                    <div class="mcd-unit"><span class="mcd-num" id="m1-s">00</span><span class="mcd-sub">Detik</span></div>
+                </div>
+            </div>
+            <div class="modal-detail-grid">
+                <div class="mdg-item"><div class="mdg-label">Berlaku Hingga</div><div class="mdg-val">28 Februari 2026</div></div>
+                <div class="mdg-item"><div class="mdg-label">Area Pengiriman</div><div class="mdg-val">South Tangerang & Ciater</div></div>
+                <div class="mdg-item"><div class="mdg-label">Min. Pembelian</div><div class="mdg-val">1 Karton (12 botol 1L)</div></div>
+                <div class="mdg-item"><div class="mdg-label">Jam Pengiriman</div><div class="mdg-val">Senin – Sabtu, 08.00–17.00</div></div>
+            </div>
+            <div class="terms-title"><i class="bi bi-info-circle-fill"></i> Syarat & Ketentuan</div>
+            <ul class="terms-list">
+                <li><i class="bi bi-check-circle-fill"></i>Berlaku untuk area Ciater, Serpong, Serpong Utara, BSD, Pondok Aren, Ciputat, Pamulang, dan sekitarnya.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Minimum pembelian 1 karton (12 botol 1L) atau setara nilainya.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Same-day delivery berlaku jika order diterima sebelum jam 12 siang.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Tidak berlaku bersamaan dengan promo free ongkir lainnya.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Promo dapat berakhir sewaktu-waktu jika kuota terpenuhi.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Hubungi WhatsApp untuk konfirmasi area Anda termasuk cakupan.</li>
+            </ul>
+            <div class="modal-actions">
+                <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20klaim%20promo%20Free%20Ongkir%20area%20Ciater%20%26%20Tangsel.%20Nama:%20[Nama]%20Alamat:%20[Alamat]%20Pesanan:%20" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> Klaim Sekarang</a>
+                <a href="product.html" class="btn-modal-green"><i class="bi bi-box-seam-fill"></i> Pilih Produk</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal P2: New Member 15% -->
+<div class="promo-modal" id="modal-p2">
+    <div class="modal-backdrop" onclick="closePromoModal('p2')"></div>
+    <div class="modal-box">
+        <div class="modal-header-band" style="background:linear-gradient(90deg,#e53935,var(--gold),#c62828);"></div>
+        <button class="modal-close-btn" onclick="closePromoModal('p2')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-img-area">
+            <div class="img-grid single"><img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&h=360&fit=crop" alt="New Member" /></div>
+            <div class="img-overlay" style="background:linear-gradient(to top,rgba(180,0,0,.7) 0%,transparent 55%);"></div>
+            <div class="modal-img-content">
+                <span class="modal-type-badge" style="background:rgba(229,57,53,.9);"><i class="bi bi-percent me-1"></i> Diskon New Member</span>
+            </div>
+        </div>
+        <div class="modal-content-inner">
+            <div class="modal-promo-name">Diskon 15% Pembelian Pertama</div>
+            <div class="modal-promo-sub">Khusus pelanggan baru — hemat langsung 15% untuk semua produk AROMAS</div>
+            <div class="modal-detail-grid">
+                <div class="mdg-item"><div class="mdg-label">Besaran Diskon</div><div class="mdg-val">15% untuk semua produk</div></div>
+                <div class="mdg-item"><div class="mdg-label">Kode Promo</div><div class="mdg-val" style="font-size:1.05rem;color:var(--green);font-weight:700;">NEWMEMBER15</div></div>
+                <div class="mdg-item"><div class="mdg-label">Min. Pembelian</div><div class="mdg-val">Rp 200.000</div></div>
+                <div class="mdg-item"><div class="mdg-label">Berlaku Hingga</div><div class="mdg-val">31 Maret 2026</div></div>
+            </div>
+            <div class="terms-title"><i class="bi bi-info-circle-fill"></i> Syarat & Ketentuan</div>
+            <ul class="terms-list">
+                <li><i class="bi bi-check-circle-fill"></i>Hanya berlaku untuk pelanggan baru yang belum pernah melakukan pembelian AROMAS.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Berlaku untuk semua varian produk AROMAS (Botol, Jeriken, BIB).</li>
+                <li><i class="bi bi-check-circle-fill"></i>Sebutkan kode <strong>NEWMEMBER15</strong> saat menghubungi tim kami via WhatsApp.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Tidak dapat digabungkan dengan promo diskon lainnya.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Berlaku satu kali per pelanggan baru.</li>
+            </ul>
+            <div class="modal-actions">
+                <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20pelanggan%20baru%20dan%20ingin%20klaim%20diskon%2015%25%20dengan%20kode%20NEWMEMBER15" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> Klaim dengan Kode</a>
+                <a href="product.html" class="btn-modal-green"><i class="bi bi-box-seam-fill"></i> Pilih Produk</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal P3: Bundling 3+1 -->
+<div class="promo-modal" id="modal-p3">
+    <div class="modal-backdrop" onclick="closePromoModal('p3')"></div>
+    <div class="modal-box">
+        <div class="modal-header-band" style="background:linear-gradient(90deg,#0077b6,var(--gold),#023e8a);"></div>
+        <button class="modal-close-btn" onclick="closePromoModal('p3')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-img-area">
+            <div class="img-grid double">
+                <img src="https://images.unsplash.com/photo-1563991655280-cb95c90ca2fb?w=600&h=360&fit=crop" alt="Bundling" />
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=360&fit=crop" alt="Bundling 2" />
+            </div>
+            <div class="img-overlay" style="background:linear-gradient(to top,rgba(0,50,100,.7) 0%,transparent 55%);"></div>
+            <div class="modal-img-content">
+                <span class="modal-type-badge" style="background:rgba(0,119,182,.9);"><i class="bi bi-boxes me-1"></i> Bundling Hemat</span>
+            </div>
+        </div>
+        <div class="modal-content-inner">
+            <div class="modal-promo-name">Bundling Hemat: Beli 3 Gratis 1</div>
+            <div class="modal-promo-sub">Beli 3 botol AROMAS 2L, gratis 1 botol AROMAS 1L — hemat Rp 35.000!</div>
+            <div class="modal-detail-grid">
+                <div class="mdg-item"><div class="mdg-label">Produk Berlaku</div><div class="mdg-val">Botol AROMAS 2L (beli 3)</div></div>
+                <div class="mdg-item"><div class="mdg-label">Produk Gratis</div><div class="mdg-val">Botol AROMAS 1L (1 pcs)</div></div>
+                <div class="mdg-item"><div class="mdg-label">Nilai Hadiah</div><div class="mdg-val">Rp 35.000 / transaksi</div></div>
+                <div class="mdg-item"><div class="mdg-label">Berlaku Hingga</div><div class="mdg-val">30 April 2026</div></div>
+            </div>
+            <div class="terms-title"><i class="bi bi-info-circle-fill"></i> Syarat & Ketentuan</div>
+            <ul class="terms-list">
+                <li><i class="bi bi-check-circle-fill"></i>Beli 3 botol ukuran 2L dalam satu transaksi, dapatkan 1 botol 1L gratis.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Produk bundling bisa kombinasi berbagai varian botol 2L AROMAS.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Hadiah tidak dapat diganti dengan uang tunai.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Berlaku selama stok masih tersedia.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Dapat digabungkan dengan promo free ongkir jika memenuhi syarat.</li>
+            </ul>
+            <div class="modal-actions">
+                <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20klaim%20promo%20Bundling%20Beli%203%20Gratis%201%20botol%202L" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> Klaim Sekarang</a>
+                <a href="product.html" class="btn-modal-green"><i class="bi bi-box-seam-fill"></i> Lihat Produk</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal P4: Loyalty -->
+<div class="promo-modal" id="modal-p4">
+    <div class="modal-backdrop" onclick="closePromoModal('p4')"></div>
+    <div class="modal-box">
+        <div class="modal-header-band" style="background:linear-gradient(90deg,var(--gold-dark),var(--gold),var(--gold-dark));"></div>
+        <button class="modal-close-btn" onclick="closePromoModal('p4')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-img-area">
+            <div class="img-grid single"><img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&h=360&fit=crop" alt="Loyalty" /></div>
+            <div class="img-overlay" style="background:linear-gradient(to top,rgba(100,60,0,.7) 0%,transparent 55%);"></div>
+            <div class="modal-img-content">
+                <span class="modal-type-badge" style="background:rgba(212,160,23,.95);color:#333;"><i class="bi bi-star-fill me-1"></i> Program Loyalitas</span>
+            </div>
+        </div>
+        <div class="modal-content-inner">
+            <div class="modal-promo-name">Double Points — Program Loyalitas AROMAS</div>
+            <div class="modal-promo-sub">Kumpulkan poin 2x lebih cepat dan tukarkan dengan hadiah menarik sepanjang 2026!</div>
+            <div class="modal-detail-grid">
+                <div class="mdg-item"><div class="mdg-label">Poin per Pembelian</div><div class="mdg-val">2 poin per Rp 10.000</div></div>
+                <div class="mdg-item"><div class="mdg-label">Penukaran Poin</div><div class="mdg-val">1.000 poin = Rp 10.000</div></div>
+                <div class="mdg-item"><div class="mdg-label">Berlaku Hingga</div><div class="mdg-val">31 Desember 2026</div></div>
+                <div class="mdg-item"><div class="mdg-label">Hadiah Tersedia</div><div class="mdg-val">Diskon, Produk, Voucher</div></div>
+            </div>
+            <div class="terms-title"><i class="bi bi-info-circle-fill"></i> Cara Kerja Program</div>
+            <ul class="terms-list">
+                <li><i class="bi bi-check-circle-fill"></i>Setiap pembelian Rp 10.000 menghasilkan 2 poin (periode normal hanya 1 poin).</li>
+                <li><i class="bi bi-check-circle-fill"></i>Poin terakumulasi dan tidak kadaluarsa selama akun aktif melakukan pembelian.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Tukar poin via WhatsApp dengan menyebutkan jumlah poin yang ingin ditukar.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Hadiah tersedia: diskon pembelian, produk gratis, atau voucher belanja.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Daftar sebagai member melalui WhatsApp untuk mulai mengumpulkan poin.</li>
+            </ul>
+            <div class="modal-actions">
+                <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20bergabung%20Program%20Loyalitas%20dan%20mengumpulkan%20poin%20double" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> Daftar Member</a>
+                <a href="partnership.html" class="btn-modal-green"><i class="bi bi-handshake-fill"></i> Info Kemitraan</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal P5: Grosir -->
+<div class="promo-modal" id="modal-p5">
+    <div class="modal-backdrop" onclick="closePromoModal('p5')"></div>
+    <div class="modal-box">
+        <div class="modal-header-band" style="background:linear-gradient(90deg,#e65100,var(--gold),#bf360c);"></div>
+        <button class="modal-close-btn" onclick="closePromoModal('p5')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-img-area">
+            <div class="img-grid double">
+                <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600&h=360&fit=crop" alt="Grosir" />
+                <img src="https://images.unsplash.com/photo-1604719312566-8912e9227f6a?w=600&h=360&fit=crop" alt="Grosir 2" />
+            </div>
+            <div class="img-overlay" style="background:linear-gradient(to top,rgba(100,30,0,.7) 0%,transparent 55%);"></div>
+            <div class="modal-img-content">
+                <span class="modal-type-badge" style="background:rgba(230,81,0,.9);"><i class="bi bi-building me-1"></i> Harga Grosir</span>
+            </div>
+        </div>
+        <div class="modal-content-inner">
+            <div class="modal-promo-name">Harga Grosir Spesial — Diskon s/d 20%</div>
+            <div class="modal-promo-sub">Pembelian karton dalam jumlah besar dapatkan harga grosir terbaik dari AROMAS</div>
+            <div class="modal-detail-grid">
+                <div class="mdg-item"><div class="mdg-label">5 Karton</div><div class="mdg-val">Diskon 10%</div></div>
+                <div class="mdg-item"><div class="mdg-label">10 Karton</div><div class="mdg-val">Diskon 15%</div></div>
+                <div class="mdg-item"><div class="mdg-label">20+ Karton</div><div class="mdg-val">Diskon 20%</div></div>
+                <div class="mdg-item"><div class="mdg-label">Berlaku Hingga</div><div class="mdg-val">31 Maret 2026</div></div>
+            </div>
+            <div class="terms-title"><i class="bi bi-info-circle-fill"></i> Syarat & Ketentuan</div>
+            <ul class="terms-list">
+                <li><i class="bi bi-check-circle-fill"></i>Minimum pembelian 5 karton (60 botol 1L atau setara) untuk mendapatkan diskon grosir.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Berlaku untuk semua varian produk AROMAS yang tersedia.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Harga grosir berlaku per transaksi tunggal, tidak dapat digabung dari beberapa order.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Tersedia layanan pengiriman gratis untuk pembelian 20 karton ke atas di area tertentu.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Hubungi tim sales kami untuk penawaran khusus pembelian di atas 50 karton.</li>
+            </ul>
+            <div class="modal-actions">
+                <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20mendapatkan%20harga%20grosir%20untuk%20pembelian%20massal" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> Tanya Harga Grosir</a>
+                <a href="partnership.html" class="btn-modal-green"><i class="bi bi-handshake-fill"></i> Info Kemitraan</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal P6: Flash Sale Jeriken -->
+<div class="promo-modal" id="modal-p6">
+    <div class="modal-backdrop" onclick="closePromoModal('p6')"></div>
+    <div class="modal-box">
+        <div class="modal-header-band" style="background:linear-gradient(90deg,var(--gold-dark),var(--gold-light),var(--gold-dark));"></div>
+        <button class="modal-close-btn" onclick="closePromoModal('p6')"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-img-area">
+            <div class="img-grid single"><img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=800&h=360&fit=crop" alt="Flash Sale Jeriken" /></div>
+            <div class="img-overlay" style="background:linear-gradient(to top,rgba(80,40,0,.75) 0%,transparent 55%);"></div>
+            <div class="modal-img-content">
+                <span class="modal-type-badge" style="background:rgba(212,160,23,.95);color:#333;"><i class="bi bi-lightning-charge-fill me-1"></i> Flash Sale</span>
+            </div>
+        </div>
+        <div class="modal-content-inner">
+            <div class="modal-promo-name">Flash Sale Jeriken 5L &amp; 20L</div>
+            <div class="modal-promo-sub">Diskon 10% khusus Jeriken AROMAS 5L dan 20L — stok sangat terbatas, segera pesan!</div>
+            <div class="modal-countdown">
+                <span class="mcd-label">⚡ Flash Sale berakhir:</span>
+                <div class="mcd-units">
+                    <div class="mcd-unit"><span class="mcd-num" id="m6-d">00</span><span class="mcd-sub">Hari</span></div>
+                    <span class="mcd-sep">:</span>
+                    <div class="mcd-unit"><span class="mcd-num" id="m6-h">00</span><span class="mcd-sub">Jam</span></div>
+                    <span class="mcd-sep">:</span>
+                    <div class="mcd-unit"><span class="mcd-num" id="m6-m">00</span><span class="mcd-sub">Menit</span></div>
+                    <span class="mcd-sep">:</span>
+                    <div class="mcd-unit"><span class="mcd-num" id="m6-s">00</span><span class="mcd-sub">Detik</span></div>
+                </div>
+            </div>
+            <div class="modal-detail-grid">
+                <div class="mdg-item"><div class="mdg-label">Produk</div><div class="mdg-val">Jeriken 5L & Jeriken 20L</div></div>
+                <div class="mdg-item"><div class="mdg-label">Diskon</div><div class="mdg-val">10% dari harga normal</div></div>
+                <div class="mdg-item"><div class="mdg-label">Stok</div><div class="mdg-val">Sangat Terbatas</div></div>
+                <div class="mdg-item"><div class="mdg-label">Berakhir</div><div class="mdg-val">22 Februari 2026</div></div>
+            </div>
+            <div class="terms-title"><i class="bi bi-info-circle-fill"></i> Syarat & Ketentuan</div>
+            <ul class="terms-list">
+                <li><i class="bi bi-check-circle-fill"></i>Berlaku khusus untuk produk Jeriken AROMAS ukuran 5 liter dan 20 liter.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Diskon 10% langsung dari harga normal, berlaku per unit jeriken.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Stok sangat terbatas — prinsip first come first served.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Pemesanan melalui WhatsApp. Harga dikonfirmasi setelah stok dipastikan tersedia.</li>
+                <li><i class="bi bi-check-circle-fill"></i>Flash sale akan berakhir otomatis saat stok habis atau tanggal berakhir.</li>
+            </ul>
+            <div class="modal-actions">
+                <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20mau%20klaim%20Flash%20Sale%20Jeriken%2010%25%20sebelum%20habis!" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> Pesan Sekarang!</a>
+                <a href="product.html" class="btn-modal-green"><i class="bi bi-box-seam-fill"></i> Lihat Produk</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* ============================================================
+   AROMAS — PROMO PAGE — COMPLETE SCRIPTS
+   ============================================================ */
+
+// ── PRELOADER
+window.addEventListener('load', function() {
+    var pl = document.getElementById('preloader');
+    if (!pl) return;
+    setTimeout(function() {
+        pl.classList.add('hidden');
+        setTimeout(function() { pl.style.display = 'none'; }, 650);
+    }, 800);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    initNavbar();
+    initBackToTop();
+    initMobileMenu();
+    initScrollAnimations();
+    initFilter();
+    initCountdowns();
+});
+
+// ── NAVBAR
+function initNavbar() {
+    var nav = document.getElementById('navbar');
+    if (!nav) return;
+    window.addEventListener('scroll', function() {
+        nav.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+}
+
+// ── BACK TO TOP
+function initBackToTop() {
+    var btn = document.getElementById('backToTop');
+    if (!btn) return;
+    window.addEventListener('scroll', function() {
+        btn.classList.toggle('show', window.scrollY > 500);
+    }, { passive: true });
+    btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// ── MOBILE MENU
+function initMobileMenu() {
+    var tog = document.querySelector('.navbar-toggler');
+    var col = document.querySelector('.navbar-collapse');
+    if (!tog || !col) return;
+    document.addEventListener('click', function(e) {
+        if (!col.contains(e.target) && !tog.contains(e.target) && col.classList.contains('show')) {
+            var bs = bootstrap.Collapse.getInstance(col);
+            if (bs) bs.hide();
+        }
+    });
+}
+
+// ── AOS ANIMATIONS
+function initScrollAnimations() {
+    var els = document.querySelectorAll('[data-aos]');
+    if (!els.length) return;
+    var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (!entry.isIntersecting) return;
+            var delay = parseInt(entry.target.getAttribute('data-aos-delay') || 0);
+            setTimeout(function() { entry.target.classList.add('aos-animate'); }, delay);
+            obs.unobserve(entry.target);
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function(el) { obs.observe(el); });
+}
+
+// ── FILTER
+function initFilter() {
+    var tabs = document.querySelectorAll('.ftab');
+    var countEl = document.getElementById('promoCount');
+    tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            var filter = this.dataset.filter;
+            tabs.forEach(function(t) { t.classList.remove('active'); });
+            this.classList.add('active');
+            var items = document.querySelectorAll('.promo-item');
+            var count = 0;
+            items.forEach(function(item) {
+                if (filter === 'all' || item.dataset.cat === filter) {
+                    item.classList.remove('hidden-promo');
+                    count++;
+                } else {
+                    item.classList.add('hidden-promo');
+                }
+            });
+            if (countEl) countEl.textContent = count;
+        });
+    });
+}
+
+// ── MODAL
+function openPromoModal(id) {
+    var modal = document.getElementById('modal-' + id);
+    if (!modal) return;
+    document.body.style.overflow = 'hidden';
+    modal.classList.add('open');
+}
+function closePromoModal(id) {
+    var modal = document.getElementById('modal-' + id);
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.promo-modal.open').forEach(function(m) {
+            m.classList.remove('open');
+        });
+        document.body.style.overflow = '';
+    }
+});
+
+// ── COUNTDOWN ENGINE
+function getTimeLeft(endDate) {
+    var now = new Date();
+    var end = new Date(endDate);
+    var diff = end - now;
+    if (diff <= 0) return { d: 0, h: 0, m: 0, s: 0 };
+    var d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    var h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    var s = Math.floor((diff % (1000 * 60)) / 1000);
+    return { d: d, h: h, m: m, s: s };
+}
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function setCountdown(ids, endDate) {
+    var elems = {};
+    ids.forEach(function(key) {
+        elems[key] = document.getElementById(key);
+    });
+    function tick() {
+        var t = getTimeLeft(endDate);
+        if (elems[ids[0]]) elems[ids[0]].textContent = pad(t.d !== undefined ? t.d : t.h);
+        if (elems[ids[1]]) elems[ids[1]].textContent = pad(t.d !== undefined ? t.h : t.m);
+        if (elems[ids[2]]) elems[ids[2]].textContent = pad(t.d !== undefined ? t.m : t.s);
+        if (elems[ids[3]]) elems[ids[3]].textContent = pad(t.s);
+    }
+    tick();
+    setInterval(tick, 1000);
+}
+
+function initCountdowns() {
+    // Hero countdown - set to end of today
+    var endToday = new Date();
+    endToday.setHours(23, 59, 59, 0);
+    (function heroTick() {
+        var t = getTimeLeft(endToday);
+        var h = document.getElementById('hcd-h');
+        var m = document.getElementById('hcd-m');
+        var s = document.getElementById('hcd-s');
+        if (h) h.textContent = pad(t.h);
+        if (m) m.textContent = pad(t.m);
+        if (s) s.textContent = pad(t.s);
+    })();
+    setInterval(function() {
+        var t = getTimeLeft(endToday);
+        var h = document.getElementById('hcd-h');
+        var m = document.getElementById('hcd-m');
+        var s = document.getElementById('hcd-s');
+        if (h) h.textContent = pad(t.h);
+        if (m) m.textContent = pad(t.m);
+        if (s) s.textContent = pad(t.s);
+    }, 1000);
+
+    // Banner: Free Ongkir — ends 2026-02-28
+    var endFreeOngkir = new Date('2026-02-28T23:59:59');
+    (function bannerTick() {
+        var t = getTimeLeft(endFreeOngkir);
+        var d = document.getElementById('bcd-d');
+        var h = document.getElementById('bcd-h');
+        var m = document.getElementById('bcd-m');
+        var s = document.getElementById('bcd-s');
+        if (d) d.textContent = pad(t.d);
+        if (h) h.textContent = pad(t.h);
+        if (m) m.textContent = pad(t.m);
+        if (s) s.textContent = pad(t.s);
+    })();
+    setInterval(function() {
+        var t = getTimeLeft(endFreeOngkir);
+        var d = document.getElementById('bcd-d');
+        var h = document.getElementById('bcd-h');
+        var m = document.getElementById('bcd-m');
+        var s = document.getElementById('bcd-s');
+        if (d) d.textContent = pad(t.d);
+        if (h) h.textContent = pad(t.h);
+        if (m) m.textContent = pad(t.m);
+        if (s) s.textContent = pad(t.s);
+    }, 1000);
+
+    // Card P1 countdown (Free Ongkir)
+    (function() {
+        function tick1() {
+            var t = getTimeLeft(endFreeOngkir);
+            ['c1-d','c1-h','c1-m','c1-s'].forEach(function(id, i) {
+                var el = document.getElementById(id);
+                if (el) el.textContent = pad([t.d, t.h, t.m, t.s][i]);
+            });
+        }
+        tick1(); setInterval(tick1, 1000);
+    })();
+
+    // Card P6 & Modal M6 countdown (Flash Sale ends 2026-02-22)
+    var endFlash = new Date('2026-02-22T23:59:59');
+    (function() {
+        function tick6() {
+            var t = getTimeLeft(endFlash);
+            ['c6-d','c6-h','c6-m','c6-s','m6-d','m6-h','m6-m','m6-s'].forEach(function(id, i) {
+                var el = document.getElementById(id);
+                var val = [t.d, t.h, t.m, t.s][i % 4];
+                if (el) el.textContent = pad(val);
+            });
+        }
+        tick6(); setInterval(tick6, 1000);
+    })();
+
+    // Modal M1 countdown (same as free ongkir)
+    (function() {
+        function tickM1() {
+            var t = getTimeLeft(endFreeOngkir);
+            ['m1-d','m1-h','m1-m','m1-s'].forEach(function(id, i) {
+                var el = document.getElementById(id);
+                if (el) el.textContent = pad([t.d, t.h, t.m, t.s][i]);
+            });
+        }
+        tickM1(); setInterval(tickM1, 1000);
+    })();
+}
+
+// ── NEWSLETTER
+function handleNewsletterSubmit() {
+    var name = document.getElementById('nl-name').value.trim();
+    var phone = document.getElementById('nl-phone').value.trim();
+    if (!name || !phone) {
+        alert('Mohon isi nama dan nomor WhatsApp Anda terlebih dahulu.');
+        return;
+    }
+    var msg = 'Halo%20AROMAS,%20saya%20ingin%20daftar%20notifikasi%20promo.%0ANama:%20' + encodeURIComponent(name) + '%0ANo.%20WA:%20' + encodeURIComponent(phone);
+    window.open('https://wa.me/6281234567890?text=' + msg, '_blank');
+}
+function handleEmailSubmit() {
+    var name = document.getElementById('nl-name').value.trim();
+    if (!name) {
+        alert('Mohon isi nama Anda terlebih dahulu.');
+        return;
+    }
+    alert('Terima kasih, ' + name + '! Kami akan mengirimkan info promo terbaru ke email Anda.');
+}
+</script>
+</body>
+</html>
