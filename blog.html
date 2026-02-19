@@ -70,58 +70,33 @@ img{max-width:100%;height:auto;display:block;}
 @keyframes textBlink{0%,100%{opacity:.3;}50%{opacity:1;}}
 
 /* ─── NAVBAR ─────────────────────────────────────── */
-.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0;
-  background:transparent;transition:background .4s ease,box-shadow .4s ease;}
-.navbar.scrolled{background:rgba(7,25,16,.96);backdrop-filter:blur(20px);
-  box-shadow:0 1px 0 rgba(200,151,10,.2),var(--sh-md);}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;
-  padding:20px 40px;max-width:1400px;margin:0 auto;transition:padding .3s ease;}
-.navbar.scrolled .nav-inner{padding:14px 40px;}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--ff-display);
-  font-size:1.5rem;color:#fff;letter-spacing:1px;}
-.brand-icon{width:36px;height:36px;border-radius:10px;
-  background:linear-gradient(135deg,var(--gold),var(--gold-lt));
-  display:flex;align-items:center;justify-content:center;font-size:.95rem;color:var(--forest);}
-.nav-links{display:flex;align-items:center;gap:2px;}
-.nav-link-item{font-size:.82rem;font-weight:500;color:rgba(255,255,255,.72);
-  padding:7px 13px;border-radius:var(--r8);letter-spacing:.2px;
-  transition:color .2s,background .2s;}
-.nav-link-item:hover{color:#fff;background:rgba(255,255,255,.08);}
-.nav-link-item.active{color:var(--gold-lt);font-weight:600;}
-.btn-nav{display:inline-flex;align-items:center;gap:7px;
-  background:linear-gradient(135deg,var(--gold),var(--gold-lt));
-  color:var(--forest);font-weight:700;font-size:.8rem;letter-spacing:.4px;
-  padding:9px 20px;border-radius:var(--r8);transition:all .25s var(--ease-out);}
-.btn-nav:hover{transform:translateY(-2px);box-shadow:var(--sh-gold);color:var(--forest);}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
-.ham-line{height:2px;background:#fff;border-radius:2px;transition:all .3s ease;}
-.ham-line:nth-child(1){width:22px;}
-.ham-line:nth-child(2){width:16px;}
-.ham-line:nth-child(3){width:19px;}
-.hamburger:hover .ham-line{width:22px;}
-
-/* Mobile nav */
-.mobile-menu{position:fixed;inset:0;z-index:999;pointer-events:none;}
-.mobile-menu-bg{position:absolute;inset:0;background:rgba(7,25,16,.7);backdrop-filter:blur(4px);
-  opacity:0;transition:opacity .35s ease;}
-.mobile-menu-panel{position:absolute;right:0;top:0;bottom:0;width:300px;
-  background:var(--forest-deep);padding:80px 30px 40px;
-  transform:translateX(100%);transition:transform .4s var(--ease-out);}
-.mobile-menu.open .mobile-menu-bg{opacity:1;pointer-events:all;}
-.mobile-menu.open .mobile-menu-panel{transform:translateX(0);pointer-events:all;}
-.mob-nav-links{display:flex;flex-direction:column;gap:4px;}
-.mob-nav-link{font-size:.95rem;font-weight:500;color:rgba(255,255,255,.75);
-  padding:11px 16px;border-radius:var(--r8);border-left:2px solid transparent;
-  transition:all .2s ease;}
-.mob-nav-link:hover,.mob-nav-link.active{color:var(--gold-lt);
-  background:rgba(200,151,10,.08);border-left-color:var(--gold);}
-.mob-close{position:absolute;top:24px;right:24px;width:36px;height:36px;
-  border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;
-  font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  transition:background .2s;}
-.mob-close:hover{background:rgba(255,255,255,.15);}
-.mob-cta{margin-top:24px;}
-.mob-cta .btn-nav{width:100%;justify-content:center;}
+.navbar { padding: 15px 0; background: transparent; transition: background .3s ease, box-shadow .3s ease; }
+.navbar.scrolled { background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.10); padding: 10px 0; }
+.navbar-brand { font-size: 1.5rem; font-weight: 700; color: #fff !important; display: flex; align-items: center; gap: 8px; transition: color .3s ease; }
+.navbar.scrolled .navbar-brand { color: #0d3320 !important; }
+.navbar-brand i { color: var(--gold-lt); font-size: 1.8rem; }
+.navbar-nav { gap: 10px; }
+.nav-link { font-size: .95rem; font-weight: 500; color: rgba(255,255,255,.9) !important; padding: 8px 16px !important; border-radius: 30px; transition: all .3s ease; }
+.navbar.scrolled .nav-link { color: #616161 !important; }
+.nav-link:hover, .nav-link.active { color: #fff !important; background: linear-gradient(135deg, #228b22, #0d3320); }
+.navbar.scrolled .nav-link:hover, .navbar.scrolled .nav-link.active { color: #fff !important; }
+.btn-contact {
+  background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+  color: var(--forest); padding: 10px 24px; border-radius: 30px;
+  font-weight: 600; border: none; box-shadow: 0 4px 15px rgba(200,151,10,.3);
+}
+.btn-contact:hover { background: linear-gradient(135deg, var(--gold-lt), var(--gold)); color: var(--forest); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(200,151,10,.4); }
+.navbar-toggler { border: none; padding: 8px; }
+.navbar-toggler:focus { box-shadow: none; }
+.navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+.navbar.scrolled .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33,37,41,.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+@media (max-width: 991.98px) {
+  .navbar-collapse { background: #fff; padding: 20px; margin-top: 15px; border-radius: 12px; box-shadow: 0 8px 40px rgba(0,0,0,.15); border: 1px solid rgba(34,139,34,.1); }
+  .navbar-collapse .navbar-nav { gap: 5px; }
+  .navbar-collapse .nav-link { color: #616161 !important; padding: 12px 16px !important; border-radius: 8px; }
+  .navbar-collapse .nav-link:hover, .navbar-collapse .nav-link.active { color: #fff !important; background: linear-gradient(135deg, #228b22, #0d3320); }
+  .navbar-collapse .btn-contact { margin-top: 15px; width: 100%; text-align: center; }
+}
 
 /* ─── HERO ───────────────────────────────────────── */
 .blog-hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
@@ -543,26 +518,30 @@ img{max-width:100%;height:auto;display:block;}
 .footer-legal-links a:hover{color:var(--gold-lt);}
 
 /* ─── FLOATERS ───────────────────────────────────── */
-.back-top{position:fixed;bottom:28px;right:28px;width:46px;height:46px;
-  border-radius:var(--r12);background:var(--forest);border:1.5px solid rgba(200,151,10,.2);
-  color:#fff;font-size:1rem;cursor:pointer;opacity:0;visibility:hidden;
-  transition:all .3s var(--ease-out);z-index:900;
-  display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-md);}
-.back-top.show{opacity:1;visibility:visible;}
-.back-top:hover{background:var(--gold);transform:translateY(-4px);}
+.back-to-top{position:fixed;bottom:30px;right:30px;width:50px;height:50px;
+  border-radius:50%;background:linear-gradient(135deg,var(--sage),var(--forest));
+  color:#fff;border:none;font-size:1.2rem;cursor:pointer;
+  opacity:0;visibility:hidden;transition:all .3s var(--ease-out);
+  z-index:999;box-shadow:0 4px 18px rgba(46,125,78,.32);
+  display:flex;align-items:center;justify-content:center;}
+.back-to-top.show{opacity:1;visibility:visible;}
+.back-to-top:hover{background:linear-gradient(135deg,var(--gold),var(--gold-lt));transform:translateY(-5px);box-shadow:0 6px 22px rgba(200,151,10,.4);}
 
-.wa-fab{position:fixed;bottom:88px;right:28px;width:52px;height:52px;
-  border-radius:var(--r12);background:linear-gradient(135deg,#25d366,#0fa855);
+.wa-float{position:fixed;bottom:100px;right:30px;width:58px;height:58px;
+  border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);
   color:#fff;display:flex;align-items:center;justify-content:center;
-  font-size:1.4rem;z-index:900;box-shadow:0 4px 20px rgba(37,211,102,.35);
-  transition:all .28s var(--ease-out);}
-.wa-fab:hover{color:#fff;transform:translateY(-4px);box-shadow:0 8px 28px rgba(37,211,102,.45);}
-.wa-fab:hover .wa-label{opacity:1;visibility:visible;transform:translateX(0);}
-.wa-label{position:absolute;right:60px;background:var(--ink);color:#fff;
-  padding:7px 12px;border-radius:var(--r8);font-size:.73rem;font-weight:600;
-  white-space:nowrap;opacity:0;visibility:hidden;transform:translateX(8px);transition:all .25s;}
-.wa-label::after{content:'';position:absolute;right:-5px;top:50%;transform:translateY(-50%);
-  border:5px solid transparent;border-left-color:var(--ink);}
+  font-size:1.7rem;z-index:998;text-decoration:none;
+  box-shadow:0 4px 18px rgba(37,211,102,.4);
+  transition:all .3s var(--ease-out);
+  animation:waPul 2s ease-in-out infinite;}
+.wa-float:hover{transform:scale(1.1);color:#fff;}
+.wa-float:hover .wa-tip{opacity:1;visibility:visible;transform:translateX(-10px);}
+.wa-tip{position:absolute;right:68px;background:var(--ink);color:#fff;
+  padding:7px 13px;border-radius:var(--r8);font-size:.8rem;font-weight:600;
+  white-space:nowrap;opacity:0;visibility:hidden;transition:all .25s;pointer-events:none;}
+.wa-tip::after{content:'';position:absolute;right:-5px;top:50%;transform:translateY(-50%);
+  border-width:5px;border-style:solid;border-color:transparent transparent transparent var(--ink);}
+@keyframes waPul{0%,100%{box-shadow:0 4px 18px rgba(37,211,102,.4);}50%{box-shadow:0 4px 28px rgba(37,211,102,.6),0 0 0 9px rgba(37,211,102,.1);}}
 
 /* ─── ANIMATIONS ─────────────────────────────────── */
 [data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out);}
@@ -579,15 +558,15 @@ img{max-width:100%;height:auto;display:block;}
   .fc-media{flex:none;}
   .fc-media img{height:260px;}
   .fc-body{padding:28px 24px 32px;}
-  .wa-label{display:none;}
+  .wa-tip{display:none;}
 }
 @media(max-width:767.98px){
   .blog-hero{min-height:90vh;padding:100px 20px 60px;}
   .filter-row{flex-direction:column;align-items:flex-start;}
   .hero-stats{gap:0;}
   .hstat{padding:0 16px;}
-  .back-top{bottom:16px;right:16px;}
-  .wa-fab{bottom:74px;right:16px;}
+  .back-to-top{bottom:16px;right:16px;}
+  .wa-float{bottom:80px;right:16px;}
 }
 @media(max-width:575.98px){
   .fc-body{padding:20px 18px 24px;}
@@ -614,51 +593,32 @@ img{max-width:100%;height:auto;display:block;}
 </div>
 
 <!-- NAVBAR -->
-<nav id="navbar" class="navbar">
-  <div class="nav-inner">
-    <a href="index.html" class="brand">
-      <div class="brand-icon"><i class="bi bi-droplet-fill"></i></div>
-      AROMAS
-    </a>
-    <div class="nav-links">
-      <a href="index.html" class="nav-link-item">Beranda</a>
-      <a href="about.html" class="nav-link-item">Tentang</a>
-      <a href="product.html" class="nav-link-item">Produk</a>
-      <a href="promo.html" class="nav-link-item">Promo</a>
-      <a href="blog.html" class="nav-link-item active">Blog</a>
-      <a href="our-machine.html" class="nav-link-item">Mesin</a>
-      <a href="portfolio.html" class="nav-link-item">Portofolio</a>
-      <a href="partnership.html" class="nav-link-item">Kemitraan</a>
-      <a href="contact-us.html" class="nav-link-item">Kontak</a>
+<nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <i class="bi bi-droplet-fill"></i> AROMAS
+        </a>
+        <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">Tentang Kami</a></li>
+                <li class="nav-item"><a class="nav-link" href="product.html">Produk</a></li>
+                <li class="nav-item"><a class="nav-link" href="promo.html">Promo</a></li>
+                <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="our-machine.html">Mesin</a></li>
+                <li class="nav-item"><a class="nav-link" href="portfolio.html">Portofolio</a></li>
+                <li class="nav-item"><a class="nav-link" href="partnership.html">Kemitraan</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact-us.html">Kontak</a></li>
+            </ul>
+            <a href="contact-us.html" class="btn btn-primary btn-contact">Hubungi Kami</a>
+        </div>
     </div>
-    <div style="display:flex;align-items:center;gap:16px;">
-      <a href="contact-us.html" class="btn-nav d-none d-lg-inline-flex"><i class="bi bi-chat-dots-fill"></i> Hubungi Kami</a>
-      <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
-        <div class="ham-line"></div><div class="ham-line"></div><div class="ham-line"></div>
-      </div>
-    </div>
-  </div>
 </nav>
-
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-menu-bg" onclick="toggleMobileMenu()"></div>
-  <div class="mobile-menu-panel">
-    <button class="mob-close" onclick="toggleMobileMenu()"><i class="bi bi-x-lg"></i></button>
-    <div class="mob-nav-links">
-      <a href="index.html" class="mob-nav-link">Beranda</a>
-      <a href="about.html" class="mob-nav-link">Tentang Kami</a>
-      <a href="product.html" class="mob-nav-link">Produk</a>
-      <a href="promo.html" class="mob-nav-link">Promo</a>
-      <a href="blog.html" class="mob-nav-link active">Blog</a>
-      <a href="our-machine.html" class="mob-nav-link">Mesin</a>
-      <a href="portfolio.html" class="mob-nav-link">Portofolio</a>
-      <a href="partnership.html" class="mob-nav-link">Kemitraan</a>
-      <a href="contact-us.html" class="mob-nav-link">Kontak</a>
-    </div>
-    <div class="mob-cta"><a href="contact-us.html" class="btn-nav"><i class="bi bi-chat-dots-fill"></i> Hubungi Kami</a></div>
-  </div>
-</div>
 
 <!-- HERO -->
 <section class="blog-hero">
@@ -965,10 +925,10 @@ img{max-width:100%;height:auto;display:block;}
   </div>
 </footer>
 
-<button id="backTop" class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="bi bi-arrow-up"></i></button>
-<a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="wa-fab">
+<button id="backTop" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="bi bi-arrow-up"></i></button>
+<a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="wa-float">
   <i class="bi bi-whatsapp"></i>
-  <span class="wa-label">Chat dengan Kami</span>
+  <span class="wa-tip">Chat dengan Kami</span>
 </a>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -1269,6 +1229,18 @@ function subscribeNL(){
     btn.style.background='';
   },3000);
 }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// ── NAVBAR SCROLL EFFECT ──
+(function(){
+  var navbar = document.getElementById('navbar');
+  if(!navbar) return;
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 50) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+  }, {passive:true});
+})();
 </script>
 </body>
 </html>

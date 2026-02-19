@@ -137,21 +137,15 @@
     </head>
     <body>
         <!-- ========== PRELOADER ========== -->
-        <div
-            id="preloader"
-            class="preloader"
-        >
-            <div class="preloader-inner">
-                <div class="preloader-logo">
-                    <i class="bi bi-droplet-fill"></i>
-                    <span>AROMAS</span>
+        <div id="preloader" class="preloader">
+            <div class="pl-inner">
+                <div class="pl-ring">
+                <div class="pl-ring-outer"></div>
+                <div class="pl-ring-inner"></div>
+                <div class="pl-dot"></div>
                 </div>
-                <div class="preloader-spinner">
-                    <div class="spinner-ring"></div>
-                    <div class="spinner-ring"></div>
-                    <div class="spinner-ring"></div>
-                </div>
-                <p class="preloader-text">Memuat...</p>
+                <div class="pl-brand">AROMAS</div>
+                <div class="pl-sub">Memuat…</div>
             </div>
         </div>
         <!-- ========== HEADER / NAVIGATION ========== -->
@@ -1426,96 +1420,86 @@
         </section>
 
         <!-- ========== FOOTER ========== -->
-        <footer
-            id="footer"
-            class="footer-section"
-        >
+        <style>
+        .footer{background:#071910;color:rgba(255,255,255,.62);padding-top:64px;}
+        .footer-divider{height:1px;background:linear-gradient(to right,transparent,rgba(200,151,10,.2),transparent);margin-bottom:48px;}
+        .footer-brand-name{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;margin-bottom:14px;}
+        .footer-brand-icon{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#C8970A,#E8B524);display:flex;align-items:center;justify-content:center;color:#071910;font-size:.85rem;}
+        .footer-desc{font-size:.84rem;line-height:1.8;color:rgba(255,255,255,.42);margin-bottom:20px;}
+        .footer-socials{display:flex;gap:8px;}
+        .social-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.88rem;transition:all .22s;}
+        .social-btn:hover{background:linear-gradient(135deg,#C8970A,#E8B524);color:#071910;border-color:transparent;transform:translateY(-3px);}
+        .footer-col-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#E8B524;margin-bottom:18px;}
+        .footer-links{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;}
+        .footer-links a{font-size:.83rem;color:rgba(255,255,255,.42);transition:all .2s;display:flex;align-items:center;gap:6px;}
+        .footer-links a:hover{color:#E8B524;padding-left:4px;}
+        .footer-links a::before{content:'';width:0;height:1.5px;background:#C8970A;transition:width .2s;border-radius:1px;}
+        .footer-links a:hover::before{width:12px;}
+        .footer-contact-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;}
+        .footer-contact-list li{font-size:.82rem;color:rgba(255,255,255,.42);display:flex;align-items:flex-start;gap:10px;}
+        .footer-contact-list i{color:#C8970A;margin-top:2px;flex-shrink:0;}
+        .footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding:20px 0;margin-top:48px;}
+        .footer-copy{font-size:.78rem;color:rgba(255,255,255,.28);margin:0;}
+        .footer-legal-links{display:flex;gap:20px;}
+        .footer-legal-links a{font-size:.78rem;color:rgba(255,255,255,.28);transition:color .2s;}
+        .footer-legal-links a:hover{color:#E8B524;}
+        </style>
+        <footer class="footer">
             <div class="container">
-                <div class="footer-top">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                            <div class="footer-brand">
-                                <a
-                                    href="#"
-                                    class="footer-logo"
-                                >
-                                    <i class="bi bi-droplet-fill"></i> AROMAS
-                                </a>
-                                <p>
-                                    Minyak goreng premium berkualitas tinggi
-                                    untuk keluarga Indonesia. Diproduksi dengan
-                                    teknologi modern dan standar keamanan pangan
-                                    internasional.
-                                </p>
-                            </div>
+                <div class="footer-divider"></div>
+                <div class="row g-5">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-brand-name">
+                            <div class="footer-brand-icon"><i class="bi bi-droplet-fill"></i></div>
+                            AROMAS
                         </div>
-                        <div class="col-lg-2 col-md-6 col-6 mb-4 mb-lg-0">
-                            <h5>Menu</h5>
-                            <ul class="footer-links">
-                                <li><a href="#home">Beranda</a></li>
-                                <li><a href="about.html">Tentang Kami</a></li>
-                                <li><a href="#services">Layanan</a></li>
-                                <li><a href="#blog">Blog</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-6 mb-4 mb-lg-0">
-                            <h5>Produk</h5>
-                            <ul class="footer-links">
-                                <li><a href="#">AROMAS Premium</a></li>
-                                <li><a href="#">AROMAS Gold</a></li>
-                                <li><a href="#">AROMAS Lite</a></li>
-                                <li><a href="#">AROMAS Bulk</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <h5>Hubungi Kami</h5>
-                            <ul class="footer-contact">
-                                <li>
-                                    <i class="bi bi-geo-alt"></i> Jl. Industri
-                                    Raya No. 123, Kawasan Industri, Jakarta
-                                    12345
-                                </li>
-                                <li>
-                                    <i class="bi bi-envelope"></i>
-                                    <a
-                                        href="/cdn-cgi/l/email-protection"
-                                        class="__cf_email__"
-                                        data-cfemail="93fafdf5fcd3f2e1fcfef2e0bdf0fcbdfaf7"
-                                        >[email&#160;protected]</a
-                                    >
-                                </li>
-                                <li>
-                                    <i class="bi bi-telephone"></i> (021)
-                                    1234-5678
-                                </li>
-                                <li>
-                                    <i class="bi bi-whatsapp"></i> +62
-                                    812-3456-7890
-                                </li>
-                            </ul>
-                            <div class="footer-social">
-                                <a href="#"><i class="bi bi-instagram"></i></a>
-                                <a href="#"><i class="bi bi-facebook"></i></a>
-                                <a href="#"><i class="bi bi-whatsapp"></i></a>
-                                <a href="#"><i class="bi bi-tiktok"></i></a>
-                                <a href="#"><i class="bi bi-youtube"></i></a>
-                            </div>
+                        <p class="footer-desc">Minyak goreng sawit premium berkualitas tinggi untuk keluarga dan industri Indonesia. Dipercaya sejak 1994.</p>
+                        <div class="footer-socials">
+                            <a href="#" class="social-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="social-btn" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                            <a href="#" class="social-btn" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                            <a href="#" class="social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
                         </div>
                     </div>
+                    <div class="col-lg-2 col-md-3 col-6">
+                        <div class="footer-col-title">Navigasi</div>
+                        <ul class="footer-links">
+                            <li><a href="#home">Beranda</a></li>
+                            <li><a href="about.html">Tentang Kami</a></li>
+                            <li><a href="product.html">Produk</a></li>
+                            <li><a href="promo.html">Promo</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="contact-us.html">Kontak</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-6">
+                        <div class="footer-col-title">Produk</div>
+                        <ul class="footer-links">
+                            <li><a href="#">AROMAS Premium</a></li>
+                            <li><a href="#">AROMAS Gold</a></li>
+                            <li><a href="#">AROMAS Lite</a></li>
+                            <li><a href="#">AROMAS Bulk</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-col-title">Hubungi Kami</div>
+                        <ul class="footer-contact-list">
+                            <li><i class="bi bi-geo-alt-fill"></i> Jl. Industri Raya No. 123, Jakarta 12345</li>
+                            <li><i class="bi bi-envelope-fill"></i> info@aromas.co.id</li>
+                            <li><i class="bi bi-telephone-fill"></i> (021) 1234-5678</li>
+                            <li><i class="bi bi-whatsapp"></i> +62 812-3456-7890</li>
+                        </ul>
+                    </div>
                 </div>
-
                 <div class="footer-bottom">
                     <div class="row align-items-center">
-                        <div class="col-md-6">
-                            <p class="copyright">
-                                &copy; 2026 AROMAS. Hak Cipta Dilindungi.
-                            </p>
-                        </div>
-                        <div class="col-md-6 text-md-end">
-                            <ul class="footer-legal">
-                                <li><a href="#">Syarat & Ketentuan</a></li>
-                                <li><a href="#">Kebijakan Privasi</a></li>
-                            </ul>
+                        <div class="col-md-6"><p class="footer-copy">&copy; 2026 AROMAS. Hak Cipta Dilindungi.</p></div>
+                        <div class="col-md-6 text-md-end mt-2 mt-md-0">
+                            <div class="footer-legal-links justify-content-md-end d-flex">
+                                <a href="#">Syarat &amp; Ketentuan</a>
+                                <a href="#">Kebijakan Privasi</a>
+                            </div>
                         </div>
                     </div>
                 </div>

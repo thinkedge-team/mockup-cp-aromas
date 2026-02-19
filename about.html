@@ -99,26 +99,19 @@
     }
 
     /* ── PRELOADER ── */
-    .preloader {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: linear-gradient(135deg, var(--forest-green-darker) 0%, var(--forest-green-dark) 50%, var(--forest-green-light) 100%);
-        z-index: 99999; display: flex; align-items: center; justify-content: center;
-        transition: opacity .6s ease, visibility .6s ease;
-    }
-    .preloader.hidden { opacity: 0; visibility: hidden; }
-    .preloader-inner { text-align: center; }
-    .preloader-logo { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 30px; animation: preloaderPulse 2s ease-in-out infinite; }
-    .preloader-logo i { font-size: 3rem; color: var(--primary-gold); filter: drop-shadow(0 0 10px rgba(212,160,23,.5)); }
-    .preloader-logo span { font-size: 2.5rem; font-weight: 700; color: var(--white); letter-spacing: 2px; }
-    .preloader-spinner { position: relative; width: 80px; height: 80px; margin: 0 auto 20px; }
-    .spinner-ring { position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 3px solid transparent; }
-    .spinner-ring:nth-child(1) { border-top-color: var(--primary-gold); animation: spinnerRotate 1.5s linear infinite; }
-    .spinner-ring:nth-child(2) { width:60px;height:60px;top:10px;left:10px; border-right-color: var(--primary-gold-light); animation: spinnerRotate 1.2s linear infinite reverse; }
-    .spinner-ring:nth-child(3) { width:40px;height:40px;top:20px;left:20px; border-bottom-color: var(--white); animation: spinnerRotate 1s linear infinite; }
-    .preloader-text { color: rgba(255,255,255,.8); font-size: .9rem; letter-spacing: 3px; text-transform: uppercase; animation: preloaderFade 1.5s ease-in-out infinite; }
-    @keyframes spinnerRotate { to { transform: rotate(360deg); } }
-    @keyframes preloaderPulse { 0%,100%{transform:scale(1)}50%{transform:scale(1.05)} }
-    @keyframes preloaderFade { 0%,100%{opacity:.5}50%{opacity:1} }
+    .preloader{position:fixed;inset:0;background:#0d3320;z-index:99999;display:flex;align-items:center;justify-content:center;transition:opacity .7s cubic-bezier(0.16,1,0.3,1),visibility .7s;}
+    .preloader.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+    .pl-inner{text-align:center;}
+    .pl-ring{position:relative;width:80px;height:80px;margin:0 auto 28px;}
+    .pl-ring-outer{position:absolute;inset:0;border-radius:50%;border:2px solid transparent;border-top-color:var(--primary-gold-light);border-right-color:var(--primary-gold);animation:plSpin 1.4s linear infinite;}
+    .pl-ring-inner{position:absolute;inset:14px;border-radius:50%;border:2px solid transparent;border-bottom-color:rgba(212,160,23,.4);animation:plSpin .9s linear infinite reverse;}
+    .pl-dot{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+    .pl-dot::after{content:'';width:10px;height:10px;border-radius:50%;background:var(--primary-gold-light);animation:plDotP 1.4s ease-in-out infinite;}
+    .pl-brand{font-family:var(--font-secondary);font-size:1.6rem;color:#fff;letter-spacing:4px;margin-bottom:8px;}
+    .pl-sub{font-size:.68rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.38);animation:plBlink 1.6s ease-in-out infinite;}
+    @keyframes plSpin{to{transform:rotate(360deg);}}
+    @keyframes plDotP{0%,100%{transform:scale(.7);opacity:.5;}50%{transform:scale(1);opacity:1;}}
+    @keyframes plBlink{0%,100%{opacity:.3;}50%{opacity:1;}}
 
     /* ── NAVBAR ── */
     .navbar { padding: 15px 0; background: transparent; transition: var(--transition-normal); }
@@ -150,27 +143,28 @@
     }
 
     /* ── FOOTER ── */
-    .footer-section { background: var(--gray-900); color: var(--white); padding-top: 60px; }
-    .footer-top { padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.1); }
-    .footer-logo { font-size: 1.5rem; font-weight: 700; color: var(--white); display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
-    .footer-logo i { color: var(--primary-gold); }
-    .footer-brand p { color: var(--gray-400); font-size: .9rem; }
-    .footer-section h5 { color: var(--white); font-size: 1rem; font-weight: 600; margin-bottom: 20px; }
-    .footer-links { list-style: none; padding: 0; margin: 0; }
-    .footer-links li { margin-bottom: 12px; }
-    .footer-links a { color: var(--gray-400); font-size: .9rem; transition: var(--transition-normal); }
-    .footer-links a:hover { color: var(--primary-gold); padding-left: 5px; }
-    .footer-contact { list-style: none; padding: 0; margin: 0; }
-    .footer-contact li { color: var(--gray-400); font-size: .9rem; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; }
-    .footer-contact i { color: var(--primary-gold); margin-top: 3px; }
-    .footer-social { display: flex; gap: 12px; margin-top: 20px; }
-    .footer-social a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 1rem; transition: var(--transition-normal); }
-    .footer-social a:hover { background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark)); transform: translateY(-3px); }
-    .footer-bottom { padding: 25px 0; }
-    .copyright { color: var(--gray-500); font-size: .85rem; margin: 0; }
-    .footer-legal { list-style: none; padding: 0; margin: 0; display: flex; gap: 25px; }
-    .footer-legal a { color: var(--gray-500); font-size: .85rem; }
-    .footer-legal a:hover { color: var(--primary-gold); }
+    .footer{background:#071910;color:rgba(255,255,255,.62);padding-top:64px;}
+    .footer-divider{height:1px;background:linear-gradient(to right,transparent,rgba(200,151,10,.2),transparent);margin-bottom:48px;}
+    .footer-brand-name{display:flex;align-items:center;gap:10px;font-family:var(--font-secondary,"Playfair Display",serif);font-size:1.5rem;color:#fff;margin-bottom:14px;}
+    .footer-brand-icon{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#C8970A,#E8B524);display:flex;align-items:center;justify-content:center;color:#071910;font-size:.85rem;}
+    .footer-desc{font-size:.84rem;line-height:1.8;color:rgba(255,255,255,.42);margin-bottom:20px;}
+    .footer-socials{display:flex;gap:8px;}
+    .social-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.88rem;transition:all .22s;}
+    .social-btn:hover{background:linear-gradient(135deg,#C8970A,#E8B524);color:#071910;border-color:transparent;transform:translateY(-3px);}
+    .footer-col-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#E8B524;margin-bottom:18px;}
+    .footer-links{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;}
+    .footer-links a{font-size:.83rem;color:rgba(255,255,255,.42);transition:all .2s;display:flex;align-items:center;gap:6px;}
+    .footer-links a:hover{color:#E8B524;padding-left:4px;}
+    .footer-links a::before{content:'';width:0;height:1.5px;background:#C8970A;transition:width .2s;border-radius:1px;}
+    .footer-links a:hover::before{width:12px;}
+    .footer-contact-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;}
+    .footer-contact-list li{font-size:.82rem;color:rgba(255,255,255,.42);display:flex;align-items:flex-start;gap:10px;}
+    .footer-contact-list i{color:#C8970A;margin-top:2px;flex-shrink:0;}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding:20px 0;margin-top:48px;}
+    .footer-copy{font-size:.78rem;color:rgba(255,255,255,.28);margin:0;}
+    .footer-legal-links{display:flex;gap:20px;}
+    .footer-legal-links a{font-size:.78rem;color:rgba(255,255,255,.28);transition:color .2s;}
+    .footer-legal-links a:hover{color:#E8B524;}
 
     /* ── BACK TO TOP ── */
     .back-to-top {
@@ -505,17 +499,14 @@
 
     <!-- ========== PRELOADER ========== -->
     <div id="preloader" class="preloader">
-        <div class="preloader-inner">
-            <div class="preloader-logo">
-                <i class="bi bi-droplet-fill"></i>
-                <span>AROMAS</span>
+        <div class="pl-inner">
+            <div class="pl-ring">
+                <div class="pl-ring-outer"></div>
+                <div class="pl-ring-inner"></div>
+                <div class="pl-dot"></div>
             </div>
-            <div class="preloader-spinner">
-                <div class="spinner-ring"></div>
-                <div class="spinner-ring"></div>
-                <div class="spinner-ring"></div>
-            </div>
-            <p class="preloader-text">Memuat...</p>
+            <div class="pl-brand">AROMAS</div>
+            <div class="pl-sub">Memuat…</div>
         </div>
     </div>
 
@@ -887,64 +878,62 @@
     </section>
 
     <!-- ========== FOOTER ========== -->
-    <footer class="footer-section">
+    <footer class="footer">
         <div class="container">
-            <div class="footer-top">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                        <div class="footer-brand">
-                            <a href="index.html" class="footer-logo">
-                                <i class="bi bi-droplet-fill"></i> AROMAS
-                            </a>
-                            <p>Minyak goreng premium berkualitas tinggi untuk keluarga Indonesia. Diproduksi dengan teknologi modern dan standar keamanan pangan internasional.</p>
-                        </div>
+            <div class="footer-divider"></div>
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand-name">
+                        <div class="footer-brand-icon"><i class="bi bi-droplet-fill"></i></div>
+                        AROMAS
                     </div>
-                    <div class="col-lg-2 col-md-6 col-6 mb-4 mb-lg-0">
-                        <h5>Menu</h5>
-                        <ul class="footer-links">
-                            <li><a href="index.html">Beranda</a></li>
-                            <li><a href="about.html">Tentang Kami</a></li>
-                            <li><a href="index.html#services">Layanan</a></li>
-                            <li><a href="index.html#blog">Blog</a></li>
-                        </ul>
+                    <p class="footer-desc">Minyak goreng sawit premium berkualitas tinggi untuk keluarga dan industri Indonesia. Dipercaya sejak 1994.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-btn" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                        <a href="#" class="social-btn" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                        <a href="#" class="social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
                     </div>
-                    <div class="col-lg-2 col-md-6 col-6 mb-4 mb-lg-0">
-                        <h5>Produk</h5>
-                        <ul class="footer-links">
-                            <li><a href="#">AROMAS Premium</a></li>
-                            <li><a href="#">AROMAS Gold</a></li>
-                            <li><a href="#">AROMAS Lite</a></li>
-                            <li><a href="#">AROMAS Bulk</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <h5>Hubungi Kami</h5>
-                        <ul class="footer-contact">
-                            <li><i class="bi bi-geo-alt"></i> Jl. Industri Raya No. 123, Kawasan Industri, Jakarta 12345</li>
-                            <li><i class="bi bi-envelope"></i> <a href="mailto:info@aromas.co.id">info@aromas.co.id</a></li>
-                            <li><i class="bi bi-telephone"></i> (021) 1234-5678</li>
-                            <li><i class="bi bi-whatsapp"></i> +62 812-3456-7890</li>
-                        </ul>
-                        <div class="footer-social">
-                            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                            <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-                            <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-                            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-                        </div>
-                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <div class="footer-col-title">Navigasi</div>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="about.html">Tentang Kami</a></li>
+                        <li><a href="product.html">Produk</a></li>
+                        <li><a href="promo.html">Promo</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact-us.html">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <div class="footer-col-title">Produk</div>
+                    <ul class="footer-links">
+                        <li><a href="#">AROMAS Premium</a></li>
+                        <li><a href="#">AROMAS Gold</a></li>
+                        <li><a href="#">AROMAS Lite</a></li>
+                        <li><a href="#">AROMAS Bulk</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-col-title">Hubungi Kami</div>
+                    <ul class="footer-contact-list">
+                        <li><i class="bi bi-geo-alt-fill"></i> Jl. Industri Raya No. 123, Jakarta 12345</li>
+                        <li><i class="bi bi-envelope-fill"></i> info@aromas.co.id</li>
+                        <li><i class="bi bi-telephone-fill"></i> (021) 1234-5678</li>
+                        <li><i class="bi bi-whatsapp"></i> +62 812-3456-7890</li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <p class="copyright">&copy; 2026 AROMAS. Hak Cipta Dilindungi.</p>
-                    </div>
-                    <div class="col-md-6 text-md-end">
-                        <ul class="footer-legal">
-                            <li><a href="#">Syarat &amp; Ketentuan</a></li>
-                            <li><a href="#">Kebijakan Privasi</a></li>
-                        </ul>
+                    <div class="col-md-6"><p class="footer-copy">&copy; 2026 AROMAS. Hak Cipta Dilindungi.</p></div>
+                    <div class="col-md-6 text-md-end mt-2 mt-md-0">
+                        <div class="footer-legal-links justify-content-md-end d-flex">
+                            <a href="#">Syarat &amp; Ketentuan</a>
+                            <a href="#">Kebijakan Privasi</a>
+                        </div>
                     </div>
                 </div>
             </div>
