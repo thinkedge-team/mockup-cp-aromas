@@ -613,6 +613,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initVideoModal();
     initMobileMenu();
     initInteractiveMap();
+    initHeroSlider();
 
     console.log("AROMAS website initialized successfully!");
 });
@@ -977,3 +978,167 @@ window.addEventListener(
         updateActiveNavLink();
     }, 250),
 );
+
+// ========================================================
+//  HERO SLIDER - TAMBAHAN JS
+//  Paste di bagian bawah script.js (sebelum baris terakhir)
+// ========================================================
+
+function initHeroSlider() {
+    const track        = document.getElementById('heroSlidesTrack');
+    const slides       = track ? track.querySelectorAll('.hero-slide') : [];
+    const dots         = document.querySelectorAll('.hero-dot');
+    const prevBtn      = document.getElementById('heroPrev');
+    const nextBtn      = document.getElementById('heroNext');
+    const counterEl    = document.getElementById('heroCurrent');
+    const progressBar  = document.getElementById('heroProgressBar');
+
+    if (!track || slides.length === 0) return;
+
+    const TOTAL        = slides.length;
+    const AUTOPLAY_MS  = 5000;
+    let current        = 0;
+    let autoplayTimer  = null;
+    let isAnimating    = false;
+
+    // ── Go to slide ──
+    function goTo(index, resetProgress = true) {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        // Remove active class from current slide
+        slides[current].classList.remove('active-slide');
+
+        // Clamp index
+        current = (index + TOTAL) % TOTAL;
+
+        // Apply transform
+        track.style.transform = `translateX(-${current * 100}%)`;
+
+        // Add active class to new slide
+        slides[current].classList.add('active-slide');
+
+        // Update dots
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+
+        // Update counter
+        if (counterEl) {
+            counterEl.textContent = String(current + 1).padStart(2, '0');
+        }
+
+        // Reset animating flag after transition
+        setTimeout(() => { isAnimating = false; }, 750);
+
+        // Restart progress bar
+        if (resetProgress) restartProgress();
+    }
+
+    // ── Autoplay ──
+    function startAutoplay() {
+        clearInterval(autoplayTimer);
+        autoplayTimer = setInterval(() => goTo(current + 1), AUTOPLAY_MS);
+    }
+
+    function stopAutoplay() {
+        clearInterval(autoplayTimer);
+    }
+
+    // ── Progress bar ──
+    function restartProgress() {
+        if (!progressBar) return;
+        progressBar.classList.remove('animating');
+        progressBar.style.transition = 'none';
+        progressBar.style.width = '0%';
+
+        // Force reflow
+        void progressBar.offsetWidth;
+
+        progressBar.style.transition = `width ${AUTOPLAY_MS}ms linear`;
+        progressBar.classList.add('animating');
+    }
+
+    // ── Dot clicks ──
+    dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+            stopAutoplay();
+            goTo(i);
+            startAutoplay();
+        });
+    });
+
+    // ── Arrow buttons ──
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            stopAutoplay();
+            goTo(current - 1);
+            startAutoplay();
+        });
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            stopAutoplay();
+            goTo(current + 1);
+            startAutoplay();
+        });
+    }
+
+    // ── Touch / swipe support ──
+    let touchStartX = 0;
+    let touchEndX   = 0;
+    const SWIPE_THRESHOLD = 50;
+
+    track.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    track.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].clientX;
+        const delta = touchStartX - touchEndX;
+
+        if (Math.abs(delta) > SWIPE_THRESHOLD) {
+            stopAutoplay();
+            goTo(delta > 0 ? current + 1 : current - 1);
+            startAutoplay();
+        }
+    }, { passive: true });
+
+    // ── Keyboard navigation ──
+    document.addEventListener('keydown', e => {
+        // Only when hero is in viewport
+        const heroEl = document.getElementById('home');
+        if (!heroEl) return;
+        const rect = heroEl.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+
+        if (e.key === 'ArrowLeft') {
+            stopAutoplay();
+            goTo(current - 1);
+            startAutoplay();
+        } else if (e.key === 'ArrowRight') {
+            stopAutoplay();
+            goTo(current + 1);
+            startAutoplay();
+        }
+    });
+
+    // ── Pause on hover (desktop) ──
+    const heroSection = document.getElementById('home');
+    if (heroSection) {
+        heroSection.addEventListener('mouseenter', () => {
+            stopAutoplay();
+            if (progressBar) {
+                progressBar.style.animationPlayState = 'paused';
+            }
+        });
+        heroSection.addEventListener('mouseleave', () => {
+            startAutoplay();
+            restartProgress();
+        });
+    }
+
+    // ── Initialize ──
+    goTo(0, true);
+    startAutoplay();
+
+    console.log('Hero Slider initialized —', TOTAL, 'slides');
+}

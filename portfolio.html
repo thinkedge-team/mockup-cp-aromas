@@ -21,11 +21,6 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <style>
-    /* ============================================================
-       AROMAS PORTFOLIO PAGE - FULLY CONSISTENT WITH index.html
-       ============================================================ */
-
-    /* ========== CSS VARIABLES (Same as index.html) ========== */
     :root {
         --primary-gold: #d4a017;
         --primary-gold-dark: #b8860b;
@@ -79,7 +74,7 @@
     }
     .section-title { font-size: 2.5rem; margin-bottom: 1.5rem; }
 
-    /* ========== PRELOADER ========== */
+    /* PRELOADER */
     .preloader { position: fixed; inset: 0; background: #0d3320; z-index: 99999; display: flex; align-items: center; justify-content: center; transition: opacity .7s cubic-bezier(0.16,1,0.3,1), visibility .7s; }
     .preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
     .pl-inner { text-align: center; }
@@ -94,7 +89,7 @@
     @keyframes plDotP { 0%,100% { transform: scale(.7); opacity: .5; } 50% { transform: scale(1); opacity: 1; } }
     @keyframes plBlink { 0%,100% { opacity: .3; } 50% { opacity: 1; } }
 
-    /* ========== NAVBAR (Identical to index.html) ========== */
+    /* NAVBAR */
     .navbar { padding: 15px 0; background: transparent; transition: var(--transition-normal); }
     .navbar.scrolled { background: var(--white); box-shadow: var(--shadow-md); padding: 10px 0; }
     .navbar-brand { font-size: 1.5rem; font-weight: 700; color: var(--white) !important; display: flex; align-items: center; gap: 8px; transition: var(--transition-normal); }
@@ -117,7 +112,7 @@
         .navbar-collapse .btn-contact { margin-top: 15px; width: 100%; text-align: center; }
     }
 
-    /* ========== PORTFOLIO HERO ========== */
+    /* PORTFOLIO HERO */
     .portfolio-hero {
         position: relative;
         min-height: 85vh;
@@ -152,7 +147,6 @@
     .hero-main-title { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 700; color: var(--white); line-height: 1.18; margin-bottom: 20px; }
     .hero-description { font-size: 1.08rem; color: rgba(255,255,255,.78); line-height: 1.8; max-width: 580px; margin: 0 auto 40px; }
 
-    /* Stat pills in hero */
     .hero-stats { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 44px; }
     .hero-stat-pill {
         display: flex; align-items: center; gap: 12px;
@@ -165,7 +159,6 @@
     .hero-stat-info strong { display: block; font-size: 1.4rem; font-weight: 700; color: var(--primary-gold); line-height: 1; }
     .hero-stat-info span { font-size: .76rem; color: rgba(255,255,255,.65); }
 
-    /* Filter chips in hero */
     .hero-filter-chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
     .hchip {
         display: inline-flex; align-items: center; gap: 7px;
@@ -180,39 +173,111 @@
         box-shadow: 0 4px 18px rgba(212,160,23,.48);
     }
 
-    /* Scroll indicator */
     .scroll-cue { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,.45); font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; animation: cueF 2.4s ease-in-out infinite; }
     @keyframes cueF { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-7px); } }
     .mouse-ico { width: 22px; height: 36px; border: 2px solid rgba(212,160,23,.45); border-radius: 18px; display: flex; justify-content: center; padding-top: 6px; }
     .wheel-dot { width: 3px; height: 6px; background: var(--primary-gold); border-radius: 2px; animation: wScroll 2s ease-in-out infinite; }
     @keyframes wScroll { 0%,100% { transform: translateY(0); opacity: 1; } 50% { transform: translateY(6px); opacity: .25; } }
 
-    /* ========== BREADCRUMB ========== */
+    /* BREADCRUMB */
     .bc-strip { background: #f5f9f5; border-bottom: 1px solid rgba(34,139,34,.1); padding: 13px 0; }
     .breadcrumb { margin: 0; }
     .breadcrumb-item a { color: var(--forest-green); font-size: .87rem; }
     .breadcrumb-item.active { color: var(--gray-600); font-size: .87rem; }
     .breadcrumb-item + .breadcrumb-item::before { color: var(--gray-400); }
 
-    /* ========== FILTER SECTION ========== */
-    .filter-section { padding: 60px 0 30px; background: var(--white); }
-    .filter-wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-    .filter-tabs { display: flex; gap: 10px; flex-wrap: wrap; }
-    .ftab {
-        display: inline-flex; align-items: center; gap: 8px;
-        padding: 10px 22px; border-radius: 50px; font-size: .88rem; font-weight: 600;
-        border: 2px solid rgba(34,139,34,.2); background: transparent; color: var(--gray-700);
-        cursor: pointer; transition: all .25s ease;
+    /* =========================================================
+       STICKY FILTER BAR — NEW IMPROVED DESIGN
+       ========================================================= */
+    .filter-section {
+        padding: 60px 0 30px;
+        background: var(--white);
     }
-    .ftab:hover { border-color: var(--forest-green); color: var(--forest-green); }
-    .ftab.active { background: linear-gradient(135deg, var(--forest-green), var(--forest-green-dark)); color: var(--white); border-color: transparent; box-shadow: 0 4px 16px rgba(34,139,34,.3); }
-    .result-count { font-size: .9rem; color: var(--gray-500); font-weight: 500; white-space: nowrap; }
-    .result-count strong { color: var(--forest-green); font-weight: 700; }
 
-    /* ========== PORTFOLIO GRID ========== */
+    /* Sticky filter bar that appears when scrolling past hero */
+    .sticky-filter-bar {
+        position: sticky;
+        top: 68px;
+        z-index: 100;
+        background: rgba(255,255,255,0.96);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(34,139,34,.12);
+        box-shadow: 0 4px 24px rgba(0,0,0,.08);
+        padding: 12px 0;
+        transition: all .3s ease;
+    }
+    .sticky-filter-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+    .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .ftab {
+        display: inline-flex; align-items: center; gap: 7px;
+        padding: 9px 20px; border-radius: 50px; font-size: .85rem; font-weight: 600;
+        border: 2px solid rgba(34,139,34,.18); background: transparent; color: var(--gray-600);
+        cursor: pointer; transition: all .22s ease; white-space: nowrap;
+    }
+    .ftab i { font-size: .85rem; }
+    .ftab .tab-count {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-width: 20px; height: 20px; padding: 0 5px;
+        background: rgba(34,139,34,.1); color: var(--forest-green);
+        border-radius: 20px; font-size: .68rem; font-weight: 700;
+        transition: all .22s ease;
+    }
+    .ftab:hover { border-color: var(--forest-green); color: var(--forest-green); background: rgba(34,139,34,.05); }
+    .ftab:hover .tab-count { background: rgba(34,139,34,.18); }
+    .ftab.active {
+        background: linear-gradient(135deg, var(--forest-green), var(--forest-green-dark));
+        color: var(--white); border-color: transparent;
+        box-shadow: 0 4px 16px rgba(34,139,34,.3);
+    }
+    .ftab.active .tab-count {
+        background: rgba(255,255,255,.25); color: var(--white);
+    }
+
+    .filter-right { display: flex; align-items: center; gap: 14px; }
+    .result-count { font-size: .88rem; color: var(--gray-500); font-weight: 500; white-space: nowrap; }
+    .result-count strong { color: var(--forest-green); font-weight: 700; font-size: 1rem; }
+
+    /* Active filter pill shown when not "all" */
+    .active-filter-pill {
+        display: none;
+        align-items: center; gap: 7px;
+        background: var(--forest-green-pale); color: var(--forest-green-dark);
+        border: 1px solid rgba(34,139,34,.25); border-radius: 50px;
+        padding: 5px 12px 5px 14px; font-size: .8rem; font-weight: 600;
+        animation: pillIn .25s ease forwards;
+    }
+    .active-filter-pill.visible { display: inline-flex; }
+    .active-filter-pill button {
+        background: none; border: none; cursor: pointer;
+        color: var(--forest-green); font-size: .8rem; padding: 0; margin: 0;
+        display: flex; align-items: center;
+        transition: color .2s;
+    }
+    .active-filter-pill button:hover { color: #b71c1c; }
+    @keyframes pillIn { from { opacity: 0; transform: scale(.85); } to { opacity: 1; transform: scale(1); } }
+
+    /* PORTFOLIO GRID */
     .portfolio-section { padding: 40px 0 100px; background: var(--white); }
 
-    /* Category Section Header */
+    /* Category section wrapper — this is what gets hidden entirely */
+    .cat-section-wrapper {
+        display: block;
+        margin-bottom: 64px;
+    }
+    .cat-section-wrapper.cat-hidden {
+        display: none !important;
+    }
+    @keyframes catFadeIn {
+        from { opacity: 0.4; transform: translateY(10px); }
+        to   { opacity: 1;   transform: translateY(0); }
+    }
+
     .cat-section-header {
         display: flex; align-items: center; gap: 20px;
         margin-bottom: 40px; padding-bottom: 20px;
@@ -250,47 +315,22 @@
         background: linear-gradient(135deg, rgba(34,139,34,.04), transparent 60%);
         pointer-events: none; z-index: 0;
     }
-    .port-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 22px 60px rgba(34,139,34,.16);
-        border-color: rgba(34,139,34,.28);
-    }
+    .port-card:hover { transform: translateY(-10px); box-shadow: 0 22px 60px rgba(34,139,34,.16); border-color: rgba(34,139,34,.28); }
 
-    /* Card Image */
-    .card-img-wrap {
-        position: relative; overflow: hidden; border-radius: 20px 20px 0 0;
-        height: 230px; background: linear-gradient(135deg, #f5faf5, #fafff5);
-    }
-    .card-img-wrap img {
-        width: 100%; height: 100%; object-fit: cover;
-        transition: transform .5s ease; filter: brightness(.9) saturate(1.05);
-    }
+    .card-img-wrap { position: relative; overflow: hidden; border-radius: 20px 20px 0 0; height: 230px; background: linear-gradient(135deg, #f5faf5, #fafff5); }
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; filter: brightness(.9) saturate(1.05); }
     .port-card:hover .card-img-wrap img { transform: scale(1.08); filter: brightness(.95) saturate(1.1); }
 
-    /* Category Badge */
-    .card-badge {
-        position: absolute; top: 16px; left: 16px;
-        padding: 5px 14px; border-radius: 20px;
-        font-size: .7rem; font-weight: 700; text-transform: uppercase;
-        letter-spacing: .5px; color: var(--white);
-        box-shadow: 0 2px 10px rgba(0,0,0,.2); z-index: 5;
-    }
+    .card-badge { position: absolute; top: 16px; left: 16px; padding: 5px 14px; border-radius: 20px; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,.2); z-index: 5; }
     .badge-retail { background: linear-gradient(135deg, #ff9800, #f57c00); }
     .badge-horeca { background: linear-gradient(135deg, #e91e63, #c2185b); }
     .badge-industri { background: linear-gradient(135deg, #607d8b, #455a64); }
     .badge-catering { background: linear-gradient(135deg, #9c27b0, #6a1b9a); }
 
-    /* Rating stars */
-    .card-rating {
-        position: absolute; bottom: 14px; right: 14px;
-        display: flex; align-items: center; gap: 4px;
-        background: rgba(0,0,0,.45); backdrop-filter: blur(8px);
-        border-radius: 20px; padding: 4px 10px; z-index: 5;
-    }
+    .card-rating { position: absolute; bottom: 14px; right: 14px; display: flex; align-items: center; gap: 4px; background: rgba(0,0,0,.45); backdrop-filter: blur(8px); border-radius: 20px; padding: 4px 10px; z-index: 5; }
     .card-rating .stars { color: var(--primary-gold); font-size: .8rem; }
     .card-rating span { color: var(--white); font-size: .72rem; font-weight: 600; }
 
-    /* Card body */
     .card-body-inner { padding: 24px; position: relative; z-index: 1; }
     .card-name { font-size: 1.15rem; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
     .card-tagline { font-size: .84rem; color: var(--gray-500); margin-bottom: 16px; line-height: 1.5; }
@@ -299,143 +339,92 @@
     .card-meta-item i { color: var(--forest-green); font-size: .9rem; width: 16px; flex-shrink: 0; }
     .card-divider { border: none; border-top: 1px solid var(--gray-200); margin: 0 0 16px; }
 
-    /* Tags row */
     .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
-    .tag-pill {
-        display: inline-flex; align-items: center; gap: 5px;
-        padding: 4px 12px; border-radius: 20px; font-size: .73rem; font-weight: 600;
-        background: var(--forest-green-pale); color: var(--forest-green-dark);
-        border: 1px solid rgba(34,139,34,.2);
-    }
+    .tag-pill { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 20px; font-size: .73rem; font-weight: 600; background: var(--forest-green-pale); color: var(--forest-green-dark); border: 1px solid rgba(34,139,34,.2); }
 
-    /* Card footer */
     .card-actions { display: flex; gap: 10px; }
-    .btn-detail {
-        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-        background: linear-gradient(135deg, var(--forest-green), var(--forest-green-dark));
-        color: var(--white); padding: 10px 22px; border-radius: var(--radius-md);
-        font-size: .84rem; font-weight: 600; transition: all .25s ease; flex: 1;
-    }
+    .btn-detail { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, var(--forest-green), var(--forest-green-dark)); color: var(--white); padding: 10px 22px; border-radius: var(--radius-md); font-size: .84rem; font-weight: 600; transition: all .25s ease; flex: 1; }
     .btn-detail:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(34,139,34,.35); color: var(--white); }
-    .btn-wa-card {
-        width: 42px; height: 42px; border-radius: var(--radius-md); flex-shrink: 0;
-        background: linear-gradient(135deg, #25d366, #128c7e);
-        color: var(--white); display: flex; align-items: center; justify-content: center;
-        font-size: 1.1rem; transition: all .25s ease;
-    }
+    .btn-wa-card { width: 42px; height: 42px; border-radius: var(--radius-md); flex-shrink: 0; background: linear-gradient(135deg, #25d366, #128c7e); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: all .25s ease; }
     .btn-wa-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,211,102,.4); color: var(--white); }
 
-    /* Category section wrapper */
-    .cat-block { transition: all .35s ease; }
+    /* Card hide/show */
+    .cat-block { transition: all .28s ease; }
     .cat-block.hidden-cat { display: none !important; }
 
-    /* ========== TESTIMONIAL TICKER ========== */
-    .testimonial-section {
+    /* Empty State */
+    .empty-state {
+        display: none;
+        text-align: center; padding: 80px 20px;
+        animation: catFadeIn .4s ease forwards;
+    }
+    .empty-icon {
+        width: 80px; height: 80px; border-radius: 50%;
         background: var(--forest-green-pale);
-        padding: var(--section-padding);
-        overflow: hidden;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 2rem; color: var(--forest-green);
+        margin: 0 auto 20px;
     }
+    .empty-state h4 { font-size: 1.25rem; color: var(--gray-700); margin-bottom: 8px; }
+    .empty-state p { color: var(--gray-500); font-size: .9rem; margin-bottom: 20px; }
+    .btn-reset-filter { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--forest-green), var(--forest-green-dark)); color: var(--white); padding: 11px 26px; border-radius: var(--radius-md); font-size: .88rem; font-weight: 600; border: none; cursor: pointer; transition: all .25s ease; }
+    .btn-reset-filter:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(34,139,34,.3); }
+
+    /* TESTIMONIAL */
+    .testimonial-section { background: var(--forest-green-pale); padding: var(--section-padding); overflow: hidden; }
     .testi-header { text-align: center; margin-bottom: 60px; }
-    .testi-card {
-        background: var(--white); border-radius: 20px;
-        padding: 32px; border: 1px solid rgba(34,139,34,.1);
-        box-shadow: var(--shadow-sm); height: 100%;
-        transition: all .3s ease; position: relative;
-    }
+    .testi-card { background: var(--white); border-radius: 20px; padding: 32px; border: 1px solid rgba(34,139,34,.1); box-shadow: var(--shadow-sm); height: 100%; transition: all .3s ease; position: relative; }
     .testi-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: rgba(34,139,34,.2); }
     .testi-quote-icon { font-size: 3rem; color: var(--primary-gold); opacity: .3; line-height: 1; margin-bottom: 16px; font-family: Georgia, serif; }
     .testi-text { font-size: .97rem; color: var(--gray-700); line-height: 1.8; margin-bottom: 24px; font-style: italic; }
     .testi-author { display: flex; align-items: center; gap: 14px; }
-    .testi-avatar {
-        width: 52px; height: 52px; border-radius: 50%; overflow: hidden;
-        border: 3px solid var(--primary-gold); flex-shrink: 0;
-    }
+    .testi-avatar { width: 52px; height: 52px; border-radius: 50%; overflow: hidden; border: 3px solid var(--primary-gold); flex-shrink: 0; }
     .testi-avatar img { width: 100%; height: 100%; object-fit: cover; }
     .testi-name { font-size: .95rem; font-weight: 700; color: var(--gray-900); margin-bottom: 2px; }
     .testi-role { font-size: .78rem; color: var(--gray-500); }
     .testi-rating { display: flex; gap: 3px; margin-top: 6px; }
     .testi-rating i { color: var(--primary-gold); font-size: .78rem; }
 
-    /* ========== IMPACT SECTION (same as index.html) ========== */
-    .impact-section {
-        position: relative; padding: var(--section-padding);
-        background: linear-gradient(135deg, var(--forest-green-darker) 0%, var(--forest-green-dark) 50%, var(--forest-green-light) 100%);
-    }
-    .impact-overlay {
-        position: absolute; inset: 0; pointer-events: none;
-        background:
-            radial-gradient(ellipse at 30% 50%, rgba(212,160,23,.15) 0%, transparent 50%),
-            radial-gradient(ellipse at 70% 80%, rgba(34,139,34,.2) 0%, transparent 40%);
-    }
+    /* IMPACT */
+    .impact-section { position: relative; padding: var(--section-padding); background: linear-gradient(135deg, var(--forest-green-darker) 0%, var(--forest-green-dark) 50%, var(--forest-green-light) 100%); }
+    .impact-overlay { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 30% 50%, rgba(212,160,23,.15) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(34,139,34,.2) 0%, transparent 40%); }
     .impact-section .container { position: relative; z-index: 2; }
-    .impact-card {
-        background: rgba(255,255,255,.1); border-radius: var(--radius-md);
-        overflow: hidden; backdrop-filter: blur(10px);
-        border: 1px solid rgba(212,160,23,.2); transition: var(--transition-normal);
-    }
+    .impact-card { background: rgba(255,255,255,.1); border-radius: var(--radius-md); overflow: hidden; backdrop-filter: blur(10px); border: 1px solid rgba(212,160,23,.2); transition: var(--transition-normal); }
     .impact-card:hover { transform: translateY(-5px); background: rgba(255,255,255,.15); border-color: rgba(212,160,23,.4); }
     .impact-img { width: 100%; height: 140px; object-fit: cover; }
     .impact-stat { padding: 20px; text-align: center; color: var(--white); }
     .impact-stat h3 { font-size: 2.5rem; font-weight: 700; color: var(--primary-gold); margin-bottom: 5px; }
     .impact-stat p { font-size: .9rem; color: rgba(255,255,255,.8); margin: 0; }
 
-    /* ========== KEUNGGULAN SECTION ========== */
-    .keunggulan-section {
-        padding: var(--section-padding);
-        background: linear-gradient(135deg, var(--forest-green-darker) 0%, var(--forest-green-dark) 55%, var(--forest-green-light) 100%);
-        position: relative; overflow: hidden;
-    }
-    .keunggulan-section::before {
-        content: ''; position: absolute; inset: 0; pointer-events: none;
-        background: radial-gradient(ellipse at 30% 50%, rgba(212,160,23,.12) 0%, transparent 55%),
-                    radial-gradient(ellipse at 70% 80%, rgba(34,139,34,.18) 0%, transparent 45%);
-    }
+    /* KEUNGGULAN */
+    .keunggulan-section { padding: var(--section-padding); background: linear-gradient(135deg, var(--forest-green-darker) 0%, var(--forest-green-dark) 55%, var(--forest-green-light) 100%); position: relative; overflow: hidden; }
+    .keunggulan-section::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 30% 50%, rgba(212,160,23,.12) 0%, transparent 55%), radial-gradient(ellipse at 70% 80%, rgba(34,139,34,.18) 0%, transparent 45%); }
     .keunggulan-section .container { position: relative; z-index: 2; }
-    .kel-card {
-        background: rgba(255,255,255,.07); backdrop-filter: blur(12px);
-        border: 1px solid rgba(212,160,23,.2); border-radius: 18px;
-        padding: 32px 24px; height: 100%; transition: all .3s ease; text-align: center;
-    }
+    .kel-card { background: rgba(255,255,255,.07); backdrop-filter: blur(12px); border: 1px solid rgba(212,160,23,.2); border-radius: 18px; padding: 32px 24px; height: 100%; transition: all .3s ease; text-align: center; }
     .kel-card:hover { background: rgba(255,255,255,.12); border-color: rgba(212,160,23,.42); transform: translateY(-6px); }
-    .kel-icon {
-        width: 64px; height: 64px; border-radius: 16px;
-        background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
-        display: flex; align-items: center; justify-content: center;
-        font-size: 1.7rem; color: var(--white); margin: 0 auto 20px;
-        box-shadow: 0 6px 20px rgba(212,160,23,.35);
-    }
+    .kel-icon { width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark)); display: flex; align-items: center; justify-content: center; font-size: 1.7rem; color: var(--white); margin: 0 auto 20px; box-shadow: 0 6px 20px rgba(212,160,23,.35); }
     .kel-card h4 { color: var(--white); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
     .kel-card p { color: rgba(255,255,255,.68); font-size: .88rem; line-height: 1.7; margin: 0; }
 
-    /* ========== MITRA LOGOS ========== */
+    /* MITRA LOGOS */
     .mitra-section { padding: 80px 0; background: var(--white); }
     .mitra-logos { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 40px; margin-top: 50px; }
     .mitra-logo { display: flex; align-items: center; gap: 8px; font-size: 1.2rem; font-weight: 700; color: var(--gray-600); opacity: .65; transition: var(--transition-normal); }
     .mitra-logo:hover { opacity: 1; color: var(--forest-green); }
     .mitra-logo i { font-size: 1.5rem; color: var(--primary-gold); }
 
-    /* ========== CTA SECTION ========== */
+    /* CTA */
     .cta-section { padding: 80px 0; background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-dark) 100%); position: relative; overflow: hidden; }
     .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,.12) 0%, transparent 60%); pointer-events: none; }
     .cta-section .container { position: relative; z-index: 2; }
     .cta-section h2 { color: var(--white); font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; margin-bottom: 10px; }
     .cta-section p { color: rgba(255,255,255,.82); font-size: 1rem; margin: 0; }
-    .btn-cta-white {
-        display: inline-flex; align-items: center; gap: 9px;
-        background: var(--white); color: var(--primary-gold-dark); font-weight: 700;
-        padding: 15px 36px; border-radius: var(--radius-md); font-size: .97rem;
-        transition: all .28s ease; box-shadow: 0 4px 16px rgba(0,0,0,.14);
-    }
+    .btn-cta-white { display: inline-flex; align-items: center; gap: 9px; background: var(--white); color: var(--primary-gold-dark); font-weight: 700; padding: 15px 36px; border-radius: var(--radius-md); font-size: .97rem; transition: all .28s ease; box-shadow: 0 4px 16px rgba(0,0,0,.14); }
     .btn-cta-white:hover { background: var(--forest-green-dark); color: var(--primary-gold); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.2); }
-    .btn-cta-outline {
-        display: inline-flex; align-items: center; gap: 9px;
-        background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.65);
-        font-weight: 600; padding: 15px 32px; border-radius: var(--radius-md); font-size: .97rem;
-        transition: all .28s ease;
-    }
+    .btn-cta-outline { display: inline-flex; align-items: center; gap: 9px; background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.65); font-weight: 600; padding: 15px 32px; border-radius: var(--radius-md); font-size: .97rem; transition: all .28s ease; }
     .btn-cta-outline:hover { background: rgba(255,255,255,.14); border-color: var(--white); color: var(--white); transform: translateY(-3px); }
 
-    /* ========== FOOTER ========== */
+    /* FOOTER */
     .footer{background:#071910;color:rgba(255,255,255,.62);padding-top:64px;}
     .footer-divider{height:1px;background:linear-gradient(to right,transparent,rgba(200,151,10,.2),transparent);margin-bottom:48px;}
     .footer-brand-name{display:flex;align-items:center;gap:10px;font-family:var(--font-display,"Playfair Display",serif);font-size:1.5rem;color:#fff;margin-bottom:14px;}
@@ -459,7 +448,7 @@
     .footer-legal-links a { font-size: .78rem; color: rgba(255,255,255,.28); transition: color .2s; }
     .footer-legal-links a:hover { color: #E8B524; }
 
-    /* ========== BACK TO TOP & WHATSAPP ========== */
+    /* BACK TO TOP & WHATSAPP */
     .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--forest-green), var(--forest-green-dark)); color: var(--white); border: none; font-size: 1.2rem; cursor: pointer; opacity: 0; visibility: hidden; transition: var(--transition-normal); z-index: 999; box-shadow: 0 4px 20px rgba(34,139,34,.3); }
     .back-to-top.show { opacity: 1; visibility: visible; }
     .back-to-top:hover { background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark)); transform: translateY(-5px); box-shadow: 0 6px 25px rgba(212,160,23,.4); }
@@ -470,16 +459,11 @@
     .wa-tooltip::after { content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); border-width: 6px; border-style: solid; border-color: transparent transparent transparent var(--gray-900); }
     @keyframes waPulse { 0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,.4); } 50% { box-shadow: 0 4px 30px rgba(37,211,102,.6), 0 0 0 10px rgba(37,211,102,.1); } }
 
-    /* ========== MODAL ========== */
+    /* MODAL */
     .port-modal { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; visibility: hidden; transition: all .3s ease; }
     .port-modal.open { opacity: 1; visibility: visible; }
     .modal-backdrop { position: absolute; inset: 0; background: rgba(13,51,32,.65); backdrop-filter: blur(8px); z-index: 1; }
-    .modal-box {
-        position: relative; z-index: 10001; background: var(--white);
-        border-radius: 24px; max-width: 780px; width: 100%; max-height: 90vh;
-        overflow-y: auto; box-shadow: 0 24px 80px rgba(0,0,0,.3);
-        transform: translateY(30px) scale(.97); transition: transform .35s cubic-bezier(.22,1,.36,1);
-    }
+    .modal-box { position: relative; z-index: 10001; background: var(--white); border-radius: 24px; max-width: 780px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 24px 80px rgba(0,0,0,.3); transform: translateY(30px) scale(.97); transition: transform .35s cubic-bezier(.22,1,.36,1); }
     .port-modal.open .modal-box { transform: translateY(0) scale(1); }
     .modal-box::-webkit-scrollbar { width: 6px; }
     .modal-box::-webkit-scrollbar-thumb { background: rgba(34,139,34,.3); border-radius: 3px; }
@@ -504,7 +488,7 @@
     .btn-modal-wa { display: inline-flex; align-items: center; gap: 9px; background: linear-gradient(135deg, #25d366, #128c7e); color: var(--white); padding: 14px 26px; border-radius: var(--radius-md); font-weight: 700; font-size: .95rem; transition: all .28s ease; }
     .btn-modal-wa:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(37,211,102,.38); color: var(--white); }
 
-    /* ========== AOS ========== */
+    /* AOS */
     [data-aos] { opacity: 0; transition: opacity .7s ease, transform .7s ease; }
     [data-aos="fade-up"] { transform: translateY(30px); }
     [data-aos="fade-right"] { transform: translateX(-30px); }
@@ -512,19 +496,21 @@
     [data-aos="zoom-in"] { transform: scale(.9); }
     [data-aos].aos-animate { opacity: 1; transform: none; }
 
-    /* ========== RESPONSIVE ========== */
+    /* RESPONSIVE */
     @media (max-width: 991.98px) {
         .portfolio-hero { min-height: auto; padding: 120px 0 80px; }
         .modal-grid { grid-template-columns: 1fr; }
         .modal-inner { padding: 24px 24px 28px; }
         .whatsapp-float { width: 55px; height: 55px; font-size: 1.6rem; bottom: 90px; right: 20px; }
         .wa-tooltip { display: none; }
+        .sticky-filter-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
     }
     @media (max-width: 767.98px) {
         :root { --section-padding: 70px 0; }
         .hero-main-title { font-size: 2rem; }
         .scroll-cue { display: none; }
-        .filter-wrap { flex-direction: column; align-items: flex-start; }
+        .filter-tabs { gap: 6px; }
+        .ftab { padding: 7px 14px; font-size: .78rem; }
         .section-title { font-size: 2rem; }
     }
     @media (max-width: 575.98px) {
@@ -539,7 +525,7 @@
 </head>
 <body>
 
-<!-- ========== PRELOADER ========== -->
+<!-- PRELOADER -->
 <div id="preloader" class="preloader">
     <div class="pl-inner">
         <div class="pl-ring">
@@ -552,7 +538,7 @@
     </div>
 </div>
 
-<!-- ========== NAVBAR ========== -->
+<!-- NAVBAR -->
 <header id="header">
     <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
         <div class="container">
@@ -568,20 +554,19 @@
                     <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">Tentang Kami</a></li>
                     <li class="nav-item"><a class="nav-link" href="product.html">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="our-machine.html">Mesin</a></li>
                     <li class="nav-item"><a class="nav-link" href="promo.html">Promo</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="our-machine.html">Mesin</a></li>
                     <li class="nav-item"><a class="nav-link active" href="portfolio.html">Portofolio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="partnership.html">Kemitraan</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact-us.html">Kontak</a></li>
                 </ul>
-                <a href="contact-us.html" class="btn btn-primary btn-contact">Hubungi Kami</a>
+                <a href="partnership.html" class="btn btn-primary btn-contact">Partnership</a>
             </div>
         </div>
     </nav>
 </header>
 
-<!-- ========== HERO SECTION ========== -->
+<!-- HERO SECTION -->
 <section class="portfolio-hero">
     <div class="hero-overlay"></div>
     <div class="hero-decoration">
@@ -601,45 +586,32 @@
                     Dari UMKM hingga korporasi besar — AROMAS bangga menjadi bagian dari ribuan kisah sukses mitra bisnis kami di berbagai sektor industri.
                 </p>
 
-                <!-- Stats -->
                 <div class="hero-stats">
                     <div class="hero-stat-pill">
                         <div class="hero-stat-icon"><i class="bi bi-people-fill"></i></div>
-                        <div class="hero-stat-info">
-                            <strong>1Jt+</strong>
-                            <span>Pelanggan Setia</span>
-                        </div>
+                        <div class="hero-stat-info"><strong>1Jt+</strong><span>Pelanggan Setia</span></div>
                     </div>
                     <div class="hero-stat-pill">
                         <div class="hero-stat-icon"><i class="bi bi-building"></i></div>
-                        <div class="hero-stat-info">
-                            <strong>500+</strong>
-                            <span>Mitra Distribusi</span>
-                        </div>
+                        <div class="hero-stat-info"><strong>500+</strong><span>Mitra Distribusi</span></div>
                     </div>
                     <div class="hero-stat-pill">
                         <div class="hero-stat-icon"><i class="bi bi-geo-alt-fill"></i></div>
-                        <div class="hero-stat-info">
-                            <strong>34</strong>
-                            <span>Provinsi Terjangkau</span>
-                        </div>
+                        <div class="hero-stat-info"><strong>34</strong><span>Provinsi Terjangkau</span></div>
                     </div>
                     <div class="hero-stat-pill">
                         <div class="hero-stat-icon"><i class="bi bi-star-fill"></i></div>
-                        <div class="hero-stat-info">
-                            <strong>4.9/5</strong>
-                            <span>Rating Kepuasan</span>
-                        </div>
+                        <div class="hero-stat-info"><strong>4.9/5</strong><span>Rating Kepuasan</span></div>
                     </div>
                 </div>
 
-                <!-- Filter chips -->
+                <!-- Hero filter chips — synced with sticky bar -->
                 <div class="hero-filter-chips">
                     <span class="hchip active" data-filter="all"><i class="bi bi-grid-fill"></i> Semua Mitra</span>
-                    <span class="hchip" data-filter="retail"><i class="bi bi-shop"></i> Retail</span>
-                    <span class="hchip" data-filter="horeca"><i class="bi bi-cup-hot-fill"></i> Hotel & Resto</span>
-                    <span class="hchip" data-filter="industri"><i class="bi bi-buildings-fill"></i> Industri</span>
-                    <span class="hchip" data-filter="catering"><i class="bi bi-egg-fried"></i> Katering</span>
+                    <span class="hchip" data-filter="retail"><i class="bi bi-shop"></i> Retail <small style="background:rgba(255,255,255,.2);border-radius:10px;padding:1px 7px;margin-left:4px;font-size:.7rem;">3</small></span>
+                    <span class="hchip" data-filter="horeca"><i class="bi bi-cup-hot-fill"></i> Hotel & Resto <small style="background:rgba(255,255,255,.2);border-radius:10px;padding:1px 7px;margin-left:4px;font-size:.7rem;">3</small></span>
+                    <span class="hchip" data-filter="industri"><i class="bi bi-buildings-fill"></i> Industri <small style="background:rgba(255,255,255,.2);border-radius:10px;padding:1px 7px;margin-left:4px;font-size:.7rem;">3</small></span>
+                    <span class="hchip" data-filter="catering"><i class="bi bi-egg-fried"></i> Katering <small style="background:rgba(255,255,255,.2);border-radius:10px;padding:1px 7px;margin-left:4px;font-size:.7rem;">3</small></span>
                 </div>
             </div>
         </div>
@@ -650,7 +622,7 @@
     </div>
 </section>
 
-<!-- ========== BREADCRUMB ========== -->
+<!-- BREADCRUMB -->
 <div class="bc-strip">
     <div class="container">
         <nav aria-label="breadcrumb">
@@ -662,41 +634,63 @@
     </div>
 </div>
 
-<!-- ========== FILTER TABS ========== -->
-<section class="filter-section">
+<!-- STICKY FILTER BAR -->
+<div class="sticky-filter-bar" id="stickyFilterBar">
     <div class="container">
-        <div class="filter-wrap">
+        <div class="sticky-filter-inner">
             <div class="filter-tabs">
-                <button class="ftab active" data-filter="all"><i class="bi bi-grid-fill"></i> Semua</button>
-                <button class="ftab" data-filter="retail"><i class="bi bi-shop"></i> Retail</button>
-                <button class="ftab" data-filter="horeca"><i class="bi bi-cup-hot-fill"></i> Hotel & Resto</button>
-                <button class="ftab" data-filter="industri"><i class="bi bi-buildings-fill"></i> Industri</button>
-                <button class="ftab" data-filter="catering"><i class="bi bi-egg-fried"></i> Katering</button>
+                <button class="ftab active" data-filter="all">
+                    <i class="bi bi-grid-fill"></i> Semua
+                    <span class="tab-count" id="count-all">12</span>
+                </button>
+                <button class="ftab" data-filter="retail">
+                    <i class="bi bi-shop"></i> Retail
+                    <span class="tab-count" id="count-retail">3</span>
+                </button>
+                <button class="ftab" data-filter="horeca">
+                    <i class="bi bi-cup-hot-fill"></i> Hotel & Resto
+                    <span class="tab-count" id="count-horeca">3</span>
+                </button>
+                <button class="ftab" data-filter="industri">
+                    <i class="bi bi-buildings-fill"></i> Industri
+                    <span class="tab-count" id="count-industri">3</span>
+                </button>
+                <button class="ftab" data-filter="catering">
+                    <i class="bi bi-egg-fried"></i> Katering
+                    <span class="tab-count" id="count-catering">3</span>
+                </button>
             </div>
-            <span class="result-count">Menampilkan <strong id="portCount">12</strong> mitra terpilih</span>
+            <div class="filter-right">
+                <!-- Active filter pill: visible when a specific category is selected -->
+                <span class="active-filter-pill" id="activeFilterPill">
+                    <span id="activeFilterLabel"></span>
+                    <button onclick="resetFilter()" title="Hapus filter"><i class="bi bi-x-lg"></i></button>
+                </span>
+                <span class="result-count">Menampilkan <strong id="portCount">12</strong> mitra</span>
+            </div>
         </div>
     </div>
-</section>
+</div>
 
-<!-- ========== PORTFOLIO GRID ========== -->
-<section class="portfolio-section">
+<!-- PORTFOLIO GRID -->
+<section class="portfolio-section" id="portfolioSection">
     <div class="container">
 
-        <!-- === RETAIL === -->
-        <div class="mb-5">
-            <div class="cat-section-header" data-aos="fade-right">
+        <!-- RETAIL -->
+        <div class="cat-section-wrapper" data-section="retail">
+            <div class="cat-section-header">
                 <div class="cat-icon-wrap green"><i class="bi bi-shop"></i></div>
                 <div>
                     <div class="cat-label">Kategori</div>
                     <div class="cat-title">Mitra Retail</div>
                 </div>
             </div>
-            <p class="cat-desc" data-aos="fade-up">
+            <p class="cat-desc">
                 Jaringan distribusi retail kami mencakup minimarket modern, supermarket, grosir tradisional, hingga platform e-commerce terkemuka di Indonesia.
             </p>
             <div class="row g-4">
 
-                <div class="col-md-6 col-lg-4 cat-block" data-cat="retail" data-aos="fade-up" data-aos-delay="0">
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="retail">
                     <div class="port-card" onclick="openModal('m1')">
                         <div class="card-img-wrap">
                             <span class="card-badge badge-retail">Retail</span>
@@ -725,7 +719,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4 cat-block" data-cat="retail" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="retail">
                     <div class="port-card" onclick="openModal('m2')">
                         <div class="card-img-wrap">
                             <span class="card-badge badge-retail">Retail</span>
@@ -754,7 +748,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4 cat-block" data-cat="retail" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="retail">
                     <div class="port-card" onclick="openModal('m3')">
                         <div class="card-img-wrap">
                             <span class="card-badge badge-retail">E-Commerce</span>
@@ -786,21 +780,21 @@
             </div>
         </div>
 
-        <!-- === HORECA === -->
-        <div class="mb-5">
-            <div class="cat-section-header" data-aos="fade-right">
+        <!-- HORECA -->
+        <div class="cat-section-wrapper" data-section="horeca">
+            <div class="cat-section-header">
                 <div class="cat-icon-wrap pink"><i class="bi bi-cup-hot-fill"></i></div>
                 <div>
                     <div class="cat-label">Kategori</div>
                     <div class="cat-title">Hotel & Restoran</div>
                 </div>
             </div>
-            <p class="cat-desc" data-aos="fade-up">
+            <p class="cat-desc">
                 Dipercaya oleh hotel bintang lima, restoran premium, café kekinian, hingga food court berskala besar dengan standar kuliner internasional.
             </p>
             <div class="row g-4">
 
-                <div class="col-md-6 col-lg-4 cat-block" data-cat="horeca" data-aos="fade-up" data-aos-delay="0">
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="horeca">
                     <div class="port-card" onclick="openModal('m4')">
                         <div class="card-img-wrap">
                             <span class="card-badge badge-horeca">Hotel ★★★★★</span>
@@ -829,7 +823,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4 cat-block" data-cat="horeca" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="horeca">
                     <div class="port-card" onclick="openModal('m5')">
                         <div class="card-img-wrap">
                             <span class="card-badge badge-horeca">Restoran</span>
@@ -858,7 +852,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4 cat-block" data-cat="horeca" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="horeca">
                     <div class="port-card" onclick="openModal('m6')">
                         <div class="card-img-wrap">
                             <span class="card-badge badge-horeca">Food Court</span>
@@ -890,21 +884,21 @@
             </div>
         </div>
 
-        <!-- === INDUSTRI === -->
-        <div class="mb-5">
-            <div class="cat-section-header" data-aos="fade-right">
+        <!-- INDUSTRI -->
+        <div class="cat-section-wrapper" data-section="industri">
+            <div class="cat-section-header">
                 <div class="cat-icon-wrap slate"><i class="bi bi-buildings-fill"></i></div>
                 <div>
                     <div class="cat-label">Kategori</div>
                     <div class="cat-title">Mitra Industri</div>
                 </div>
             </div>
-            <p class="cat-desc" data-aos="fade-up">
+            <p class="cat-desc">
                 Solusi supply minyak goreng curah dan kemasan besar untuk kebutuhan manufaktur makanan, pabrik snack, hingga usaha pengolahan skala industri.
             </p>
             <div class="row g-4">
 
-                <div class="col-md-6 col-lg-4 cat-block" data-cat="industri" data-aos="fade-up" data-aos-delay="0">
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="industri">
                     <div class="port-card" onclick="openModal('m7')">
                         <div class="card-img-wrap">
                             <span class="card-badge badge-industri">Manufaktur</span>
@@ -933,7 +927,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4 cat-block" data-cat="industri" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="industri">
                     <div class="port-card" onclick="openModal('m8')">
                         <div class="card-img-wrap">
                             <span class="card-badge badge-industri">Pengolahan</span>
@@ -962,7 +956,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4 cat-block" data-cat="industri" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="industri">
                     <div class="port-card" onclick="openModal('m9')">
                         <div class="card-img-wrap">
                             <span class="card-badge badge-industri">UMKM</span>
@@ -994,21 +988,21 @@
             </div>
         </div>
 
-        <!-- === CATERING === -->
-        <div class="mb-2">
-            <div class="cat-section-header" data-aos="fade-right">
+        <!-- CATERING -->
+        <div class="cat-section-wrapper" data-section="catering">
+            <div class="cat-section-header">
                 <div class="cat-icon-wrap gold"><i class="bi bi-egg-fried"></i></div>
                 <div>
                     <div class="cat-label">Kategori</div>
                     <div class="cat-title">Jasa Boga & Katering</div>
                 </div>
             </div>
-            <p class="cat-desc" data-aos="fade-up">
+            <p class="cat-desc">
                 Solusi terpercaya untuk usaha katering pernikahan, katering korporat, kantin perusahaan, hingga dapur komunal skala besar.
             </p>
             <div class="row g-4">
 
-                <div class="col-md-6 col-lg-4 cat-block" data-cat="catering" data-aos="fade-up" data-aos-delay="0">
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="catering">
                     <div class="port-card" onclick="openModal('m10')">
                         <div class="card-img-wrap">
                             <span class="card-badge badge-catering">Katering Premium</span>
@@ -1037,7 +1031,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4 cat-block" data-cat="catering" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="catering">
                     <div class="port-card" onclick="openModal('m11')">
                         <div class="card-img-wrap">
                             <span class="card-badge badge-catering">Kantin</span>
@@ -1066,7 +1060,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4 cat-block" data-cat="catering" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-md-6 col-lg-4 cat-block" data-cat="catering">
                     <div class="port-card" onclick="openModal('m12')">
                         <div class="card-img-wrap">
                             <span class="card-badge badge-catering">Social</span>
@@ -1098,15 +1092,25 @@
             </div>
         </div>
 
+        <!-- EMPTY STATE -->
+        <div class="empty-state" id="emptyState">
+            <div class="empty-icon"><i class="bi bi-search"></i></div>
+            <h4>Tidak ada mitra ditemukan</h4>
+            <p>Coba pilih kategori lain atau lihat semua mitra kami.</p>
+            <button class="btn-reset-filter" onclick="resetFilter()">
+                <i class="bi bi-arrow-counterclockwise"></i> Tampilkan Semua Mitra
+            </button>
+        </div>
+
     </div>
 </section>
 
-<!-- ========== TESTIMONIALS ========== -->
+<!-- TESTIMONIALS -->
 <section class="testimonial-section">
     <div class="container">
         <div class="testi-header" data-aos="fade-up">
             <h2 class="section-title">Apa Kata <span class="italic">Mitra Kami</span></h2>
-            <p class="section-desc" style="max-width: 600px; margin: 0 auto;">Kepercayaan mitra adalah motivasi terbesar kami untuk terus berinovasi dan memberikan yang terbaik.</p>
+            <p style="max-width: 600px; margin: 0 auto;">Kepercayaan mitra adalah motivasi terbesar kami untuk terus berinovasi dan memberikan yang terbaik.</p>
         </div>
         <div class="row g-4">
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
@@ -1155,56 +1159,44 @@
     </div>
 </section>
 
-<!-- ========== IMPACT SECTION ========== -->
+<!-- IMPACT -->
 <section class="impact-section">
     <div class="impact-overlay"></div>
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
             <h2 class="section-title text-white">Dampak <span class="italic" style="-webkit-text-fill-color:inherit; color: var(--primary-gold);">AROMAS</span></h2>
-            <p style="color:rgba(255,255,255,.7); max-width:520px; margin: 0 auto; font-size: 1rem;">Angka-angka nyata yang mencerminkan kepercayaan mitra dan pelanggan kami.</p>
+            <p style="color:rgba(255,255,255,.7); max-width:520px; margin: 0 auto;">Angka-angka nyata yang mencerminkan kepercayaan mitra dan pelanggan kami.</p>
         </div>
         <div class="row g-4">
             <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="impact-card">
                     <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=160&fit=crop" alt="Experience" class="impact-img" />
-                    <div class="impact-stat">
-                        <h3><span class="counter" data-target="15">0</span>+</h3>
-                        <p>Tahun Pengalaman</p>
-                    </div>
+                    <div class="impact-stat"><h3><span class="counter" data-target="15">0</span>+</h3><p>Tahun Pengalaman</p></div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="200">
                 <div class="impact-card">
                     <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&h=160&fit=crop" alt="Partners" class="impact-img" />
-                    <div class="impact-stat">
-                        <h3><span class="counter" data-target="500">0</span>+</h3>
-                        <p>Mitra Distribusi</p>
-                    </div>
+                    <div class="impact-stat"><h3><span class="counter" data-target="500">0</span>+</h3><p>Mitra Distribusi</p></div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="300">
                 <div class="impact-card">
                     <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=300&h=160&fit=crop" alt="Provinces" class="impact-img" />
-                    <div class="impact-stat">
-                        <h3><span class="counter" data-target="34">0</span></h3>
-                        <p>Provinsi Terjangkau</p>
-                    </div>
+                    <div class="impact-stat"><h3><span class="counter" data-target="34">0</span></h3><p>Provinsi Terjangkau</p></div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="400">
                 <div class="impact-card">
                     <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=160&fit=crop" alt="Customers" class="impact-img" />
-                    <div class="impact-stat">
-                        <h3><span class="counter" data-target="1000000">0</span>+</h3>
-                        <p>Pelanggan Setia</p>
-                    </div>
+                    <div class="impact-stat"><h3><span class="counter" data-target="1000000">0</span>+</h3><p>Pelanggan Setia</p></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ========== KEUNGGULAN SECTION ========== -->
+<!-- KEUNGGULAN -->
 <section class="keunggulan-section">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
@@ -1244,7 +1236,7 @@
     </div>
 </section>
 
-<!-- ========== MITRA LOGOS ========== -->
+<!-- MITRA LOGOS -->
 <section class="mitra-section">
     <div class="container">
         <h3 class="text-center mb-2" style="font-size: 1rem; color: var(--gray-500); font-weight: 500;" data-aos="fade-up">Didistribusikan Melalui Jaringan Terkemuka</h3>
@@ -1259,7 +1251,7 @@
     </div>
 </section>
 
-<!-- ========== CTA ========== -->
+<!-- CTA -->
 <section class="cta-section">
     <div class="container">
         <div class="row align-items-center gy-4">
@@ -1281,7 +1273,7 @@
     </div>
 </section>
 
-<!-- ========== FOOTER ========== -->
+<!-- FOOTER -->
 <footer class="footer">
     <div class="container">
         <div class="footer-divider"></div>
@@ -1293,11 +1285,11 @@
                 </div>
                 <p class="footer-desc">Minyak goreng sawit premium berkualitas tinggi untuk keluarga dan industri Indonesia. Dipercaya sejak 1994.</p>
                 <div class="footer-socials">
-                    <a href="#" class="social-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="social-btn" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-                    <a href="#" class="social-btn" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-                    <a href="#" class="social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="social-btn"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-btn"><i class="bi bi-whatsapp"></i></a>
+                    <a href="#" class="social-btn"><i class="bi bi-tiktok"></i></a>
+                    <a href="#" class="social-btn"><i class="bi bi-youtube"></i></a>
                 </div>
             </div>
             <div class="col-lg-2 col-md-3 col-6">
@@ -1324,7 +1316,7 @@
                 <div class="footer-col-title">Hubungi Kami</div>
                 <ul class="footer-contact-list">
                     <li><i class="bi bi-geo-alt-fill"></i> Jl. Industri Raya No. 123, Jakarta 12345</li>
-                    <li><i class="bi bi-envelope-fill"></i> info@aromas.co.id</li>
+                    <li><i class="bi bi-envelope-fill"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="076e696168476675686a6674296468296e63">[email&#160;protected]</a></li>
                     <li><i class="bi bi-telephone-fill"></i> (021) 1234-5678</li>
                     <li><i class="bi bi-whatsapp"></i> +62 812-3456-7890</li>
                 </ul>
@@ -1344,18 +1336,14 @@
     </div>
 </footer>
 
-<!-- Back to Top -->
 <button id="backToTop" class="back-to-top"><i class="bi bi-arrow-up"></i></button>
 
-<!-- WhatsApp Float -->
-<a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20bertanya%20tentang%20kemitraan" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat via WhatsApp">
+<a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20bertanya%20tentang%20kemitraan" target="_blank" rel="noopener noreferrer" class="whatsapp-float">
     <i class="bi bi-whatsapp"></i>
     <span class="wa-tooltip">Chat dengan Kami</span>
 </a>
 
-<!-- ========== MODALS ========== -->
-
-<!-- Modal m1: Mart 88 -->
+<!-- MODALS -->
 <div class="port-modal" id="modal-m1">
     <div class="modal-backdrop" onclick="closeModal('m1')"></div>
     <div class="modal-box">
@@ -1384,7 +1372,6 @@
     </div>
 </div>
 
-<!-- Modal m2: Toko Kelontong Berkah -->
 <div class="port-modal" id="modal-m2">
     <div class="modal-backdrop" onclick="closeModal('m2')"></div>
     <div class="modal-box">
@@ -1413,7 +1400,6 @@
     </div>
 </div>
 
-<!-- Modal m3: NusaMart Online -->
 <div class="port-modal" id="modal-m3">
     <div class="modal-backdrop" onclick="closeModal('m3')"></div>
     <div class="modal-box">
@@ -1442,7 +1428,6 @@
     </div>
 </div>
 
-<!-- Modal m4: Grand Hotel -->
 <div class="port-modal" id="modal-m4">
     <div class="modal-backdrop" onclick="closeModal('m4')"></div>
     <div class="modal-box">
@@ -1471,7 +1456,6 @@
     </div>
 </div>
 
-<!-- Modal m5: Cafe Senja Group -->
 <div class="port-modal" id="modal-m5">
     <div class="modal-backdrop" onclick="closeModal('m5')"></div>
     <div class="modal-box">
@@ -1500,7 +1484,6 @@
     </div>
 </div>
 
-<!-- Modal m6: Kelapa Muda Food Hall -->
 <div class="port-modal" id="modal-m6">
     <div class="modal-backdrop" onclick="closeModal('m6')"></div>
     <div class="modal-box">
@@ -1529,7 +1512,6 @@
     </div>
 </div>
 
-<!-- Modal m7: IndoSnack -->
 <div class="port-modal" id="modal-m7">
     <div class="modal-backdrop" onclick="closeModal('m7')"></div>
     <div class="modal-box">
@@ -1558,7 +1540,6 @@
     </div>
 </div>
 
-<!-- Modal m8: PT Mie Nusantara -->
 <div class="port-modal" id="modal-m8">
     <div class="modal-backdrop" onclick="closeModal('m8')"></div>
     <div class="modal-box">
@@ -1587,7 +1568,6 @@
     </div>
 </div>
 
-<!-- Modal m9: UMKM Keripik Ibu Sri -->
 <div class="port-modal" id="modal-m9">
     <div class="modal-backdrop" onclick="closeModal('m9')"></div>
     <div class="modal-box">
@@ -1616,7 +1596,6 @@
     </div>
 </div>
 
-<!-- Modal m10: Catering Nusantara -->
 <div class="port-modal" id="modal-m10">
     <div class="modal-backdrop" onclick="closeModal('m10')"></div>
     <div class="modal-box">
@@ -1645,7 +1624,6 @@
     </div>
 </div>
 
-<!-- Modal m11: Dapur Karyawan Sejahtera -->
 <div class="port-modal" id="modal-m11">
     <div class="modal-backdrop" onclick="closeModal('m11')"></div>
     <div class="modal-box">
@@ -1674,7 +1652,6 @@
     </div>
 </div>
 
-<!-- Modal m12: Yayasan Dapur Sosial -->
 <div class="port-modal" id="modal-m12">
     <div class="modal-backdrop" onclick="closeModal('m12')"></div>
     <div class="modal-box">
@@ -1703,14 +1680,25 @@
     </div>
 </div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script>
 /* ============================================================
-   AROMAS PORTFOLIO PAGE SCRIPTS
+   AROMAS PORTFOLIO — FIXED FILTER SYSTEM v2
    ============================================================ */
+
+// Category display names for the active pill
+var FILTER_LABELS = {
+    'all': 'Semua Mitra',
+    'retail': 'Retail',
+    'horeca': 'Hotel & Resto',
+    'industri': 'Industri',
+    'catering': 'Katering'
+};
+
+// Track current active filter
+var currentFilter = 'all';
 
 // PRELOADER
 window.addEventListener('load', function () {
@@ -1728,9 +1716,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initBackToTop();
     initMobileMenu();
     initFilter();
-    initHeroChips();
     initCounters();
-    console.log('AROMAS Portfolio page ready!');
 });
 
 // NAVBAR
@@ -1767,55 +1753,136 @@ function initMobileMenu() {
     });
 }
 
-// FILTER TABS
-function initFilter() {
-    var tabs = document.querySelectorAll('.ftab');
+/* =========================================================
+   CORE FILTER ENGINE
+   ========================================================= */
+function applyFilter(filter) {
+    currentFilter = filter;
+
+    var blocks = document.querySelectorAll('.cat-block');
+    var catSections = document.querySelectorAll('.cat-section-wrapper');
     var countEl = document.getElementById('portCount');
+    var emptyState = document.getElementById('emptyState');
+    var activeFilterPill = document.getElementById('activeFilterPill');
+    var activeFilterLabel = document.getElementById('activeFilterLabel');
 
-    tabs.forEach(function (tab) {
-        tab.addEventListener('click', function () {
-            var filter = this.dataset.filter;
-            tabs.forEach(function (t) { t.classList.remove('active'); });
-            this.classList.add('active');
+    var count = 0;
 
-            var blocks = document.querySelectorAll('.cat-block');
-            var count = 0;
-            blocks.forEach(function (block) {
-                var cat = block.dataset.cat;
-                if (filter === 'all' || cat === filter) {
-                    block.classList.remove('hidden-cat');
-                    count++;
-                } else {
-                    block.classList.add('hidden-cat');
-                }
+    // 1. Show/hide individual cards
+    blocks.forEach(function (block) {
+        var cat = block.dataset.cat;
+        if (filter === 'all' || cat === filter) {
+            block.classList.remove('hidden-cat');
+            count++;
+        } else {
+            block.classList.add('hidden-cat');
+        }
+    });
+
+    // 2. Show/hide entire category section wrappers
+    catSections.forEach(function (section) {
+        var sectionCat = section.dataset.section;
+        if (filter === 'all' || sectionCat === filter) {
+            section.classList.remove('cat-hidden');
+            section.style.removeProperty('animation');
+            // Force all child [data-aos] elements to be visible immediately
+            section.querySelectorAll('[data-aos]').forEach(function (el) {
+                el.classList.add('aos-animate');
             });
-            if (countEl) countEl.textContent = count;
+            // Use rAF so display:block is painted first, THEN animate
+            requestAnimationFrame(function () {
+                section.style.animation = 'catFadeIn 0.35s ease forwards';
+            });
+        } else {
+            section.classList.add('cat-hidden');
+            section.style.removeProperty('animation');
+        }
+    });
 
-            // Scroll to portfolio section
-            var sec = document.querySelector('.portfolio-section');
-            if (sec) {
-                var offset = sec.getBoundingClientRect().top + window.pageYOffset - 90;
-                window.scrollTo({ top: offset, behavior: 'smooth' });
-            }
-        });
+    // 3. Update count badge
+    if (countEl) countEl.textContent = count;
+
+    // 4. Show/hide active filter pill
+    if (activeFilterPill && activeFilterLabel) {
+        if (filter !== 'all') {
+            activeFilterLabel.textContent = FILTER_LABELS[filter] || filter;
+            activeFilterPill.classList.add('visible');
+        } else {
+            activeFilterPill.classList.remove('visible');
+        }
+    }
+
+    // 5. Empty state
+    if (emptyState) {
+        emptyState.style.display = count === 0 ? 'block' : 'none';
+    }
+}
+
+function syncAllFilterUI(filter) {
+    // Sync sticky tab buttons
+    document.querySelectorAll('.ftab[data-filter]').forEach(function (t) {
+        t.classList.toggle('active', t.dataset.filter === filter);
+    });
+    // Sync hero chips
+    document.querySelectorAll('.hchip[data-filter]').forEach(function (c) {
+        c.classList.toggle('active', c.dataset.filter === filter);
     });
 }
 
-// HERO CHIPS sync with filter tabs
-function initHeroChips() {
-    var chips = document.querySelectorAll('.hchip[data-filter]');
-    chips.forEach(function (chip) {
-        chip.addEventListener('click', function () {
+function resetFilter() {
+    syncAllFilterUI('all');
+    applyFilter('all');
+    setTimeout(function () {
+        var sec = document.getElementById('portfolioSection');
+        if (sec) {
+            var offset = sec.getBoundingClientRect().top + window.pageYOffset - 90;
+            window.scrollTo({ top: offset, behavior: 'smooth' });
+        }
+    }, 20);
+}
+
+function initFilter() {
+    // Attach click handlers to ALL filter elements: tabs + hero chips
+    var allFilterEls = document.querySelectorAll('.ftab[data-filter], .hchip[data-filter]');
+
+    allFilterEls.forEach(function (el) {
+        el.addEventListener('click', function () {
             var filter = this.dataset.filter;
-            chips.forEach(function (c) { c.classList.remove('active'); });
-            this.classList.add('active');
-            var matchTab = document.querySelector('.ftab[data-filter="' + filter + '"]');
-            if (matchTab) matchTab.click();
+
+            // If clicking already-active filter, reset to all
+            if (filter === currentFilter && filter !== 'all') {
+                filter = 'all';
+            }
+
+            syncAllFilterUI(filter);
+            applyFilter(filter);
+
+            // Delay scroll slightly so display:block is painted before measuring position
+            setTimeout(function () {
+                var sec = document.getElementById('portfolioSection');
+                if (sec) {
+                    var offset = sec.getBoundingClientRect().top + window.pageYOffset - 90;
+                    window.scrollTo({ top: offset, behavior: 'smooth' });
+                }
+            }, 20);
         });
     });
+
+    // Initial render — explicitly mark all sections visible and force AOS on their children
+    document.querySelectorAll('.cat-section-wrapper').forEach(function (s) {
+        s.classList.remove('cat-hidden');
+        s.style.removeProperty('animation');
+        // Force AOS animate on all children so they are visible
+        s.querySelectorAll('[data-aos]').forEach(function (el) {
+            el.classList.add('aos-animate');
+        });
+    });
+    applyFilter('all');
 }
 
-// COUNTER ANIMATION
+/* =========================================================
+   COUNTER ANIMATION
+   ========================================================= */
 function initCounters() {
     var counters = document.querySelectorAll('.counter');
     var animated = false;
@@ -1834,18 +1901,14 @@ function initCounters() {
                     function update() {
                         current += increment;
                         if (current < target) {
-                            if (target >= 1000000) {
-                                counter.textContent = Math.floor(current).toLocaleString('id-ID');
-                            } else {
-                                counter.textContent = Math.floor(current);
-                            }
+                            counter.textContent = target >= 1000000
+                                ? Math.floor(current).toLocaleString('id-ID')
+                                : Math.floor(current);
                             requestAnimationFrame(update);
                         } else {
-                            if (target >= 1000000) {
-                                counter.textContent = target.toLocaleString('id-ID');
-                            } else {
-                                counter.textContent = target;
-                            }
+                            counter.textContent = target >= 1000000
+                                ? target.toLocaleString('id-ID')
+                                : target;
                         }
                     }
                     update();
@@ -1856,7 +1919,9 @@ function initCounters() {
     obs.observe(impactSec);
 }
 
-// MODAL OPEN
+/* =========================================================
+   MODAL
+   ========================================================= */
 function openModal(id) {
     var modal = document.getElementById('modal-' + id);
     if (!modal) return;
@@ -1864,7 +1929,6 @@ function openModal(id) {
     modal.classList.add('open');
 }
 
-// MODAL CLOSE
 function closeModal(id) {
     var modal = document.getElementById('modal-' + id);
     if (!modal) return;
@@ -1872,7 +1936,6 @@ function closeModal(id) {
     document.body.style.overflow = '';
 }
 
-// CLOSE MODAL ON ESC
 document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
         document.querySelectorAll('.port-modal.open').forEach(function (m) {

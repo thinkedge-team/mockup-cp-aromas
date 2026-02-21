@@ -4382,3 +4382,251 @@ img {
 }
 
 /* ========== END OF CUSTOM MARKERS & COMPACT POPUP ========== */
+
+/* ========================================
+   HERO SLIDER - TAMBAHAN CSS
+   Paste di bagian bawah style.css
+   ======================================== */
+
+/* ========== HERO SLIDER WRAPPER ========== */
+.hero-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hero-slides-track {
+    display: flex;
+    width: 100%;
+    transition: transform 0.7s cubic-bezier(0.77, 0, 0.18, 1);
+    will-change: transform;
+}
+
+/* Setiap slide = 1 hero section, lebar 100% */
+.hero-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Background tiap slide bisa berbeda */
+.hero-slide:nth-child(1) {
+    background: linear-gradient(135deg, #1a2e1a 0%, #0d3320 50%, #15412a 100%);
+}
+.hero-slide:nth-child(2) {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0d1f3c 50%, #15253d 100%);
+}
+.hero-slide:nth-child(3) {
+    background: linear-gradient(135deg, #2e1a0d 0%, #3d200d 50%, #2a1800 100%);
+}
+
+/* Setiap slide punya overlay sendiri */
+.hero-slide .hero-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-slide:nth-child(1) .hero-overlay {
+    background:
+        radial-gradient(ellipse at 70% 50%, rgba(212,160,23,0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 80%, rgba(34,85,51,0.3) 0%, transparent 40%);
+}
+.hero-slide:nth-child(2) .hero-overlay {
+    background:
+        radial-gradient(ellipse at 70% 50%, rgba(23,100,212,0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 80%, rgba(34,51,85,0.3) 0%, transparent 40%);
+}
+.hero-slide:nth-child(3) .hero-overlay {
+    background:
+        radial-gradient(ellipse at 70% 50%, rgba(212,80,23,0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 80%, rgba(85,51,34,0.3) 0%, transparent 40%);
+}
+
+/* Decoration & container di dalam slide */
+.hero-slide .hero-decoration {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-slide .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+/* ========== SLIDER NAVIGATION ARROWS ========== */
+.hero-slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1.5px solid rgba(212, 160, 23, 0.4);
+    color: #fff;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+
+.hero-slider-arrow:hover {
+    background: var(--primary-gold);
+    border-color: var(--primary-gold);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 28px rgba(212,160,23,0.45);
+}
+
+.hero-slider-arrow-prev {
+    left: 24px;
+}
+
+.hero-slider-arrow-next {
+    right: 24px;
+}
+
+.hero-slider-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ========== SLIDER DOTS ========== */
+.hero-slider-dots {
+    position: absolute;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.hero-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.4);
+    border: none;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    padding: 0;
+}
+
+.hero-dot.active {
+    width: 28px;
+    background: var(--primary-gold);
+    box-shadow: 0 0 10px rgba(212,160,23,0.5);
+}
+
+/* ========== SLIDE COUNTER ========== */
+.hero-slide-counter {
+    position: absolute;
+    bottom: 90px;
+    right: 30px;
+    z-index: 100;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-family: var(--font-primary);
+}
+
+.hero-slide-counter span {
+    color: var(--primary-gold);
+    font-size: 1rem;
+}
+
+/* ========== PROGRESS BAR AUTOPLAY ========== */
+.hero-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-gold), var(--primary-gold-light));
+    z-index: 100;
+    width: 0%;
+    transition: width 0s linear;
+    box-shadow: 0 0 8px rgba(212,160,23,0.5);
+}
+
+.hero-progress-bar.animating {
+    width: 100%;
+    transition: width 5s linear;
+}
+
+/* ========== SLIDE-IN ANIMATIONS ========== */
+.hero-slide .hero-content-left {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.hero-slide .hero-product-wrapper {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Slide tidak aktif sembunyikan konten */
+.hero-slide:not(.active-slide) .hero-content-left,
+.hero-slide:not(.active-slide) .hero-product-wrapper {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hero-slide.active-slide .hero-content-left {
+    animation: slideContentIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-slide.active-slide .hero-product-wrapper {
+    animation: slideProductIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+@keyframes slideContentIn {
+    from { opacity: 0; transform: translateX(-40px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideProductIn {
+    from { opacity: 0; transform: translateX(40px) scale(0.95); }
+    to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+/* ========== RESPONSIVE SLIDER ========== */
+@media (max-width: 768px) {
+    .hero-slider-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    .hero-slider-arrow-prev { left: 12px; }
+    .hero-slider-arrow-next { right: 12px; }
+
+    .hero-slider-dots {
+        bottom: 70px;
+    }
+    .hero-slide-counter {
+        bottom: 70px;
+        right: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-slider-arrow {
+        display: none;
+    }
+    .hero-slider-dots {
+        bottom: 60px;
+    }
+}

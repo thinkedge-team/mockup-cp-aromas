@@ -189,188 +189,325 @@
                                 <a class="nav-link" href="product.html">Produk</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="our-machine.html">Mesin</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="promo.html">Promo</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="blog.html">Blog</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="our-machine.html">Mesin</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="portfolio.html">Portofolio</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="partnership.html">Kemitraan</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="contact-us.html">Kontak</a>
                             </li>
                         </ul>
-                        <a href="contact-us.html" class="btn btn-primary btn-contact">Hubungi Kami</a>
+                        <a href="partnership.html" class="btn btn-primary btn-contact">Partnership</a>
                     </div>
                 </div>
             </nav>
         </header>
 
         <!-- ========== HERO SECTION ========== -->
-        <section
-            id="home"
-            class="hero-section"
-        >
-            <div class="hero-overlay"></div>
+        <section id="home" class="hero-slider">
 
-            <!-- Decorative Elements -->
-            <div class="hero-decoration">
-                <div class="decoration-circle circle-1"></div>
-                <div class="decoration-circle circle-2"></div>
-                <div class="decoration-circle circle-3"></div>
+            <!-- ===== NAVIGATION ARROWS ===== -->
+            <button class="hero-slider-arrow hero-slider-arrow-prev" id="heroPrev" aria-label="Slide sebelumnya">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+            <button class="hero-slider-arrow hero-slider-arrow-next" id="heroNext" aria-label="Slide berikutnya">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+
+            <!-- ===== DOTS ===== -->
+            <div class="hero-slider-dots" id="heroSliderDots">
+                <button class="hero-dot active" data-index="0" aria-label="Slide 1"></button>
+                <button class="hero-dot" data-index="1" aria-label="Slide 2"></button>
+                <button class="hero-dot" data-index="2" aria-label="Slide 3"></button>
             </div>
 
-            <div class="container">
-                <div class="row align-items-center min-vh-hero">
-                    <!-- Left Content -->
-                    <div class="col-lg-5 col-md-6 order-lg-1 order-2">
-                        <div
-                            class="hero-content-left"
-                            data-aos="fade-right"
-                        >
-                            <span class="hero-badge">
-                                <i class="bi bi-award-fill"></i> Premium Quality
-                            </span>
-                            <h1 class="hero-main-title">
-                                Minyak Goreng
-                                <span class="text-gradient">AROMAS</span>
-                            </h1>
-                            <p class="hero-description">
-                                Hadirkan cita rasa terbaik untuk masakan
-                                keluarga dengan minyak goreng sawit berkualitas
-                                premium. Jernih, sehat, dan tahan panas tinggi.
-                            </p>
+            <!-- ===== COUNTER ===== -->
+            <div class="hero-slide-counter">
+                <span id="heroCurrent">01</span> / 03
+            </div>
 
-                            <!-- Feature Pills -->
-                            <div class="hero-pills">
-                                <span class="pill"
-                                    ><i class="bi bi-check-circle-fill"></i>
-                                    Rendah Kolesterol</span
-                                >
-                                <span class="pill"
-                                    ><i class="bi bi-check-circle-fill"></i>
-                                    Halal MUI</span
-                                >
-                                <span class="pill"
-                                    ><i class="bi bi-check-circle-fill"></i>
-                                    BPOM Certified</span
-                                >
-                            </div>
+            <!-- ===== AUTOPLAY PROGRESS BAR ===== -->
+            <div class="hero-progress-bar" id="heroProgressBar"></div>
 
-                            <!-- CTA Buttons -->
-                            <div class="hero-actions">
-                                <a
-                                    href="#products"
-                                    class="btn-primary-hero"
-                                >
-                                    <i class="bi bi-bag-check-fill"></i>
-                                    <span>Lihat Produk</span>
-                                </a>
-                                <a
-                                    href="about.html"
-                                    class="btn-secondary-hero"
-                                >
-                                    <i class="bi bi-play-circle-fill"></i>
-                                    <span>Tentang Kami</span>
-                                </a>
-                            </div>
+            <!-- ===== SLIDES TRACK ===== -->
+            <div class="hero-slides-track" id="heroSlidesTrack">
 
-                            <!-- Trust Badges -->
-                            <div class="hero-trust">
-                                <div class="trust-item">
-                                    <strong>15+</strong>
-                                    <span>Tahun Pengalaman</span>
-                                </div>
-                                <div class="trust-divider"></div>
-                                <div class="trust-item">
-                                    <strong>1Jt+</strong>
-                                    <span>Pelanggan Setia</span>
-                                </div>
-                                <div class="trust-divider"></div>
-                                <div class="trust-item">
-                                    <strong>500+</strong>
-                                    <span>Mitra Distribusi</span>
-                                </div>
-                            </div>
-                        </div>
+                <!-- ========== SLIDE 1 - ORIGINAL (tidak diubah sama sekali) ========== -->
+                <div class="hero-slide active-slide" style="padding: 100px 0 60px;">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-decoration">
+                        <div class="decoration-circle circle-1"></div>
+                        <div class="decoration-circle circle-2"></div>
+                        <div class="decoration-circle circle-3"></div>
                     </div>
-
-                    <!-- Center/Right Product Image -->
-                    <div class="col-lg-7 col-md-6 order-lg-2 order-1">
-                        <div
-                            class="hero-product-wrapper"
-                            data-aos="fade-left"
-                            data-aos-delay="200"
-                        >
-                            <!-- Main Product Image -->
-                            <img
-                                src="assets/images/aromas-hero.png"
-                                alt="AROMAS Minyak Goreng Premium"
-                                class="hero-product-img"
-                            />
-
-                            <!-- Floating Feature Cards -->
-                            <div
-                                class="floating-card card-1"
-                                data-aos="fade-down"
-                                data-aos-delay="400"
-                            >
-                                <div class="floating-icon">
-                                    <i class="bi bi-heart-pulse-fill"></i>
-                                </div>
-                                <div class="floating-text">
-                                    <strong>Sehat</strong>
-                                    <span>Rendah Lemak</span>
+                    <div class="container">
+                        <div class="row align-items-center min-vh-hero">
+                            <div class="col-lg-5 col-md-6 order-lg-1 order-2">
+                                <div class="hero-content-left">
+                                    <span class="hero-badge">
+                                        <i class="bi bi-award-fill"></i> Premium Quality
+                                    </span>
+                                    <h1 class="hero-main-title">
+                                        Minyak Goreng
+                                        <span class="text-gradient">AROMAS</span>
+                                    </h1>
+                                    <p class="hero-description">
+                                        Hadirkan cita rasa terbaik untuk masakan
+                                        keluarga dengan minyak goreng sawit berkualitas
+                                        premium. Jernih, sehat, dan tahan panas tinggi.
+                                    </p>
+                                    <div class="hero-pills">
+                                        <span class="pill"><i class="bi bi-check-circle-fill"></i> Rendah Kolesterol</span>
+                                        <span class="pill"><i class="bi bi-check-circle-fill"></i> Halal MUI</span>
+                                        <span class="pill"><i class="bi bi-check-circle-fill"></i> BPOM Certified</span>
+                                    </div>
+                                    <div class="hero-actions">
+                                        <a href="#products" class="btn-primary-hero">
+                                            <i class="bi bi-bag-check-fill"></i>
+                                            <span>Lihat Produk</span>
+                                        </a>
+                                        <a href="about.html" class="btn-secondary-hero">
+                                            <i class="bi bi-play-circle-fill"></i>
+                                            <span>Tentang Kami</span>
+                                        </a>
+                                    </div>
+                                    <div class="hero-trust">
+                                        <div class="trust-item">
+                                            <strong>15+</strong>
+                                            <span>Tahun Pengalaman</span>
+                                        </div>
+                                        <div class="trust-divider"></div>
+                                        <div class="trust-item">
+                                            <strong>1Jt+</strong>
+                                            <span>Pelanggan Setia</span>
+                                        </div>
+                                        <div class="trust-divider"></div>
+                                        <div class="trust-item">
+                                            <strong>500+</strong>
+                                            <span>Mitra Distribusi</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div
-                                class="floating-card card-2"
-                                data-aos="fade-up"
-                                data-aos-delay="500"
-                            >
-                                <div class="floating-icon">
-                                    <i class="bi bi-fire"></i>
-                                </div>
-                                <div class="floating-text">
-                                    <strong>Tahan Panas</strong>
-                                    <span>Anti Gosong</span>
-                                </div>
-                            </div>
-
-                            <div
-                                class="floating-card card-3"
-                                data-aos="fade-left"
-                                data-aos-delay="600"
-                            >
-                                <div class="floating-icon">
-                                    <i class="bi bi-droplet-fill"></i>
-                                </div>
-                                <div class="floating-text">
-                                    <strong>Jernih</strong>
-                                    <span>100% Murni</span>
+                            <div class="col-lg-7 col-md-6 order-lg-2 order-1">
+                                <div class="hero-product-wrapper">
+                                    <img src="assets/images/aromas-hero.png" alt="AROMAS Minyak Goreng Premium" class="hero-product-img" />
+                                    <div class="floating-card card-1">
+                                        <div class="floating-icon"><i class="bi bi-heart-pulse-fill"></i></div>
+                                        <div class="floating-text">
+                                            <strong>Sehat</strong>
+                                            <span>Rendah Lemak</span>
+                                        </div>
+                                    </div>
+                                    <div class="floating-card card-2">
+                                        <div class="floating-icon"><i class="bi bi-fire"></i></div>
+                                        <div class="floating-text">
+                                            <strong>Tahan Panas</strong>
+                                            <span>Anti Gosong</span>
+                                        </div>
+                                    </div>
+                                    <div class="floating-card card-3">
+                                        <div class="floating-icon"><i class="bi bi-droplet-fill"></i></div>
+                                        <div class="floating-text">
+                                            <strong>Jernih</strong>
+                                            <span>100% Murni</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <!-- END SLIDE 1 -->
 
-            <!-- Scroll Indicator -->
-            <div class="scroll-indicator">
-                <div class="mouse">
-                    <div class="wheel"></div>
+                <!-- ========== SLIDE 2 - PROMO / B2B ========== -->
+                <div class="hero-slide" style="padding: 100px 0 60px;">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-decoration">
+                        <div class="decoration-circle circle-1"></div>
+                        <div class="decoration-circle circle-2"></div>
+                        <div class="decoration-circle circle-3"></div>
+                    </div>
+                    <div class="container">
+                        <div class="row align-items-center min-vh-hero">
+                            <div class="col-lg-5 col-md-6 order-lg-1 order-2">
+                                <div class="hero-content-left">
+                                    <span class="hero-badge">
+                                        <i class="bi bi-building-fill"></i> Kemitraan B2B
+                                    </span>
+                                    <h1 class="hero-main-title">
+                                        Solusi Industri
+                                        <span class="text-gradient">Terpercaya</span>
+                                    </h1>
+                                    <p class="hero-description">
+                                        Pasokan minyak goreng premium untuk restoran,
+                                        hotel, katering & industri makanan dengan
+                                        harga kompetitif dan kualitas terjamin.
+                                    </p>
+                                    <div class="hero-pills">
+                                        <span class="pill"><i class="bi bi-check-circle-fill"></i> Harga Grosir</span>
+                                        <span class="pill"><i class="bi bi-check-circle-fill"></i> Pengiriman Cepat</span>
+                                        <span class="pill"><i class="bi bi-check-circle-fill"></i> Kontrak Fleksibel</span>
+                                    </div>
+                                    <div class="hero-actions">
+                                        <a href="partnership.html" class="btn-primary-hero">
+                                            <i class="bi bi-handshake-fill"></i>
+                                            <span>Mulai Kemitraan</span>
+                                        </a>
+                                        <a href="contact-us.html" class="btn-secondary-hero">
+                                            <i class="bi bi-telephone-fill"></i>
+                                            <span>Hubungi Kami</span>
+                                        </a>
+                                    </div>
+                                    <div class="hero-trust">
+                                        <div class="trust-item">
+                                            <strong>500+</strong>
+                                            <span>Mitra Aktif</span>
+                                        </div>
+                                        <div class="trust-divider"></div>
+                                        <div class="trust-item">
+                                            <strong>34</strong>
+                                            <span>Provinsi Terjangkau</span>
+                                        </div>
+                                        <div class="trust-divider"></div>
+                                        <div class="trust-item">
+                                            <strong>24/7</strong>
+                                            <span>Layanan Pelanggan</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-md-6 order-lg-2 order-1">
+                                <div class="hero-product-wrapper">
+                                    <img src="assets/images/aromas-hero.png" alt="AROMAS Minyak Goreng Industri" class="hero-product-img" />
+                                    <div class="floating-card card-1">
+                                        <div class="floating-icon"><i class="bi bi-truck-front-fill"></i></div>
+                                        <div class="floating-text">
+                                            <strong>Pengiriman</strong>
+                                            <span>Ke Seluruh RI</span>
+                                        </div>
+                                    </div>
+                                    <div class="floating-card card-2">
+                                        <div class="floating-icon"><i class="bi bi-box-seam-fill"></i></div>
+                                        <div class="floating-text">
+                                            <strong>Bulk Order</strong>
+                                            <span>Min. 100 Liter</span>
+                                        </div>
+                                    </div>
+                                    <div class="floating-card card-3">
+                                        <div class="floating-icon"><i class="bi bi-shield-check-fill"></i></div>
+                                        <div class="floating-text">
+                                            <strong>Garansi</strong>
+                                            <span>Kualitas 100%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <span>Scroll Down</span>
+                <!-- END SLIDE 2 -->
+
+                <!-- ========== SLIDE 3 - AWARDS / SERTIFIKASI ========== -->
+                <div class="hero-slide" style="padding: 100px 0 60px;">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-decoration">
+                        <div class="decoration-circle circle-1"></div>
+                        <div class="decoration-circle circle-2"></div>
+                        <div class="decoration-circle circle-3"></div>
+                    </div>
+                    <div class="container">
+                        <div class="row align-items-center min-vh-hero">
+                            <div class="col-lg-5 col-md-6 order-lg-1 order-2">
+                                <div class="hero-content-left">
+                                    <span class="hero-badge">
+                                        <i class="bi bi-patch-check-fill"></i> Bersertifikat Resmi
+                                    </span>
+                                    <h1 class="hero-main-title">
+                                        Standar Keamanan
+                                        <span class="text-gradient">Tertinggi</span>
+                                    </h1>
+                                    <p class="hero-description">
+                                        Setiap tetes AROMAS melalui quality control
+                                        ketat bersertifikasi internasional—aman untuk
+                                        seluruh keluarga Indonesia.
+                                    </p>
+                                    <div class="hero-pills">
+                                        <span class="pill"><i class="bi bi-check-circle-fill"></i> ISO 22000:2018</span>
+                                        <span class="pill"><i class="bi bi-check-circle-fill"></i> BPOM RI</span>
+                                        <span class="pill"><i class="bi bi-check-circle-fill"></i> Top Brand 2024</span>
+                                    </div>
+                                    <div class="hero-actions">
+                                        <a href="product.html" class="btn-primary-hero">
+                                            <i class="bi bi-grid-fill"></i>
+                                            <span>Lihat Produk</span>
+                                        </a>
+                                        <a href="about.html" class="btn-secondary-hero">
+                                            <i class="bi bi-trophy-fill"></i>
+                                            <span>Penghargaan Kami</span>
+                                        </a>
+                                    </div>
+                                    <div class="hero-trust">
+                                        <div class="trust-item">
+                                            <strong>5+</strong>
+                                            <span>Sertifikasi</span>
+                                        </div>
+                                        <div class="trust-divider"></div>
+                                        <div class="trust-item">
+                                            <strong>12</strong>
+                                            <span>Varian Produk</span>
+                                        </div>
+                                        <div class="trust-divider"></div>
+                                        <div class="trust-item">
+                                            <strong>A+</strong>
+                                            <span>Rating Kualitas</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-md-6 order-lg-2 order-1">
+                                <div class="hero-product-wrapper">
+                                    <img src="assets/images/aromas-hero.png" alt="AROMAS Bersertifikat" class="hero-product-img" />
+                                    <div class="floating-card card-1">
+                                        <div class="floating-icon"><i class="bi bi-award-fill"></i></div>
+                                        <div class="floating-text">
+                                            <strong>Top Brand</strong>
+                                            <span>Award 2024</span>
+                                        </div>
+                                    </div>
+                                    <div class="floating-card card-2">
+                                        <div class="floating-icon"><i class="bi bi-patch-check-fill"></i></div>
+                                        <div class="floating-text">
+                                            <strong>Halal MUI</strong>
+                                            <span>Tersertifikasi</span>
+                                        </div>
+                                    </div>
+                                    <div class="floating-card card-3">
+                                        <div class="floating-icon"><i class="bi bi-star-fill"></i></div>
+                                        <div class="floating-text">
+                                            <strong>ISO 22000</strong>
+                                            <span>Food Safety</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END SLIDE 3 -->
+
             </div>
+            <!-- END .hero-slides-track -->
+
         </section>
+        <!-- END HERO SLIDER -->
 
         <!-- ========== MISSION / ABOUT SECTION ========== -->
         <section
