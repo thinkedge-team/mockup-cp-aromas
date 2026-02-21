@@ -119,6 +119,7 @@
     .ptype-distributor i{color:#4caf50;}
     .ptype-agen i{color:#64b5f6;}
     .ptype-maklon i{color:#ce93d8;}
+    .ptype-implan i{color:#ef9a9a;}
 
     /* Scroll cue */
     .scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;color:rgba(255,255,255,.45);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;animation:cueF 2.4s ease-in-out infinite;}
@@ -175,6 +176,7 @@
     .pdetail-badge.badge-distributor{background:rgba(34,139,34,.9);}
     .pdetail-badge.badge-agen{background:rgba(0,119,182,.9);}
     .pdetail-badge.badge-maklon{background:rgba(123,45,139,.9);}
+    .pdetail-badge.badge-implan{background:rgba(192,57,43,.9);}
     .pdetail-title{font-size:2rem;font-weight:700;color:#fff;margin-bottom:8px;}
     .pdetail-sub{font-size:1rem;color:rgba(255,255,255,.8);max-width:600px;}
 
@@ -187,6 +189,7 @@
     .pinfo-item.clr-green .pinfo-icon{background:rgba(34,139,34,.12);color:var(--green);}
     .pinfo-item.clr-blue .pinfo-icon{background:rgba(0,119,182,.12);color:#0077b6;}
     .pinfo-item.clr-purple .pinfo-icon{background:rgba(123,45,139,.12);color:#7b2d8b;}
+    .pinfo-item.clr-red .pinfo-icon{background:rgba(192,57,43,.12);color:#c0392b;}
     .pinfo-label{font-size:.72rem;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
     .pinfo-val{font-size:1rem;font-weight:700;color:var(--gray-900);}
     .pinfo-note{font-size:.78rem;color:var(--gray-500);margin-top:2px;}
@@ -219,6 +222,7 @@
     .panel-cta.cta-distributor{background:linear-gradient(135deg,rgba(34,139,34,.1),rgba(13,51,32,.05));border:1px solid rgba(34,139,34,.25);}
     .panel-cta.cta-agen{background:linear-gradient(135deg,rgba(0,119,182,.1),rgba(2,62,138,.05));border:1px solid rgba(0,119,182,.25);}
     .panel-cta.cta-maklon{background:linear-gradient(135deg,rgba(123,45,139,.1),rgba(74,14,87,.05));border:1px solid rgba(123,45,139,.25);}
+    .panel-cta.cta-implan{background:linear-gradient(135deg,rgba(192,57,43,.1),rgba(120,0,0,.05));border:1px solid rgba(192,57,43,.25);}
     .panel-cta h4{font-size:1.2rem;font-weight:700;color:var(--gray-900);margin-bottom:6px;}
     .panel-cta p{font-size:.9rem;color:var(--gray-600);margin:0;}
     .panel-cta-btns{display:flex;gap:12px;flex-wrap:wrap;}
@@ -229,6 +233,7 @@
     .btn-pform.btn-distributor{background:linear-gradient(135deg,var(--green),var(--green-dark));}
     .btn-pform.btn-agen{background:linear-gradient(135deg,#0077b6,#023e8a);}
     .btn-pform.btn-maklon{background:linear-gradient(135deg,#7b2d8b,#4a0e57);}
+    .btn-pform.btn-implan{background:linear-gradient(135deg,#c0392b,#78001c);}
     .btn-pform:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.25);color:#fff;}
 
     /* ── WHY AROMAS SECTION */
@@ -255,6 +260,7 @@
     .th-distributor{background:rgba(34,139,34,.2) !important;color:#4caf50 !important;}
     .th-agen{background:rgba(0,119,182,.2) !important;color:#64b5f6 !important;}
     .th-maklon{background:rgba(123,45,139,.2) !important;color:#ce93d8 !important;}
+    .th-implan{background:rgba(192,57,43,.2) !important;color:#ef9a9a !important;}
     .check-yes{color:var(--green);font-size:1.1rem;}
     .check-partial{color:var(--gold-dark);font-size:1.1rem;}
     .check-no{color:var(--gray-400);font-size:1.1rem;}
@@ -286,6 +292,21 @@
     .ttype-distributor{background:rgba(34,139,34,.12);color:var(--green-dark);}
     .ttype-agen{background:rgba(0,119,182,.12);color:#0077b6;}
     .ttype-maklon{background:rgba(123,45,139,.12);color:#7b2d8b;}
+    .ttype-implan{background:rgba(192,57,43,.12);color:#c0392b;}
+
+    /* ── TESTIMONIAL SLIDER (Partnership) */
+    .p-testi-slider-wrapper{overflow:hidden;margin:0 -8px;padding:8px 8px 0;}
+    .p-testi-slider-track{display:flex;gap:24px;transition:transform .45s cubic-bezier(.25,.46,.45,.94);will-change:transform;}
+    .p-testi-slide{flex:0 0 calc(33.333% - 16px);min-width:calc(33.333% - 16px);}
+    @media(max-width:991px){.p-testi-slide{flex:0 0 calc(50% - 12px);min-width:calc(50% - 12px);}}
+    @media(max-width:575px){.p-testi-slide{flex:0 0 100%;min-width:100%;}}
+    .p-testi-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:32px;}
+    .p-testi-arrow{width:42px;height:42px;border-radius:50%;border:2px solid rgba(34,139,34,.25);background:#fff;color:var(--green);font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--tr);}
+    .p-testi-arrow:hover:not(:disabled){background:var(--green);color:#fff;border-color:var(--green);}
+    .p-testi-arrow:disabled{opacity:.35;cursor:not-allowed;}
+    .p-testi-dots{display:flex;gap:8px;align-items:center;}
+    .p-testi-dot{width:8px;height:8px;border-radius:50%;background:rgba(34,139,34,.2);border:none;cursor:pointer;transition:var(--tr);padding:0;}
+    .p-testi-dot.active{width:24px;border-radius:4px;background:var(--green);}
 
     /* ── CTA STRIP */
     .cta-strip{background:linear-gradient(135deg,var(--green-darker),var(--green-dark) 50%,var(--green-light));padding:80px 0;position:relative;overflow:hidden;}
@@ -396,7 +417,7 @@
     <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <i class="bi bi-droplet-fill"></i> AROMAS
+                <img src="assets/images/logo.png" alt="AROMAS" style="height:44px;width:auto;" />
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -467,6 +488,13 @@
                                 <div class="chip-name">Maklon</div>
                             </div>
                         </div>
+                        <div class="ptype-chip ptype-implan" onclick="switchPanel('implan'); scrollToSection()">
+                            <i class="bi bi-building-fill-up"></i>
+                            <div>
+                                <div class="chip-label">Program</div>
+                                <div class="chip-name">Implan Korporasi</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -530,7 +558,7 @@
                 <div class="d-flex justify-content-center mb-2">
                     <span class="sec-tag"><i class="bi bi-handshake-fill"></i> Pilih Program Kemitraan</span>
                 </div>
-                <h2 class="section-title">Empat Jalur Menuju <span class="italic text-gradient">Kesuksesan</span></h2>
+                <h2 class="section-title">Lima Jalur Menuju <span class="italic text-gradient">Kesuksesan</span></h2>
                 <p class="section-desc mx-auto" style="max-width:580px;">
                     Setiap program dirancang khusus untuk segmen dan kebutuhan berbeda. Pilih yang paling sesuai dengan visi bisnis Anda.
                 </p>
@@ -553,6 +581,10 @@
                 <button class="pnav-btn" data-target="maklon" onclick="switchPanel('maklon')">
                     <i class="bi bi-gear-wide-connected" style="color:#7b2d8b;"></i>
                     <span>Maklon</span>
+                </button>
+                <button class="pnav-btn" data-target="implan" onclick="switchPanel('implan')">
+                    <i class="bi bi-building-fill-up" style="color:#c0392b;"></i>
+                    <span>Implan Korporasi</span>
                 </button>
             </div>
 
@@ -1084,6 +1116,137 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ─────────────────── IMPLAN KORPORASI PANEL ─────────────────── -->
+            <div class="partner-panel" id="panel-implan">
+                <div class="pdetail-hero" data-aos="fade-up">
+                    <img class="pdetail-img" src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=400&fit=crop" alt="Implan Korporasi AROMAS" />
+                    <div class="pdetail-img-overlay" style="background:linear-gradient(135deg,rgba(120,0,0,.88) 0%,rgba(192,57,43,.3) 60%,transparent 100%);"></div>
+                    <div class="pdetail-hero-content">
+                        <span class="pdetail-badge badge-implan"><i class="bi bi-building-fill-up me-1"></i> Implan Korporasi</span>
+                        <div class="pdetail-title">Program Implan Korporasi AROMAS</div>
+                        <div class="pdetail-sub">Solusi pengadaan minyak goreng terintegrasi khusus untuk perusahaan, instansi, dan korporasi skala besar dengan harga & layanan eksklusif.</div>
+                    </div>
+                </div>
+
+                <div class="pinfo-grid" data-aos="fade-up" data-aos-delay="60">
+                    <div class="pinfo-item clr-red">
+                        <div class="pinfo-icon"><i class="bi bi-building"></i></div>
+                        <div class="pinfo-label">Target Klien</div>
+                        <div class="pinfo-val">Perusahaan / Instansi</div>
+                        <div class="pinfo-note">BUMN, swasta, pemerintah</div>
+                    </div>
+                    <div class="pinfo-item clr-red">
+                        <div class="pinfo-icon"><i class="bi bi-layers-fill"></i></div>
+                        <div class="pinfo-label">Min. Order Bulanan</div>
+                        <div class="pinfo-val">50.000 Liter</div>
+                        <div class="pinfo-note">Kontrak jangka panjang</div>
+                    </div>
+                    <div class="pinfo-item clr-red">
+                        <div class="pinfo-icon"><i class="bi bi-percent"></i></div>
+                        <div class="pinfo-label">Harga Khusus</div>
+                        <div class="pinfo-val">Harga Korporasi</div>
+                        <div class="pinfo-note">Di bawah harga pasaran</div>
+                    </div>
+                    <div class="pinfo-item clr-red">
+                        <div class="pinfo-icon"><i class="bi bi-truck"></i></div>
+                        <div class="pinfo-label">Pengiriman</div>
+                        <div class="pinfo-val">Door-to-Door</div>
+                        <div class="pinfo-note">Ke lokasi klien langsung</div>
+                    </div>
+                    <div class="pinfo-item clr-red">
+                        <div class="pinfo-icon"><i class="bi bi-calendar-range"></i></div>
+                        <div class="pinfo-label">Durasi Kontrak</div>
+                        <div class="pinfo-val">1 – 3 Tahun</div>
+                        <div class="pinfo-note">Dapat diperpanjang</div>
+                    </div>
+                    <div class="pinfo-item clr-red">
+                        <div class="pinfo-icon"><i class="bi bi-headset"></i></div>
+                        <div class="pinfo-label">Account Manager</div>
+                        <div class="pinfo-val">Dedicated 1-on-1</div>
+                        <div class="pinfo-note">Layanan prioritas 24/7</div>
+                    </div>
+                </div>
+
+                <div class="pdetail-cols" data-aos="fade-up" data-aos-delay="80">
+                    <div class="pcol-card">
+                        <div class="pcol-title">
+                            <div style="width:34px;height:34px;border-radius:10px;background:rgba(192,57,43,.12);color:#c0392b;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">
+                                <i class="bi bi-stars"></i>
+                            </div>
+                            Keunggulan Program Implan
+                        </div>
+                        <ul class="plist benefit-list">
+                            <li><i class="bi bi-check-circle-fill"></i>Harga korporasi eksklusif jauh di bawah harga eceran</li>
+                            <li><i class="bi bi-check-circle-fill"></i>Pengiriman terjadwal langsung ke lokasi perusahaan</li>
+                            <li><i class="bi bi-check-circle-fill"></i>Dedicated account manager khusus untuk setiap klien</li>
+                            <li><i class="bi bi-check-circle-fill"></i>Laporan penggunaan & invoice bulanan terstruktur</li>
+                            <li><i class="bi bi-check-circle-fill"></i>Kemasan & branding custom atas nama perusahaan klien</li>
+                            <li><i class="bi bi-check-circle-fill"></i>Jaminan ketersediaan stok & SLA pengiriman tertulis</li>
+                            <li><i class="bi bi-check-circle-fill"></i>Fleksibilitas pembayaran: NET 30 / NET 60 terms</li>
+                        </ul>
+                    </div>
+                    <div class="pcol-card">
+                        <div class="pcol-title">
+                            <div style="width:34px;height:34px;border-radius:10px;background:rgba(212,160,23,.12);color:var(--gold-dark);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">
+                                <i class="bi bi-clipboard-check-fill"></i>
+                            </div>
+                            Persyaratan & Dokumen
+                        </div>
+                        <ul class="plist req-list">
+                            <li><i class="bi bi-dot"></i>Surat permohonan resmi dari perusahaan</li>
+                            <li><i class="bi bi-dot"></i>SIUP, TDP, NPWP perusahaan aktif</li>
+                            <li><i class="bi bi-dot"></i>Estimasi kebutuhan penggunaan per bulan</li>
+                            <li><i class="bi bi-dot"></i>Penandatanganan MoU / PKS korporasi</li>
+                            <li><i class="bi bi-dot"></i>Deposit awal sesuai nilai kontrak</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="psteps" data-aos="fade-up" data-aos-delay="100">
+                    <div class="pstep">
+                        <div class="pstep-num">1</div>
+                        <div class="pstep-label">Pengajuan Kebutuhan</div>
+                        <div class="pstep-sub">Kirim estimasi kebutuhan</div>
+                    </div>
+                    <div class="pstep">
+                        <div class="pstep-num">2</div>
+                        <div class="pstep-label">Survey & Analisa</div>
+                        <div class="pstep-sub">Tim kami kunjungi lokasi</div>
+                    </div>
+                    <div class="pstep">
+                        <div class="pstep-num">3</div>
+                        <div class="pstep-label">Penawaran Harga</div>
+                        <div class="pstep-sub">Harga spesial korporasi</div>
+                    </div>
+                    <div class="pstep">
+                        <div class="pstep-num">4</div>
+                        <div class="pstep-label">Kontrak & MoU</div>
+                        <div class="pstep-sub">Perjanjian kerjasama</div>
+                    </div>
+                    <div class="pstep">
+                        <div class="pstep-num">5</div>
+                        <div class="pstep-label">Setup Pengiriman</div>
+                        <div class="pstep-sub">Jadwal & rute ditetapkan</div>
+                    </div>
+                    <div class="pstep">
+                        <div class="pstep-num">6</div>
+                        <div class="pstep-label">Mulai Beroperasi</div>
+                        <div class="pstep-sub">Pasokan rutin aktif</div>
+                    </div>
+                </div>
+
+                <div class="panel-cta cta-implan" data-aos="fade-up" data-aos-delay="120">
+                    <div>
+                        <h4>Siap Implementasi Solusi Korporasi?</h4>
+                        <p>Tim B2B kami siap menyusun proposal khusus sesuai skala dan kebutuhan perusahaan Anda.</p>
+                    </div>
+                    <div class="panel-cta-btns">
+                        <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20program%20Implan%20Korporasi%20AROMAS" target="_blank" class="btn-pwa"><i class="bi bi-whatsapp"></i> Konsultasi B2B</a>
+                        <a href="index.html#contact" class="btn-pform btn-implan"><i class="bi bi-file-earmark-text-fill"></i> Ajukan Proposal</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1179,6 +1342,7 @@
                             <th class="th-distributor">🚚 Distributor</th>
                             <th class="th-agen">🏪 Agen / Reseller</th>
                             <th class="th-maklon">⚙️ Maklon</th>
+                            <th class="th-implan">🏢 Implan Korporasi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -1188,6 +1352,7 @@
                             <td>Rp 100 – 500 Jt</td>
                             <td>Rp 5 – 25 Jt</td>
                             <td>Sesuai Volume</td>
+                            <td>Kontrak MoU</td>
                         </tr>
                         <tr>
                             <td>Merek Sendiri</td>
@@ -1195,6 +1360,7 @@
                             <td><i class="bi bi-x-circle-fill check-no"></i></td>
                             <td><i class="bi bi-x-circle-fill check-no"></i></td>
                             <td><i class="bi bi-check-circle-fill check-yes"></i></td>
+                            <td><i class="bi bi-dash-circle-fill check-partial"></i></td>
                         </tr>
                         <tr>
                             <td>Wilayah Eksklusif</td>
@@ -1202,12 +1368,14 @@
                             <td><i class="bi bi-check-circle-fill check-yes"></i></td>
                             <td><i class="bi bi-dash-circle-fill check-partial"></i></td>
                             <td><i class="bi bi-dash-circle-fill check-partial"></i></td>
+                            <td><i class="bi bi-x-circle-fill check-no"></i></td>
                         </tr>
                         <tr>
                             <td>Dukungan Pemasaran</td>
                             <td><i class="bi bi-check-circle-fill check-yes"></i></td>
                             <td><i class="bi bi-check-circle-fill check-yes"></i></td>
                             <td><i class="bi bi-check-circle-fill check-yes"></i></td>
+                            <td><i class="bi bi-dash-circle-fill check-partial"></i></td>
                             <td><i class="bi bi-dash-circle-fill check-partial"></i></td>
                         </tr>
                         <tr>
@@ -1216,6 +1384,7 @@
                             <td><i class="bi bi-check-circle-fill check-yes"></i></td>
                             <td><i class="bi bi-check-circle-fill check-yes"></i></td>
                             <td><i class="bi bi-dash-circle-fill check-partial"></i></td>
+                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
                         </tr>
                         <tr>
                             <td>Margin Keuntungan</td>
@@ -1223,12 +1392,14 @@
                             <td>Sangat Tinggi</td>
                             <td>Menengah</td>
                             <td>Custom</td>
+                            <td>Harga Korporasi</td>
                         </tr>
                         <tr>
                             <td>Custom Kemasan</td>
                             <td><i class="bi bi-x-circle-fill check-no"></i></td>
                             <td><i class="bi bi-x-circle-fill check-no"></i></td>
                             <td><i class="bi bi-x-circle-fill check-no"></i></td>
+                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
                             <td><i class="bi bi-check-circle-fill check-yes"></i></td>
                         </tr>
                         <tr>
@@ -1237,6 +1408,7 @@
                             <td>5.000 L</td>
                             <td>100 L</td>
                             <td>10.000 L/batch</td>
+                            <td>50.000 L</td>
                         </tr>
                         <tr>
                             <td>Program Bonus</td>
@@ -1244,13 +1416,15 @@
                             <td><i class="bi bi-check-circle-fill check-yes"></i></td>
                             <td><i class="bi bi-check-circle-fill check-yes"></i></td>
                             <td><i class="bi bi-dash-circle-fill check-partial"></i></td>
+                            <td><i class="bi bi-x-circle-fill check-no"></i></td>
                         </tr>
                         <tr>
                             <td>Cocok Untuk</td>
                             <td>Pengusaha berpengalaman</td>
                             <td>Perusahaan distribusi</td>
-                            <td>Pemula & UMKM<span class="badge-recommended">Rekomendasi</span></td>
+                            <td>Pemula &amp; UMKM<span class="badge-recommended">Rekomendasi</span></td>
                             <td>Pemilik merek</td>
+                            <td>Korporasi / Instansi<span class="badge-recommended" style="background:#c0392b;">B2B</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -1268,72 +1442,111 @@
                 <h2 class="section-title">Sukses Bersama <span class="italic text-gradient">AROMAS</span></h2>
                 <p class="section-desc mx-auto" style="max-width:520px;">Dengarkan langsung pengalaman mitra kami yang telah membuktikan manfaat program kemitraan AROMAS.</p>
             </div>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
-                    <div class="testi-card">
-                        <div class="testi-quote">"</div>
-                        <div class="testi-text">Bergabung sebagai franchisee AROMAS adalah keputusan terbaik. Dalam 14 bulan modal sudah kembali. Tim support-nya luar biasa responsif.</div>
-                        <div class="testi-author">
-                            <div class="testi-avatar">
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Budi Santoso" />
-                            </div>
-                            <div>
-                                <div class="testi-name">Budi Santoso</div>
-                                <div class="testi-role">Gerai AROMAS Bekasi</div>
-                                <div class="testi-type ttype-franchise"><i class="bi bi-award-fill"></i> Franchise</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-                    <div class="testi-card">
-                        <div class="testi-quote">"</div>
-                        <div class="testi-text">Sebagai distributor eksklusif Kabupaten Semarang, omzet kami tumbuh 340% dalam 2 tahun. Sistem order online sangat memudahkan operasional.</div>
-                        <div class="testi-author">
-                            <div class="testi-avatar">
-                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Hendra Wijaya" />
-                            </div>
-                            <div>
-                                <div class="testi-name">Hendra Wijaya</div>
-                                <div class="testi-role">PT Sari Distribusi, Semarang</div>
-                                <div class="testi-type ttype-distributor"><i class="bi bi-truck-front-fill"></i> Distributor</div>
+
+            <!-- Slider wrapper -->
+            <div class="p-testi-slider-wrapper" data-aos="fade-up" data-aos-delay="80">
+                <div class="p-testi-slider-track" id="pTestiTrack">
+
+                    <!-- Slide 1 - Franchise -->
+                    <div class="p-testi-slide">
+                        <div class="testi-card">
+                            <div class="testi-quote">"</div>
+                            <div class="testi-text">Bergabung sebagai franchisee AROMAS adalah keputusan terbaik. Dalam 14 bulan modal sudah kembali. Tim support-nya luar biasa responsif.</div>
+                            <div class="testi-author">
+                                <div class="testi-avatar">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Budi Santoso" />
+                                </div>
+                                <div>
+                                    <div class="testi-name">Budi Santoso</div>
+                                    <div class="testi-role">Gerai AROMAS Bekasi</div>
+                                    <div class="testi-type ttype-franchise"><i class="bi bi-award-fill"></i> Franchise</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-                    <div class="testi-card">
-                        <div class="testi-quote">"</div>
-                        <div class="testi-text">Modal awal hanya Rp 8 juta, sekarang bisa raup Rp 15–20 juta per bulan dari jualan di Shopee dan Tokopedia. Materi promosi digital-nya sangat membantu!</div>
-                        <div class="testi-author">
-                            <div class="testi-avatar">
-                                <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&h=100&fit=crop&crop=face" alt="Dewi Rahayu" />
-                            </div>
-                            <div>
-                                <div class="testi-name">Dewi Rahayu</div>
-                                <div class="testi-role">Reseller Online, Surabaya</div>
-                                <div class="testi-type ttype-agen"><i class="bi bi-shop-window"></i> Agen</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-                    <div class="testi-card">
-                        <div class="testi-quote">"</div>
-                        <div class="testi-text">Layanan maklon AROMAS sangat profesional. Merek Goldenia kami kini sudah hadir di 8 provinsi. Kualitas produksi konsisten dan sertifikasi halal diproses cepat.</div>
-                        <div class="testi-author">
-                            <div class="testi-avatar">
-                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&crop=face" alt="Rizal Firmansyah" />
-                            </div>
-                            <div>
-                                <div class="testi-name">Rizal Firmansyah</div>
-                                <div class="testi-role">Direktur PT Goldenia Food</div>
-                                <div class="testi-type ttype-maklon"><i class="bi bi-gear-wide-connected"></i> Maklon</div>
+
+                    <!-- Slide 2 - Distributor -->
+                    <div class="p-testi-slide">
+                        <div class="testi-card">
+                            <div class="testi-quote">"</div>
+                            <div class="testi-text">Sebagai distributor eksklusif Kabupaten Semarang, omzet kami tumbuh 340% dalam 2 tahun. Sistem order online sangat memudahkan operasional.</div>
+                            <div class="testi-author">
+                                <div class="testi-avatar">
+                                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Hendra Wijaya" />
+                                </div>
+                                <div>
+                                    <div class="testi-name">Hendra Wijaya</div>
+                                    <div class="testi-role">PT Sari Distribusi, Semarang</div>
+                                    <div class="testi-type ttype-distributor"><i class="bi bi-truck-front-fill"></i> Distributor</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <!-- Slide 3 - Agen -->
+                    <div class="p-testi-slide">
+                        <div class="testi-card">
+                            <div class="testi-quote">"</div>
+                            <div class="testi-text">Modal awal hanya Rp 8 juta, sekarang bisa raup Rp 15–20 juta per bulan dari jualan di Shopee dan Tokopedia. Materi promosi digital-nya sangat membantu!</div>
+                            <div class="testi-author">
+                                <div class="testi-avatar">
+                                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&h=100&fit=crop&crop=face" alt="Dewi Rahayu" />
+                                </div>
+                                <div>
+                                    <div class="testi-name">Dewi Rahayu</div>
+                                    <div class="testi-role">Reseller Online, Surabaya</div>
+                                    <div class="testi-type ttype-agen"><i class="bi bi-shop-window"></i> Agen</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4 - Maklon -->
+                    <div class="p-testi-slide">
+                        <div class="testi-card">
+                            <div class="testi-quote">"</div>
+                            <div class="testi-text">Layanan maklon AROMAS sangat profesional. Merek Goldenia kami kini sudah hadir di 8 provinsi. Kualitas produksi konsisten dan sertifikasi halal diproses cepat.</div>
+                            <div class="testi-author">
+                                <div class="testi-avatar">
+                                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&crop=face" alt="Rizal Firmansyah" />
+                                </div>
+                                <div>
+                                    <div class="testi-name">Rizal Firmansyah</div>
+                                    <div class="testi-role">Direktur PT Goldenia Food</div>
+                                    <div class="testi-type ttype-maklon"><i class="bi bi-gear-wide-connected"></i> Maklon</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 5 - Implan Korporasi -->
+                    <div class="p-testi-slide">
+                        <div class="testi-card">
+                            <div class="testi-quote">"</div>
+                            <div class="testi-text">Program Implan Korporasi AROMAS sangat menguntungkan perusahaan kami. Harga kompetitif, pengiriman tepat waktu, dan account manager kami selalu responsif setiap saat.</div>
+                            <div class="testi-author">
+                                <div class="testi-avatar">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Agus Pramono" />
+                                </div>
+                                <div>
+                                    <div class="testi-name">Agus Pramono</div>
+                                    <div class="testi-role">GM Procurement PT Nusa Sentosa</div>
+                                    <div class="testi-type ttype-implan"><i class="bi bi-building-fill-up"></i> Implan Korporasi</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /track -->
+            </div><!-- /wrapper -->
+
+            <!-- Navigation -->
+            <div class="p-testi-nav" data-aos="fade-up" data-aos-delay="100">
+                <button class="p-testi-arrow" id="pTestiPrev" aria-label="Sebelumnya"><i class="bi bi-chevron-left"></i></button>
+                <div class="p-testi-dots" id="pTestiDots"></div>
+                <button class="p-testi-arrow" id="pTestiNext" aria-label="Berikutnya"><i class="bi bi-chevron-right"></i></button>
             </div>
+
         </div>
     </section>
 
@@ -1456,8 +1669,7 @@
             <div class="row g-5">
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-brand-name">
-                        <div class="footer-brand-icon"><i class="bi bi-droplet-fill"></i></div>
-                        AROMAS
+                        <img src="assets/images/logo.png" alt="AROMAS" style="height:50px;width:auto;margin-bottom:4px;" />
                     </div>
                     <p class="footer-desc">Minyak goreng sawit premium berkualitas tinggi untuk keluarga dan industri Indonesia. Dipercaya sejak 1994.</p>
                     <div class="footer-socials">
@@ -1674,6 +1886,85 @@
         }, { threshold: 0.5 });
         obs.observe(statsStrip);
     }
+    
+    /* ── PARTNERSHIP TESTIMONIAL SLIDER ── */
+    (function () {
+        var track    = document.getElementById('pTestiTrack');
+        var prevBtn  = document.getElementById('pTestiPrev');
+        var nextBtn  = document.getElementById('pTestiNext');
+        var dotsWrap = document.getElementById('pTestiDots');
+
+        if (!track || !prevBtn || !nextBtn) return;
+
+        var slides      = track.querySelectorAll('.p-testi-slide');
+        var totalSlides = slides.length;
+        var current     = 0;
+
+        function getVisible() {
+            if (window.innerWidth <= 575) return 1;
+            if (window.innerWidth <= 991) return 2;
+            return 3;
+        }
+
+        function maxIndex() {
+            return Math.max(0, totalSlides - getVisible());
+        }
+
+        function buildDots() {
+            dotsWrap.innerHTML = '';
+            var pages = maxIndex() + 1;
+            for (var i = 0; i < pages; i++) {
+                var dot = document.createElement('button');
+                dot.className = 'p-testi-dot' + (i === current ? ' active' : '');
+                dot.setAttribute('aria-label', 'Halaman ' + (i + 1));
+                (function(idx){ dot.addEventListener('click', function(){ goTo(idx); }); })(i);
+                dotsWrap.appendChild(dot);
+            }
+        }
+
+        function updateDots() {
+            var dots = dotsWrap.querySelectorAll('.p-testi-dot');
+            dots.forEach(function(d, i){ d.classList.toggle('active', i === current); });
+        }
+
+        function getOffset() {
+            if (totalSlides === 0) return 0;
+            var slideEl = slides[0];
+            var gap = 24;
+            var slideWidth = slideEl.getBoundingClientRect().width;
+            return -(current * (slideWidth + gap));
+        }
+
+        function goTo(idx) {
+            current = Math.max(0, Math.min(idx, maxIndex()));
+            track.style.transform = 'translateX(' + getOffset() + 'px)';
+            prevBtn.disabled = (current === 0);
+            nextBtn.disabled = (current >= maxIndex());
+            updateDots();
+        }
+
+        buildDots();
+        goTo(0);
+
+        prevBtn.addEventListener('click', function () { goTo(current - 1); });
+        nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+        var resizeTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+                buildDots();
+                goTo(Math.min(current, maxIndex()));
+            }, 150);
+        });
+
+        var touchStartX = 0;
+        track.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+        track.addEventListener('touchend',   function (e) {
+            var diff = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) { goTo(diff > 0 ? current + 1 : current - 1); }
+        }, { passive: true });
+    })();
     </script>
 </body>
 </html>

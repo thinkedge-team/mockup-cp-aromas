@@ -1142,3 +1142,92 @@ function initHeroSlider() {
 
     console.log('Hero Slider initialized —', TOTAL, 'slides');
 }
+
+/* ── BLOG SLIDER ── */
+(function () {
+    var track      = document.getElementById('blogSliderTrack');
+    var prevBtn    = document.getElementById('blogPrev');
+    var nextBtn    = document.getElementById('blogNext');
+    var dotsWrap   = document.getElementById('blogDots');
+
+    if (!track || !prevBtn || !nextBtn) return;
+
+    var slides     = track.querySelectorAll('.blog-slide');
+    var totalSlides = slides.length;
+    var current    = 0;
+
+    /* How many slides visible at once based on window width */
+    function getVisible() {
+        if (window.innerWidth <= 575)  return 1;
+        if (window.innerWidth <= 991)  return 2;
+        return 3;
+    }
+
+    /* Max index we can scroll to */
+    function maxIndex() {
+        return Math.max(0, totalSlides - getVisible());
+    }
+
+    /* Build dots */
+    function buildDots() {
+        dotsWrap.innerHTML = '';
+        var pages = maxIndex() + 1;
+        for (var i = 0; i < pages; i++) {
+            var dot = document.createElement('button');
+            dot.className = 'blog-dot' + (i === current ? ' active' : '');
+            dot.setAttribute('aria-label', 'Halaman ' + (i + 1));
+            (function(idx){ dot.addEventListener('click', function(){ goTo(idx); }); })(i);
+            dotsWrap.appendChild(dot);
+        }
+    }
+
+    /* Update dots */
+    function updateDots() {
+        var dots = dotsWrap.querySelectorAll('.blog-dot');
+        dots.forEach(function(d, i){ d.classList.toggle('active', i === current); });
+    }
+
+    /* Calculate translateX for the current index */
+    function getOffset() {
+        if (totalSlides === 0) return 0;
+        var slideEl = slides[0];
+        /* gap between slides = 24px (from CSS) */
+        var gap = 24;
+        var slideWidth = slideEl.getBoundingClientRect().width;
+        return -(current * (slideWidth + gap));
+    }
+
+    /* Animate to index */
+    function goTo(idx) {
+        current = Math.max(0, Math.min(idx, maxIndex()));
+        track.style.transform = 'translateX(' + getOffset() + 'px)';
+        prevBtn.disabled = (current === 0);
+        nextBtn.disabled = (current >= maxIndex());
+        updateDots();
+    }
+
+    /* Init */
+    buildDots();
+    goTo(0);
+
+    prevBtn.addEventListener('click', function () { goTo(current - 1); });
+    nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+    /* Recalculate on resize */
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+            buildDots();
+            goTo(Math.min(current, maxIndex()));
+        }, 150);
+    });
+
+    /* Touch/swipe support */
+    var touchStartX = 0;
+    track.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend',   function (e) {
+        var diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) { goTo(diff > 0 ? current + 1 : current - 1); }
+    }, { passive: true });
+})();
