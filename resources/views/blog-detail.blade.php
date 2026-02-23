@@ -1,0 +1,935 @@
+@extends('layouts.app')
+
+@section('content')
+<div id="readProgress" class="read-progress"></div>
+
+<!-- ═══════════ ARTICLE HERO ════════════ -->
+<section class="article-hero">
+  <div class="ah-bg"></div>
+  <div class="ah-grain"></div>
+
+  <div class="container">
+    <div class="ah-inner">
+
+      <!-- Category pill -->
+      <div><span class="ah-cat-pill"><i class="bi bi-lightbulb-fill"></i> Tips Memasak</span></div>
+
+      <!-- Title -->
+      <h1 class="ah-title">
+        Cara Memilih Minyak Goreng<br/>yang <em>Sehat untuk Keluarga</em><br/>— Panduan Lengkap 2026
+      </h1>
+
+      <!-- Excerpt -->
+      <p class="ah-excerpt">
+        Dengan begitu banyaknya pilihan minyak goreng di pasaran, bagaimana cara memilih yang terbaik untuk kesehatan keluarga? Kami ulas tuntas dari komposisi, titik asap, hingga label sertifikasi.
+      </p>
+
+      <!-- Meta -->
+      <div class="ah-meta">
+        <span class="ah-meta-item"><i class="bi bi-calendar3"></i> 15 Januari 2026</span>
+        <span class="ah-meta-sep"></span>
+        <span class="ah-meta-item"><i class="bi bi-clock"></i> 6 menit baca</span>
+        <span class="ah-meta-sep"></span>
+        <span class="ah-meta-item"><i class="bi bi-eye"></i> 12.4K pembaca</span>
+      </div>
+
+      <!-- Author -->
+      <div>
+        <div class="ah-author">
+          <div class="ah-avatar">S</div>
+          <div>
+            <span class="ah-author-name">dr. Sari Nutritionist, M.Gizi</span>
+            <span class="ah-author-role">Ahli Gizi Klinis · AROMAS Health Advisory Board</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero image -->
+      <div class="ah-img-wrap">
+        <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=1400&h=600&fit=crop&auto=format" alt="Cara Memilih Minyak Goreng Sehat"/>
+        <div class="ah-share">
+          <button class="afs-btn" onclick="shareWA()" title="WhatsApp"><i class="bi bi-whatsapp"></i></button>
+          <button class="afs-btn" onclick="shareFB()" title="Facebook"><i class="bi bi-facebook"></i></button>
+          <button class="afs-btn" onclick="copyLink()" title="Salin link"><i class="bi bi-link-45deg"></i></button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BREADCRUMB -->
+<div class="bc-bar">
+  <div class="container">
+    <div class="bc-inner">
+      <a href="{{ url('/') }}" class="bc-link"><i class="bi bi-house-door-fill"></i> Beranda</a>
+      <span class="bc-sep"><i class="bi bi-chevron-right"></i></span>
+      <a href="{{ url('/blog') }}" class="bc-link">Blog</a>
+      <span class="bc-sep"><i class="bi bi-chevron-right"></i></span>
+      <a href="{{ url('/blog') }}" class="bc-link">Tips Memasak</a>
+      <span class="bc-sep"><i class="bi bi-chevron-right"></i></span>
+      <span class="bc-current">Cara Memilih Minyak Goreng Sehat…</span>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body">
+  <div class="container">
+    <div class="row g-5">
+
+      <!-- CONTENT COLUMN -->
+      <div class="col-lg-8">
+
+        <!-- Prev / Next -->
+        <div class="art-nav" data-reveal>
+          <div class="art-nav-item" onclick="location.href='{{ url('/blog') }}'">
+            <div class="art-nav-label"><i class="bi bi-arrow-left"></i> Sebelumnya</div>
+            <div class="art-nav-title">5 Tips Memasak Hemat Minyak Goreng Tanpa Mengurangi Kelezatan</div>
+          </div>
+          <div class="art-nav-divider"></div>
+          <div class="art-nav-item next" onclick="location.href='{{ url('/blog') }}'">
+            <div class="art-nav-label">Berikutnya <i class="bi bi-arrow-right"></i></div>
+            <div class="art-nav-title">7 Rahasia Menggoreng Crispy Sempurna yang Sering Dilupakan</div>
+          </div>
+        </div>
+
+        <!-- ARTICLE CARD -->
+        <div class="article-card" id="articleContent" data-reveal>
+          <p>Memilih minyak goreng yang tepat bukan sekadar soal harga atau merek — ini adalah keputusan yang berdampak langsung pada kesehatan seluruh keluarga setiap hari. Dengan begitu banyak pilihan di rak supermarket, banyak konsumen yang bingung harus memilih yang mana.</p>
+          <p>Dalam panduan ini, kami membahas secara tuntas apa yang benar-benar perlu Anda perhatikan saat memilih minyak goreng — dari kandungan nutrisi, titik asap, hingga sertifikasi resmi yang menjamin keamanan produk.</p>
+
+          <div class="callout info">
+            <div class="callout-icon"><i class="bi bi-info-circle-fill"></i></div>
+            <div class="callout-body">
+              <div class="callout-title">Tahukah Anda?</div>
+              <p class="callout-text">Rata-rata orang Indonesia mengonsumsi 15–20 liter minyak goreng per tahun. Memilih produk yang tepat bisa membuat perbedaan signifikan pada kesehatan jangka panjang seluruh keluarga.</p>
+            </div>
+          </div>
+
+          <h2 id="h-1">1. Pahami Jenis-Jenis Minyak Goreng</h2>
+          <p>Di Indonesia, minyak goreng yang paling umum digunakan adalah <strong>minyak kelapa sawit</strong>. Setiap jenis minyak memiliki karakteristik berbeda yang perlu dipertimbangkan:</p>
+
+          <div class="compare-wrap">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th>Jenis Minyak</th><th>Titik Asap</th><th>Lemak Jenuh</th><th>Cocok Untuk</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Minyak Sawit (AROMAS)</td>
+                  <td class="tc-good">215°C</td>
+                  <td><span class="badge-pill green">Sedang</span></td>
+                  <td>Semua teknik memasak</td>
+                </tr>
+                <tr>
+                  <td>Minyak Kelapa</td>
+                  <td>177°C</td>
+                  <td><span class="badge-pill gold">Tinggi</span></td>
+                  <td>Tumis, panggang</td>
+                </tr>
+                <tr>
+                  <td>Minyak Jagung</td>
+                  <td class="tc-good">230°C</td>
+                  <td><span class="badge-pill green">Rendah</span></td>
+                  <td>Goreng, tumis</td>
+                </tr>
+                <tr>
+                  <td>Minyak Zaitun</td>
+                  <td class="tc-warn">160–190°C</td>
+                  <td><span class="badge-pill green">Sangat Rendah</span></td>
+                  <td>Salad, tumis ringan</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="h-2">2. Perhatikan Titik Asap (Smoke Point)</h2>
+          <p>Titik asap adalah suhu ketika minyak mulai mengeluarkan asap dan terurai secara kimia. Menggunakan minyak di atas titik asapnya menghasilkan senyawa berbahaya seperti <strong>aldehida dan akrolein</strong> yang dapat merusak kesehatan.</p>
+
+          <div class="pull-quote">
+            <p>"Semakin tinggi titik asap sebuah minyak goreng, semakin aman dan stabil minyak tersebut untuk teknik memasak bersuhu tinggi seperti menggoreng dalam minyak banyak."</p>
+            <cite>dr. Sari Nutritionist, Ahli Gizi Klinis</cite>
+          </div>
+
+          <p>Untuk aktivitas menggoreng harian seperti ayam goreng, tempe goreng, atau gorengan lainnya, pilihlah minyak dengan titik asap di atas 200°C. Minyak goreng sawit berkualitas seperti AROMAS memiliki titik asap sekitar 215°C — sangat ideal untuk berbagai teknik memasak.</p>
+
+          <figure class="art-img">
+            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&h=450&fit=crop&auto=format" alt="Memasak dengan minyak goreng berkualitas"/>
+            <figcaption><i class="bi bi-camera"></i> Minyak dengan titik asap tinggi menghasilkan masakan lebih sehat dan tidak cepat menghitam.</figcaption>
+          </figure>
+
+          <h2 id="h-3">3. Cek Kandungan Lemak & Nutrisi</h2>
+          <p>Label nutrisi pada kemasan minyak goreng wajib Anda baca sebelum membeli. Ini yang perlu dicermati:</p>
+          <ul>
+            <li><strong>Lemak jenuh (saturated fat)</strong> — pilih yang kandungannya lebih rendah untuk kesehatan jantung jangka panjang.</li>
+            <li><strong>Lemak tak jenuh tunggal (MUFA)</strong> — jenis lemak baik yang membantu menjaga kadar kolesterol HDL.</li>
+            <li><strong>Lemak tak jenuh ganda (PUFA)</strong> — termasuk omega-3 dan omega-6 yang penting untuk otak dan imunitas.</li>
+            <li><strong>Vitamin E (tokoferol)</strong> — antioksidan alami yang membantu melindungi sel dari kerusakan oksidatif.</li>
+            <li><strong>Kolesterol</strong> — minyak nabati idealnya bebas kolesterol. Pastikan label mencantumkan "0 mg kolesterol".</li>
+          </ul>
+
+          <div class="callout warn">
+            <div class="callout-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+            <div class="callout-body">
+              <div class="callout-title">Perhatian Penting</div>
+              <p class="callout-text">Hindari minyak goreng yang sudah berubah warna menjadi gelap, berbau tengik, atau berbusa saat dipanaskan — ini tanda minyak sudah mengalami degradasi dan tidak aman dikonsumsi.</p>
+            </div>
+          </div>
+
+          <h2 id="h-4">4. Pastikan Ada Sertifikasi Resmi</h2>
+          <p>Ini adalah langkah krusial yang sering diabaikan. Produk minyak goreng berkualitas harus memiliki setidaknya:</p>
+          <ol>
+            <li><strong>Izin Edar BPOM RI</strong> — bukti produk telah melalui uji keamanan pangan Badan Pengawas Obat dan Makanan.</li>
+            <li><strong>Sertifikasi Halal MUI</strong> — jaminan produk memenuhi standar kehalalan Majelis Ulama Indonesia.</li>
+            <li><strong>Standar Nasional Indonesia (SNI)</strong> — produk memenuhi standar mutu nasional yang berlaku.</li>
+            <li><strong>ISO 22000 (nilai tambah)</strong> — sistem manajemen keamanan pangan bertaraf internasional.</li>
+          </ol>
+
+          <div class="callout success">
+            <div class="callout-icon"><i class="bi bi-patch-check-fill"></i></div>
+            <div class="callout-body">
+              <div class="callout-title">AROMAS Sudah Tersertifikasi</div>
+              <p class="callout-text">Semua produk AROMAS telah mendapatkan izin BPOM RI, Sertifikat Halal MUI, dan SNI — sehingga aman dan terjamin kualitasnya untuk seluruh keluarga.</p>
+            </div>
+          </div>
+
+          <h2 id="h-5">5. Kenali Tanda Minyak Goreng Berkualitas</h2>
+          <p>Minyak goreng berkualitas memiliki ciri fisik yang dapat dikenali dengan mudah:</p>
+          <ul>
+            <li><strong>Warna kuning keemasan jernih</strong> — tidak terlalu pucat maupun terlalu gelap.</li>
+            <li><strong>Tidak berbau tengik</strong> — aroma netral atau sedikit harum alami sawit segar.</li>
+            <li><strong>Tidak berbuih berlebihan</strong> saat dipanaskan untuk pertama kali.</li>
+            <li><strong>Tidak meninggalkan residu hitam</strong> di wajan setelah penggorengan normal.</li>
+            <li><strong>Kemasan rapat dan tertutup sempurna</strong> — mencegah oksidasi sebelum produk digunakan.</li>
+          </ul>
+
+          <div class="takeaways">
+            <div class="takeaways-header">
+              <i class="bi bi-bookmark-star-fill"></i>
+              <span>Ringkasan — Simpan Ini!</span>
+            </div>
+            <div class="takeaways-body">
+              <div class="takeaway-row"><div class="takeaway-num">1</div><span>Pilih minyak dengan titik asap minimal 200°C untuk penggorengan yang aman dan sehat.</span></div>
+              <div class="takeaway-row"><div class="takeaway-num">2</div><span>Baca label nutrisi — utamakan rendah lemak jenuh dan kaya Vitamin E alami.</span></div>
+              <div class="takeaway-row"><div class="takeaway-num">3</div><span>Wajib ada sertifikasi BPOM RI dan Halal MUI yang tercetak jelas di kemasan.</span></div>
+              <div class="takeaway-row"><div class="takeaway-num">4</div><span>Perhatikan warna, aroma, dan konsistensi minyak sebelum digunakan memasak.</span></div>
+              <div class="takeaway-row"><div class="takeaway-num">5</div><span>Simpan di tempat sejuk, gelap, dan tutup rapat setelah setiap pemakaian.</span></div>
+            </div>
+          </div>
+
+          <p>Dengan menerapkan panduan ini, Anda dapat membuat keputusan pembelian yang lebih cerdas demi kesehatan keluarga. Minyak goreng AROMAS hadir sebagai pilihan yang memenuhi semua kriteria di atas — jernih, bersertifikat, dan kaya Vitamin E alami.</p>
+        </div><!-- /article-card -->
+
+        <!-- TAGS & SHARE -->
+        <div class="article-footer" data-reveal>
+          <div class="tag-row">
+            <span class="tag-row-label"><i class="bi bi-tags-fill"></i> Tags</span>
+            <span class="tag-chip">#MinyakGorengSehat</span>
+            <span class="tag-chip">#TipsMemasak</span>
+            <span class="tag-chip">#MinyakSawit</span>
+            <span class="tag-chip">#BPOM</span>
+            <span class="tag-chip">#HalalMUI</span>
+            <span class="tag-chip">#VitaminE</span>
+          </div>
+          <div class="share-row">
+            <span class="share-label"><i class="bi bi-share-fill"></i> Bagikan:</span>
+            <button class="share-btn wa" onclick="shareWA()"><i class="bi bi-whatsapp"></i> WhatsApp</button>
+            <button class="share-btn fb" onclick="shareFB()"><i class="bi bi-facebook"></i> Facebook</button>
+            <button class="share-btn tw" onclick="shareTW()"><i class="bi bi-twitter-x"></i> X</button>
+            <button class="share-btn cp" onclick="copyLink()"><i class="bi bi-link-45deg"></i> Salin</button>
+            <button class="like-btn" id="likeBtn" onclick="toggleLike()">
+              <i class="bi bi-heart" id="likeIcon"></i>
+              <span id="likeCount">248</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- AUTHOR BOX -->
+        <div class="author-box" data-reveal>
+          <div class="author-avatar">S</div>
+          <div style="flex:1;">
+            <div class="author-label">Tentang Penulis</div>
+            <div class="author-name">dr. Sari Nutritionist, M.Gizi</div>
+            <div class="author-role">Ahli Gizi Klinis & Konsultan Kesehatan Pangan · AROMAS Health Advisory Board</div>
+            <p class="author-bio">Dokter spesialis gizi klinis dengan pengalaman 12 tahun di bidang keamanan pangan dan nutrisi keluarga. Aktif berkontribusi sebagai penulis di berbagai jurnal kesehatan nasional dan internasional. Bergabung dengan AROMAS sebagai konsultan kesehatan sejak 2022.</p>
+            <div class="author-socials">
+              <div class="author-soc"><i class="bi bi-instagram"></i></div>
+              <div class="author-soc"><i class="bi bi-linkedin"></i></div>
+              <div class="author-soc"><i class="bi bi-twitter-x"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COMMENTS -->
+        <div class="comment-section" data-reveal>
+          <div class="cs-header">
+            <div class="cs-title">
+              <i class="bi bi-chat-dots-fill"></i>
+              Diskusi
+              <span class="cs-count">14 komentar</span>
+            </div>
+          </div>
+
+          <div class="comment-list">
+            <div class="comment-item">
+              <div class="cm-avatar" style="background:linear-gradient(135deg,#25d366,#0fa855);">Bu</div>
+              <div class="cm-content">
+                <div class="cm-head">
+                  <span class="cm-name">Budi Santoso</span>
+                  <span class="cm-date"><i class="bi bi-clock" style="font-size:.65rem;"></i> 15 Feb 2026, 10.32</span>
+                  <span class="cm-badge verified">✓ Terverifikasi</span>
+                </div>
+                <div class="cm-bubble">Artikel yang sangat informatif! Selama ini saya hanya lihat harga tanpa perhatikan titik asap. Langsung cek label kemasan AROMAS di rumah dan ternyata sudah memenuhi semua kriteria. Makasih dr. Sari!</div>
+                <div class="cm-actions">
+                  <button class="cm-action"><i class="bi bi-hand-thumbs-up"></i> 24 Suka</button>
+                  <button class="cm-action"><i class="bi bi-reply"></i> Balas</button>
+                </div>
+              </div>
+            </div>
+            <div class="comment-reply">
+              <div class="comment-item">
+                <div class="cm-avatar" style="background:linear-gradient(135deg,var(--forest),var(--sage));font-size:.75rem;"><i class="bi bi-droplet-fill"></i></div>
+                <div class="cm-content">
+                  <div class="cm-head">
+                    <span class="cm-name">Tim AROMAS</span>
+                    <span class="cm-date"><i class="bi bi-clock" style="font-size:.65rem;"></i> 15 Feb 2026, 11.15</span>
+                    <span class="cm-badge official">✦ Official</span>
+                  </div>
+                  <div class="cm-bubble official-bubble">Terima kasih, Pak Budi! Senang bisa membantu. Semua produk AROMAS dirancang dengan memperhatikan kebutuhan kesehatan konsumen. Jangan ragu menghubungi kami jika ada pertanyaan lanjutan. 🌿</div>
+                  <div class="cm-actions"><button class="cm-action"><i class="bi bi-hand-thumbs-up"></i> 12 Suka</button></div>
+                </div>
+              </div>
+            </div>
+            <div class="comment-item">
+              <div class="cm-avatar" style="background:linear-gradient(135deg,#e91e8c,#c01574);">Ra</div>
+              <div class="cm-content">
+                <div class="cm-head">
+                  <span class="cm-name">Rahma Dewi</span>
+                  <span class="cm-date"><i class="bi bi-clock" style="font-size:.65rem;"></i> 14 Feb 2026, 20.45</span>
+                </div>
+                <div class="cm-bubble">Bagian tabel perbandingannya sangat membantu! Baru tahu kalau minyak zaitun titik asapnya rendah. Selama ini saya salah kaprah menggunakannya untuk menggoreng 😅</div>
+                <div class="cm-actions">
+                  <button class="cm-action"><i class="bi bi-hand-thumbs-up"></i> 18 Suka</button>
+                  <button class="cm-action"><i class="bi bi-reply"></i> Balas</button>
+                </div>
+              </div>
+            </div>
+            <div class="comment-item">
+              <div class="cm-avatar" style="background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:var(--forest);">Ag</div>
+              <div class="cm-content">
+                <div class="cm-head">
+                  <span class="cm-name">Agus Prasetyo</span>
+                  <span class="cm-date"><i class="bi bi-clock" style="font-size:.65rem;"></i> 14 Feb 2026, 15.20</span>
+                </div>
+                <div class="cm-bubble">Sudah pakai AROMAS sejak 2 tahun lalu, kualitasnya konsisten. Minyaknya bening, tidak cepat hitam, dan aromama netral jadi tidak mengubah cita rasa masakan. Highly recommended!</div>
+                <div class="cm-actions">
+                  <button class="cm-action"><i class="bi bi-hand-thumbs-up"></i> 31 Suka</button>
+                  <button class="cm-action"><i class="bi bi-reply"></i> Balas</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="comment-form">
+            <div class="cf-header"><i class="bi bi-pencil-square"></i> Tinggalkan Komentar</div>
+            <div class="cf-grid">
+              <div class="cf-field">
+                <label>Nama Lengkap *</label>
+                <input type="text" id="cmName" placeholder="cth. Budi Santoso"/>
+              </div>
+              <div class="cf-field">
+                <label>Email *</label>
+                <input type="email" id="cmEmail" placeholder="email@contoh.com"/>
+              </div>
+            </div>
+            <div class="cf-field">
+              <label>Komentar *</label>
+              <textarea id="cmText" placeholder="Bagikan pendapat, pertanyaan, atau pengalaman Anda…"></textarea>
+            </div>
+            <button class="btn-comment" onclick="submitComment()">
+              <i class="bi bi-send-fill"></i> Kirim Komentar
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /col-lg-8 -->
+
+      <!-- SIDEBAR -->
+      <div class="col-lg-4">
+        <div class="sidebar-widget toc-widget" data-reveal="right">
+          <div class="sw-head">
+            <div class="sw-icon"><i class="bi bi-list-ul"></i></div>
+            <div class="sw-title">Daftar Isi</div>
+          </div>
+          <ul class="toc-list" id="tocList">
+            <li class="toc-item active"><a href="#h-1" class="toc-link" onclick="goTo('h-1');return false;">1. Jenis-Jenis Minyak Goreng</a></li>
+            <li class="toc-item"><a href="#h-2" class="toc-link" onclick="goTo('h-2');return false;">2. Titik Asap (Smoke Point)</a></li>
+            <li class="toc-item"><a href="#h-3" class="toc-link" onclick="goTo('h-3');return false;">3. Kandungan Lemak & Nutrisi</a></li>
+            <li class="toc-item"><a href="#h-4" class="toc-link" onclick="goTo('h-4');return false;">4. Sertifikasi Resmi</a></li>
+            <li class="toc-item"><a href="#h-5" class="toc-link" onclick="goTo('h-5');return false;">5. Ciri Minyak Berkualitas</a></li>
+          </ul>
+          <div class="toc-progress">
+            <div class="toc-prog-row">
+              <span>Progres Membaca</span>
+              <span id="tocPct">0%</span>
+            </div>
+            <div class="toc-track"><div class="toc-fill" id="tocFill"></div></div>
+          </div>
+        </div>
+
+        <div class="sidebar-widget" data-reveal="right" data-reveal-delay="80">
+          <div class="sw-head">
+            <div class="sw-icon"><i class="bi bi-journal-bookmark-fill"></i></div>
+            <div class="sw-title">Artikel Terkait</div>
+          </div>
+          <div class="related-item" onclick="location.href='{{ url('/blog') }}'">
+            <div class="ri-thumb"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=150&h=120&fit=crop&auto=format" alt=""/></div>
+            <div>
+              <div class="ri-cat">Tips Memasak</div>
+              <div class="ri-title">7 Rahasia Menggoreng Crispy Sempurna yang Sering Dilupakan</div>
+              <div class="ri-date"><i class="bi bi-calendar3"></i> 12 Feb 2026</div>
+            </div>
+          </div>
+          <div class="related-item" onclick="location.href='{{ url('/blog') }}'">
+            <div class="ri-thumb"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=150&h=120&fit=crop&auto=format" alt=""/></div>
+            <div>
+              <div class="ri-cat">Kesehatan</div>
+              <div class="ri-title">Benarkah Minyak Sawit Berbahaya untuk Jantung? Penjelasan Ilmiahnya</div>
+              <div class="ri-date"><i class="bi bi-calendar3"></i> 25 Jan 2026</div>
+            </div>
+          </div>
+          <div class="related-item" onclick="location.href='{{ url('/blog') }}'">
+            <div class="ri-thumb"><img src="https://images.unsplash.com/photo-1543352634-99a5d50ae78e?w=150&h=120&fit=crop&auto=format" alt=""/></div>
+            <div>
+              <div class="ri-cat">Kesehatan</div>
+              <div class="ri-title">Vitamin E dalam Minyak Goreng Sawit: Manfaat Nyata untuk Tubuh</div>
+              <div class="ri-date"><i class="bi bi-calendar3"></i> 28 Des 2025</div>
+            </div>
+          </div>
+          <div class="related-item" onclick="location.href='{{ url('/blog') }}'">
+            <div class="ri-thumb"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=150&h=120&fit=crop&auto=format" alt=""/></div>
+            <div>
+              <div class="ri-cat">Resep</div>
+              <div class="ri-title">5 Resep Gorengan Crispy yang Wajib Dicoba di Rumah</div>
+              <div class="ri-date"><i class="bi bi-calendar3"></i> 08 Feb 2026</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nl-sidebar" data-reveal="right" data-reveal-delay="140">
+          <div class="nl-deco"></div><div class="nl-deco2"></div>
+          <div class="nl-inner">
+            <div class="nl-icon"><i class="bi bi-envelope-heart-fill"></i></div>
+            <h4 class="nl-title">Newsletter AROMAS</h4>
+            <p class="nl-desc">Artikel, tips, dan resep terbaru langsung ke inbox Anda setiap minggu. Gratis!</p>
+            <input type="email" class="nl-input" id="nlEmail" placeholder="email@contoh.com"/>
+            <button class="nl-btn" onclick="subscribeNL()"><i class="bi bi-send-fill"></i> Langganan Gratis</button>
+            <p class="nl-privacy"><i class="bi bi-shield-check"></i> Privasi terjaga · Berhenti kapan saja</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast-el"></div>
+
+<button id="backTop" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="bi bi-arrow-up"></i></button>
+<a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="wa-float">
+  <i class="bi bi-whatsapp"></i>
+  <span class="wa-tip">Chat dengan Kami</span>
+</a>
+@endsection
+
+@push('styles')
+<style>
+/* ─── ROOT ───────────────────────────────────────── */
+:root{
+  --forest:#0B2A1A;--forest-deep:#071910;--forest-mid:#143320;--forest-light:#1E4A2E;
+  --sage:#2E7D4E;--sage-lt:#3D9E63;
+  --gold:#C8970A;--gold-lt:#E8B524;--gold-pale:#F5D97A;--gold-cream:#FBF3D9;
+  --cream:#FDFAF2;--cream-dk:#F5EDD8;
+  --ink:#0F1A12;
+  --white:#FFFFFF;
+  --g50:#F9FAF7;--g100:#EFF0EB;--g200:#D9DBD3;--g300:#C4C9BC;
+  --g400:#9FA79A;--g500:#7A8475;--g600:#5A6357;--g700:#3D4A3A;--g800:#2E3529;
+  --ff-serif:'Cormorant Garamond',Georgia,serif;
+  --ff-display:'DM Serif Display',Georgia,serif;
+  --ff-body:'DM Sans',system-ui,sans-serif;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+  --r4:4px;--r8:8px;--r12:12px;--r16:16px;--r20:20px;--r24:24px;
+  --sh-xs:0 1px 3px rgba(0,0,0,.05),0 1px 2px rgba(0,0,0,.04);
+  --sh-sm:0 2px 10px rgba(0,0,0,.07),0 1px 4px rgba(0,0,0,.05);
+  --sh-md:0 8px 32px rgba(0,0,0,.09),0 2px 8px rgba(0,0,0,.05);
+  --sh-lg:0 20px 64px rgba(0,0,0,.11),0 4px 16px rgba(0,0,0,.06);
+  --sh-gold:0 6px 24px rgba(200,151,10,.28);
+  --sh-green:0 6px 24px rgba(46,125,78,.22);
+}
+
+/* ─── READING PROGRESS ───────────────────────────── */
+.read-progress{position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--sage),var(--gold-lt),var(--sage-lt));
+  z-index:100001;transition:width .1s linear;box-shadow:0 0 10px rgba(46,125,78,.5);}
+
+/* ─── ARTICLE HERO — simplified ─────────────────── */
+.article-hero{
+  position:relative;
+  background:var(--forest-deep);
+  overflow:hidden;
+  padding:110px 0 0;
+}
+/* subtle background mesh — same palette, lighter weight */
+.ah-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 70% at 80% 20%,rgba(200,151,10,.10) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 60% at 10% 80%,rgba(46,125,78,.12) 0%,transparent 50%);
+}
+.ah-grain{position:absolute;inset:0;opacity:.025;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;}
+
+/* text block */
+.ah-inner{position:relative;z-index:2;text-align:center;padding:40px 0 0;}
+
+.ah-cat-pill{display:inline-flex;align-items:center;gap:6px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-lt));
+  color:var(--forest);padding:5px 16px;border-radius:50px;
+  font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;
+  margin-bottom:20px;
+  animation:fadeUp .7s var(--ease-out) both;}
+
+.ah-title{
+  font-size:clamp(1.9rem,4.5vw,3.1rem);
+  color:#fff;font-family:var(--ff-display);line-height:1.16;
+  font-style:italic;margin-bottom:16px;
+  animation:fadeUp .75s var(--ease-out) .07s both;
+}
+.ah-title em{color:var(--gold-lt);font-style:normal;}
+
+.ah-excerpt{
+  font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.85;
+  max-width:580px;margin:0 auto 28px;
+  animation:fadeUp .8s var(--ease-out) .14s both;
+}
+
+.ah-meta{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;
+  margin-bottom:28px;animation:fadeUp .8s var(--ease-out) .2s both;}
+.ah-meta-item{display:inline-flex;align-items:center;gap:5px;
+  font-size:.75rem;color:rgba(255,255,255,.45);}
+.ah-meta-item i{font-size:.7rem;color:rgba(200,151,10,.65);}
+.ah-meta-sep{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.18);}
+
+.ah-author{display:inline-flex;align-items:center;gap:12px;
+  padding:12px 20px;border-radius:var(--r16);
+  background:rgba(255,255,255,.06);border:1px solid rgba(200,151,10,.16);
+  margin-bottom:36px;animation:fadeUp .85s var(--ease-out) .26s both;}
+.ah-avatar{width:42px;height:42px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--gold),var(--gold-lt));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--ff-display);font-size:1.1rem;color:var(--forest);}
+.ah-author-name{font-size:.83rem;font-weight:700;color:#fff;display:block;text-align:left;}
+.ah-author-role{font-size:.7rem;color:rgba(255,255,255,.4);display:block;margin-top:1px;text-align:left;}
+
+/* hero image sits at bottom, no top border-radius corners cut */
+.ah-img-wrap{
+  position:relative;
+  height:400px;
+  max-width:860px;
+  margin:0 auto;
+  border-radius:16px 16px 0 0;
+  overflow:hidden;
+  animation:fadeUp 1s var(--ease-out) .32s both;
+}
+.ah-img-wrap img{width:100%;height:100%;object-fit:cover;}
+.ah-img-wrap::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 60%,rgba(7,25,16,.55));}
+
+.ah-share{position:absolute;bottom:16px;right:16px;z-index:5;display:flex;gap:7px;}
+.afs-btn{width:34px;height:34px;border-radius:var(--r8);
+  background:rgba(7,25,16,.65);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.75);font-size:.82rem;cursor:pointer;transition:all .2s;}
+.afs-btn:hover{background:var(--gold);color:var(--forest);border-color:transparent;transform:translateY(-2px);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+/* ─── BREADCRUMB ─────────────────────────────────── */
+.bc-bar{background:var(--cream-dk);border-bottom:1px solid rgba(0,0,0,.06);padding:12px 0;}
+.bc-inner{display:flex;align-items:center;gap:7px;font-size:.78rem;color:var(--g400);flex-wrap:wrap;}
+.bc-link{color:var(--sage);font-weight:500;transition:color .2s;}
+.bc-link:hover{color:var(--gold);}
+.bc-sep{color:var(--g200);}
+.bc-current{color:var(--g500);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px;}
+
+/* ─── ARTICLE BODY ───────────────────────────────── */
+.article-body{padding:52px 0 80px;background:var(--cream);}
+
+/* Prev/Next nav */
+.art-nav{display:grid;grid-template-columns:1fr 1px 1fr;background:var(--white);
+  border-radius:var(--r20);border:1px solid rgba(0,0,0,.05);
+  box-shadow:var(--sh-xs);overflow:hidden;margin-bottom:28px;}
+.art-nav-item{padding:20px 22px;cursor:pointer;display:flex;flex-direction:column;transition:background .22s;}
+.art-nav-item:hover{background:rgba(46,125,78,.04);}
+.art-nav-item.next{align-items:flex-end;text-align:right;}
+.art-nav-divider{background:var(--g100);}
+.art-nav-label{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;
+  color:var(--g300);display:flex;align-items:center;gap:5px;margin-bottom:5px;}
+.art-nav-item.next .art-nav-label{flex-direction:row-reverse;}
+.art-nav-title{font-size:.8rem;font-weight:600;color:var(--g600);line-height:1.45;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .2s;}
+.art-nav-item:hover .art-nav-title{color:var(--forest);}
+
+/* ─── ARTICLE CONTENT CARD ───────────────────────── */
+.article-card{background:var(--white);border-radius:24px;
+  border:1px solid rgba(0,0,0,.05);box-shadow:var(--sh-md);
+  padding:52px 56px;margin-bottom:24px;}
+.article-card h2{font-family:var(--ff-display);font-size:1.7rem;color:var(--ink);
+  margin:44px 0 16px;padding-bottom:14px;position:relative;border-bottom:1.5px solid var(--g100);}
+.article-card h2::after{content:'';position:absolute;bottom:-1.5px;left:0;
+  width:48px;height:1.5px;background:linear-gradient(to right,var(--sage),var(--gold));}
+.article-card h3{font-size:1.15rem;font-family:var(--ff-body);font-weight:700;color:var(--forest);margin:28px 0 11px;}
+.article-card p{font-size:.96rem;color:var(--g600);line-height:1.95;margin-bottom:18px;}
+.article-card strong{color:var(--g800);font-weight:700;}
+.article-card a{color:var(--sage);border-bottom:1px solid rgba(46,125,78,.25);}
+.article-card a:hover{color:var(--gold);border-color:var(--gold);}
+.article-card ul,.article-card ol{list-style:none;padding:0;margin:0 0 20px;}
+.article-card ul li,.article-card ol li{font-size:.94rem;color:var(--g600);line-height:1.85;margin-bottom:10px;display:flex;align-items:flex-start;gap:12px;}
+.article-card ul li::before{content:'';width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--sage),var(--gold));margin-top:8px;flex-shrink:0;}
+.article-card ol{counter-reset:ol-c;}
+.article-card ol li{counter-increment:ol-c;}
+.article-card ol li::before{content:counter(ol-c);width:24px;height:24px;border-radius:var(--r8);flex-shrink:0;background:linear-gradient(135deg,var(--forest),var(--sage));color:#fff;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px;}
+
+/* ─── CALLOUT BLOCKS ─────────────────────────────── */
+.callout{display:flex;gap:16px;padding:20px 22px;border-radius:var(--r16);margin:28px 0;align-items:flex-start;}
+.callout.info{background:rgba(200,151,10,.07);border:1.5px solid rgba(200,151,10,.22);}
+.callout.warn{background:rgba(220,53,69,.06);border:1.5px solid rgba(220,53,69,.2);}
+.callout.success{background:rgba(46,125,78,.07);border:1.5px solid rgba(46,125,78,.2);}
+.callout-icon{width:38px;height:38px;border-radius:var(--r8);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.95rem;}
+.callout.info .callout-icon{background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:var(--forest);}
+.callout.warn .callout-icon{background:linear-gradient(135deg,#dc3545,#c82333);color:#fff;}
+.callout.success .callout-icon{background:linear-gradient(135deg,var(--sage),var(--forest));color:#fff;}
+.callout-title{font-size:.84rem;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.callout-text{font-size:.83rem;color:var(--g500);line-height:1.72;margin:0;}
+
+/* Pull quote */
+.pull-quote{position:relative;padding:28px 32px 28px 44px;margin:36px 0;border-radius:0 var(--r16) var(--r16) 0;background:linear-gradient(135deg,rgba(46,125,78,.06),rgba(200,151,10,.04));border-left:4px solid var(--sage);}
+.pull-quote::before{content:'\201C';position:absolute;top:-8px;left:14px;font-family:var(--ff-display);font-size:5rem;color:var(--sage);opacity:.18;line-height:1;}
+.pull-quote p{font-family:var(--ff-serif);font-size:1.18rem;font-style:italic;color:var(--forest);line-height:1.7;margin:0 0 10px;}
+.pull-quote cite{font-size:.78rem;color:var(--g400);font-style:normal;display:flex;align-items:center;gap:8px;}
+.pull-quote cite::before{content:'';width:20px;height:1.5px;background:var(--gold);}
+
+/* ─── COMPARISON TABLE ───────────────────────────── */
+.compare-wrap{margin:28px 0;border-radius:var(--r16);overflow:hidden;box-shadow:var(--sh-sm);}
+.compare-table{width:100%;border-collapse:collapse;font-size:.84rem;}
+.compare-table thead tr{background:linear-gradient(135deg,var(--forest),var(--sage));}
+.compare-table thead th{color:#fff;padding:14px 18px;font-weight:700;text-align:left;font-size:.76rem;text-transform:uppercase;letter-spacing:.7px;}
+.compare-table tbody tr{border-bottom:1px solid var(--g100);background:var(--white);transition:background .18s;}
+.compare-table tbody tr:hover{background:rgba(46,125,78,.04);}
+.compare-table tbody tr:nth-child(even){background:var(--g50);}
+.compare-table td{padding:12px 18px;color:var(--g600);vertical-align:middle;}
+.compare-table td:first-child{font-weight:600;color:var(--g800);}
+.badge-pill{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:50px;font-size:.68rem;font-weight:700;}
+.badge-pill.green{background:rgba(46,125,78,.1);color:var(--sage);}
+.badge-pill.gold{background:rgba(200,151,10,.12);color:#9B6F00;}
+.tc-good{color:var(--sage);font-weight:700;}
+.tc-warn{color:#c05800;font-weight:700;}
+
+/* ─── IN-ARTICLE IMAGE ───────────────────────────── */
+.art-img{margin:36px 0;}
+.art-img img{width:100%;border-radius:var(--r16);max-height:380px;object-fit:cover;box-shadow:var(--sh-md);}
+.art-img figcaption{text-align:center;font-size:.75rem;color:var(--g300);margin-top:10px;font-style:italic;display:flex;align-items:center;justify-content:center;gap:6px;}
+
+/* ─── KEY TAKEAWAYS ──────────────────────────────── */
+.takeaways{border-radius:var(--r20);overflow:hidden;margin:40px 0;}
+.takeaways-header{background:linear-gradient(135deg,var(--forest-deep),var(--forest));padding:20px 28px;display:flex;align-items:center;gap:12px;}
+.takeaways-header i{font-size:1.3rem;color:var(--gold-lt);}
+.takeaways-header span{font-family:var(--ff-display);font-size:1.1rem;color:#fff;}
+.takeaways-body{background:linear-gradient(to bottom,var(--forest-mid),var(--forest-light));padding:24px 28px;display:flex;flex-direction:column;gap:14px;}
+.takeaway-row{display:flex;align-items:flex-start;gap:13px;font-size:.88rem;color:rgba(255,255,255,.78);line-height:1.7;}
+.takeaway-num{width:28px;height:28px;border-radius:var(--r8);flex-shrink:0;background:rgba(200,151,10,.22);border:1px solid rgba(200,151,10,.35);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--gold-lt);}
+
+/* ─── ARTICLE FOOTER BAR ─────────────────────────── */
+.article-footer{background:var(--white);border-radius:var(--r20);border:1px solid rgba(0,0,0,.05);box-shadow:var(--sh-xs);padding:26px 28px;margin-bottom:22px;}
+.tag-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--g50);}
+.tag-row-label{font-size:.73rem;font-weight:700;color:var(--g300);display:flex;align-items:center;gap:5px;white-space:nowrap;}
+.tag-chip{padding:5px 14px;border-radius:50px;font-size:.72rem;font-weight:600;background:var(--g50);color:var(--g500);border:1.5px solid var(--g100);cursor:pointer;transition:all .2s;}
+.tag-chip:hover{background:var(--forest);color:#fff;border-color:var(--forest);}
+.share-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.share-label{font-size:.78rem;font-weight:700;color:var(--g400);white-space:nowrap;display:flex;align-items:center;gap:5px;}
+.share-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:var(--r8);font-size:.77rem;font-weight:700;color:#fff;cursor:pointer;border:none;transition:all .22s;}
+.share-btn:hover{transform:translateY(-2px);}
+.share-btn.wa{background:linear-gradient(135deg,#25d366,#0fa855);}
+.share-btn.fb{background:linear-gradient(135deg,#1877f2,#0d5cba);}
+.share-btn.tw{background:linear-gradient(135deg,#111,#333);}
+.share-btn.cp{background:linear-gradient(135deg,var(--sage),var(--forest));}
+.like-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:var(--r8);font-size:.82rem;font-weight:700;color:var(--g400);background:var(--g50);border:1.5px solid var(--g100);cursor:pointer;transition:all .22s;margin-left:auto;}
+.like-btn:hover,.like-btn.liked{background:rgba(220,53,69,.07);color:#c82333;border-color:rgba(220,53,69,.25);}
+.like-btn i{transition:transform .25s var(--ease-spring);}
+.like-btn:hover i,.like-btn.liked i{transform:scale(1.25);}
+
+/* ─── AUTHOR BOX ─────────────────────────────────── */
+.author-box{display:flex;gap:24px;background:var(--white);border-radius:var(--r20);border:1px solid rgba(0,0,0,.05);box-shadow:var(--sh-xs);padding:28px;margin-bottom:22px;align-items:flex-start;}
+.author-avatar{width:80px;height:80px;border-radius:18px;flex-shrink:0;background:linear-gradient(135deg,var(--forest),var(--sage));display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:2rem;color:#fff;box-shadow:0 6px 20px rgba(46,125,78,.28);}
+.author-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:4px;}
+.author-name{font-size:1.1rem;font-family:var(--ff-display);color:var(--ink);margin-bottom:2px;}
+.author-role{font-size:.78rem;color:var(--g300);margin-bottom:12px;}
+.author-bio{font-size:.84rem;color:var(--g500);line-height:1.8;margin-bottom:16px;}
+.author-socials{display:flex;gap:8px;}
+.author-soc{width:32px;height:32px;border-radius:var(--r8);background:var(--g50);border:1.5px solid var(--g100);display:flex;align-items:center;justify-content:center;color:var(--g400);font-size:.85rem;cursor:pointer;transition:all .2s;}
+.author-soc:hover{background:var(--forest);color:#fff;border-color:var(--forest);}
+
+/* ─── COMMENTS ───────────────────────────────────── */
+.comment-section{background:var(--white);border-radius:var(--r20);border:1px solid rgba(0,0,0,.05);box-shadow:var(--sh-xs);padding:32px;margin-bottom:22px;}
+.cs-header{display:flex;align-items:center;margin-bottom:28px;padding-bottom:18px;border-bottom:1.5px solid var(--g50);}
+.cs-title{display:flex;align-items:center;gap:10px;font-size:1.05rem;font-family:var(--ff-display);color:var(--ink);}
+.cs-title i{color:var(--gold);}
+.cs-count{padding:3px 12px;border-radius:50px;background:rgba(46,125,78,.1);color:var(--sage);font-size:.72rem;font-weight:700;}
+.comment-list{display:flex;flex-direction:column;gap:22px;margin-bottom:32px;}
+.comment-item{display:flex;gap:14px;}
+.cm-avatar{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:.95rem;font-weight:700;color:#fff;}
+.cm-content{flex:1;}
+.cm-head{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:8px;}
+.cm-name{font-size:.86rem;font-weight:700;color:var(--ink);}
+.cm-date{font-size:.71rem;color:var(--g300);}
+.cm-badge{padding:2px 9px;border-radius:50px;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+.cm-badge.official{background:rgba(46,125,78,.12);color:var(--sage);}
+.cm-badge.verified{background:rgba(200,151,10,.12);color:#9B6F00;}
+.cm-bubble{font-size:.84rem;color:var(--g500);line-height:1.8;background:var(--g50);border-radius:0 var(--r16) var(--r16) var(--r16);padding:14px 18px;border:1px solid var(--g100);}
+.cm-bubble.official-bubble{background:rgba(46,125,78,.06);border-color:rgba(46,125,78,.15);}
+.cm-actions{display:flex;gap:14px;margin-top:8px;}
+.cm-action{background:none;border:none;font-size:.72rem;font-weight:600;color:var(--g300);cursor:pointer;display:flex;align-items:center;gap:4px;font-family:var(--ff-body);transition:color .2s;padding:0;}
+.cm-action:hover{color:var(--sage);}
+.comment-reply{margin-left:56px;margin-top:14px;}
+.comment-form{background:var(--g50);border-radius:var(--r16);padding:26px;border:1px solid var(--g100);}
+.cf-header{font-size:.9rem;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px;margin-bottom:18px;}
+.cf-header i{color:var(--gold);}
+.cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:13px;}
+.cf-field label{display:block;font-size:.73rem;font-weight:700;color:var(--g400);margin-bottom:6px;text-transform:uppercase;letter-spacing:.8px;}
+.cf-field input,.cf-field textarea{width:100%;padding:10px 14px;border-radius:var(--r8);border:1.5px solid var(--g100);background:#fff;font-family:var(--ff-body);font-size:.84rem;color:var(--ink);outline:none;transition:all .22s;}
+.cf-field input:focus,.cf-field textarea:focus{border-color:var(--sage);box-shadow:0 0 0 3px rgba(46,125,78,.1);}
+.cf-field textarea{resize:vertical;min-height:110px;margin-bottom:13px;}
+.btn-comment{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--forest),var(--sage));color:#fff;border:none;border-radius:var(--r8);padding:11px 24px;font-family:var(--ff-body);font-size:.84rem;font-weight:700;cursor:pointer;transition:all .25s var(--ease-out);}
+.btn-comment:hover{transform:translateY(-2px);box-shadow:var(--sh-green);}
+
+/* ─── SIDEBAR ────────────────────────────────────── */
+.sidebar-widget{background:var(--white);border-radius:var(--r20);border:1px solid rgba(0,0,0,.05);box-shadow:var(--sh-xs);padding:24px 22px;margin-bottom:18px;}
+.sw-head{display:flex;align-items:center;gap:9px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--g50);}
+.sw-icon{width:30px;height:30px;border-radius:var(--r8);background:linear-gradient(135deg,var(--gold),var(--gold-lt));display:flex;align-items:center;justify-content:center;color:var(--forest);font-size:.78rem;flex-shrink:0;}
+.sw-title{font-size:.87rem;font-weight:700;color:var(--ink);}
+.toc-widget{position:sticky;top:90px;}
+.toc-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:2px;}
+.toc-item{border-left:2px solid var(--g100);padding-left:14px;transition:border-color .22s;}
+.toc-item.active{border-color:var(--sage);}
+.toc-link{font-size:.8rem;color:var(--g400);display:block;padding:5px 0;line-height:1.5;transition:all .2s;}
+.toc-item.active .toc-link,.toc-link:hover{color:var(--forest);font-weight:600;}
+.toc-progress{margin-top:18px;padding-top:16px;border-top:1px dashed var(--g100);}
+.toc-prog-row{display:flex;justify-content:space-between;font-size:.72rem;color:var(--g300);margin-bottom:7px;}
+.toc-track{height:5px;background:var(--g100);border-radius:3px;overflow:hidden;}
+.toc-fill{height:100%;width:0%;border-radius:3px;background:linear-gradient(to right,var(--sage),var(--gold-lt));transition:width .15s linear;}
+.related-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--g50);cursor:pointer;transition:transform .22s;}
+.related-item:last-child{border-bottom:0;padding-bottom:0;}
+.related-item:hover{transform:translateX(4px);}
+.ri-thumb{width:62px;height:54px;border-radius:var(--r8);overflow:hidden;flex-shrink:0;}
+.ri-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .35s;}
+.related-item:hover .ri-thumb img{transform:scale(1.08);}
+.ri-cat{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:3px;}
+.ri-title{font-size:.78rem;font-weight:600;color:var(--g700);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .2s;}
+.related-item:hover .ri-title{color:var(--forest);}
+.ri-date{font-size:.66rem;color:var(--g200);margin-top:3px;display:flex;align-items:center;gap:4px;}
+.nl-sidebar{border-radius:var(--r20);overflow:hidden;margin-bottom:18px;background:linear-gradient(160deg,var(--forest-deep),var(--forest-mid));position:relative;}
+.nl-deco{position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;border:1.5px solid rgba(200,151,10,.12);}
+.nl-deco2{position:absolute;bottom:-30px;left:-30px;width:130px;height:130px;border-radius:50%;border:1.5px solid rgba(46,125,78,.15);}
+.nl-inner{position:relative;z-index:1;padding:26px 22px;}
+.nl-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold-lt));display:flex;align-items:center;justify-content:center;color:var(--forest);font-size:1rem;margin-bottom:12px;}
+.nl-title{font-size:1rem;font-family:var(--ff-display);color:#fff;margin-bottom:6px;}
+.nl-desc{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.72;margin-bottom:16px;}
+.nl-input{width:100%;padding:10px 13px;border-radius:var(--r8);border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.08);color:#fff;font-family:var(--ff-body);font-size:.82rem;outline:none;margin-bottom:9px;transition:border-color .22s;}
+.nl-input::placeholder{color:rgba(255,255,255,.3);}
+.nl-input:focus{border-color:var(--gold-lt);}
+.nl-btn{width:100%;padding:10px;border-radius:var(--r8);border:none;cursor:pointer;background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:var(--forest);font-family:var(--ff-body);font-size:.83rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .25s var(--ease-out);}
+.nl-btn:hover{transform:translateY(-2px);box-shadow:var(--sh-gold);}
+.nl-privacy{font-size:.62rem;color:rgba(255,255,255,.28);text-align:center;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:5px;}
+
+/* ─── TOAST ──────────────────────────────────────── */
+.toast-el{position:fixed;bottom:110px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:linear-gradient(135deg,var(--forest),var(--sage));color:#fff;
+  padding:12px 24px;border-radius:var(--r12);font-size:.84rem;font-weight:600;
+  z-index:9999;box-shadow:0 8px 28px rgba(46,125,78,.4);
+  opacity:0;transition:all .3s var(--ease-out);
+  white-space:nowrap;max-width:90vw;text-align:center;pointer-events:none;}
+.toast-el.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ─── REVEAL ─────────────────────────────────────── */
+[data-reveal]{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out);}
+[data-reveal="right"]{transform:translateX(20px);}
+[data-reveal].revealed{opacity:1;transform:none;}
+
+/* ─── RESPONSIVE ─────────────────────────────────── */
+@media(max-width:991.98px){
+  .article-card{padding:28px 24px;}
+  .author-box{flex-direction:column;gap:16px;}
+  .author-avatar{width:64px;height:64px;font-size:1.5rem;}
+  .art-nav{grid-template-columns:1fr;}.art-nav-divider{height:1px;}
+  .art-nav-item.next{align-items:flex-start;text-align:left;}
+  .art-nav-item.next .art-nav-label{flex-direction:row;}
+  .toc-widget{position:static;}
+  .ah-img-wrap{height:240px;}
+}
+@media(max-width:767.98px){
+  .article-card{padding:20px 16px;}
+  .cf-grid{grid-template-columns:1fr;}
+  .comment-reply{margin-left:30px;}
+  .share-row{gap:6px;}
+  .share-btn{padding:8px 12px;font-size:.72rem;}
+  .ah-img-wrap{height:200px;}
+  .ah-title{font-size:1.75rem;}
+  .comment-section{padding:24px 18px;}
+}
+</style>
+@endpush
+
+@push('scripts')
+<script>
+/* ─── PRELOADER ──────────────────────────────────── */
+window.addEventListener('load',()=>{
+  const pl=document.getElementById('preloader');
+  if(pl) {
+    setTimeout(()=>{pl.classList.add('hidden');setTimeout(()=>pl.style.display='none',700);},850);
+  }
+});
+
+document.addEventListener('DOMContentLoaded',()=>{
+  initNavbar();
+  initBackTop();
+  initReveal();
+  initReadProgress();
+  initTOC();
+});
+
+/* ─── NAVBAR ─────────────────────────────────────── */
+function initNavbar(){
+  const nav=document.getElementById('navbar');
+  if(nav) {
+    window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
+  }
+}
+
+/* ─── BACK TO TOP ────────────────────────────────── */
+function initBackTop(){
+  const btn=document.getElementById('backTop');
+  if(btn) {
+    window.addEventListener('scroll',()=>{
+      btn.classList.toggle('show', scrollY > 500);
+    },{passive:true});
+  }
+}
+
+/* ─── SCROLL REVEAL ──────────────────────────────── */
+function initReveal(){
+  const els=document.querySelectorAll('[data-reveal]');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting)return;
+      const d=parseInt(e.target.dataset.revealDelay||0);
+      setTimeout(()=>e.target.classList.add('revealed'),d);
+      obs.unobserve(e.target);
+    });
+  },{threshold:0.1,rootMargin:'0px 0px -36px 0px'});
+  els.forEach(el=>obs.observe(el));
+}
+
+/* ─── READING PROGRESS ───────────────────────────── */
+function initReadProgress(){
+  const bar=document.getElementById('readProgress');
+  const fill=document.getElementById('tocFill');
+  const pct=document.getElementById('tocPct');
+  window.addEventListener('scroll',()=>{
+    const total=document.documentElement.scrollHeight-window.innerHeight;
+    const progress=total>0?Math.min(100,Math.round(scrollY/total*100)):0;
+    if(bar)bar.style.width=progress+'%';
+    if(fill)fill.style.width=progress+'%';
+    if(pct)pct.textContent=progress+'%';
+  },{passive:true});
+}
+
+/* ─── TABLE OF CONTENTS ──────────────────────────── */
+function initTOC(){
+  const ids=['h-1','h-2','h-3','h-4','h-5'];
+  const items=document.querySelectorAll('.toc-item');
+  window.addEventListener('scroll',()=>{
+    let current='';
+    ids.forEach(id=>{
+      const el=document.getElementById(id);
+      if(el&&scrollY>=el.getBoundingClientRect().top+pageYOffset-130)current=id;
+    });
+    items.forEach((li,i)=>li.classList.toggle('active','h-'+(i+1)===current));
+  },{passive:true});
+}
+
+function goTo(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  window.scrollTo({top:el.getBoundingClientRect().top+pageYOffset-100,behavior:'smooth'});
+}
+
+/* ─── LIKE ───────────────────────────────────────── */
+let liked=false;
+function toggleLike(){
+  liked=!liked;
+  document.getElementById('likeBtn').classList.toggle('liked',liked);
+  document.getElementById('likeIcon').className=liked?'bi bi-heart-fill':'bi bi-heart';
+  document.getElementById('likeCount').textContent=liked?249:248;
+}
+
+/* ─── SHARE ──────────────────────────────────────── */
+function shareWA(){window.open('https://wa.me/?text='+encodeURIComponent('Artikel dari AROMAS: '+document.title+' '+location.href),'_blank');}
+function shareFB(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank');}
+function shareTW(){window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href),'_blank');}
+function copyLink(){
+  navigator.clipboard.writeText(location.href)
+    .then(()=>toast('✓ Link artikel berhasil disalin!'))
+    .catch(()=>toast('✓ Link disalin'));
+}
+
+/* ─── COMMENT ────────────────────────────────────── */
+function submitComment(){
+  const name=document.getElementById('cmName').value.trim();
+  const email=document.getElementById('cmEmail').value.trim();
+  const text=document.getElementById('cmText').value.trim();
+  if(!name||!email||!text){toast('⚠ Mohon lengkapi semua field komentar.');return;}
+  if(!email.includes('@')){toast('⚠ Format email tidak valid.');return;}
+  document.getElementById('cmName').value='';
+  document.getElementById('cmEmail').value='';
+  document.getElementById('cmText').value='';
+  toast('✓ Komentar dikirim dan menunggu moderasi. Terima kasih!');
+}
+
+/* ─── NEWSLETTER ─────────────────────────────────── */
+function subscribeNL(){
+  const el=document.getElementById('nlEmail');
+  if(!el||!el.value.includes('@')){
+    if(el){el.style.borderColor='rgba(220,53,69,.6)';el.focus();}
+    setTimeout(()=>{if(el)el.style.borderColor='';},1500);
+    return;
+  }
+  el.value='';
+  toast('✓ Berhasil berlangganan! Selamat bergabung di newsletter AROMAS.');
+}
+
+/* ─── TOAST ──────────────────────────────────────── */
+function toast(msg){
+  const el=document.getElementById('toast');
+  if(!el) return;
+  el.textContent=msg;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t=setTimeout(()=>el.classList.remove('show'),3200);
+}
+</script>
+@endpush

@@ -1,0 +1,685 @@
+@extends('layouts.app')
+
+@section('title', 'AROMAS - Minyak Goreng Premium Berkualitas Tinggi Indonesia')
+
+@section('content')
+<!-- ========== HERO SECTION ========== -->
+<section id="home" class="hero-slider">
+
+    <!-- ===== NAVIGATION ARROWS ===== -->
+    <button class="hero-slider-arrow hero-slider-arrow-prev" id="heroPrev" aria-label="Slide sebelumnya">
+        <i class="bi bi-chevron-left"></i>
+    </button>
+    <button class="hero-slider-arrow hero-slider-arrow-next" id="heroNext" aria-label="Slide berikutnya">
+        <i class="bi bi-chevron-right"></i>
+    </button>
+
+    <!-- ===== DOTS ===== -->
+    <div class="hero-slider-dots" id="heroSliderDots">
+        <button class="hero-dot active" data-index="0" aria-label="Slide 1"></button>
+        <button class="hero-dot" data-index="1" aria-label="Slide 2"></button>
+        <button class="hero-dot" data-index="2" aria-label="Slide 3"></button>
+    </div>
+
+    <!-- ===== COUNTER ===== -->
+    <div class="hero-slide-counter">
+        <span id="heroCurrent">01</span> / 03
+    </div>
+
+    <!-- ===== AUTOPLAY PROGRESS BAR ===== -->
+    <div class="hero-progress-bar" id="heroProgressBar"></div>
+
+    <!-- ===== SLIDES TRACK ===== -->
+    <div class="hero-slides-track" id="heroSlidesTrack">
+
+        <!-- ========== SLIDE 1 ========== -->
+        <div class="hero-slide active-slide" style="padding: 100px 0 60px;">
+            <div class="hero-overlay"></div>
+            <div class="hero-decoration">
+                <div class="decoration-circle circle-1"></div>
+                <div class="decoration-circle circle-2"></div>
+                <div class="decoration-circle circle-3"></div>
+            </div>
+            <div class="container">
+                <div class="row align-items-center min-vh-hero">
+                    <div class="col-lg-5 col-md-6 order-lg-1 order-2">
+                        <div class="hero-content-left">
+                            <span class="hero-badge">
+                                <i class="bi bi-award-fill"></i> Premium Quality
+                            </span>
+                            <h1 class="hero-main-title">
+                                Minyak Goreng
+                                <span class="text-gradient">AROMAS</span>
+                            </h1>
+                            <p class="hero-description">
+                                Hadirkan cita rasa terbaik untuk masakan
+                                keluarga dengan minyak goreng sawit berkualitas
+                                premium. Jernih, sehat, dan tahan panas tinggi.
+                            </p>
+                            <div class="hero-pills">
+                                <span class="pill"><i class="bi bi-check-circle-fill"></i> Rendah Kolesterol</span>
+                                <span class="pill"><i class="bi bi-check-circle-fill"></i> Halal MUI</span>
+                                <span class="pill"><i class="bi bi-check-circle-fill"></i> BPOM Certified</span>
+                            </div>
+                            <div class="hero-actions">
+                                <a href="#products" class="btn-primary-hero">
+                                    <i class="bi bi-bag-check-fill"></i>
+                                    <span>Lihat Produk</span>
+                                </a>
+                                <a href="{{ url('/about') }}" class="btn-secondary-hero">
+                                    <i class="bi bi-play-circle-fill"></i>
+                                    <span>Tentang Kami</span>
+                                </a>
+                            </div>
+                            <div class="hero-trust">
+                                <div class="trust-item">
+                                    <strong>15+</strong>
+                                    <span>Tahun Pengalaman</span>
+                                </div>
+                                <div class="trust-divider"></div>
+                                <div class="trust-item">
+                                    <strong>1Jt+</strong>
+                                    <span>Pelanggan Setia</span>
+                                </div>
+                                <div class="trust-divider"></div>
+                                <div class="trust-item">
+                                    <strong>500+</strong>
+                                    <span>Mitra Distribusi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-6 order-lg-2 order-1">
+                        <div class="hero-product-wrapper">
+                            <img src="{{ asset('assets/images/aromas-hero.png') }}" alt="AROMAS Minyak Goreng Premium" class="hero-product-img" />
+                            <div class="floating-card card-1">
+                                <div class="floating-icon"><i class="bi bi-heart-pulse-fill"></i></div>
+                                <div class="floating-text">
+                                    <strong>Sehat</strong>
+                                    <span>Rendah Lemak</span>
+                                </div>
+                            </div>
+                            <div class="floating-card card-2">
+                                <div class="floating-icon"><i class="bi bi-fire"></i></div>
+                                <div class="floating-text">
+                                    <strong>Tahan Panas</strong>
+                                    <span>Anti Gosong</span>
+                                </div>
+                            </div>
+                            <div class="floating-card card-3">
+                                <div class="floating-icon"><i class="bi bi-droplet-fill"></i></div>
+                                <div class="floating-text">
+                                    <strong>Jernih</strong>
+                                    <span>100% Murni</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== SLIDE 2 ========== -->
+        <div class="hero-slide" style="padding: 100px 0 60px;">
+            <div class="hero-overlay"></div>
+            <div class="hero-decoration">
+                <div class="decoration-circle circle-1"></div>
+                <div class="decoration-circle circle-2"></div>
+                <div class="decoration-circle circle-3"></div>
+            </div>
+            <div class="container">
+                <div class="row align-items-center min-vh-hero">
+                    <div class="col-lg-5 col-md-6 order-lg-1 order-2">
+                        <div class="hero-content-left">
+                            <span class="hero-badge">
+                                <i class="bi bi-building-fill"></i> Kemitraan B2B
+                            </span>
+                            <h1 class="hero-main-title">
+                                Solusi Industri
+                                <span class="text-gradient">Terpercaya</span>
+                            </h1>
+                            <p class="hero-description">
+                                Pasokan minyak goreng premium untuk restoran,
+                                hotel, katering & industri makanan dengan
+                                harga kompetitif dan kualitas terjamin.
+                            </p>
+                            <div class="hero-pills">
+                                <span class="pill"><i class="bi bi-check-circle-fill"></i> Harga Grosir</span>
+                                <span class="pill"><i class="bi bi-check-circle-fill"></i> Pengiriman Cepat</span>
+                                <span class="pill"><i class="bi bi-check-circle-fill"></i> Kontrak Fleksibel</span>
+                            </div>
+                            <div class="hero-actions">
+                                <a href="{{ url('/partnership') }}" class="btn-primary-hero">
+                                    <i class="bi bi-handshake-fill"></i>
+                                    <span>Mulai Kemitraan</span>
+                                </a>
+                                <a href="{{ url('/contact') }}" class="btn-secondary-hero">
+                                    <i class="bi bi-telephone-fill"></i>
+                                    <span>Hubungi Kami</span>
+                                </a>
+                            </div>
+                            <div class="hero-trust">
+                                <div class="trust-item">
+                                    <strong>500+</strong>
+                                    <span>Mitra Aktif</span>
+                                </div>
+                                <div class="trust-divider"></div>
+                                <div class="trust-item">
+                                    <strong>34</strong>
+                                    <span>Provinsi Terjangkau</span>
+                                </div>
+                                <div class="trust-divider"></div>
+                                <div class="trust-item">
+                                    <strong>24/7</strong>
+                                    <span>Layanan Pelanggan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-6 order-lg-2 order-1">
+                        <div class="hero-product-wrapper">
+                            <img src="{{ asset('assets/images/aromas-hero.png') }}" alt="AROMAS Minyak Goreng Industri" class="hero-product-img" />
+                            <div class="floating-card card-1">
+                                <div class="floating-icon"><i class="bi bi-truck-front-fill"></i></div>
+                                <div class="floating-text">
+                                    <strong>Pengiriman</strong>
+                                    <span>Ke Seluruh RI</span>
+                                </div>
+                            </div>
+                            <div class="floating-card card-2">
+                                <div class="floating-icon"><i class="bi bi-box-seam-fill"></i></div>
+                                <div class="floating-text">
+                                    <strong>Bulk Order</strong>
+                                    <span>Min. 100 Liter</span>
+                                </div>
+                            </div>
+                            <div class="floating-card card-3">
+                                <div class="floating-icon"><i class="bi bi-shield-check-fill"></i></div>
+                                <div class="floating-text">
+                                    <strong>Garansi</strong>
+                                    <span>Kualitas 100%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== SLIDE 3 ========== -->
+        <div class="hero-slide" style="padding: 100px 0 60px;">
+            <div class="hero-overlay"></div>
+            <div class="hero-decoration">
+                <div class="decoration-circle circle-1"></div>
+                <div class="decoration-circle circle-2"></div>
+                <div class="decoration-circle circle-3"></div>
+            </div>
+            <div class="container">
+                <div class="row align-items-center min-vh-hero">
+                    <div class="col-lg-5 col-md-6 order-lg-1 order-2">
+                        <div class="hero-content-left">
+                            <span class="hero-badge">
+                                <i class="bi bi-patch-check-fill"></i> Bersertifikat Resmi
+                            </span>
+                            <h1 class="hero-main-title">
+                                Standar Keamanan
+                                <span class="text-gradient">Tertinggi</span>
+                            </h1>
+                            <p class="hero-description">
+                                Setiap tetes AROMAS melalui quality control
+                                ketat bersertifikasi internasional—aman untuk
+                                seluruh keluarga Indonesia.
+                            </p>
+                            <div class="hero-pills">
+                                <span class="pill"><i class="bi bi-check-circle-fill"></i> ISO 22000:2018</span>
+                                <span class="pill"><i class="bi bi-check-circle-fill"></i> BPOM RI</span>
+                                <span class="pill"><i class="bi bi-check-circle-fill"></i> Top Brand 2024</span>
+                            </div>
+                            <div class="hero-actions">
+                                <a href="{{ url('/product') }}" class="btn-primary-hero">
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Lihat Produk</span>
+                                </a>
+                                <a href="{{ url('/about') }}" class="btn-secondary-hero">
+                                    <i class="bi bi-trophy-fill"></i>
+                                    <span>Penghargaan Kami</span>
+                                </a>
+                            </div>
+                            <div class="hero-trust">
+                                <div class="trust-item">
+                                    <strong>5+</strong>
+                                    <span>Sertifikasi</span>
+                                </div>
+                                <div class="trust-divider"></div>
+                                <div class="trust-item">
+                                    <strong>12</strong>
+                                    <span>Varian Produk</span>
+                                </div>
+                                <div class="trust-divider"></div>
+                                <div class="trust-item">
+                                    <strong>A+</strong>
+                                    <span>Rating Kualitas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-6 order-lg-2 order-1">
+                        <div class="hero-product-wrapper">
+                            <img src="{{ asset('assets/images/aromas-hero.png') }}" alt="AROMAS Bersertifikat" class="hero-product-img" />
+                            <div class="floating-card card-1">
+                                <div class="floating-icon"><i class="bi bi-award-fill"></i></div>
+                                <div class="floating-text">
+                                    <strong>Top Brand</strong>
+                                    <span>Award 2024</span>
+                                </div>
+                            </div>
+                            <div class="floating-card card-2">
+                                <div class="floating-icon"><i class="bi bi-patch-check-fill"></i></div>
+                                <div class="floating-text">
+                                    <strong>Halal MUI</strong>
+                                    <span>Tersertifikasi</span>
+                                </div>
+                            </div>
+                            <div class="floating-card card-3">
+                                <div class="floating-icon"><i class="bi bi-star-fill"></i></div>
+                                <div class="floating-text">
+                                    <strong>ISO 22000</strong>
+                                    <span>Food Safety</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ========== MISSION / ABOUT SECTION ========== -->
+<section id="about" class="mission-section">
+    <div class="container">
+        <div class="mission-content" data-aos="fade-up">
+            <p class="mission-text">
+                Di AROMAS, kami berkomitmen menghadirkan
+                <span class="highlight">minyak goreng premium</span>
+                dengan kualitas
+                <span class="eco-badge"><i class="bi bi-check-circle"></i> Terjamin</span>
+                dan proses produksi berkelanjutan. Dengan dedikasi
+                terhadap kesehatan konsumen dan kelestarian lingkungan,
+                kami bertujuan menjadi
+                <span class="leaf-icon"><i class="bi bi-award"></i></span>
+                produsen minyak goreng terpercaya di Indonesia.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== SERVICES SECTION ========== -->
+<section id="services" class="services-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                <h2 class="section-title">
+                    Layanan <span class="italic">Unggulan Kami</span> Untuk Anda!
+                </h2>
+
+                <div class="services-accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span class="accordion-icon"><i class="bi bi-box-seam"></i></span>
+                            <span class="accordion-title">Distribusi Nasional</span>
+                            <span class="accordion-toggle"><i class="bi bi-plus-lg"></i></span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Jaringan distribusi yang luas mencakup seluruh Indonesia, memastikan produk AROMAS tersedia di berbagai toko dan supermarket terdekat Anda.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span class="accordion-icon"><i class="bi bi-building"></i></span>
+                            <span class="accordion-title">Kemitraan B2B</span>
+                            <span class="accordion-toggle"><i class="bi bi-plus-lg"></i></span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Program kemitraan khusus untuk restoran, hotel, katering, dan industri makanan dengan harga kompetitif dan pasokan terjamin.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item active">
+                        <div class="accordion-header">
+                            <span class="accordion-icon"><i class="bi bi-shield-check"></i></span>
+                            <span class="accordion-title">Jaminan Kualitas</span>
+                            <span class="accordion-toggle"><i class="bi bi-dash-lg"></i></span>
+                        </div>
+                        <div class="accordion-content show">
+                            <p>Setiap produk AROMAS melalui proses quality control ketat dengan sertifikasi BPOM, Halal MUI, dan standar ISO untuk menjamin keamanan konsumen.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span class="accordion-icon"><i class="bi bi-headset"></i></span>
+                            <span class="accordion-title">Layanan Pelanggan</span>
+                            <span class="accordion-toggle"><i class="bi bi-plus-lg"></i></span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Tim customer service yang responsif siap membantu pertanyaan, keluhan, dan saran Anda melalui berbagai channel komunikasi 24/7.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="services-image">
+                    <img src="{{ asset('assets/images/ChatGPT Image Jan 19, 2026, 04_30_15 PM.png') }}" alt="Cooking Oil Production" class="img-fluid" />
+                    <div class="image-badge">
+                        <i class="bi bi-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== IMPACT / STATS SECTION ========== -->
+<section id="impact" class="impact-section">
+    <div class="impact-overlay"></div>
+    <div class="container">
+        <div class="impact-header" data-aos="fade-up">
+            <h2 class="section-title text-white">
+                Pencapaian<br /><span class="italic">Kami</span>
+            </h2>
+        </div>
+
+        <div class="row g-4 mt-4">
+            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="impact-card">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=200&fit=crop" alt="Experience" class="impact-img" />
+                    <div class="impact-stat">
+                        <h3><span class="counter" data-target="15">0</span>+</h3>
+                        <p>Tahun Pengalaman</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="impact-card">
+                    <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=300&h=200&fit=crop" alt="Products" class="impact-img" />
+                    <div class="impact-stat">
+                        <h3><span class="counter" data-target="12">0</span></h3>
+                        <p>Varian Produk</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="impact-card">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&h=200&fit=crop" alt="Distribution" class="impact-img" />
+                    <div class="impact-stat">
+                        <h3><span class="counter" data-target="500">0</span>+</h3>
+                        <p>Mitra Distribusi</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="impact-card">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop" alt="Customers" class="impact-img" />
+                    <div class="impact-stat">
+                        <h3><span class="counter" data-target="1000000">0</span>+</h3>
+                        <p>Pelanggan Setia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== AWARDS SECTION ========== -->
+<section id="awards" class="awards-section">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Penghargaan & Sertifikasi</h2>
+        <div class="awards-list">
+            <div class="award-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="award-info">
+                    <h4>Top Brand Award - Kategori Minyak Goreng</h4>
+                    <p>Frontier Consulting Group <span class="dot green"></span></p>
+                </div>
+                <div class="award-year">2024</div>
+            </div>
+            <div class="award-item" data-aos="fade-up" data-aos-delay="150">
+                <div class="award-info">
+                    <h4>Sertifikasi Halal MUI</h4>
+                    <p>Majelis Ulama Indonesia <span class="dot green"></span></p>
+                </div>
+                <div class="award-year">2024</div>
+            </div>
+            <div class="award-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="award-info">
+                    <h4>Indonesia Best Brand Award</h4>
+                    <p>SWA Magazine & MARS Research <span class="dot yellow"></span></p>
+                </div>
+                <div class="award-year">2023</div>
+            </div>
+            <div class="award-item" data-aos="fade-up" data-aos-delay="250">
+                <div class="award-info">
+                    <h4>ISO 22000:2018 - Food Safety Management</h4>
+                    <p>International Organization for Standardization <span class="dot green"></span></p>
+                </div>
+                <div class="award-year">2023</div>
+            </div>
+            <div class="award-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="award-info">
+                    <h4>Sertifikasi BPOM RI</h4>
+                    <p>Badan Pengawas Obat dan Makanan <span class="dot green"></span></p>
+                </div>
+                <div class="award-year">2022</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== BENEFITS SECTION ========== -->
+<section id="products" class="benefits-section">
+    <div class="benefits-bg">
+        <div class="container">
+            <div class="benefits-header" data-aos="fade-up">
+                <h2 class="section-title text-white">
+                    Keunggulan<br /><span class="italic">Minyak Goreng AROMAS</span>
+                </h2>
+                <p class="benefits-desc">AROMAS diproduksi dengan teknologi modern untuk menghasilkan minyak goreng berkualitas tinggi yang aman dan sehat untuk keluarga Indonesia.</p>
+            </div>
+            <div class="row g-4 mt-4">
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="bi bi-heart-pulse"></i></div>
+                        <h4>Rendah Kolesterol</h4>
+                        <p>Diformulasi khusus dengan kandungan lemak jenuh yang rendah untuk menjaga kesehatan jantung dan pembuluh darah keluarga Anda.</p>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="bi bi-brightness-high"></i></div>
+                        <h4>Jernih & Tidak Berbau</h4>
+                        <p>Proses penyulingan multi-tahap menghasilkan minyak goreng yang jernih, tidak berbau, dan tidak mengubah rasa asli masakan Anda.</p>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="bi bi-fire"></i></div>
+                        <h4>Tahan Panas Tinggi</h4>
+                        <p>Titik asap tinggi memungkinkan penggorengan berulang tanpa cepat menghitam, lebih hemat dan ekonomis untuk rumah tangga.</p>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="bi bi-shield-plus"></i></div>
+                        <h4>Kaya Vitamin E</h4>
+                        <p>Mengandung vitamin E alami sebagai antioksidan yang membantu menjaga kesehatan kulit dan meningkatkan daya tahan tubuh.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== PARTNERS SECTION ========== -->
+<section id="partners" class="investors-section">
+    <div class="container">
+        <h3 class="text-center mb-5" data-aos="fade-up">Mitra & Distributor Kami</h3>
+        <div class="investors-logos" data-aos="fade-up" data-aos-delay="100">
+            <div class="investor-logo"><i class="bi bi-shop"></i><span>Indomaret</span></div>
+            <div class="investor-logo"><i class="bi bi-shop"></i><span>Alfamart</span></div>
+            <div class="investor-logo"><i class="bi bi-cart4"></i><span>Hypermart</span></div>
+            <div class="investor-logo"><i class="bi bi-bag"></i><span>Giant</span></div>
+            <div class="investor-logo"><i class="bi bi-basket"></i><span>Superindo</span></div>
+            <div class="investor-logo"><i class="bi bi-globe"></i><span>Tokopedia</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== VIDEO SECTION ========== -->
+<section id="gallery" class="video-section">
+    <div class="video-overlay"></div>
+    <div class="container">
+        <div class="video-content" data-aos="zoom-in">
+            <h2 class="section-title text-white">Proses Produksi<br /><span class="outline-text">AROMAS</span></h2>
+            <button class="play-btn" data-bs-toggle="modal" data-bs-target="#videoModal"><i class="bi bi-play-fill"></i></button>
+        </div>
+    </div>
+</section>
+
+<!-- Video Modal -->
+<div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="ratio ratio-16x9">
+                    <iframe src="" id="videoIframe" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== BLOG SECTION ========== -->
+<section id="blog" class="blog-section">
+    <div class="container">
+        <div class="blog-header" data-aos="fade-up">
+            <h2 class="section-title">Tips &amp; Artikel <span class="italic">Seputar Memasak</span> dari AROMAS</h2>
+        </div>
+        <div class="blog-slider-wrapper mt-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="blog-slider-track" id="blogSliderTrack">
+                <div class="blog-slide">
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop" alt="Blog 1" />
+                            <span class="blog-tag">Tips Memasak</span>
+                        </div>
+                        <div class="blog-content">
+                            <h4>Cara Memilih Minyak Goreng yang Sehat untuk Keluarga</h4>
+                            <p>Panduan lengkap memilih minyak goreng berkualitas untuk menjaga kesehatan keluarga tercinta.</p>
+                            <a href="{{ url('/blog/1') }}" class="blog-link">BACA SELENGKAPNYA <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-slide">
+                    <div class="blog-card featured">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop" alt="Blog 2" />
+                            <span class="blog-tag">Resep</span>
+                        </div>
+                        <div class="blog-content">
+                            <h4>5 Resep Gorengan Crispy yang Wajib Dicoba di Rumah</h4>
+                            <p>Kumpulan resep gorengan renyah dan lezat menggunakan minyak goreng AROMAS.</p>
+                            <a href="{{ url('/blog/2') }}" class="blog-link">BACA SELENGKAPNYA <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-slide">
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=400&h=300&fit=crop" alt="Blog 3" />
+                            <span class="blog-tag">Edukasi</span>
+                        </div>
+                        <div class="blog-content">
+                            <h4>Fakta Menarik Tentang Minyak Kelapa Sawit Indonesia</h4>
+                            <p>Ketahui manfaat dan proses produksi minyak kelapa sawit yang menjadi kebanggaan Indonesia.</p>
+                            <a href="{{ url('/blog/3') }}" class="blog-link">BACA SELENGKAPNYA <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="blog-dots" id="blogDots"></div>
+        <div class="blog-nav" data-aos="fade-up">
+            <button class="nav-arrow prev" id="blogPrev" aria-label="Artikel sebelumnya"><i class="bi bi-arrow-left"></i></button>
+            <button class="nav-arrow next" id="blogNext" aria-label="Artikel berikutnya"><i class="bi bi-arrow-right"></i></button>
+        </div>
+    </div>
+</section>
+
+<!-- ========== INTERACTIVE BRANCH SECTION ========== -->
+<section id="interactive-branches" class="interactive-branch-section">
+    <div class="container" style="margin-bottom: 100px">
+        <div class="branch-header" data-aos="fade-up">
+            <h2 class="section-title">Cabang <span class="italic">Kami</span></h2>
+            <p class="branch-desc">Temukan lokasi AROMAS terdekat dengan peta interaktif</p>
+        </div>
+        <div class="interactive-map-container" data-aos="fade-up" data-aos-delay="100">
+            <div id="interactiveMap"></div>
+            <div class="cards-wrapper">
+                <div class="cards-dots" id="cardsDots"></div>
+                <div class="cards-row-wrap">
+                    <button class="card-arrow card-arrow-left" id="cardArrowLeft"><i class="bi bi-chevron-left"></i></button>
+                    <div class="info-cards-container" id="infoCards"></div>
+                    <button class="card-arrow card-arrow-right" id="cardArrowRight"><i class="bi bi-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FAQ SECTION ========== -->
+<section id="faq" class="faq-section">
+    <div class="container">
+        <div class="faq-header" data-aos="fade-up">
+            <h2 class="section-title">Pertanyaan <span class="italic">Umum</span> tentang AROMAS</h2>
+            <p class="faq-desc">Temukan jawaban untuk pertanyaan yang sering diajukan tentang produk dan layanan AROMAS.</p>
+        </div>
+        <div class="row g-4 mt-4">
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <span class="faq-icon"><i class="bi bi-question-circle"></i></span>
+                            <span class="faq-title">Apa keunggulan minyak goreng AROMAS dibandingkan dengan merek lain?</span>
+                            <span class="faq-toggle"><i class="bi bi-plus-lg"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <p>Minyak goreng AROMAS diproduksi dengan teknologi modern melalui proses penyulingan multi-tahap yang menghasilkan minyak yang jernih, tidak berbau, dan memiliki titik asap tinggi. AROMAS juga kaya akan vitamin E alami dan telah teruji memiliki kandungan lemak jenuh yang lebih rendah dibandingkan merek lain.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CONTACT / CTA SECTION ========== -->
+<section id="contact" class="contact-section">
+    <div class="contact-bg">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <h2 class="section-title text-white">Kami Siap<br /><span class="italic">Melayani Anda!</span></h2>
+                    <p class="contact-desc">Hubungi kami untuk pertanyaan seputar produk, kerjasama bisnis, atau saran dan masukan. Tim AROMAS siap membantu Anda dengan sepenuh hati.</p>
+                    <a href="{{ url('/contact') }}" class="btn btn-light btn-contact-main">Hubungi Kami</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endsection
