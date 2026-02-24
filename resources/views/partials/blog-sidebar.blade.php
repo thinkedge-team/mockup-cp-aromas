@@ -10,19 +10,6 @@
   </div>
 </div>
 
-<!-- Newsletter -->
-<div class="newsletter-card" data-reveal="right" data-reveal-delay="80">
-  <div class="nl-deco"></div><div class="nl-deco2"></div>
-  <div class="nl-inner">
-    <div class="nl-icon-wrap"><i class="bi bi-envelope-heart-fill"></i></div>
-    <h3 class="nl-title">Newsletter AROMAS</h3>
-    <p class="nl-desc">Dapatkan tips memasak &amp; resep terbaru langsung di inbox Anda. Gratis setiap minggu!</p>
-    <input type="email" class="nl-input" id="nlEmail" placeholder="Alamat email Anda…"/>
-    <button class="nl-btn" onclick="subscribeNL()"><i class="bi bi-send-fill"></i> Berlangganan Gratis</button>
-    <p class="nl-privacy"><i class="bi bi-shield-check"></i> Privasi terjaga · Berhenti kapan saja</p>
-  </div>
-</div>
-
 <!-- Categories -->
 <div class="sidebar-widget" data-reveal="right" data-reveal-delay="120">
   <div class="sw-header">
