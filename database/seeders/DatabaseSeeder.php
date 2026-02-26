@@ -36,6 +36,11 @@ class DatabaseSeeder extends Seeder
             FaqItemSeeder::class,
             BranchSeeder::class,
             MissionSectionSeeder::class,
+            ProductHeroSeeder::class,
+            ProductCategorySeeder::class,
+            ProductSeeder::class,
+            ProductAdvantageSeeder::class,
+            ProductCtaSeeder::class,
         ]);
     }
 }

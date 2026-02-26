@@ -1,3 +1,16 @@
+@php
+    use App\Models\ProductHero;
+    use App\Models\ProductCategory;
+    use App\Models\Product;
+    use App\Models\ProductAdvantage;
+    use App\Models\ProductCta;
+
+    $productHero = ProductHero::active()->first();
+    $categories = ProductCategory::active()->orderBy('order')->get();
+    $advantages = ProductAdvantage::active()->get();
+    $productCta = ProductCta::active()->first();
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Produk - AROMAS Minyak Goreng Sawit Premium')
@@ -153,6 +166,19 @@
     .modal-img-band{background:linear-gradient(135deg,#f5faf5,#fffdf7);border-radius:16px;padding:28px;text-align:center;margin-bottom:26px;}
     /* MODAL IMAGE FIX */
     .modal-img-band img{max-height:250px;width:100%;object-fit:contain;filter:drop-shadow(0 10px 28px rgba(0,0,0,.14));}
+    
+    /* Product Image Slider */
+    .product-image-slider{position:relative;}
+    .slider-image{display:none;}
+    .slider-image.active{display:block;}
+    .slider-image img{max-height:250px;width:100%;object-fit:contain;filter:drop-shadow(0 10px 28px rgba(0,0,0,.14));}
+    .slider-prev,.slider-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.6);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:all .2s;z-index:10;}
+    .slider-prev:hover,.slider-next:hover{background:rgba(0,0,0,.8);transform:translateY(-50%) scale(1.1);}
+    .slider-prev{left:10px;}
+    .slider-next{right:10px;}
+    .slider-dots{display:flex;justify-content:center;gap:8px;margin-top:12px;}
+    .slider-dot{width:10px;height:10px;border-radius:50%;background:rgba(0,0,0,.3);cursor:pointer;transition:all .2s;}
+    .slider-dot.active,.slider-dot:hover{background:var(--green);transform:scale(1.2);}
     .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;}
     .detail-item{background:var(--green-pale);border-radius:12px;padding:14px 18px;border:1px solid rgba(34,139,34,.15);}
     .detail-item-label{font-size:.7rem;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
@@ -232,6 +258,14 @@
     <div class="container text-center">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10" data-aos="fade-up">
+                @if($productHero)
+                <span class="hero-badge"><i class="bi {{ $productHero->badge_icon }}"></i> {{ $productHero->badge_text }}</span>
+                <h1 class="hero-title">
+                    {!! $productHero->title !!}
+                    <span class="italic text-gradient">{{ $productHero->title_gradient }}</span>
+                </h1>
+                <p class="hero-desc">{{ $productHero->description }}</p>
+                @else
                 <span class="hero-badge"><i class="bi bi-box-seam-fill"></i> Produk Kami</span>
                 <h1 class="hero-title">
                     Pilihan Kemasan untuk<br />
@@ -242,19 +276,16 @@
                     kemasan — Botol, Jeriken, dan BIB — dengan ukuran yang fleksibel dan
                     kualitas yang konsisten di setiap tetes.
                 </p>
+                @endif
                 <div class="hero-chips">
                     <span class="chip active" data-filter="all">
                         <i class="bi bi-grid-fill"></i> Semua Produk
                     </span>
-                    <span class="chip" data-filter="botol">
-                        <i class="bi bi-droplet-half"></i> Botol
+                    @foreach($categories as $category)
+                    <span class="chip" data-filter="{{ $category->slug }}">
+                        <i class="bi {{ $category->icon }}"></i> {{ $category->title }}
                     </span>
-                    <span class="chip" data-filter="jeriken">
-                        <i class="bi bi-bucket-fill"></i> Jeriken / Refill
-                    </span>
-                    <span class="chip" data-filter="bib">
-                        <i class="bi bi-box-fill"></i> BIB
-                    </span>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -283,11 +314,13 @@
         <div class="filter-wrap">
             <div class="filter-tabs">
                 <button class="ftab active" data-filter="all"><i class="bi bi-grid-fill"></i> Semua</button>
-                <button class="ftab" data-filter="botol"><i class="bi bi-droplet-half"></i> Botol</button>
-                <button class="ftab" data-filter="jeriken"><i class="bi bi-bucket-fill"></i> Jeriken / Refill</button>
-                <button class="ftab" data-filter="bib"><i class="bi bi-box-fill"></i> BIB</button>
+                @foreach($categories as $category)
+                <button class="ftab" data-filter="{{ $category->slug }}">
+                    <i class="bi {{ $category->icon }}"></i> {{ $category->title }}
+                </button>
+                @endforeach
             </div>
-            <span class="result-count">Menampilkan <strong id="prodCount">3</strong> kategori produk</span>
+            <span class="result-count">Menampilkan <strong id="prodCount">{{ $categories->count() }}</strong> kategori produk</span>
         </div>
     </div>
 </section>
@@ -295,266 +328,62 @@
 <!-- PRODUCTS CATEGORIES -->
 <section class="cat-section">
     <div class="container">
-
-        <!-- KATEGORI 1: BOTOL -->
-        <div class="cat-block" id="cat-botol" data-cat="botol">
+        @foreach($categories as $category)
+        @php
+            $categoryProducts = Product::active()->where('category_id', $category->id)->orderBy('order')->get();
+        @endphp
+        <div class="cat-block" id="cat-{{ $category->slug }}" data-cat="{{ $category->slug }}">
             <div class="cat-header" data-aos="fade-up">
-                <div class="cat-icon-wrap"><i class="bi bi-droplet-half"></i></div>
+                <div class="cat-icon-wrap" @if($category->slug !== 'botol') style="background:linear-gradient(135deg,var(--gold),var(--gold-dark));" @endif>
+                    <i class="bi {{ $category->icon }}"></i>
+                </div>
                 <div class="cat-header-info">
-                    <div class="cat-label">Kemasan Primer</div>
-                    <h2 class="cat-title">Botol</h2>
+                    <div class="cat-label">{{ $category->label }}</div>
+                    <h2 class="cat-title">{{ $category->title }}</h2>
                 </div>
             </div>
             <div class="cat-desc-row" data-aos="fade-up" data-aos-delay="80">
-                <p>Kemasan botol plastik HDPE berkualitas tinggi — jernih, ringan, dan mudah dituang. Ideal untuk konsumsi rumah tangga harian dengan berbagai pilihan ukuran dari 200 ml hingga 2.000 ml untuk menyesuaikan kebutuhan keluarga Anda.</p>
+                <p>{{ $category->description }}</p>
             </div>
 
             <div class="row g-4">
-                <div class="col-lg-7" data-aos="fade-left" data-aos-delay="120">
-                    <div class="row g-4">
-                        <div class="col-sm-6">
-                            <div class="prod-card" onclick="openModal('botol-kecil')">
-                                <div class="card-img-wrap">
-                                    <span class="card-badge">Rumah Tangga</span>
-                                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop" alt="AROMAS Botol Kecil" />
-                                </div>
-                                <div class="card-body-inner">
-                                    <div class="card-sizes">
-                                        <span class="size-tag">200 ml</span>
-                                        <span class="size-tag">220 ml</span>
-                                        <span class="size-tag">400 ml</span>
-                                    </div>
-                                    <div class="card-name">AROMAS Botol Mini</div>
-                                    <div class="card-tagline">Praktis untuk pemakaian harian & perjalanan</div>
-                                    <ul class="card-features">
-                                        <li><i class="bi bi-check-circle-fill"></i>Kemasan HDPE food-grade</li>
-                                        <li><i class="bi bi-check-circle-fill"></i>Tutup anti-tumpah presisi</li>
-                                        <li><i class="bi bi-check-circle-fill"></i>Cocok untuk warung & kafe kecil</li>
-                                    </ul>
-                                    <div class="card-footer-row">
-                                        <span class="btn-detail"><i class="bi bi-eye"></i> Detail</span>
-                                        <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20AROMAS%20Botol%20Mini" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
-                                    </div>
-                                </div>
-                            </div>
+                @foreach($categoryProducts as $product)
+                <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ 100 * ($loop->index + 1) }}">
+                    <div class="prod-card" onclick="openModal('product-{{ $product->id }}')">
+                        <div class="card-img-wrap">
+                            <span class="card-badge">{{ $product->badge_text }}</span>
+                            <img src="{{ Storage::url($product->banner_image) }}" alt="{{ $product->name }}" />
                         </div>
-                        <div class="col-sm-6">
-                            <div class="prod-card" onclick="openModal('botol-besar')">
-                                <div class="card-img-wrap">
-                                    <span class="card-badge" style="background:linear-gradient(135deg,var(--green),var(--green-dark));">Populer</span>
-                                    <img src="https://images.unsplash.com/photo-1563991655280-cb95c90ca2fb?w=400&h=300&fit=crop" alt="AROMAS Botol Besar" />
-                                </div>
-                                <div class="card-body-inner">
-                                    <div class="card-sizes">
-                                        <span class="size-tag">750 ml</span>
-                                        <span class="size-tag">800 ml</span>
-                                        <span class="size-tag">900 ml</span>
-                                        <span class="size-tag highlight">1 L</span>
-                                        <span class="size-tag highlight">2 L</span>
-                                    </div>
-                                    <div class="card-name">AROMAS Botol Standar</div>
-                                    <div class="card-tagline">Pilihan utama keluarga Indonesia</div>
-                                    <ul class="card-features">
-                                        <li><i class="bi bi-check-circle-fill"></i>Ukuran ekonomis keluarga</li>
-                                        <li><i class="bi bi-check-circle-fill"></i>Ergonomis, mudah digenggam</li>
-                                        <li><i class="bi bi-check-circle-fill"></i>Label informasi gizi lengkap</li>
-                                    </ul>
-                                    <div class="card-footer-row">
-                                        <span class="btn-detail"><i class="bi bi-eye"></i> Detail</span>
-                                        <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20AROMAS%20Botol%20Standar" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
-                                    </div>
-                                </div>
+                        <div class="card-body-inner">
+                            <div class="card-sizes">
+                                @foreach(array_slice($product->sizes ?? [], 0, 5) as $size)
+                                <span class="size-tag @if($size['is_popular'] ?? false) highlight @endif">
+                                    {{ $size['volume'] }} {{ $size['unit'] }}
+                                </span>
+                                @endforeach
+                            </div>
+                            <div class="card-name">{{ $product->name }}</div>
+                            <div class="card-tagline">{{ $product->tagline }}</div>
+                            <ul class="card-features">
+                                @foreach(array_slice($product->features ?? [], 0, 3) as $feature)
+                                <li><i class="bi bi-check-circle-fill"></i>{{ $feature['text'] }}</li>
+                                @endforeach
+                            </ul>
+                            <div class="card-footer-row">
+                                <span class="btn-detail"><i class="bi bi-eye"></i> Detail</span>
+                                <a href="https://wa.me/6281234567890?text={{ urlencode($product->whatsapp_message ?? 'Halo, saya tertarik dengan ' . $product->name) }}" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
         </div>
 
-        <hr style="border:0;border-top:1px solid var(--gray-200);margin:60px 0;" class="cat-block" data-cat="all-div">
-
-        <!-- KATEGORI 2: JERIKEN -->
-        <div class="cat-block" id="cat-jeriken" data-cat="jeriken">
-            <div class="cat-header" data-aos="fade-up">
-                <div class="cat-icon-wrap" style="background:linear-gradient(135deg,var(--gold),var(--gold-dark));"><i class="bi bi-bucket-fill"></i></div>
-                <div class="cat-header-info">
-                    <div class="cat-label">Kemasan Isi Ulang</div>
-                    <h2 class="cat-title">Jeriken / Refill</h2>
-                </div>
-            </div>
-            <div class="cat-desc-row" data-aos="fade-up" data-aos-delay="80">
-                <p>Jeriken AROMAS dirancang untuk kebutuhan kapasitas tinggi — usaha kuliner, katering, kantin, hingga industri makanan. Material food-grade tahan lama dengan pegangan ergonomis.</p>
-            </div>
-
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="prod-card" onclick="openModal('jeriken-5')">
-                        <div class="card-img-wrap" style="height:200px;">
-                            <span class="card-badge" style="background:linear-gradient(135deg,var(--gold),var(--gold-dark));">Refill</span>
-                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop" alt="AROMAS Jeriken 5L" />
-                        </div>
-                        <div class="card-body-inner">
-                            <div class="card-sizes">
-                                <span class="size-tag highlight">5 Liter</span>
-                            </div>
-                            <div class="card-name">AROMAS Jeriken 5L</div>
-                            <div class="card-tagline">Ideal untuk usaha kecil & warung makan</div>
-                            <ul class="card-features">
-                                <li><i class="bi bi-check-circle-fill"></i>Handle ergonomis mudah dituang</li>
-                                <li><i class="bi bi-check-circle-fill"></i>Tutup ulir anti-bocor</li>
-                                <li><i class="bi bi-check-circle-fill"></i>Plastik HDPE food-grade tebal</li>
-                            </ul>
-                            <div class="card-footer-row">
-                                <span class="btn-detail"><i class="bi bi-eye"></i> Detail</span>
-                                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20Jeriken%205L" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Jeriken 15L -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="180">
-                    <div class="prod-card" onclick="openModal('jeriken-15')">
-                        <div class="card-img-wrap" style="height:200px;">
-                            <span class="card-badge" style="background:linear-gradient(135deg,var(--gold),var(--gold-dark));">Best Value</span>
-                            <img src="https://images.unsplash.com/photo-1563991655280-cb95c90ca2fb?w=400&h=300&fit=crop" alt="AROMAS Jeriken 15L" />
-                        </div>
-                        <div class="card-body-inner">
-                            <div class="card-sizes">
-                                <span class="size-tag highlight">15 Liter</span>
-                                <span class="size-tag highlight">18 Liter</span>
-                            </div>
-                            <div class="card-name">AROMAS Jeriken 15/18L</div>
-                            <div class="card-tagline">Untuk restoran, katering & kantin</div>
-                            <ul class="card-features">
-                                <li><i class="bi bi-check-circle-fill"></i>Volume besar, efisiensi tinggi</li>
-                                <li><i class="bi bi-check-circle-fill"></i>Label SNI & halal terpasang</li>
-                                <li><i class="bi bi-check-circle-fill"></i>Stacking-friendly</li>
-                            </ul>
-                            <div class="card-footer-row">
-                                <span class="btn-detail"><i class="bi bi-eye"></i> Detail</span>
-                                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20Jeriken%2015-18L" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Jeriken 20L -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="260">
-                    <div class="prod-card" onclick="openModal('jeriken-20')">
-                        <div class="card-img-wrap" style="height:200px;">
-                            <span class="card-badge" style="background:linear-gradient(135deg,#1a6b3a,#0d3320);">Industri</span>
-                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop" alt="AROMAS Jeriken 20L" />
-                        </div>
-                        <div class="card-body-inner">
-                            <div class="card-sizes">
-                                <span class="size-tag highlight">20 Liter</span>
-                            </div>
-                            <div class="card-name">AROMAS Jeriken 20L</div>
-                            <div class="card-tagline">Solusi industri makanan skala besar</div>
-                            <ul class="card-features">
-                                <li><i class="bi bi-check-circle-fill"></i>Kapasitas terbesar jeriken</li>
-                                <li><i class="bi bi-check-circle-fill"></i>Dinding tebal tahan tekanan</li>
-                                <li><i class="bi bi-check-circle-fill"></i>Cocok untuk hotel & pabrik</li>
-                            </ul>
-                            <div class="card-footer-row">
-                                <span class="btn-detail"><i class="bi bi-eye"></i> Detail</span>
-                                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20Jeriken%2020L" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <hr style="border:0;border-top:1px solid var(--gray-200);margin:60px 0;" class="cat-block" data-cat="all-div2">
-
-        <!-- KATEGORI 3: BIB -->
-        <div class="cat-block" id="cat-bib" data-cat="bib">
-            <div class="cat-header" data-aos="fade-up">
-                <div class="cat-icon-wrap" style="background:linear-gradient(135deg,#1a6b3a,#0d3320);"><i class="bi bi-box-fill"></i></div>
-                <div class="cat-header-info">
-                    <div class="cat-label">Kemasan Industri</div>
-                    <h2 class="cat-title">BIB — Bag in Box</h2>
-                </div>
-            </div>
-            <div class="cat-desc-row" data-aos="fade-up" data-aos-delay="80">
-                <p>Bag in Box (BIB) adalah solusi kemasan premium berbasis kantong fleksibel berlapis multi-layer di dalam dus karton kokoh.</p>
-            </div>
-
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="prod-card" onclick="openModal('bib-15')">
-                        <div class="card-img-wrap" style="height:200px;background:linear-gradient(135deg,#f0f4f0,#e8f0e8);">
-                            <span class="card-badge" style="background:linear-gradient(135deg,#1a6b3a,#0d3320);">BIB</span>
-                            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop" alt="AROMAS BIB 15L" />
-                        </div>
-                        <div class="card-body-inner">
-                            <div class="card-sizes">
-                                <span class="size-tag highlight">15 Liter</span>
-                            </div>
-                            <div class="card-name">AROMAS BIB 15L</div>
-                            <div class="card-tagline">Pilihan ekonomis distribusi menengah</div>
-                            <ul class="card-features">
-                                <li><i class="bi bi-check-circle-fill"></i>Lapisan kantong multi-layer</li>
-                                <li><i class="bi bi-check-circle-fill"></i>Kran dispenser built-in</li>
-                                <li><i class="bi bi-check-circle-fill"></i>Dus karton double-wall</li>
-                            </ul>
-                            <div class="card-footer-row">
-                                <span class="btn-detail"><i class="bi bi-eye"></i> Detail</span>
-                                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20BIB%2015L" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="180">
-                    <div class="prod-card" onclick="openModal('bib-18')">
-                        <div class="card-img-wrap" style="height:200px;background:linear-gradient(135deg,#f0f4f0,#e8f0e8);">
-                            <span class="card-badge" style="background:linear-gradient(135deg,#1a6b3a,#0d3320);">Best Seller</span>
-                            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop" alt="AROMAS BIB 18L" />
-                        </div>
-                        <div class="card-body-inner">
-                            <div class="card-sizes">
-                                <span class="size-tag highlight">18 Liter</span>
-                            </div>
-                            <div class="card-name">AROMAS BIB 18L</div>
-                            <div class="card-tagline">Terpopuler untuk distribusi B2B</div>
-                            <ul class="card-features">
-                                <li><i class="bi bi-check-circle-fill"></i>Umur simpan lebih panjang</li>
-                                <li><i class="bi bi-check-circle-fill"></i>Minim oksidasi</li>
-                                <li><i class="bi bi-check-circle-fill"></i>Ideal minimarket</li>
-                            </ul>
-                            <div class="card-footer-row">
-                                <span class="btn-detail"><i class="bi bi-eye"></i> Detail</span>
-                                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20BIB%2018L" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="260">
-                    <div class="prod-card" onclick="openModal('bib-20')">
-                        <div class="card-img-wrap" style="height:200px;background:linear-gradient(135deg,#f0f4f0,#e8f0e8);">
-                            <span class="card-badge" style="background:linear-gradient(135deg,#1a6b3a,#0d3320);">Industri</span>
-                            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop" alt="AROMAS BIB 20L" />
-                        </div>
-                        <div class="card-body-inner">
-                            <div class="card-sizes">
-                                <span class="size-tag highlight">20 Liter</span>
-                            </div>
-                            <div class="card-name">AROMAS BIB 20L</div>
-                            <div class="card-tagline">Kapasitas maksimal industri</div>
-                            <ul class="card-features">
-                                <li><i class="bi bi-check-circle-fill"></i>Mudah ditumpuk</li>
-                                <li><i class="bi bi-check-circle-fill"></i>Label barcode lengkap</li>
-                                <li><i class="bi bi-check-circle-fill"></i>Cocok untuk hotel & catering</li>
-                            </ul>
-                            <div class="card-footer-row">
-                                <span class="btn-detail"><i class="bi bi-eye"></i> Detail</span>
-                                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20BIB%2020L" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @if(!$loop->last)
+        <hr style="border:0;border-top:1px solid var(--gray-200);margin:60px 0;" class="cat-block" data-cat="all-div{{ $loop->index }}">
+        @endif
+        @endforeach
     </div>
 </section>
 
@@ -568,34 +397,15 @@
             </p>
         </div>
         <div class="row g-4">
-            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+            @foreach($advantages as $advantage)
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="{{ 80 * ($loop->index + 1) }}">
                 <div class="kel-card">
-                    <div class="kel-icon"><i class="bi bi-award-fill"></i></div>
-                    <h4>Halal & Bersertifikat</h4>
-                    <p>Bersertifikasi Halal MUI, BPOM, dan ISO 22000 — jaminan keamanan pangan.</p>
+                    <div class="kel-icon"><i class="bi {{ $advantage->icon }}"></i></div>
+                    <h4>{{ $advantage->title }}</h4>
+                    <p>{{ $advantage->description }}</p>
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
-                <div class="kel-card">
-                    <div class="kel-icon"><i class="bi bi-droplet-fill"></i></div>
-                    <h4>Jernih & Tidak Berbau</h4>
-                    <p>Proses penyulingan multi-tahap menghasilkan minyak yang bening sempurna.</p>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
-                <div class="kel-card">
-                    <div class="kel-icon"><i class="bi bi-heart-fill"></i></div>
-                    <h4>Kaya Vitamin E</h4>
-                    <p>Mengandung Vitamin E alami yang bermanfaat sebagai antioksidan.</p>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="320">
-                <div class="kel-card">
-                    <div class="kel-icon"><i class="bi bi-arrow-repeat"></i></div>
-                    <h4>Tahan Digunakan Ulang</h4>
-                    <p>Titik asap tinggi memungkinkan penggunaan berulang dengan kualitas terjaga.</p>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -605,17 +415,31 @@
     <div class="container">
         <div class="row align-items-center gy-4">
             <div class="col-lg-7" data-aos="fade-right">
+                @if($productCta)
+                <h2>{{ $productCta->title }}</h2>
+                <p>{{ $productCta->description }}</p>
+                @else
                 <h2>Butuh Penawaran Harga Khusus?</h2>
                 <p>Hubungi tim sales kami untuk mendapatkan harga terbaik sesuai volume pesanan Anda.</p>
+                @endif
             </div>
             <div class="col-lg-5 text-lg-end" data-aos="fade-left">
                 <div class="d-flex gap-3 flex-wrap justify-content-lg-end">
+                    @if($productCta)
+                    <a href="{{ $productCta->primary_button_url }}" target="_blank" class="btn-cta-w">
+                        <i class="bi bi-whatsapp"></i> {{ $productCta->primary_button_text }}
+                    </a>
+                    <a href="{{ $productCta->secondary_button_url }}" class="btn-cta-ol">
+                        <i class="bi bi-envelope-fill"></i> {{ $productCta->secondary_button_text }}
+                    </a>
+                    @else
                     <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20tanya%20harga%20produk" target="_blank" class="btn-cta-w">
                         <i class="bi bi-whatsapp"></i> Tanya via WhatsApp
                     </a>
                     <a href="{{ url('/contact') }}" class="btn-cta-ol">
                         <i class="bi bi-envelope-fill"></i> Kirim Pesan
                     </a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -623,233 +447,98 @@
 </section>
 
 <!-- PRODUCT DETAIL MODALS -->
-<!-- Modal: Botol Mini -->
-<div class="prod-modal" id="modal-botol-kecil" role="dialog" aria-modal="true" aria-label="Detail AROMAS Botol Mini">
-    <div class="modal-backdrop" onclick="closeModal('botol-kecil')"></div>
+@foreach($categories as $category)
+@foreach($category->products()->active()->get() as $product)
+<div class="prod-modal" id="modal-product-{{ $product->id }}" role="dialog" aria-modal="true" aria-label="Detail {{ $product->name }}">
+    <div class="modal-backdrop" onclick="closeModal('product-{{ $product->id }}')"></div>
     <div class="modal-box">
         <div class="modal-header-band"></div>
-        <button class="modal-close" onclick="closeModal('botol-kecil')"><i class="bi bi-x-lg"></i></button>
+        <button class="modal-close" onclick="closeModal('product-{{ $product->id }}')"><i class="bi bi-x-lg"></i></button>
         <div class="modal-inner">
-            <div class="modal-tag">Kemasan Botol · Rumah Tangga</div>
-            <div class="modal-title">AROMAS Botol Mini</div>
-            <div class="modal-sub">Minyak goreng sawit premium untuk pemakaian harian</div>
+            <div class="modal-tag">{{ $category->label }} · {{ $product->badge_text }}</div>
+            <div class="modal-title">{{ $product->modal_title ?? $product->name }}</div>
+            <div class="modal-sub">{{ $product->modal_subtitle ?? $product->tagline }}</div>
             <div class="modal-img-band">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=300&fit=crop" alt="AROMAS Botol Mini" />
+                @php
+                    $images = $product->images ?? [];
+                    $bannerIndex = 0;
+                    foreach($images as $idx => $img) {
+                        if(!empty($img['is_banner'])) {
+                            $bannerIndex = $idx;
+                            break;
+                        }
+                    }
+                @endphp
+                
+                @if(count($images) > 1)
+                <!-- Image Gallery Slider -->
+                <div class="product-image-slider" data-product-id="{{ $product->id }}">
+                    @foreach($images as $index => $image)
+                    <div class="slider-image {{ $index === $bannerIndex ? 'active' : '' }}" data-index="{{ $index }}">
+                        <img src="{{ Storage::url($image['url']) }}" alt="{{ $product->name }} {{ $index + 1 }}" />
+                    </div>
+                    @endforeach
+                    
+                    @if(count($images) > 1)
+                    <button class="slider-prev" onclick="slideImage({{ $product->id }}, -1)"><i class="bi bi-chevron-left"></i></button>
+                    <button class="slider-next" onclick="slideImage({{ $product->id }}, 1)"><i class="bi bi-chevron-right"></i></button>
+                    
+                    <div class="slider-dots">
+                        @foreach($images as $index => $image)
+                        <span class="slider-dot {{ $index === $bannerIndex ? 'active' : '' }}" onclick="goToSlide({{ $product->id }}, {{ $index }})"></span>
+                        @endforeach
+                    </div>
+                    @endif
+                </div>
+                @else
+                <!-- Single Image -->
+                <img src="{{ Storage::url($images[0]['url'] ?? '') }}" alt="{{ $product->name }}" />
+                @endif
             </div>
+
+            @if($product->modal_details)
             <div class="detail-grid">
-                <div class="detail-item"><div class="detail-item-label">Jenis Produk</div><div class="detail-item-val">Minyak Goreng Sawit</div></div>
-                <div class="detail-item"><div class="detail-item-label">Jenis Kemasan</div><div class="detail-item-val">Botol Plastik HDPE</div></div>
-                <div class="detail-item"><div class="detail-item-label">Sertifikasi</div><div class="detail-item-val">Halal MUI · BPOM · SNI</div></div>
-                <div class="detail-item"><div class="detail-item-label">Segmen</div><div class="detail-item-val">Rumah Tangga · Warung</div></div>
+                @foreach($product->modal_details as $detail)
+                <div class="detail-item">
+                    <div class="detail-item-label">{{ $detail['label'] }}</div>
+                    <div class="detail-item-val">{{ $detail['value'] }}</div>
+                </div>
+                @endforeach
             </div>
+            @endif
+
+            @if($product->sizes)
             <div class="modal-sizes-wrap">
                 <div class="modal-sizes-title"><i class="bi bi-rulers"></i> Ukuran Tersedia</div>
                 <div class="modal-sizes">
-                    <span class="modal-size">200 ml</span>
-                    <span class="modal-size">220 ml</span>
-                    <span class="modal-size">400 ml</span>
+                    @foreach($product->sizes as $size)
+                    <span class="modal-size">{{ $size['volume'] }} {{ $size['unit'] }}</span>
+                    @endforeach
                 </div>
             </div>
+            @endif
+
+            @if($product->modal_features)
             <div class="modal-feat-title">Keunggulan Produk</div>
             <div class="modal-feat-grid">
-                <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Higienis & food-grade</span></div>
-                <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Tutup anti-tumpah</span></div>
-                <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Praktis & ekonomis</span></div>
-                <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Kaya Vitamin E</span></div>
+                @foreach($product->modal_features as $feature)
+                <div class="modal-feat-item">
+                    <i class="bi {{ $feature['icon'] ?? 'bi-check-circle-fill' }}"></i>
+                    <span>{{ $feature['text'] }}</span>
+                </div>
+                @endforeach
             </div>
-            <div class="modal-actions">
-                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20pesan%20AROMAS%20Botol%20Mini" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
-                <a href="{{ url('/contact') }}" class="btn-modal-primary">Minta Penawaran</a>
-            </div>
-        </div>
-    </div>
-</div>
+            @endif
 
-<!-- Modal: Botol Standar -->
-<div class="prod-modal" id="modal-botol-besar" role="dialog" aria-modal="true" aria-label="Detail AROMAS Botol Standar">
-    <div class="modal-backdrop" onclick="closeModal('botol-besar')"></div>
-    <div class="modal-box">
-        <div class="modal-header-band"></div>
-        <button class="modal-close" onclick="closeModal('botol-besar')"><i class="bi bi-x-lg"></i></button>
-        <div class="modal-inner">
-            <div class="modal-tag">Kemasan Botol · Keluarga · Populer</div>
-            <div class="modal-title">AROMAS Botol Standar</div>
-            <div class="modal-sub">Pilihan utama jutaan keluarga Indonesia</div>
-            <div class="modal-img-band">
-                <img src="https://images.unsplash.com/photo-1563991655280-cb95c90ca2fb?w=500&h=300&fit=crop" alt="AROMAS Botol Standar" />
-            </div>
-            <div class="detail-grid">
-                <div class="detail-item"><div class="detail-item-label">Isi Netto</div><div class="detail-item-val">1.000 ml · 2.000 ml</div></div>
-                <div class="detail-item"><div class="detail-item-label">Jenis Kemasan</div><div class="detail-item-val">Botol Plastik HDPE</div></div>
-                <div class="detail-item"><div class="detail-item-label">Sertifikasi</div><div class="detail-item-val">Lengkap (ISO 22000)</div></div>
-                <div class="detail-item"><div class="detail-item-label">Segmen</div><div class="detail-item-val">Keluarga · Retail</div></div>
-            </div>
             <div class="modal-actions">
-                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20pesan%20AROMAS%20Botol%20Standar" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+                <a href="https://wa.me/6281234567890?text={{ urlencode($product->whatsapp_message ?? 'Halo, saya ingin pesan ' . $product->name) }}" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
                 <a href="{{ url('/contact') }}" class="btn-modal-primary">Minta Penawaran</a>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Modal: Jeriken 5L -->
-<div class="prod-modal" id="modal-jeriken-5" role="dialog" aria-modal="true">
-    <div class="modal-backdrop" onclick="closeModal('jeriken-5')"></div>
-    <div class="modal-box">
-        <div class="modal-header-band" style="background:linear-gradient(90deg,var(--gold),var(--green),var(--gold));"></div>
-        <button class="modal-close" onclick="closeModal('jeriken-5')"><i class="bi bi-x-lg"></i></button>
-        <div class="modal-inner">
-            <div class="modal-tag">Jeriken / Refill · Usaha Kecil</div>
-            <div class="modal-title">AROMAS Jeriken 5L</div>
-            <div class="modal-sub">Isi ulang praktis untuk warung makan, kafe, dan usaha kecil</div>
-            <div class="modal-img-band" style="background:linear-gradient(135deg,#fffbf0,#fff8e7);">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=300&fit=crop" alt="Jeriken 5L" />
-            </div>
-            <div class="detail-grid">
-                <div class="detail-item"><div class="detail-item-label">Isi Netto</div><div class="detail-item-val">5 Liter</div></div>
-                <div class="detail-item"><div class="detail-item-label">Jenis Kemasan</div><div class="detail-item-val">Jeriken HDPE Food-Grade</div></div>
-                <div class="detail-item"><div class="detail-item-label">Sertifikasi</div><div class="detail-item-val">Halal MUI · BPOM · SNI</div></div>
-                <div class="detail-item"><div class="detail-item-label">Segmen</div><div class="detail-item-val">Warung · Kafe · UMKM</div></div>
-            </div>
-            <div class="modal-feat-title">Keunggulan Produk</div>
-            <div class="modal-feat-grid">
-                <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Handle ergonomis</span></div>
-                <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Tutup ulir rapat</span></div>
-                <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Material HDPE tebal</span></div>
-                <div class="modal-feat-item"><i class="bi bi-check-circle-fill"></i><span>Dapur kompak</span></div>
-            </div>
-            <div class="modal-actions">
-                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20pesan%20AROMAS%20Jeriken%205L" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
-                <a href="{{ url('/contact') }}" class="btn-modal-primary">Minta Penawaran</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal: Jeriken 15/18L -->
-<div class="prod-modal" id="modal-jeriken-15" role="dialog" aria-modal="true">
-    <div class="modal-backdrop" onclick="closeModal('jeriken-15')"></div>
-    <div class="modal-box">
-        <div class="modal-header-band" style="background:linear-gradient(90deg,var(--gold),var(--green),var(--gold));"></div>
-        <button class="modal-close" onclick="closeModal('jeriken-15')"><i class="bi bi-x-lg"></i></button>
-        <div class="modal-inner">
-            <div class="modal-tag">Jeriken / Refill · Restoran & Katering</div>
-            <div class="modal-title">AROMAS Jeriken 15L / 18L</div>
-            <div class="modal-sub">Volume menengah untuk restoran dan katering</div>
-            <div class="modal-img-band" style="background:linear-gradient(135deg,#fffbf0,#fff8e7);">
-                <img src="https://images.unsplash.com/photo-1563991655280-cb95c90ca2fb?w=500&h=300&fit=crop" alt="Jeriken 15-18L" />
-            </div>
-            <div class="detail-grid">
-                <div class="detail-item"><div class="detail-item-label">Ukuran</div><div class="detail-item-val">15 Liter · 18 Liter</div></div>
-                <div class="detail-item"><div class="detail-item-label">Segmen</div><div class="detail-item-val">Restoran · Katering</div></div>
-            </div>
-            <div class="modal-actions">
-                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20pesan%20AROMAS%20Jeriken%2015-18L" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
-                <a href="{{ url('/contact') }}" class="btn-modal-primary">Minta Penawaran</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal: Jeriken 20L -->
-<div class="prod-modal" id="modal-jeriken-20" role="dialog" aria-modal="true">
-    <div class="modal-backdrop" onclick="closeModal('jeriken-20')"></div>
-    <div class="modal-box">
-        <div class="modal-header-band" style="background:linear-gradient(90deg,var(--green-dark),var(--gold),var(--green-dark));"></div>
-        <button class="modal-close" onclick="closeModal('jeriken-20')"><i class="bi bi-x-lg"></i></button>
-        <div class="modal-inner">
-            <div class="modal-tag">Jeriken / Refill · Industri</div>
-            <div class="modal-title">AROMAS Jeriken 20L</div>
-            <div class="modal-sub">Solusi industri makanan skala besar</div>
-            <div class="modal-img-band" style="background:linear-gradient(135deg,#fffbf0,#fff8e7);">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=300&fit=crop" alt="Jeriken 20L" />
-            </div>
-            <div class="detail-grid">
-                <div class="detail-item"><div class="detail-item-label">Isi Netto</div><div class="detail-item-val">20 Liter</div></div>
-                <div class="detail-item"><div class="detail-item-label">Jenis</div><div class="detail-item-val">HDPE Industrial</div></div>
-            </div>
-            <div class="modal-actions">
-                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20pesan%20AROMAS%20Jeriken%2020L" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
-                <a href="{{ url('/contact') }}" class="btn-modal-primary">Minta Penawaran</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal: BIB 15L -->
-<div class="prod-modal" id="modal-bib-15" role="dialog" aria-modal="true">
-    <div class="modal-backdrop" onclick="closeModal('bib-15')"></div>
-    <div class="modal-box">
-        <div class="modal-header-band" style="background:linear-gradient(90deg,#1a6b3a,var(--gold-light),#1a6b3a);"></div>
-        <button class="modal-close" onclick="closeModal('bib-15')"><i class="bi bi-x-lg"></i></button>
-        <div class="modal-inner">
-            <div class="modal-tag">BIB · Distribusi Menengah</div>
-            <div class="modal-title">AROMAS BIB 15L</div>
-            <div class="modal-sub">Kemasan teknologi modern menjaga kualitas minyak</div>
-            <div class="modal-img-band" style="background:linear-gradient(135deg,#f0f8f0,#e8f5e8);">
-                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=300&fit=crop" alt="BIB 15L" />
-            </div>
-            <div class="detail-grid">
-                <div class="detail-item"><div class="detail-item-label">Isi Netto</div><div class="detail-item-val">15 Liter</div></div>
-                <div class="detail-item"><div class="detail-item-label">Teknologi</div><div class="detail-item-val">Bag in Box</div></div>
-            </div>
-            <div class="modal-actions">
-                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20pesan%20AROMAS%20BIB%2015L" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
-                <a href="{{ url('/contact') }}" class="btn-modal-primary">Minta Penawaran</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal: BIB 18L -->
-<div class="prod-modal" id="modal-bib-18" role="dialog" aria-modal="true">
-    <div class="modal-backdrop" onclick="closeModal('bib-18')"></div>
-    <div class="modal-box">
-        <div class="modal-header-band" style="background:linear-gradient(90deg,#1a6b3a,var(--gold-light),#1a6b3a);"></div>
-        <button class="modal-close" onclick="closeModal('bib-18')"><i class="bi bi-x-lg"></i></button>
-        <div class="modal-inner">
-            <div class="modal-tag">BIB · Best Seller</div>
-            <div class="modal-title">AROMAS BIB 18L</div>
-            <div class="modal-sub">Produk BIB terpopuler untuk distribusi B2B</div>
-            <div class="modal-img-band" style="background:linear-gradient(135deg,#f0f8f0,#e8f5e8);">
-                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=300&fit=crop" alt="BIB 18L" />
-            </div>
-            <div class="detail-grid">
-                <div class="detail-item"><div class="detail-item-label">Isi Netto</div><div class="detail-item-val">18 Liter</div></div>
-                <div class="detail-item"><div class="detail-item-label">Segmen</div><div class="detail-item-val">Supermarket · Retail</div></div>
-            </div>
-            <div class="modal-actions">
-                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20pesan%20AROMAS%20BIB%2018L" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
-                <a href="{{ url('/contact') }}" class="btn-modal-primary">Minta Penawaran</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal: BIB 20L -->
-<div class="prod-modal" id="modal-bib-20" role="dialog" aria-modal="true">
-    <div class="modal-backdrop" onclick="closeModal('bib-20')"></div>
-    <div class="modal-box">
-        <div class="modal-header-band" style="background:linear-gradient(90deg,#0d3320,var(--gold-light),#0d3320);"></div>
-        <button class="modal-close" onclick="closeModal('bib-20')"><i class="bi bi-x-lg"></i></button>
-        <div class="modal-inner">
-            <div class="modal-tag">BIB · Industri</div>
-            <div class="modal-title">AROMAS BIB 20L</div>
-            <div class="modal-sub">Kapasitas tertinggi dirancang untuk operasional industri</div>
-            <div class="modal-img-band" style="background:linear-gradient(135deg,#f0f8f0,#e8f5e8);">
-                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=300&fit=crop" alt="BIB 20L" />
-            </div>
-            <div class="detail-grid">
-                <div class="detail-item"><div class="detail-item-label">Isi Netto</div><div class="detail-item-val">20 Liter</div></div>
-                <div class="detail-item"><div class="detail-item-label">Segmen</div><div class="detail-item-val">Hotel · Pabrik · Industri</div></div>
-            </div>
-            <div class="modal-actions">
-                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20pesan%20AROMAS%20BIB%2020L" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
-                <a href="{{ url('/contact') }}" class="btn-modal-primary">Minta Penawaran</a>
-            </div>
-        </div>
-    </div>
-</div>
+@endforeach
+@endforeach
 @endsection
 
 @push('scripts')
@@ -936,5 +625,52 @@
             document.body.style.overflow = '';
         }
     });
+
+    // Product Image Slider Functions
+    function slideImage(productId, direction) {
+        var slider = document.querySelector('.product-image-slider[data-product-id="' + productId + '"]');
+        if (!slider) return;
+        
+        var images = slider.querySelectorAll('.slider-image');
+        var dots = slider.querySelectorAll('.slider-dot');
+        var activeIndex = 0;
+        
+        images.forEach(function(img, index) {
+            if (img.classList.contains('active')) {
+                activeIndex = index;
+            }
+            img.classList.remove('active');
+        });
+        
+        dots.forEach(function(dot) {
+            dot.classList.remove('active');
+        });
+        
+        var newIndex = activeIndex + direction;
+        if (newIndex < 0) newIndex = images.length - 1;
+        if (newIndex >= images.length) newIndex = 0;
+        
+        images[newIndex].classList.add('active');
+        dots[newIndex].classList.add('active');
+    }
+
+    function goToSlide(productId, index) {
+        var slider = document.querySelector('.product-image-slider[data-product-id="' + productId + '"]');
+        if (!slider) return;
+        
+        var images = slider.querySelectorAll('.slider-image');
+        var dots = slider.querySelectorAll('.slider-dot');
+        
+        images.forEach(function(img) {
+            img.classList.remove('active');
+        });
+        
+        dots.forEach(function(dot) {
+            dot.classList.remove('active');
+        });
+        
+        images[index].classList.add('active');
+        dots[index].classList.add('active');
+    }
 </script>
 @endpush
