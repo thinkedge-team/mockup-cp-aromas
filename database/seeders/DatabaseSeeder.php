@@ -15,20 +15,27 @@ class DatabaseSeeder extends Seeder
     {
         // Seed Admin User (using updateOrCreate for re-runability)
         User::updateOrCreate(
-            ['email' => 'admin@aromas.local'],
+            ["email" => "admin@aromas.local"],
             [
-                'name' => 'Admin',
-                'password' => bcrypt('password'),
-                'email_verified_at' => now(),
-            ]
+                "name" => "Admin",
+                "password" => bcrypt("password"),
+                "email_verified_at" => now(),
+            ],
         );
 
-        // Call all other seeders
+        // Call seeders
         $this->call([
-            SiteSettingsSeeder::class,
-            NavigationSettingsSeeder::class,
             FooterSettingsSeeder::class,
-            ThemeSettingsSeeder::class,
+            HeroSlideSeeder::class,
+            ImpactStatSeeder::class,
+            AwardSeeder::class,
+            ServiceSeeder::class,
+            BenefitSeeder::class,
+            PartnerSeeder::class,
+            VideoSettingSeeder::class,
+            FaqItemSeeder::class,
+            BranchSeeder::class,
+            MissionSectionSeeder::class,
         ]);
     }
 }

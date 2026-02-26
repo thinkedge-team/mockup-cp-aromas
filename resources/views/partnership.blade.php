@@ -870,15 +870,6 @@
 
 @push('scripts')
 <script>
-    window.addEventListener('load', function () {
-        var pl = document.getElementById('preloader');
-        if (!pl) return;
-        setTimeout(function () {
-            pl.classList.add('hidden');
-            setTimeout(function () { pl.style.display = 'none'; }, 650);
-        }, 800);
-    });
-
     document.addEventListener('DOMContentLoaded', function () {
         initNavbar();
         initBackToTop();

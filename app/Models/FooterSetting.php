@@ -15,7 +15,6 @@ class FooterSetting extends Model implements HasMedia
         'logo',
         'company_description',
         'contact_info',
-        'link_columns',
         'social_links',
         'copyright_text',
         'legal_links',
@@ -24,7 +23,6 @@ class FooterSetting extends Model implements HasMedia
 
     protected $casts = [
         'contact_info' => 'array',
-        'link_columns' => 'array',
         'social_links' => 'array',
         'legal_links' => 'array',
         'is_active' => 'boolean',

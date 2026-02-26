@@ -33,6 +33,14 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->brandName('AROMAS CMS')
             ->favicon(asset('favicon.ico'))
+            ->navigationGroups([
+                'Beranda' => \Filament\Navigation\NavigationGroup::make()
+                    ->label('Beranda')
+                    ->collapsed(true),
+                'Settings' => \Filament\Navigation\NavigationGroup::make()
+                    ->label('Settings')
+                    ->collapsed(true),
+            ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([

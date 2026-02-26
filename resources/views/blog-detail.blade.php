@@ -796,14 +796,6 @@
 
 @push('scripts')
 <script>
-/* ─── PRELOADER ──────────────────────────────────── */
-window.addEventListener('load',()=>{
-  const pl=document.getElementById('preloader');
-  if(pl) {
-    setTimeout(()=>{pl.classList.add('hidden');setTimeout(()=>pl.style.display='none',700);},850);
-  }
-});
-
 document.addEventListener('DOMContentLoaded',()=>{
   initNavbar();
   initBackTop();

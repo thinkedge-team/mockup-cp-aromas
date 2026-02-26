@@ -42,17 +42,6 @@ mockup-cp-aromas/
 ## Original Static Files
 All original static HTML files are backed up in `temp-static/` folder for reference when building the CMS content structure.
 
-## Next Steps (Phase 2)
-Build content models and Filament resources for:
-1. Site Settings
-2. Pages & Page Sections
-3. Products
-4. Blog Posts
-5. Portfolio Items
-6. Partnership Programs
-7. Contact Inquiries
-8. Media Library management
-
 ## Common Commands
 ```bash
 # Start development server

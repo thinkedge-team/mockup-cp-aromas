@@ -1,3 +1,41 @@
+@php
+    use App\Models\HeroSlide;
+    use App\Models\ImpactStat;
+    use App\Models\Award;
+    use App\Models\Service;
+    use App\Models\Benefit;
+    use App\Models\Partner;
+    use App\Models\VideoSetting;
+    use App\Models\FaqItem;
+    use App\Models\Branch;
+    use App\Models\MissionSection;
+
+    $heroSlides = HeroSlide::active()->get();
+    $impactStats = ImpactStat::active()->get();
+    $awards = Award::active()->get();
+    $services = Service::active()->get();
+    $benefits = Benefit::active()->get();
+    $partners = Partner::active()->get();
+    $videoSetting = VideoSetting::first();
+    $faqs = FaqItem::active()->get();
+    $branches = Branch::active()->get();
+    $missionSection = MissionSection::active()->first();
+    $branchesData = $branches->map(function($branch) {
+        return [
+            'id' => $branch->id,
+            'name' => $branch->name,
+            'category' => $branch->category,
+            'address' => $branch->address,
+            'latitude' => $branch->latitude,
+            'longitude' => $branch->longitude,
+            'phone' => $branch->phone,
+            'whatsapp' => $branch->whatsapp,
+            'mapLink' => $branch->map_link,
+            'operatingHours' => $branch->operating_hours,
+        ];
+    })->values();
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'AROMAS - Minyak Goreng Premium Berkualitas Tinggi Indonesia')
@@ -32,8 +70,9 @@
     <!-- ===== SLIDES TRACK ===== -->
     <div class="hero-slides-track" id="heroSlidesTrack">
 
-        <!-- ========== SLIDE 1 ========== -->
-        <div class="hero-slide active-slide" style="padding: 100px 0 60px;">
+        @foreach($heroSlides as $index => $slide)
+        <!-- ========== SLIDE {{ $index + 1 }} ========== -->
+        <div class="hero-slide {{ $index === 0 ? 'active-slide' : '' }}" style="padding: 100px 0 60px; @if($slide->background_image) background-image: url('{{ Storage::url($slide->background_image) }}'); background-size: cover; background-position: center; @endif">
             <div class="hero-overlay"></div>
             <div class="hero-decoration">
                 <div class="decoration-circle circle-1"></div>
@@ -45,253 +84,63 @@
                     <div class="col-lg-5 col-md-6 order-lg-1 order-2">
                         <div class="hero-content-left">
                             <span class="hero-badge">
-                                <i class="bi bi-award-fill"></i> Premium Quality
+                                <i class="bi {{ $slide->badge_icon }}"></i> {{ $slide->badge_text }}
                             </span>
                             <h1 class="hero-main-title">
-                                Minyak Goreng
-                                <span class="text-gradient">AROMAS</span>
+                                {{ $slide->title }}
+                                <span class="text-gradient">{{ $slide->title_gradient }}</span>
                             </h1>
-                            <p class="hero-description">
-                                Hadirkan cita rasa terbaik untuk masakan
-                                keluarga dengan minyak goreng sawit berkualitas
-                                premium. Jernih, sehat, dan tahan panas tinggi.
-                            </p>
+                            <p class="hero-description">{{ $slide->description }}</p>
                             <div class="hero-pills">
-                                <span class="pill"><i class="bi bi-check-circle-fill"></i> Rendah Kolesterol</span>
-                                <span class="pill"><i class="bi bi-check-circle-fill"></i> Halal MUI</span>
-                                <span class="pill"><i class="bi bi-check-circle-fill"></i> BPOM Certified</span>
+                                @foreach($slide->pills ?? [] as $pill)
+                                <span class="pill"><i class="bi bi-check-circle-fill"></i> {{ is_array($pill) ? $pill['text'] : $pill }}</span>
+                                @endforeach
                             </div>
                             <div class="hero-actions">
-                                <a href="#products" class="btn-primary-hero">
+                                <a href="{{ $slide->primary_button_url }}" class="btn-primary-hero">
                                     <i class="bi bi-bag-check-fill"></i>
-                                    <span>Lihat Produk</span>
+                                    <span>{{ $slide->primary_button_text }}</span>
                                 </a>
-                                <a href="{{ url('/about') }}" class="btn-secondary-hero">
-                                    <i class="bi bi-play-circle-fill"></i>
-                                    <span>Tentang Kami</span>
+                                <a href="{{ $slide->secondary_button_url }}" class="btn-secondary-hero">
+                                    <i class="bi {{ $index === 0 ? 'bi-play-circle-fill' : ($index === 1 ? 'bi-telephone-fill' : 'bi-trophy-fill') }}"></i>
+                                    <span>{{ $slide->secondary_button_text }}</span>
                                 </a>
                             </div>
                             <div class="hero-trust">
+                                @foreach($slide->trust_items ?? [] as $i => $item)
                                 <div class="trust-item">
-                                    <strong>15+</strong>
-                                    <span>Tahun Pengalaman</span>
+                                    <strong>{{ $item['number'] }}</strong>
+                                    <span>{{ $item['label'] }}</span>
                                 </div>
+                                @if(!$loop->last)
                                 <div class="trust-divider"></div>
-                                <div class="trust-item">
-                                    <strong>1Jt+</strong>
-                                    <span>Pelanggan Setia</span>
-                                </div>
-                                <div class="trust-divider"></div>
-                                <div class="trust-item">
-                                    <strong>500+</strong>
-                                    <span>Mitra Distribusi</span>
-                                </div>
+                                @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-6 order-lg-2 order-1">
                         <div class="hero-product-wrapper">
-                            <img src="{{ asset('assets/images/aromas-hero.png') }}" alt="AROMAS Minyak Goreng Premium" class="hero-product-img" />
-                            <div class="floating-card card-1">
-                                <div class="floating-icon"><i class="bi bi-heart-pulse-fill"></i></div>
+                            @if($slide->product_image)
+                            <img src="{{ Storage::url($slide->product_image) }}" alt="AROMAS {{ $slide->title_gradient }}" class="hero-product-img" />
+                            @else
+                            <img src="{{ asset('assets/images/aromas-hero.png') }}" alt="AROMAS {{ $slide->title_gradient }}" class="hero-product-img" />
+                            @endif
+                            @foreach($slide->floating_cards ?? [] as $card)
+                            <div class="floating-card card-{{ $loop->index + 1 }}">
+                                <div class="floating-icon"><i class="bi {{ $card['icon'] }}"></i></div>
                                 <div class="floating-text">
-                                    <strong>Sehat</strong>
-                                    <span>Rendah Lemak</span>
+                                    <strong>{{ $card['title'] }}</strong>
+                                    <span>{{ $card['subtitle'] }}</span>
                                 </div>
                             </div>
-                            <div class="floating-card card-2">
-                                <div class="floating-icon"><i class="bi bi-fire"></i></div>
-                                <div class="floating-text">
-                                    <strong>Tahan Panas</strong>
-                                    <span>Anti Gosong</span>
-                                </div>
-                            </div>
-                            <div class="floating-card card-3">
-                                <div class="floating-icon"><i class="bi bi-droplet-fill"></i></div>
-                                <div class="floating-text">
-                                    <strong>Jernih</strong>
-                                    <span>100% Murni</span>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- ========== SLIDE 2 ========== -->
-        <div class="hero-slide" style="padding: 100px 0 60px;">
-            <div class="hero-overlay"></div>
-            <div class="hero-decoration">
-                <div class="decoration-circle circle-1"></div>
-                <div class="decoration-circle circle-2"></div>
-                <div class="decoration-circle circle-3"></div>
-            </div>
-            <div class="container">
-                <div class="row align-items-center min-vh-hero">
-                    <div class="col-lg-5 col-md-6 order-lg-1 order-2">
-                        <div class="hero-content-left">
-                            <span class="hero-badge">
-                                <i class="bi bi-building-fill"></i> Kemitraan B2B
-                            </span>
-                            <h1 class="hero-main-title">
-                                Solusi Industri
-                                <span class="text-gradient">Terpercaya</span>
-                            </h1>
-                            <p class="hero-description">
-                                Pasokan minyak goreng premium untuk restoran,
-                                hotel, katering & industri makanan dengan
-                                harga kompetitif dan kualitas terjamin.
-                            </p>
-                            <div class="hero-pills">
-                                <span class="pill"><i class="bi bi-check-circle-fill"></i> Harga Grosir</span>
-                                <span class="pill"><i class="bi bi-check-circle-fill"></i> Pengiriman Cepat</span>
-                                <span class="pill"><i class="bi bi-check-circle-fill"></i> Kontrak Fleksibel</span>
-                            </div>
-                            <div class="hero-actions">
-                                <a href="{{ url('/partnership') }}" class="btn-primary-hero">
-                                    <i class="bi bi-handshake-fill"></i>
-                                    <span>Mulai Kemitraan</span>
-                                </a>
-                                <a href="{{ url('/contact') }}" class="btn-secondary-hero">
-                                    <i class="bi bi-telephone-fill"></i>
-                                    <span>Hubungi Kami</span>
-                                </a>
-                            </div>
-                            <div class="hero-trust">
-                                <div class="trust-item">
-                                    <strong>500+</strong>
-                                    <span>Mitra Aktif</span>
-                                </div>
-                                <div class="trust-divider"></div>
-                                <div class="trust-item">
-                                    <strong>34</strong>
-                                    <span>Provinsi Terjangkau</span>
-                                </div>
-                                <div class="trust-divider"></div>
-                                <div class="trust-item">
-                                    <strong>24/7</strong>
-                                    <span>Layanan Pelanggan</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-7 col-md-6 order-lg-2 order-1">
-                        <div class="hero-product-wrapper">
-                            <img src="{{ asset('assets/images/aromas-hero.png') }}" alt="AROMAS Minyak Goreng Industri" class="hero-product-img" />
-                            <div class="floating-card card-1">
-                                <div class="floating-icon"><i class="bi bi-truck-front-fill"></i></div>
-                                <div class="floating-text">
-                                    <strong>Pengiriman</strong>
-                                    <span>Ke Seluruh RI</span>
-                                </div>
-                            </div>
-                            <div class="floating-card card-2">
-                                <div class="floating-icon"><i class="bi bi-box-seam-fill"></i></div>
-                                <div class="floating-text">
-                                    <strong>Bulk Order</strong>
-                                    <span>Min. 100 Liter</span>
-                                </div>
-                            </div>
-                            <div class="floating-card card-3">
-                                <div class="floating-icon"><i class="bi bi-shield-check-fill"></i></div>
-                                <div class="floating-text">
-                                    <strong>Garansi</strong>
-                                    <span>Kualitas 100%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ========== SLIDE 3 ========== -->
-        <div class="hero-slide" style="padding: 100px 0 60px;">
-            <div class="hero-overlay"></div>
-            <div class="hero-decoration">
-                <div class="decoration-circle circle-1"></div>
-                <div class="decoration-circle circle-2"></div>
-                <div class="decoration-circle circle-3"></div>
-            </div>
-            <div class="container">
-                <div class="row align-items-center min-vh-hero">
-                    <div class="col-lg-5 col-md-6 order-lg-1 order-2">
-                        <div class="hero-content-left">
-                            <span class="hero-badge">
-                                <i class="bi bi-patch-check-fill"></i> Bersertifikat Resmi
-                            </span>
-                            <h1 class="hero-main-title">
-                                Standar Keamanan
-                                <span class="text-gradient">Tertinggi</span>
-                            </h1>
-                            <p class="hero-description">
-                                Setiap tetes AROMAS melalui quality control
-                                ketat bersertifikasi internasional—aman untuk
-                                seluruh keluarga Indonesia.
-                            </p>
-                            <div class="hero-pills">
-                                <span class="pill"><i class="bi bi-check-circle-fill"></i> ISO 22000:2018</span>
-                                <span class="pill"><i class="bi bi-check-circle-fill"></i> BPOM RI</span>
-                                <span class="pill"><i class="bi bi-check-circle-fill"></i> Top Brand 2024</span>
-                            </div>
-                            <div class="hero-actions">
-                                <a href="{{ url('/product') }}" class="btn-primary-hero">
-                                    <i class="bi bi-grid-fill"></i>
-                                    <span>Lihat Produk</span>
-                                </a>
-                                <a href="{{ url('/about') }}" class="btn-secondary-hero">
-                                    <i class="bi bi-trophy-fill"></i>
-                                    <span>Penghargaan Kami</span>
-                                </a>
-                            </div>
-                            <div class="hero-trust">
-                                <div class="trust-item">
-                                    <strong>5+</strong>
-                                    <span>Sertifikasi</span>
-                                </div>
-                                <div class="trust-divider"></div>
-                                <div class="trust-item">
-                                    <strong>12</strong>
-                                    <span>Varian Produk</span>
-                                </div>
-                                <div class="trust-divider"></div>
-                                <div class="trust-item">
-                                    <strong>A+</strong>
-                                    <span>Rating Kualitas</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-7 col-md-6 order-lg-2 order-1">
-                        <div class="hero-product-wrapper">
-                            <img src="{{ asset('assets/images/aromas-hero.png') }}" alt="AROMAS Bersertifikat" class="hero-product-img" />
-                            <div class="floating-card card-1">
-                                <div class="floating-icon"><i class="bi bi-award-fill"></i></div>
-                                <div class="floating-text">
-                                    <strong>Top Brand</strong>
-                                    <span>Award 2024</span>
-                                </div>
-                            </div>
-                            <div class="floating-card card-2">
-                                <div class="floating-icon"><i class="bi bi-patch-check-fill"></i></div>
-                                <div class="floating-text">
-                                    <strong>Halal MUI</strong>
-                                    <span>Tersertifikasi</span>
-                                </div>
-                            </div>
-                            <div class="floating-card card-3">
-                                <div class="floating-icon"><i class="bi bi-star-fill"></i></div>
-                                <div class="floating-text">
-                                    <strong>ISO 22000</strong>
-                                    <span>Food Safety</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
 
     </div>
 </section>
@@ -301,15 +150,24 @@
     <div class="container">
         <div class="mission-content" data-aos="fade-up">
             <p class="mission-text">
-                Di AROMAS, kami berkomitmen menghadirkan
-                <span class="highlight">minyak goreng premium</span>
-                dengan kualitas
-                <span class="eco-badge"><i class="bi bi-check-circle"></i> Terjamin</span>
-                dan proses produksi berkelanjutan. Dengan dedikasi
-                terhadap kesehatan konsumen dan kelestarian lingkungan,
-                kami bertujuan menjadi
-                <span class="leaf-icon"><i class="bi bi-award"></i></span>
-                produsen minyak goreng terpercaya di Indonesia.
+                @if($missionSection)
+                    {{ $missionSection->mission_text }}
+                    <span class="highlight">{{ $missionSection->highlight_text }}</span>
+                    dengan kualitas
+                    <span class="eco-badge"><i class="bi bi-check-circle"></i> {{ $missionSection->eco_badge_text }}</span>
+                    dan proses produksi berkelanjutan. {{ $missionSection->mission_text_continued }}
+                    <span class="leaf-icon"><i class="bi bi-award"></i></span>
+                @else
+                    Di AROMAS, kami berkomitmen menghadirkan
+                    <span class="highlight">minyak goreng premium</span>
+                    dengan kualitas
+                    <span class="eco-badge"><i class="bi bi-check-circle"></i> Terjamin</span>
+                    dan proses produksi berkelanjutan. Dengan dedikasi
+                    terhadap kesehatan konsumen dan kelestarian lingkungan,
+                    kami bertujuan menjadi
+                    <span class="leaf-icon"><i class="bi bi-award"></i></span>
+                    produsen minyak goreng terpercaya di Indonesia.
+                @endif
             </p>
         </div>
     </div>
@@ -325,49 +183,18 @@
                 </h2>
 
                 <div class="services-accordion">
-                    <div class="accordion-item">
+                    @foreach($services as $service)
+                    <div class="accordion-item {{ $loop->first ? 'active' : '' }}">
                         <div class="accordion-header">
-                            <span class="accordion-icon"><i class="bi bi-box-seam"></i></span>
-                            <span class="accordion-title">Distribusi Nasional</span>
-                            <span class="accordion-toggle"><i class="bi bi-plus-lg"></i></span>
+                            <span class="accordion-icon"><i class="bi {{ $service->icon }}"></i></span>
+                            <span class="accordion-title">{{ $service->title }}</span>
+                            <span class="accordion-toggle"><i class="bi {{ $loop->first ? 'bi-dash-lg' : 'bi-plus-lg' }}"></i></span>
                         </div>
-                        <div class="accordion-content">
-                            <p>Jaringan distribusi yang luas mencakup seluruh Indonesia, memastikan produk AROMAS tersedia di berbagai toko dan supermarket terdekat Anda.</p>
+                        <div class="accordion-content {{ $loop->first ? 'show' : '' }}">
+                            <p>{{ $service->description }}</p>
                         </div>
                     </div>
-
-                    <div class="accordion-item">
-                        <div class="accordion-header">
-                            <span class="accordion-icon"><i class="bi bi-building"></i></span>
-                            <span class="accordion-title">Kemitraan B2B</span>
-                            <span class="accordion-toggle"><i class="bi bi-plus-lg"></i></span>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Program kemitraan khusus untuk restoran, hotel, katering, dan industri makanan dengan harga kompetitif dan pasokan terjamin.</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item active">
-                        <div class="accordion-header">
-                            <span class="accordion-icon"><i class="bi bi-shield-check"></i></span>
-                            <span class="accordion-title">Jaminan Kualitas</span>
-                            <span class="accordion-toggle"><i class="bi bi-dash-lg"></i></span>
-                        </div>
-                        <div class="accordion-content show">
-                            <p>Setiap produk AROMAS melalui proses quality control ketat dengan sertifikasi BPOM, Halal MUI, dan standar ISO untuk menjamin keamanan konsumen.</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <div class="accordion-header">
-                            <span class="accordion-icon"><i class="bi bi-headset"></i></span>
-                            <span class="accordion-title">Layanan Pelanggan</span>
-                            <span class="accordion-toggle"><i class="bi bi-plus-lg"></i></span>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Tim customer service yang responsif siap membantu pertanyaan, keluhan, dan saran Anda melalui berbagai channel komunikasi 24/7.</p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
@@ -394,42 +221,19 @@
         </div>
 
         <div class="row g-4 mt-4">
-            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="100">
+            @foreach($impactStats as $stat)
+            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="{{ 100 * ($loop->index + 1) }}">
                 <div class="impact-card">
-                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=200&fit=crop" alt="Experience" class="impact-img" />
+                    @if($stat->image)
+                    <img src="{{ Storage::url($stat->image) }}" alt="{{ $stat->label }}" class="impact-img" />
+                    @endif
                     <div class="impact-stat">
-                        <h3><span class="counter" data-target="15">0</span>+</h3>
-                        <p>Tahun Pengalaman</p>
+                        <h3><span class="counter" data-target="{{ preg_replace('/[^0-9]/', '', $stat->number) }}">{{ $stat->number }}</span></h3>
+                        <p>{{ $stat->label }}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="impact-card">
-                    <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=300&h=200&fit=crop" alt="Products" class="impact-img" />
-                    <div class="impact-stat">
-                        <h3><span class="counter" data-target="12">0</span></h3>
-                        <p>Varian Produk</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="300">
-                <div class="impact-card">
-                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&h=200&fit=crop" alt="Distribution" class="impact-img" />
-                    <div class="impact-stat">
-                        <h3><span class="counter" data-target="500">0</span>+</h3>
-                        <p>Mitra Distribusi</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="400">
-                <div class="impact-card">
-                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop" alt="Customers" class="impact-img" />
-                    <div class="impact-stat">
-                        <h3><span class="counter" data-target="1000000">0</span>+</h3>
-                        <p>Pelanggan Setia</p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -439,41 +243,15 @@
     <div class="container">
         <h2 class="section-title" data-aos="fade-up">Penghargaan & Sertifikasi</h2>
         <div class="awards-list">
-            <div class="award-item" data-aos="fade-up" data-aos-delay="100">
+            @foreach($awards as $award)
+            <div class="award-item" data-aos="fade-up" data-aos-delay="{{ 100 * ($loop->index + 1) }}">
                 <div class="award-info">
-                    <h4>Top Brand Award - Kategori Minyak Goreng</h4>
-                    <p>Frontier Consulting Group <span class="dot green"></span></p>
+                    <h4>{{ $award->title }}</h4>
+                    <p>{{ $award->organization }} <span class="dot {{ $award->status_color }}"></span></p>
                 </div>
-                <div class="award-year">2024</div>
+                <div class="award-year">{{ $award->year }}</div>
             </div>
-            <div class="award-item" data-aos="fade-up" data-aos-delay="150">
-                <div class="award-info">
-                    <h4>Sertifikasi Halal MUI</h4>
-                    <p>Majelis Ulama Indonesia <span class="dot green"></span></p>
-                </div>
-                <div class="award-year">2024</div>
-            </div>
-            <div class="award-item" data-aos="fade-up" data-aos-delay="200">
-                <div class="award-info">
-                    <h4>Indonesia Best Brand Award</h4>
-                    <p>SWA Magazine & MARS Research <span class="dot yellow"></span></p>
-                </div>
-                <div class="award-year">2023</div>
-            </div>
-            <div class="award-item" data-aos="fade-up" data-aos-delay="250">
-                <div class="award-info">
-                    <h4>ISO 22000:2018 - Food Safety Management</h4>
-                    <p>International Organization for Standardization <span class="dot green"></span></p>
-                </div>
-                <div class="award-year">2023</div>
-            </div>
-            <div class="award-item" data-aos="fade-up" data-aos-delay="300">
-                <div class="award-info">
-                    <h4>Sertifikasi BPOM RI</h4>
-                    <p>Badan Pengawas Obat dan Makanan <span class="dot green"></span></p>
-                </div>
-                <div class="award-year">2022</div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -489,34 +267,15 @@
                 <p class="benefits-desc">AROMAS diproduksi dengan teknologi modern untuk menghasilkan minyak goreng berkualitas tinggi yang aman dan sehat untuk keluarga Indonesia.</p>
             </div>
             <div class="row g-4 mt-4">
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                @foreach($benefits as $benefit)
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="{{ 100 * ($loop->index + 1) }}">
                     <div class="benefit-card">
-                        <div class="benefit-icon"><i class="bi bi-heart-pulse"></i></div>
-                        <h4>Rendah Kolesterol</h4>
-                        <p>Diformulasi khusus dengan kandungan lemak jenuh yang rendah untuk menjaga kesehatan jantung dan pembuluh darah keluarga Anda.</p>
+                        <div class="benefit-icon"><i class="bi {{ $benefit->icon }}"></i></div>
+                        <h4>{{ $benefit->title }}</h4>
+                        <p>{{ $benefit->description }}</p>
                     </div>
                 </div>
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="benefit-card">
-                        <div class="benefit-icon"><i class="bi bi-brightness-high"></i></div>
-                        <h4>Jernih & Tidak Berbau</h4>
-                        <p>Proses penyulingan multi-tahap menghasilkan minyak goreng yang jernih, tidak berbau, dan tidak mengubah rasa asli masakan Anda.</p>
-                    </div>
-                </div>
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="benefit-card">
-                        <div class="benefit-icon"><i class="bi bi-fire"></i></div>
-                        <h4>Tahan Panas Tinggi</h4>
-                        <p>Titik asap tinggi memungkinkan penggorengan berulang tanpa cepat menghitam, lebih hemat dan ekonomis untuk rumah tangga.</p>
-                    </div>
-                </div>
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="benefit-card">
-                        <div class="benefit-icon"><i class="bi bi-shield-plus"></i></div>
-                        <h4>Kaya Vitamin E</h4>
-                        <p>Mengandung vitamin E alami sebagai antioksidan yang membantu menjaga kesehatan kulit dan meningkatkan daya tahan tubuh.</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -527,25 +286,37 @@
     <div class="container">
         <h3 class="text-center mb-5" data-aos="fade-up">Mitra & Distributor Kami</h3>
         <div class="investors-logos" data-aos="fade-up" data-aos-delay="100">
-            <div class="investor-logo"><i class="bi bi-shop"></i><span>Indomaret</span></div>
-            <div class="investor-logo"><i class="bi bi-shop"></i><span>Alfamart</span></div>
-            <div class="investor-logo"><i class="bi bi-cart4"></i><span>Hypermart</span></div>
-            <div class="investor-logo"><i class="bi bi-bag"></i><span>Giant</span></div>
-            <div class="investor-logo"><i class="bi bi-basket"></i><span>Superindo</span></div>
-            <div class="investor-logo"><i class="bi bi-globe"></i><span>Tokopedia</span></div>
+            @foreach($partners as $partner)
+            <div class="investor-logo">
+                @if($partner->url)
+                <a href="{{ $partner->url }}" target="_blank" rel="noopener noreferrer">
+                @endif
+                    @if($partner->logo)
+                    <img src="{{ Storage::url($partner->logo) }}" alt="{{ $partner->name }}" style="max-width: 120px; max-height: 60px; object-fit: contain;" />
+                    @else
+                    <i class="bi {{ $partner->icon }}"></i>
+                    @endif
+                    <span>{{ $partner->name }}</span>
+                @if($partner->url)
+                </a>
+                @endif
+            </div>
+            @endforeach
         </div>
     </div>
 </section>
 
 <!-- ========== VIDEO SECTION ========== -->
 <section id="gallery" class="video-section">
+    @if($videoSetting && $videoSetting->is_active)
     <div class="video-overlay"></div>
     <div class="container">
         <div class="video-content" data-aos="zoom-in">
-            <h2 class="section-title text-white">Proses Produksi<br /><span class="outline-text">AROMAS</span></h2>
+            <h2 class="section-title text-white">{{ $videoSetting->section_title }}</h2>
             <button class="play-btn" data-bs-toggle="modal" data-bs-target="#videoModal"><i class="bi bi-play-fill"></i></button>
         </div>
     </div>
+    @endif
 </section>
 
 <!-- Video Modal -->
@@ -557,7 +328,7 @@
             </div>
             <div class="modal-body p-0">
                 <div class="ratio ratio-16x9">
-                    <iframe src="" id="videoIframe" allowfullscreen></iframe>
+                    <iframe src="" id="videoIframe" allowfullscreen data-video-url="{{ $videoSetting && $videoSetting->video_url ? $videoSetting->video_url . '?autoplay=1' : '' }}"></iframe>
                 </div>
             </div>
         </div>
@@ -640,6 +411,11 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Pass branches data from CMS to JavaScript
+        window.branchesData = @json($branchesData);
+    </script>
 </section>
 
 <!-- ========== FAQ SECTION ========== -->
@@ -652,16 +428,18 @@
         <div class="row g-4 mt-4">
             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="faq-accordion">
+                    @foreach($faqs as $faq)
                     <div class="faq-item">
                         <div class="faq-header">
                             <span class="faq-icon"><i class="bi bi-question-circle"></i></span>
-                            <span class="faq-title">Apa keunggulan minyak goreng AROMAS dibandingkan dengan merek lain?</span>
+                            <span class="faq-title">{{ $faq->question }}</span>
                             <span class="faq-toggle"><i class="bi bi-plus-lg"></i></span>
                         </div>
                         <div class="faq-content">
-                            <p>Minyak goreng AROMAS diproduksi dengan teknologi modern melalui proses penyulingan multi-tahap yang menghasilkan minyak yang jernih, tidak berbau, dan memiliki titik asap tinggi. AROMAS juga kaya akan vitamin E alami dan telah teruji memiliki kandungan lemak jenuh yang lebih rendah dibandingkan merek lain.</p>
+                            <p>{{ $faq->answer }}</p>
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>

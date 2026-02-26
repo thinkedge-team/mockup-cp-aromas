@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('logo')->nullable();
             $table->text('company_description')->nullable();
-            $table->json('contact_info')->nullable(); // {phone, email, address}
-            $table->json('link_columns')->nullable(); // Repeater: title, links[]
-            $table->json('social_links')->nullable(); // {platform, url, icon}
+            $table->json('contact_info')->nullable(); // KeyValue: {phone, email, address, whatsapp}
+            $table->json('social_links')->nullable(); // KeyValue: {instagram, facebook, tiktok, youtube}
             $table->string('copyright_text')->nullable();
-            $table->json('legal_links')->nullable(); // [{label, url}]
+            $table->json('legal_links')->nullable(); // KeyValue: {privacy, terms}
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

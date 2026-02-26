@@ -4,86 +4,8 @@
     ======================================== */
 
 // ========== BRANCHES DATA ==========
-const branches = [
-    {
-        id: 1,
-        nama_cabang: "Cabang Jakarta Pusat",
-        kategori: "Outlet Premium",
-        alamat: "Jl. Industri Raya No. 123, Jakarta 12345",
-        latitude: -6.2088,
-        longitude: 106.8456,
-        foto_url:
-            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=300&h=300&fit=crop",
-        rating: 5,
-        name: "Cabang Jakarta",
-        address: "Jl. Industri Raya No. 123, Kawasan Industri, Jakarta 12345",
-        phone: "(021) 1234-5678",
-        whatsapp: "6281234567890",
-        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop",
-        lat: -6.2088,
-        lng: 106.8456,
-        mapLink: "https://maps.google.com/?q=Jl.+Industri+Raya+No.+123+Jakarta",
-        city: "Jakarta",
-        operatingHours: {
-            open: "08:00",
-            close: "17:00",
-            days: "Senin - Jumat",
-        },
-        isOpen: true,
-    },
-    {
-        id: 2,
-        nama_cabang: "Cabang Surabaya Timur",
-        kategori: "Outlet Standar",
-        alamat: "Jl. Raya Surabaya No. 45, Jawa Timur 60111",
-        latitude: -7.2575,
-        longitude: 112.7521,
-        foto_url:
-            "https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&h=300&fit=crop",
-        rating: 4,
-        name: "Cabang Surabaya",
-        address: "Jl. Raya Surabaya No. 45, Jawa Timur 60111",
-        phone: "(031) 9876-5432",
-        whatsapp: "6281345678901",
-        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=250&fit=crop",
-        lat: -7.2575,
-        lng: 112.7521,
-        mapLink: "https://maps.google.com/?q=Jl.+Raya+Surabaya+No.+45",
-        city: "Surabaya",
-        operatingHours: {
-            open: "08:00",
-            close: "17:00",
-            days: "Senin - Jumat",
-        },
-        isOpen: true,
-    },
-    {
-        id: 3,
-        nama_cabang: "Cabang Bandung Utara",
-        kategori: "Outlet Premium",
-        alamat: "Jl. Braga No. 67, Bandung 40111, Jawa Barat",
-        latitude: -6.9175,
-        longitude: 107.6191,
-        foto_url:
-            "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=300&h=300&fit=crop",
-        rating: 5,
-        name: "Cabang Bandung",
-        address: "Jl. Braga No. 67, Bandung 40111, Jawa Barat",
-        phone: "(022) 2345-6789",
-        whatsapp: "6281456789012",
-        image: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=400&h=250&fit=crop",
-        lat: -6.9175,
-        lng: 107.6191,
-        mapLink: "https://maps.google.com/?q=Jl.+Braga+No.+67+Bandung",
-        city: "Bandung",
-        operatingHours: {
-            open: "08:00",
-            close: "17:00",
-            days: "Senin - Jumat",
-        },
-        isOpen: true,
-    },
-];
+// Data is now passed from CMS via window.branchesData in home.blade.php
+const branches = window.branchesData || [];
 
 // ========== GLOBAL VARIABLES FOR INTERACTIVE MAP ==========
 let markers = {};
@@ -100,16 +22,17 @@ function checkBranchStatus(branch) {
     const dayOfWeek = now.getDay();
 
     const isWeekday = dayOfWeek >= 1 && dayOfWeek <= 5;
-    const isOpenToday = branch.operatingHours.days
-        .toLowerCase()
-        .includes("senin - jumat")
-        ? isWeekday
+    const hours = branch.operatingHours || {};
+    const isOpenToday = hours.days 
+        ? hours.days.toLowerCase().includes("senin - jumat")
+            ? isWeekday
+            : true
         : true;
 
     if (!isOpenToday) return false;
 
-    const openTime = parseTime(branch.operatingHours.open);
-    const closeTime = parseTime(branch.operatingHours.close);
+    const openTime = parseTime(hours.open || "08:00");
+    const closeTime = parseTime(hours.close || "17:00");
 
     return currentTime >= openTime && currentTime <= closeTime;
 }
@@ -171,6 +94,7 @@ function createPopupContent(branch) {
     const isOpen = checkBranchStatus(branch);
     const statusClass = isOpen ? "open" : "closed";
     const statusText = isOpen ? "Buka" : "Tutup";
+    const hours = branch.operatingHours || {};
     return `
         <div class="aromas-popup">
             <div class="popup-accent-bar"></div>
@@ -179,19 +103,19 @@ function createPopupContent(branch) {
                     <img src="assets/images/aromas-hero.png" alt="AROMAS">
                 </div>
                 <div class="popup-main-info">
-                    <p class="popup-branch-name">${branch.nama_cabang}</p>
+                    <p class="popup-branch-name">${branch.name}</p>
                     <div class="popup-meta-row">
                         <span class="popup-status-dot ${statusClass}"></span>
                         <span class="popup-status-text ${statusClass}">${statusText}</span>
                         <span class="popup-meta-sep">·</span>
-                        <span>${branch.operatingHours.open}–${branch.operatingHours.close}</span>
+                        <span>${hours.open || '08:00'}–${hours.close || '17:00'}</span>
                     </div>
                 </div>
             </div>
             <div class="popup-thin-divider"></div>
             <div class="popup-address-row">
                 <i class="bi bi-geo-alt-fill"></i>
-                <span>${branch.alamat}</span>
+                <span>${branch.address}</span>
             </div>
             <div class="popup-actions-section">
                 <a href="https://wa.me/${branch.whatsapp}" target="_blank" class="popup-btn popup-btn-whatsapp">
@@ -227,20 +151,21 @@ function renderInfoCards() {
             const isOpen = checkBranchStatus(branch);
             const statusClass = isOpen ? "open" : "closed";
             const statusText = isOpen ? "Buka" : "Tutup";
+            const hours = branch.operatingHours || {};
             return `
         <div class="info-card" data-id="${branch.id}">
             <div class="card-image">
-                <img src="${branch.foto_url}" alt="${branch.nama_cabang}" class="card-photo" loading="lazy">
+                <img src="${branch.foto_url || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=300&h=200&fit=crop'}" alt="${branch.name}" class="card-photo" loading="lazy">
             </div>
             <div class="card-info">
                 <span class="card-status-badge ${statusClass}">
                     <span class="card-status-dot"></span>
-                    ${statusText} · ${branch.operatingHours.open}–${branch.operatingHours.close}
+                    ${statusText} · ${hours.open || '08:00'}–${hours.close || '17:00'}
                 </span>
-                <h3 class="card-name">${branch.nama_cabang}</h3>
-                <span class="card-category">${branch.kategori}</span>
+                <h3 class="card-name">${branch.name}</h3>
+                <span class="card-category">${branch.category || 'Outlet'}</span>
                 <p class="card-address">
-                    <i class="bi bi-geo-alt-fill"></i>${branch.alamat}
+                    <i class="bi bi-geo-alt-fill"></i>${branch.address}
                 </p>
                 <div class="card-actions">
                     <a href="https://wa.me/${branch.whatsapp}" target="_blank" class="card-btn card-btn-wa">
@@ -590,14 +515,10 @@ function initInteractiveMap() {
 window.addEventListener("load", function () {
     const preloader = document.getElementById("preloader");
     if (preloader) {
-        // Add a small delay for smooth transition
+        preloader.classList.add('hidden');
         setTimeout(function () {
-            preloader.classList.add("hidden");
-            // Remove from DOM after animation completes
-            setTimeout(function () {
-                preloader.style.display = "none";
-            }, 600);
-        }, 800);
+            preloader.style.display = "none";
+        }, 700);
     }
 });
 
@@ -879,8 +800,8 @@ function initVideoModal() {
 
     if (!videoModal || !videoIframe) return;
 
-    // Sample video URL (replace with actual video)
-    const videoURL = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
+    // Get video URL from iframe data attribute (set in Blade view)
+    const videoURL = videoIframe.getAttribute("data-video-url") || "";
 
     videoModal.addEventListener("show.bs.modal", function () {
         videoIframe.src = videoURL;

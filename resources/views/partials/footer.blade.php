@@ -1,4 +1,8 @@
 <!-- ========== FOOTER ========== -->
+@php
+    $footer = \App\Models\FooterSetting::where('is_active', true)->first();
+@endphp
+
 <style>
 .footer{background:#071910;color:rgba(255,255,255,.62);padding-top:64px;}
 .footer-divider{height:1px;background:linear-gradient(to right,transparent,rgba(200,151,10,.2),transparent);margin-bottom:48px;}
@@ -29,15 +33,42 @@
         <div class="row g-5">
             <div class="col-lg-4 col-md-6">
                 <div class="footer-brand-name">
-                    <img src="{{ asset('assets/images/logo.png') }}" alt="AROMAS" style="height:50px;width:auto;" />
+                    @if($footer && $footer->logo)
+                        <img src="{{ Storage::url($footer->logo) }}" alt="AROMAS" style="height:50px;width:auto;" />
+                    @else
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="AROMAS" style="height:50px;width:auto;" />
+                    @endif
                 </div>
-                <p class="footer-desc">Minyak goreng sawit premium berkualitas tinggi untuk keluarga dan industri Indonesia. Dipercaya sejak 1994.</p>
+                <p class="footer-desc">{{ $footer->company_description ?? 'Minyak goreng sawit premium berkualitas tinggi untuk keluarga dan industri Indonesia. Dipercaya sejak 1994.' }}</p>
                 <div class="footer-socials">
-                    <a href="#" class="social-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="social-btn" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-                    <a href="#" class="social-btn" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-                    <a href="#" class="social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    @if($footer && $footer->social_links)
+                        @foreach($footer->social_links as $platform => $url)
+                            @if($url)
+                                <a href="{{ $url }}" class="social-btn" aria-label="{{ ucfirst($platform) }}">
+                                    @if($platform === 'instagram')
+                                        <i class="bi bi-instagram"></i>
+                                    @elseif($platform === 'facebook')
+                                        <i class="bi bi-facebook"></i>
+                                    @elseif($platform === 'tiktok')
+                                        <i class="bi bi-tiktok"></i>
+                                    @elseif($platform === 'youtube')
+                                        <i class="bi bi-youtube"></i>
+                                    @elseif($platform === 'twitter')
+                                        <i class="bi bi-twitter"></i>
+                                    @elseif($platform === 'linkedin')
+                                        <i class="bi bi-linkedin"></i>
+                                    @elseif($platform === 'whatsapp')
+                                        <i class="bi bi-whatsapp"></i>
+                                    @endif
+                                </a>
+                            @endif
+                        @endforeach
+                    @else
+                        <a href="#" class="social-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-btn" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                        <a href="#" class="social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    @endif
                 </div>
             </div>
             <div class="col-lg-2 col-md-3 col-6">
@@ -63,20 +94,51 @@
             <div class="col-lg-4 col-md-6">
                 <div class="footer-col-title">Hubungi Kami</div>
                 <ul class="footer-contact-list">
-                    <li><i class="bi bi-geo-alt-fill"></i> Jl. Industri Raya No. 123, Jakarta 12345</li>
-                    <li><i class="bi bi-envelope-fill"></i> info@aromas.co.id</li>
-                    <li><i class="bi bi-telephone-fill"></i> (021) 1234-5678</li>
-                    <li><i class="bi bi-whatsapp"></i> +62 812-3456-7890</li>
+                    @if($footer && $footer->contact_info)
+                        @if(isset($footer->contact_info['address']))
+                            <li><i class="bi bi-geo-alt-fill"></i> {{ $footer->contact_info['address'] }}</li>
+                        @endif
+                        @if(isset($footer->contact_info['email']))
+                            <li><i class="bi bi-envelope-fill"></i> {{ $footer->contact_info['email'] }}</li>
+                        @endif
+                        @if(isset($footer->contact_info['phone']))
+                            <li><i class="bi bi-telephone-fill"></i> {{ $footer->contact_info['phone'] }}</li>
+                        @endif
+                        @if(isset($footer->contact_info['whatsapp']))
+                            <li><i class="bi bi-whatsapp"></i> {{ $footer->contact_info['whatsapp'] }}</li>
+                        @endif
+                    @else
+                        <li><i class="bi bi-geo-alt-fill"></i> Jl. Industri Raya No. 123, Jakarta 12345</li>
+                        <li><i class="bi bi-envelope-fill"></i> info@aromas.co.id</li>
+                        <li><i class="bi bi-telephone-fill"></i> (021) 1234-5678</li>
+                        <li><i class="bi bi-whatsapp"></i> +62 812-3456-7890</li>
+                    @endif
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
             <div class="row align-items-center">
-                <div class="col-md-6"><p class="footer-copy">&copy; {{ date('Y') }} AROMAS. Hak Cipta Dilindungi.</p></div>
+                <div class="col-md-6">
+                    <p class="footer-copy">{{ $footer->copyright_text ?? '© ' . date('Y') . ' AROMAS. Hak Cipta Dilindungi.' }}</p>
+                </div>
                 <div class="col-md-6 text-md-end mt-2 mt-md-0">
                     <div class="footer-legal-links justify-content-md-end d-flex">
-                        <a href="#">Syarat &amp; Ketentuan</a>
-                        <a href="#">Kebijakan Privasi</a>
+                        @if($footer && $footer->legal_links)
+                            @foreach($footer->legal_links as $label => $url)
+                                <a href="{{ $url }}">
+                                    @if($label === 'privacy')
+                                        Kebijakan Privasi
+                                    @elseif($label === 'terms')
+                                        Syarat & Ketentuan
+                                    @else
+                                        {{ ucfirst($label) }}
+                                    @endif
+                                </a>
+                            @endforeach
+                        @else
+                            <a href="#">Syarat &amp; Ketentuan</a>
+                            <a href="#">Kebijakan Privasi</a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -90,7 +152,7 @@
 </button>
 
 <!-- WhatsApp Floating Button -->
-<a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20bertanya%20tentang%20produk" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat via WhatsApp">
+<a href="https://wa.me/{{ isset($footer->contact_info['whatsapp']) ? preg_replace('/[^0-9]/', '', $footer->contact_info['whatsapp']) : '6281234567890' }}?text=Halo%20AROMAS,%20saya%20ingin%20bertanya%20tentang%20produk" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat via WhatsApp">
     <i class="bi bi-whatsapp"></i>
     <span class="whatsapp-tooltip">Chat dengan Kami</span>
 </a>
