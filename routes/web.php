@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PromoPageController;
 use Illuminate\Support\Facades\Route;
 
 // Home page
@@ -23,9 +24,7 @@ Route::get('/our-machine', function () {
     return view('our-machine');
 });
 
-Route::get('/promo', function () {
-    return view('promo');
-});
+Route::get('/promo', [PromoPageController::class, 'index'])->name('promo');
 
 Route::get('/blog', function () {
     return view('blog');

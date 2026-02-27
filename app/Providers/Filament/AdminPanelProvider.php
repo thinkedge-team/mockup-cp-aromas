@@ -24,29 +24,39 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->id('admin')
-            ->path('admin')
+            ->id("admin")
+            ->path("admin")
             ->login()
             ->colors([
-                'primary' => Color::hex('#d4a017'), // AROMAS Gold
-                'success' => Color::hex('#228b22'), // Forest Green
+                "primary" => Color::hex("#d4a017"), // AROMAS Gold
+                "success" => Color::hex("#228b22"), // Forest Green
             ])
-            ->brandName('AROMAS CMS')
-            ->favicon(asset('favicon.ico'))
+            ->brandName("AROMAS CMS")
+            ->favicon(asset("favicon.ico"))
             ->navigationGroups([
-                'Beranda' => \Filament\Navigation\NavigationGroup::make()
-                    ->label('Beranda')
+                "Beranda" => \Filament\Navigation\NavigationGroup::make()
+                    ->label("Beranda")
                     ->collapsed(true),
-                'Settings' => \Filament\Navigation\NavigationGroup::make()
-                    ->label('Settings')
+                "Settings" => \Filament\Navigation\NavigationGroup::make()
+                    ->label("Settings")
+                    ->collapsed(true),
+                "Promo Management" => \Filament\Navigation\NavigationGroup::make()
+                    ->label("Promo Management")
                     ->collapsed(true),
             ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
-            ->pages([
-                Pages\Dashboard::class,
-            ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverResources(
+                in: app_path("Filament/Resources"),
+                for: "App\\Filament\\Resources",
+            )
+            ->discoverPages(
+                in: app_path("Filament/Pages"),
+                for: "App\\Filament\\Pages",
+            )
+            ->pages([Pages\Dashboard::class])
+            ->discoverWidgets(
+                in: app_path("Filament/Widgets"),
+                for: "App\\Filament\\Widgets",
+            )
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
@@ -62,8 +72,6 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
-            ->authMiddleware([
-                Authenticate::class,
-            ]);
+            ->authMiddleware([Authenticate::class]);
     }
 }

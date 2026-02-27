@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('promo_cta_sections', function (Blueprint $table) {
+            $table->id();
+            $table->boolean('is_active')->default(true);
+            $table->string('title')->default('Ada Promo yang Menarik Perhatian Anda?');
+            $table->text('description')->nullable();
+            $table->json('buttons')->nullable(); // [{label, url, icon, style, order}]
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('promo_cta_sections');
+    }
+};

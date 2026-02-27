@@ -46,6 +46,7 @@ class DatabaseSeeder extends Seeder
             MachineSeeder::class,
             MachineCtaSeeder::class,
             CapacityStatSeeder::class,
+            PromoSeeder::class,
         ]);
     }
 }
