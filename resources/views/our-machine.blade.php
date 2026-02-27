@@ -1,3 +1,16 @@
+@php
+    use App\Models\MachineHero;
+    use App\Models\MachineCategory;
+    use App\Models\Machine;
+    use App\Models\CapacityStat;
+    use App\Models\MachineCta;
+
+    $machineHero = MachineHero::active()->first();
+    $categories = MachineCategory::active()->orderBy('order')->get();
+    $capacityStats = CapacityStat::active()->orderBy('order')->get();
+    $machineCta = MachineCta::active()->first();
+@endphp
+
 @extends('layouts.app')
 
 @section('content')
@@ -14,6 +27,29 @@
     <div class="container text-center">
         <div class="row justify-content-center">
             <div class="col-lg-9 col-md-11" data-aos="fade-up">
+                @if($machineHero)
+                <span class="hero-badge"><i class="bi {{ $machineHero->badge_icon }}"></i> {{ $machineHero->badge_text }}</span>
+                <h1 class="hero-title">
+                    {{ $machineHero->title }}
+                    <span class="italic text-gradient">{{ $machineHero->title_gradient }}</span>
+                </h1>
+                <div class="hero-prod-img-wrap" data-aos="fade-up" data-aos-delay="80">
+                    <img src="{{ Storage::url($machineHero->production_line_image) }}" alt="Lini Produksi AROMAS" class="hero-prod-img" />
+                </div>
+                @if($machineHero->hero_stats)
+                <div class="hero-machine-stats" data-aos="fade-up" data-aos-delay="150">
+                    @foreach($machineHero->hero_stats as $stat)
+                    <div class="hmstat">
+                        <i class="bi {{ $stat['icon'] }}"></i>
+                        <div>
+                            <strong>{{ $stat['number'] }}</strong>
+                            <span>{{ $stat['label'] }}</span>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                @endif
+                @else
                 <span class="hero-badge"><i class="bi bi-gear-wide-connected"></i> Fasilitas Produksi</span>
                 <h1 class="hero-title">
                     Mesin Berteknologi Tinggi,<br />
@@ -52,6 +88,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>
@@ -79,14 +116,13 @@
         <div class="filter-wrap">
             <div class="filter-tabs">
                 <button class="ftab active" data-filter="all"><i class="bi bi-grid-fill"></i> Semua Mesin</button>
-                <button class="ftab" data-filter="blowing"><i class="bi bi-wind"></i> Blowing</button>
-                <button class="ftab" data-filter="filling"><i class="bi bi-droplet-half"></i> Filling & Capping</button>
-                <button class="ftab" data-filter="labeling"><i class="bi bi-tag-fill"></i> Labeling</button>
-                <button class="ftab" data-filter="packaging"><i class="bi bi-box-seam-fill"></i> Packaging</button>
-                <button class="ftab" data-filter="conveyor"><i class="bi bi-arrows-move"></i> Conveyor</button>
-                <button class="ftab" data-filter="refinery"><i class="bi bi-fire"></i> Refinery</button>
+                @foreach($categories as $category)
+                <button class="ftab" data-filter="{{ $category->slug }}">
+                    <i class="bi {{ $category->icon }}"></i> {{ $category->name }}
+                </button>
+                @endforeach
             </div>
-            <span class="result-count">Menampilkan <strong id="machineCount">8</strong> unit mesin</span>
+            <span class="result-count">Menampilkan <strong id="machineCount">{{ Machine::active()->count() }}</strong> unit mesin</span>
         </div>
     </div>
 </section>
@@ -95,8 +131,51 @@
 <section class="machines-section">
     <div class="container">
         <div class="row g-4" id="machineGrid">
-            <!-- Machine cards go here (m1 to m8) -->
-            @include('partials.machine-cards')
+            @foreach($categories as $category)
+                @php
+                    $categoryMachines = Machine::active()->where('category_id', $category->id)->orderBy('order')->get();
+                @endphp
+                @foreach($categoryMachines as $machine)
+                <div class="col-md-6 col-lg-4 machine-item" data-cat="{{ $category->slug }}" data-aos="fade-up" data-aos-delay="{{ $loop->parent->index * 80 + $loop->index * 80 }}">
+                    <div class="machine-card" onclick="openMachineModal('machine-{{ $machine->id }}')">
+                        <div class="card-gallery" id="gallery-machine-{{ $machine->id }}">
+                            <div class="card-gallery-slides" id="slides-machine-{{ $machine->id }}">
+                                @foreach($machine->images ?? [] as $index => $image)
+                                <div class="gallery-slide {{ $index === 0 ? 'active' : '' }}">
+                                    <img src="{{ Storage::url($image['url']) }}" alt="{{ $machine->name }}" />
+                                </div>
+                                @endforeach
+                            </div>
+                            <span class="card-cat-badge" style="background: {{ $category->color }};"><i class="bi {{ $category->icon }}"></i> {{ $category->name }}</span>
+                            <span class="card-unit-badge"><i class="bi bi-check-circle-fill"></i> {{ $machine->unit_count }} Unit</span>
+                            @if(count($machine->images ?? []) > 1)
+                            <button class="gallery-prev" onclick="slideCard(event,'machine-{{ $machine->id }}',-1)"><i class="bi bi-chevron-left"></i></button>
+                            <button class="gallery-next" onclick="slideCard(event,'machine-{{ $machine->id }}',1)"><i class="bi bi-chevron-right"></i></button>
+                            <div class="gallery-dots" id="dots-machine-{{ $machine->id }}">
+                                @foreach($machine->images ?? [] as $index => $image)
+                                <div class="gdot {{ $index === 0 ? 'active' : '' }}" onclick="goToSlide(event,'machine-{{ $machine->id }}',{{ $index }})"></div>
+                                @endforeach
+                            </div>
+                            @endif
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-capacity"><i class="bi bi-lightning-charge-fill"></i> {{ $machine->capacity_badge }}</div>
+                            <div class="card-name">{{ $machine->name }}</div>
+                            <div class="card-tagline">{{ $machine->tagline }}</div>
+                            <ul class="card-specs">
+                                @foreach($machine->specs ?? [] as $spec)
+                                <li><i class="bi bi-check2-circle"></i>{{ $spec['label'] }}: {{ $spec['value'] }}</li>
+                                @endforeach
+                            </ul>
+                            <div class="card-footer-row">
+                                <button class="btn-detail"><i class="bi bi-eye"></i> Lihat Detail</button>
+                                <button class="btn-inquiry" title="Tanya via WhatsApp" onclick="event.stopPropagation(); window.open('https://wa.me/6281234567890?text={{ urlencode($machine->whatsapp_message ?? 'Halo, saya ingin tanya tentang ' . $machine->name) }}','_blank')"><i class="bi bi-whatsapp"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            @endforeach
         </div>
     </div>
 </section>
@@ -109,38 +188,16 @@
             <p class="section-desc" style="color:rgba(255,255,255,.7);max-width:520px;margin:0 auto;">Infrastruktur produksi AROMAS dirancang untuk memenuhi permintaan skala nasional dengan efisiensi dan kualitas terjaga.</p>
         </div>
         <div class="row g-4">
-            <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
+            @foreach($capacityStats as $stat)
+            <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="{{ $loop->index * 80 }}">
                 <div class="cap-card">
-                    <div class="cap-card-icon"><i class="bi bi-wind"></i></div>
-                    <span class="big-num">6.000</span>
-                    <h4>BPH Blowing</h4>
-                    <p>Kapasitas produksi botol per jam</p>
+                    <div class="cap-card-icon"><i class="bi {{ $stat->icon }}"></i></div>
+                    <span class="big-num">{{ $stat->number }}</span>
+                    <h4>{{ $stat->title }}</h4>
+                    <p>{{ $stat->description }}</p>
                 </div>
             </div>
-            <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
-                <div class="cap-card">
-                    <div class="cap-card-icon"><i class="bi bi-droplet-fill"></i></div>
-                    <span class="big-num">12.000</span>
-                    <h4>BPH Filling</h4>
-                    <p>Kapasitas pengisian per jam</p>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
-                <div class="cap-card">
-                    <div class="cap-card-icon"><i class="bi bi-fire"></i></div>
-                    <span class="big-num">50 T</span>
-                    <h4>Per Hari Refinery</h4>
-                    <p>Kapasitas penyulingan CPO harian</p>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
-                <div class="cap-card">
-                    <div class="cap-card-icon"><i class="bi bi-clock-fill"></i></div>
-                    <span class="big-num">24/7</span>
-                    <h4>Operasional</h4>
-                    <p>Produksi tanpa henti sepanjang tahun</p>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -150,17 +207,31 @@
     <div class="container">
         <div class="row align-items-center gy-4">
             <div class="col-lg-7" data-aos="fade-right">
+                @if($machineCta)
+                <h2>{{ $machineCta->title }}</h2>
+                <p>{{ $machineCta->description }}</p>
+                @else
                 <h2>Ingin Tahu Lebih Lanjut<br />Tentang Fasilitas Produksi Kami?</h2>
                 <p>Jadwalkan kunjungan pabrik atau hubungi tim teknis kami untuk informasi lebih detail.</p>
+                @endif
             </div>
             <div class="col-lg-5 text-lg-end" data-aos="fade-left">
                 <div class="d-flex gap-3 flex-wrap justify-content-lg-end">
+                    @if($machineCta)
+                    <a href="{{ $machineCta->primary_button_url }}" target="_blank" class="btn-cta-w">
+                        <i class="bi bi-whatsapp"></i> {{ $machineCta->primary_button_text }}
+                    </a>
+                    <a href="{{ $machineCta->secondary_button_url }}" class="btn-cta-ol">
+                        <i class="bi bi-envelope-fill"></i> {{ $machineCta->secondary_button_text }}
+                    </a>
+                    @else
                     <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20kunjungan%20pabrik" target="_blank" class="btn-cta-w">
                         <i class="bi bi-whatsapp"></i> Jadwalkan Kunjungan
                     </a>
                     <a href="{{ url('/contact') }}" class="btn-cta-ol">
                         <i class="bi bi-envelope-fill"></i> Kirim Pertanyaan
                     </a>
+                    @endif
                 </div>
             </div>
         </div>

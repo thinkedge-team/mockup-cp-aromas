@@ -41,6 +41,11 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             ProductAdvantageSeeder::class,
             ProductCtaSeeder::class,
+            MachineHeroSeeder::class,
+            MachineCategorySeeder::class,
+            MachineSeeder::class,
+            MachineCtaSeeder::class,
+            CapacityStatSeeder::class,
         ]);
     }
 }
