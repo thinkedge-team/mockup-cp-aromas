@@ -52,11 +52,15 @@ class PartnershipTestimonialResource extends Resource
                         ->numeric()
                         ->default(0),
 
-                    Forms\Components\TextInput::make('avatar_url')
-                        ->label('URL Foto Avatar')
-                        ->helperText('URL gambar profil, misal dari Unsplash')
-                        ->placeholder('https://images.unsplash.com/...')
-                        ->url()
+                    Forms\Components\FileUpload::make('avatar_url')
+                        ->label('Foto Profil')
+                        ->image()
+                        ->imageEditor()
+                        ->imageEditorAspectRatios(['1:1'])
+                        ->directory('testimonials/avatars')
+                        ->maxSize(2048)
+                        ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                        ->helperText('Upload foto profil mitra (disarankan ukuran persegi, maks. 2MB)')
                         ->columnSpanFull(),
                 ]),
 
@@ -82,6 +86,10 @@ class PartnershipTestimonialResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('sort_order')->label('#')->sortable(),
+                Tables\Columns\ImageColumn::make('avatar_url')
+                    ->label('Foto')
+                    ->circular()
+                    ->defaultImageUrl(fn () => 'https://ui-avatars.com/api/?background=228b22&color=fff&name=M'),
                 Tables\Columns\TextColumn::make('name')->label('Nama')->searchable(),
                 Tables\Columns\TextColumn::make('role')->label('Jabatan')->limit(30),
                 Tables\Columns\BadgeColumn::make('program_type')
