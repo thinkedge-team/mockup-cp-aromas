@@ -47,6 +47,14 @@ class DatabaseSeeder extends Seeder
             MachineCtaSeeder::class,
             CapacityStatSeeder::class,
             PromoSeeder::class,
+            // About Us seeders
+            AboutHeroSettingSeeder::class,
+            AboutStorySettingSeeder::class,
+            AboutVmSettingSeeder::class,
+            AboutCoreValueSeeder::class,
+            AboutMilestoneSeeder::class,
+            AboutCertificationSeeder::class,
+            AboutCtaSettingSeeder::class,
         ]);
     }
 }

@@ -1,3 +1,37 @@
+@php
+    use App\Models\AboutHeroSetting;
+    use App\Models\AboutStorySetting;
+    use App\Models\AboutVmSetting;
+    use App\Models\AboutCoreValue;
+    use App\Models\AboutMilestone;
+    use App\Models\AboutCertification;
+    use App\Models\AboutCtaSetting;
+    use Illuminate\Support\Facades\Storage;
+
+    // --- Load data with error handling ---
+    // Each section gracefully falls back to null on any DB/runtime error.
+    // The view uses @if($model) guards + @else fallback content for all sections.
+    try {
+        $aboutHero          = AboutHeroSetting::active()->first();
+        $aboutStory         = AboutStorySetting::active()->first();
+        $aboutVm            = AboutVmSetting::active()->first();
+        $aboutCoreValues    = AboutCoreValue::active()->get();
+        $aboutMilestones    = AboutMilestone::active()->get();
+        $aboutCertifications = AboutCertification::active()->get();
+        $aboutCta           = AboutCtaSetting::active()->first();
+    } catch (\Throwable $e) {
+        $aboutHero          = null;
+        $aboutStory         = null;
+        $aboutVm            = null;
+        $aboutCoreValues    = collect();
+        $aboutMilestones    = collect();
+        $aboutCertifications = collect();
+        $aboutCta           = null;
+        // In production errors are silent to the visitor; in dev they can be logged.
+        logger()->error('About page CMS data error: ' . $e->getMessage());
+    }
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Tentang Kami - AROMAS Minyak Goreng Premium')
@@ -16,37 +50,39 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10" data-aos="fade-up">
                 <span class="about-hero-badge">
-                    <i class="bi bi-droplet-fill"></i> Perjalanan Kami
+                    <i class="bi bi-droplet-fill"></i>
+                    {{ $aboutHero?->badge_text ?? 'Perjalanan Kami' }}
                 </span>
                 <h1 class="about-hero-title">
-                    Menghadirkan Kualitas<br />
-                    <span class="italic text-gradient">Terbaik Untuk Indonesia</span>
+                    {{ $aboutHero?->title_main ?? 'Menghadirkan Kualitas' }}<br />
+                    <span class="italic text-gradient">{{ $aboutHero?->title_italic ?? 'Terbaik Untuk Indonesia' }}</span>
                 </h1>
                 <p class="about-hero-desc">
-                    Sejak didirikan, AROMAS berdedikasi untuk menciptakan produk minyak goreng
-                    yang tidak hanya lezat, tetapi juga sehat dan berkelanjutan bagi setiap keluarga.
+                    {{ $aboutHero?->description ?? 'Sejak didirikan, AROMAS berdedikasi untuk menciptakan produk minyak goreng yang tidak hanya lezat, tetapi juga sehat dan berkelanjutan bagi setiap keluarga.' }}
                 </p>
+
+                @php
+                    $heroStats = $aboutHero?->stats ?? [
+                        ['value' => '15+', 'label' => 'Tahun Berdiri'],
+                        ['value' => '1Jt+', 'label' => 'Pelanggan Setia'],
+                        ['value' => '34',   'label' => 'Provinsi'],
+                        ['value' => '500+', 'label' => 'Mitra Distribusi'],
+                    ];
+                @endphp
+
+                @if(!empty($heroStats))
                 <div class="hero-stats" data-aos="fade-up" data-aos-delay="150">
-                    <div class="hstat-item">
-                        <strong>15+</strong>
-                        <span>Tahun Berdiri</span>
-                    </div>
-                    <div class="hstat-div"></div>
-                    <div class="hstat-item">
-                        <strong>1Jt+</strong>
-                        <span>Pelanggan Setia</span>
-                    </div>
-                    <div class="hstat-div"></div>
-                    <div class="hstat-item">
-                        <strong>34</strong>
-                        <span>Provinsi</span>
-                    </div>
-                    <div class="hstat-div"></div>
-                    <div class="hstat-item">
-                        <strong>500+</strong>
-                        <span>Mitra Distribusi</span>
-                    </div>
+                    @foreach($heroStats as $index => $stat)
+                        <div class="hstat-item">
+                            <strong>{{ $stat['value'] ?? '' }}</strong>
+                            <span>{{ $stat['label'] ?? '' }}</span>
+                        </div>
+                        @if(!$loop->last)
+                            <div class="hstat-div"></div>
+                        @endif
+                    @endforeach
                 </div>
+                @endif
             </div>
         </div>
     </div>
@@ -75,42 +111,61 @@
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6" data-aos="fade-right">
-                <span class="story-badge"><i class="bi bi-clock-history"></i> Sejarah Kami</span>
+                <span class="story-badge">
+                    <i class="bi bi-clock-history"></i>
+                    {{ $aboutStory?->badge_text ?? 'Sejarah Kami' }}
+                </span>
                 <h2 class="section-title">
-                    Kisah di Balik Merek <span class="italic">AROMAS</span>
+                    {{ $aboutStory?->title_main ?? 'Kisah di Balik Merek' }}
+                    <span class="italic">{{ $aboutStory?->title_italic ?? 'AROMAS' }}</span>
                 </h2>
                 <p class="story-lead">
-                    Berawal dari sebuah pabrik kecil di Jakarta pada tahun 2009, AROMAS
-                    tumbuh menjadi salah satu produsen minyak goreng sawit terpercaya di Indonesia.
+                    {{ $aboutStory?->lead_paragraph ?? 'Berawal dari sebuah pabrik kecil di Jakarta pada tahun 2009, AROMAS tumbuh menjadi salah satu produsen minyak goreng sawit terpercaya di Indonesia.' }}
                 </p>
                 <p class="story-body">
-                    Dengan visi yang kuat untuk menghadirkan produk berkualitas tinggi yang dapat
-                    dinikmati setiap keluarga, kami terus berinovasi dalam proses produksi, mulai dari
-                    pemilihan bahan baku kelapa sawit pilihan hingga teknologi penyulingan multi-tahap
-                    yang menghasilkan minyak jernih, tidak berbau, and kaya vitamin E alami.
+                    {{ $aboutStory?->body_paragraph_1 ?? 'Dengan visi yang kuat untuk menghadirkan produk berkualitas tinggi yang dapat dinikmati setiap keluarga, kami terus berinovasi dalam proses produksi, mulai dari pemilihan bahan baku kelapa sawit pilihan hingga teknologi penyulingan multi-tahap yang menghasilkan minyak jernih, tidak berbau, dan kaya vitamin E alami.' }}
                 </p>
+                @if($aboutStory?->body_paragraph_2)
                 <p class="story-body mt-3">
-                    Kini AROMAS telah hadir di seluruh 34 provinsi di Indonesia, bermitra dengan
-                    lebih dari 500 distributor dan dipercaya oleh lebih dari 1 juta keluarga
-                    sebagai pilihan utama minyak goreng mereka.
+                    {{ $aboutStory->body_paragraph_2 }}
                 </p>
+                @else
+                <p class="story-body mt-3">
+                    Kini AROMAS telah hadir di seluruh 34 provinsi di Indonesia, bermitra dengan lebih dari 500 distributor dan dipercaya oleh lebih dari 1 juta keluarga sebagai pilihan utama minyak goreng mereka.
+                </p>
+                @endif
+
+                @php
+                    $storyPills = $aboutStory?->pills ?? [
+                        ['icon' => 'award-fill',       'text' => 'Berdiri Tahun 2009'],
+                        ['icon' => 'patch-check-fill', 'text' => 'Bersertifikat Halal MUI'],
+                        ['icon' => 'shield-check',     'text' => 'Teregistrasi BPOM'],
+                        ['icon' => 'tree-fill',        'text' => 'Produksi Berkelanjutan'],
+                    ];
+                @endphp
                 <div class="story-pills">
-                    <span class="story-pill"><i class="bi bi-award-fill"></i> Berdiri Tahun 2009</span>
-                    <span class="story-pill"><i class="bi bi-patch-check-fill"></i> Bersertifikat Halal MUI</span>
-                    <span class="story-pill"><i class="bi bi-shield-check"></i> Teregistrasi BPOM</span>
-                    <span class="story-pill"><i class="bi bi-tree-fill"></i> Produksi Berkelanjutan</span>
+                    @foreach($storyPills as $pill)
+                    <span class="story-pill">
+                        <i class="bi bi-{{ $pill['icon'] ?? 'check-circle' }}"></i>
+                        {{ $pill['text'] ?? '' }}
+                    </span>
+                    @endforeach
                 </div>
             </div>
             <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
                 <div class="story-img-box">
-                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop" alt="Pabrik AROMAS" />
+                    @if($aboutStory?->story_image)
+                        <img src="{{ Storage::url($aboutStory->story_image) }}" alt="Pabrik AROMAS" />
+                    @else
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop" alt="Pabrik AROMAS" />
+                    @endif
                     <div class="story-img-badge">
-                        <strong>2009</strong>
-                        <span>Tahun Berdiri AROMAS</span>
+                        <strong>{{ $aboutStory?->founded_year ?? '2009' }}</strong>
+                        <span>{{ $aboutStory?->founded_label ?? 'Tahun Berdiri AROMAS' }}</span>
                     </div>
                     <div class="story-img-cert">
                         <i class="bi bi-award-fill"></i>
-                        <span>ISO<br/>22000</span>
+                        <span>{{ $aboutStory?->cert_badge_text ?? 'ISO 22000' }}</span>
                     </div>
                 </div>
             </div>
@@ -122,9 +177,9 @@
 <section class="vm-section">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
-            <h2 class="section-title">Visi &amp; Misi <span class="italic">AROMAS</span></h2>
+            <h2 class="section-title">{{ $aboutVm?->section_title_main ?? 'Visi & Misi' }} <span class="italic">AROMAS</span></h2>
             <p style="max-width:540px;margin:0 auto;color:var(--gray-600);font-size:1rem;">
-                Prinsip yang mengarahkan setiap langkah dan keputusan kami.
+                {{ $aboutVm?->section_subtitle ?? 'Prinsip yang mengarahkan setiap langkah dan keputusan kami.' }}
             </p>
         </div>
         <div class="row g-4">
@@ -133,9 +188,7 @@
                     <div class="vm-icon-wrap"><i class="bi bi-eye-fill"></i></div>
                     <h3>Visi Kami</h3>
                     <p>
-                        Menjadi produsen minyak goreng terkemuka yang dipercaya oleh setiap keluarga
-                        Indonesia, dikenal karena kualitas premium, inovasi berkelanjutan, dan kontribusi
-                        positif terhadap kesehatan serta kelestarian lingkungan hidup.
+                        {{ $aboutVm?->vision_text ?? 'Menjadi produsen minyak goreng terkemuka yang dipercaya oleh setiap keluarga Indonesia, dikenal karena kualitas premium, inovasi berkelanjutan, dan kontribusi positif terhadap kesehatan serta kelestarian lingkungan hidup.' }}
                     </p>
                 </div>
             </div>
@@ -143,11 +196,21 @@
                 <div class="vm-card mission">
                     <div class="vm-icon-wrap"><i class="bi bi-bullseye"></i></div>
                     <h3>Misi Kami</h3>
+                    @php
+                        $missionItems = $aboutVm?->mission_items ?? [
+                            ['text' => 'Memproduksi minyak goreng berkualitas tinggi dengan standar keamanan pangan internasional.'],
+                            ['text' => 'Mengedepankan inovasi teknologi untuk proses produksi yang ramah lingkungan.'],
+                            ['text' => 'Meningkatkan kesejahteraan petani sawit dan komunitas sekitar melalui kemitraan yang adil.'],
+                            ['text' => 'Memberikan edukasi kesehatan kepada konsumen mengenai pola makan yang baik.'],
+                        ];
+                    @endphp
                     <ul class="mission-list">
-                        <li><i class="bi bi-check-circle-fill"></i><span>Memproduksi minyak goreng berkualitas tinggi dengan standar keamanan pangan internasional.</span></li>
-                        <li><i class="bi bi-check-circle-fill"></i><span>Mengedepankan inovasi teknologi untuk proses produksi yang ramah lingkungan.</span></li>
-                        <li><i class="bi bi-check-circle-fill"></i><span>Meningkatkan kesejahteraan petani sawit dan komunitas sekitar melalui kemitraan yang adil.</span></li>
-                        <li><i class="bi bi-check-circle-fill"></i><span>Memberikan edukasi kesehatan kepada konsumen mengenai pola makan yang baik.</span></li>
+                        @foreach($missionItems as $item)
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            <span>{{ $item['text'] ?? '' }}</span>
+                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -165,34 +228,33 @@
             </p>
         </div>
         <div class="row g-4">
-            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-                <div class="value-card">
-                    <div class="value-icon"><i class="bi bi-award"></i></div>
-                    <h4>Kualitas</h4>
-                    <p>Kami tidak pernah berkompromi soal kualitas. Hanya yang terbaik yang sampai ke tangan konsumen.</p>
+            @if($aboutCoreValues->isNotEmpty())
+                @foreach($aboutCoreValues as $index => $value)
+                <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="{{ 100 * ($index + 1) }}">
+                    <div class="value-card">
+                        <div class="value-icon"><i class="bi bi-{{ $value->icon }}"></i></div>
+                        <h4>{{ $value->title }}</h4>
+                        <p>{{ $value->description }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-                <div class="value-card">
-                    <div class="value-icon"><i class="bi bi-shield-check"></i></div>
-                    <h4>Integritas</h4>
-                    <p>Kejujuran dan transparansi adalah fondasi kepercayaan pelanggan kepada kami.</p>
+                @endforeach
+            @else
+                {{-- Fallback static content --}}
+                @foreach([
+                    ['icon' => 'award',        'title' => 'Kualitas',       'desc' => 'Kami tidak pernah berkompromi soal kualitas. Hanya yang terbaik yang sampai ke tangan konsumen.'],
+                    ['icon' => 'shield-check', 'title' => 'Integritas',     'desc' => 'Kejujuran dan transparansi adalah fondasi kepercayaan pelanggan kepada kami.'],
+                    ['icon' => 'lightbulb',    'title' => 'Inovasi',        'desc' => 'Terus berinovasi menciptakan produk yang lebih sehat dan proses yang lebih efisien.'],
+                    ['icon' => 'tree',         'title' => 'Keberlanjutan',  'desc' => 'Berkomitmen menjaga kelestarian alam demi masa depan generasi mendatang.'],
+                ] as $index => $value)
+                <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="{{ 100 * ($index + 1) }}">
+                    <div class="value-card">
+                        <div class="value-icon"><i class="bi bi-{{ $value['icon'] }}"></i></div>
+                        <h4>{{ $value['title'] }}</h4>
+                        <p>{{ $value['desc'] }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-                <div class="value-card">
-                    <div class="value-icon"><i class="bi bi-lightbulb"></i></div>
-                    <h4>Inovasi</h4>
-                    <p>Terus berinovasi menciptakan produk yang lebih sehat dan proses yang lebih efisien.</p>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-                <div class="value-card">
-                    <div class="value-icon"><i class="bi bi-tree"></i></div>
-                    <h4>Keberlanjutan</h4>
-                    <p>Berkomitmen menjaga kelestarian alam demi masa depan generasi mendatang.</p>
-                </div>
-            </div>
+                @endforeach
+            @endif
         </div>
     </div>
 </section>
@@ -207,54 +269,77 @@
             </p>
         </div>
         <div class="timeline">
-            <div class="tl-item left" data-aos="fade-right">
-                <div class="tl-content">
-                    <div class="tl-year">2009</div>
-                    <div class="tl-title">Pendirian AROMAS</div>
-                    <p class="tl-desc">AROMAS resmi berdiri sebagai perusahaan minyak goreng di Jakarta dengan kapasitas produksi awal 100 ton per bulan.</p>
+            @if($aboutMilestones->isNotEmpty())
+                @foreach($aboutMilestones as $index => $milestone)
+                <div class="tl-item {{ $index % 2 === 0 ? 'left' : '' }}" data-aos="{{ $index % 2 === 0 ? 'fade-right' : 'fade-left' }}">
+                    @if($index % 2 === 0)
+                        <div class="tl-content">
+                            <div class="tl-year">{{ $milestone->year }}</div>
+                            <div class="tl-title">{{ $milestone->title }}</div>
+                            <p class="tl-desc">{{ $milestone->description }}</p>
+                        </div>
+                        <div class="tl-dot"><i class="bi bi-{{ $milestone->icon }}"></i></div>
+                    @else
+                        <div class="tl-dot"><i class="bi bi-{{ $milestone->icon }}"></i></div>
+                        <div class="tl-content">
+                            <div class="tl-year">{{ $milestone->year }}</div>
+                            <div class="tl-title">{{ $milestone->title }}</div>
+                            <p class="tl-desc">{{ $milestone->description }}</p>
+                        </div>
+                    @endif
                 </div>
-                <div class="tl-dot"><i class="bi bi-flag-fill"></i></div>
-            </div>
-            <div class="tl-item" data-aos="fade-left">
-                <div class="tl-dot"><i class="bi bi-patch-check-fill"></i></div>
-                <div class="tl-content">
-                    <div class="tl-year">2013</div>
-                    <div class="tl-title">Sertifikasi Halal &amp; BPOM</div>
-                    <p class="tl-desc">Memperoleh sertifikasi Halal MUI dan izin edar BPOM, memperkuat kepercayaan konsumen di seluruh Indonesia.</p>
+                @endforeach
+            @else
+                {{-- Fallback static timeline --}}
+                <div class="tl-item left" data-aos="fade-right">
+                    <div class="tl-content">
+                        <div class="tl-year">2009</div>
+                        <div class="tl-title">Pendirian AROMAS</div>
+                        <p class="tl-desc">AROMAS resmi berdiri sebagai perusahaan minyak goreng di Jakarta dengan kapasitas produksi awal 100 ton per bulan.</p>
+                    </div>
+                    <div class="tl-dot"><i class="bi bi-flag-fill"></i></div>
                 </div>
-            </div>
-            <div class="tl-item left" data-aos="fade-right">
-                <div class="tl-content">
-                    <div class="tl-year">2016</div>
-                    <div class="tl-title">Ekspansi Nasional</div>
-                    <p class="tl-desc">Jaringan distribusi AROMAS meluas ke 34 provinsi melalui kemitraan dengan lebih dari 200 distributor lokal.</p>
+                <div class="tl-item" data-aos="fade-left">
+                    <div class="tl-dot"><i class="bi bi-patch-check-fill"></i></div>
+                    <div class="tl-content">
+                        <div class="tl-year">2013</div>
+                        <div class="tl-title">Sertifikasi Halal &amp; BPOM</div>
+                        <p class="tl-desc">Memperoleh sertifikasi Halal MUI dan izin edar BPOM, memperkuat kepercayaan konsumen di seluruh Indonesia.</p>
+                    </div>
                 </div>
-                <div class="tl-dot"><i class="bi bi-geo-alt-fill"></i></div>
-            </div>
-            <div class="tl-item" data-aos="fade-left">
-                <div class="tl-dot"><i class="bi bi-award-fill"></i></div>
-                <div class="tl-content">
-                    <div class="tl-year">2019</div>
-                    <div class="tl-title">ISO 22000:2018</div>
-                    <p class="tl-desc">Meraih sertifikasi ISO 22000:2018 — standar manajemen keamanan pangan internasional — sebuah pencapaian bersejarah.</p>
+                <div class="tl-item left" data-aos="fade-right">
+                    <div class="tl-content">
+                        <div class="tl-year">2016</div>
+                        <div class="tl-title">Ekspansi Nasional</div>
+                        <p class="tl-desc">Jaringan distribusi AROMAS meluas ke 34 provinsi melalui kemitraan dengan lebih dari 200 distributor lokal.</p>
+                    </div>
+                    <div class="tl-dot"><i class="bi bi-geo-alt-fill"></i></div>
                 </div>
-            </div>
-            <div class="tl-item left" data-aos="fade-right">
-                <div class="tl-content">
-                    <div class="tl-year">2022</div>
-                    <div class="tl-title">1 Juta Pelanggan</div>
-                    <p class="tl-desc">Milestone luar biasa: lebih dari 1 juta keluarga Indonesia memilih AROMAS sebagai minyak goreng andalan sehari-hari.</p>
+                <div class="tl-item" data-aos="fade-left">
+                    <div class="tl-dot"><i class="bi bi-award-fill"></i></div>
+                    <div class="tl-content">
+                        <div class="tl-year">2019</div>
+                        <div class="tl-title">ISO 22000:2018</div>
+                        <p class="tl-desc">Meraih sertifikasi ISO 22000:2018 — standar manajemen keamanan pangan internasional — sebuah pencapaian bersejarah.</p>
+                    </div>
                 </div>
-                <div class="tl-dot"><i class="bi bi-people-fill"></i></div>
-            </div>
-            <div class="tl-item" data-aos="fade-left">
-                <div class="tl-dot"><i class="bi bi-trophy-fill"></i></div>
-                <div class="tl-content">
-                    <div class="tl-year">2024</div>
-                    <div class="tl-title">Top Brand Award</div>
-                    <p class="tl-desc">Menerima penghargaan Top Brand Award kategori minyak goreng dari Frontier Consulting Group atas loyalitas konsumen tertinggi.</p>
+                <div class="tl-item left" data-aos="fade-right">
+                    <div class="tl-content">
+                        <div class="tl-year">2022</div>
+                        <div class="tl-title">1 Juta Pelanggan</div>
+                        <p class="tl-desc">Milestone luar biasa: lebih dari 1 juta keluarga Indonesia memilih AROMAS sebagai minyak goreng andalan sehari-hari.</p>
+                    </div>
+                    <div class="tl-dot"><i class="bi bi-people-fill"></i></div>
                 </div>
-            </div>
+                <div class="tl-item" data-aos="fade-left">
+                    <div class="tl-dot"><i class="bi bi-trophy-fill"></i></div>
+                    <div class="tl-content">
+                        <div class="tl-year">2024</div>
+                        <div class="tl-title">Top Brand Award</div>
+                        <p class="tl-desc">Menerima penghargaan Top Brand Award kategori minyak goreng dari Frontier Consulting Group atas loyalitas konsumen tertinggi.</p>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </section>
@@ -269,54 +354,37 @@
             </p>
         </div>
         <div class="row g-4">
-            <div class="col-6 col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="100">
-                <div class="cert-card">
-                    <div class="cert-icon"><i class="bi bi-moon-stars-fill"></i></div>
-                    <h5>Halal MUI</h5>
-                    <p>Majelis Ulama Indonesia</p>
-                    <span class="cert-year">2013</span>
+            @if($aboutCertifications->isNotEmpty())
+                @foreach($aboutCertifications as $index => $cert)
+                <div class="col-6 col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="{{ 50 * ($index + 1) }}">
+                    <div class="cert-card">
+                        <div class="cert-icon"><i class="bi bi-{{ $cert->icon }}"></i></div>
+                        <h5>{{ $cert->name }}</h5>
+                        <p>{{ $cert->issuer }}</p>
+                        <span class="cert-year">{{ $cert->year }}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="150">
-                <div class="cert-card">
-                    <div class="cert-icon"><i class="bi bi-shield-check"></i></div>
-                    <h5>BPOM RI</h5>
-                    <p>Izin Edar Pangan</p>
-                    <span class="cert-year">2013</span>
+                @endforeach
+            @else
+                {{-- Fallback static certifications --}}
+                @foreach([
+                    ['icon' => 'moon-stars-fill', 'name' => 'Halal MUI',  'issuer' => 'Majelis Ulama Indonesia', 'year' => 2013],
+                    ['icon' => 'shield-check',    'name' => 'BPOM RI',    'issuer' => 'Izin Edar Pangan',       'year' => 2013],
+                    ['icon' => 'globe',           'name' => 'ISO 22000',  'issuer' => 'Food Safety Mgmt',       'year' => 2019],
+                    ['icon' => 'trophy-fill',     'name' => 'Top Brand',  'issuer' => 'Frontier Consulting',    'year' => 2024],
+                    ['icon' => 'star-fill',       'name' => 'Best Brand', 'issuer' => 'SWA Magazine & MARS',   'year' => 2023],
+                    ['icon' => 'tree-fill',       'name' => 'RSPO',       'issuer' => 'Sustainable Palm Oil',   'year' => 2020],
+                ] as $index => $cert)
+                <div class="col-6 col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="{{ 50 * ($index + 1) }}">
+                    <div class="cert-card">
+                        <div class="cert-icon"><i class="bi bi-{{ $cert['icon'] }}"></i></div>
+                        <h5>{{ $cert['name'] }}</h5>
+                        <p>{{ $cert['issuer'] }}</p>
+                        <span class="cert-year">{{ $cert['year'] }}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="200">
-                <div class="cert-card">
-                    <div class="cert-icon"><i class="bi bi-globe"></i></div>
-                    <h5>ISO 22000</h5>
-                    <p>Food Safety Mgmt</p>
-                    <span class="cert-year">2019</span>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="250">
-                <div class="cert-card">
-                    <div class="cert-icon"><i class="bi bi-trophy-fill"></i></div>
-                    <h5>Top Brand</h5>
-                    <p>Frontier Consulting</p>
-                    <span class="cert-year">2024</span>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="300">
-                <div class="cert-card">
-                    <div class="cert-icon"><i class="bi bi-star-fill"></i></div>
-                    <h5>Best Brand</h5>
-                    <p>SWA Magazine &amp; MARS</p>
-                    <span class="cert-year">2023</span>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="350">
-                <div class="cert-card">
-                    <div class="cert-icon"><i class="bi bi-tree-fill"></i></div>
-                    <h5>RSPO</h5>
-                    <p>Sustainable Palm Oil</p>
-                    <span class="cert-year">2020</span>
-                </div>
-            </div>
+                @endforeach
+            @endif
         </div>
     </div>
 </section>
@@ -326,16 +394,16 @@
     <div class="container">
         <div class="row align-items-center gy-4">
             <div class="col-lg-7" data-aos="fade-right">
-                <h2>Siap Bergabung Bersama Keluarga AROMAS?</h2>
-                <p>Jadilah bagian dari jutaan keluarga Indonesia yang mempercayai AROMAS setiap hari.</p>
+                <h2>{{ $aboutCta?->headline ?? 'Siap Bergabung Bersama Keluarga AROMAS?' }}</h2>
+                <p>{{ $aboutCta?->subtext ?? 'Jadilah bagian dari jutaan keluarga Indonesia yang mempercayai AROMAS setiap hari.' }}</p>
             </div>
             <div class="col-lg-5 text-lg-end" data-aos="fade-left">
                 <div class="d-flex gap-3 flex-wrap justify-content-lg-end">
-                    <a href="{{ url('/') }}#products" class="btn-cta-white">
-                        <i class="bi bi-bag-check-fill"></i> Lihat Produk
+                    <a href="{{ url($aboutCta?->button_1_url ?? '/#products') }}" class="btn-cta-white">
+                        <i class="bi bi-bag-check-fill"></i> {{ $aboutCta?->button_1_text ?? 'Lihat Produk' }}
                     </a>
-                    <a href="{{ url('/') }}#contact" class="btn-cta-outline">
-                        <i class="bi bi-chat-dots-fill"></i> Hubungi Kami
+                    <a href="{{ url($aboutCta?->button_2_url ?? '/#contact') }}" class="btn-cta-outline">
+                        <i class="bi bi-chat-dots-fill"></i> {{ $aboutCta?->button_2_text ?? 'Hubungi Kami' }}
                     </a>
                 </div>
             </div>
@@ -633,14 +701,10 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Initialization for About page components
         console.log('AROMAS About page initialized!');
-        
-        // Re-init AOS if needed specifically for this page's content
         if (typeof AOS !== 'undefined') {
             AOS.refresh();
         }
     });
 </script>
 @endpush
-
