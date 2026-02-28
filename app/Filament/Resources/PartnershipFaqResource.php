@@ -56,19 +56,42 @@ class PartnershipFaqResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('sort_order')->label('#')->sortable(),
-                Tables\Columns\TextColumn::make('question')->label('Pertanyaan')->limit(60)->searchable(),
-                Tables\Columns\IconColumn::make('is_active')->label('Aktif')->boolean(),
-                Tables\Columns\TextColumn::make('updated_at')->label('Diperbarui')->since(),
+                Tables\Columns\TextColumn::make('sort_order')
+                    ->label('#')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('question')
+                    ->label('Pertanyaan')
+                    ->limit(70)
+                    ->searchable()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('answer')
+                    ->label('Jawaban')
+                    ->limit(60)
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\IconColumn::make('is_active')
+                    ->label('Aktif')
+                    ->boolean()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Diperbarui')
+                    ->since()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->defaultSort('sort_order')
             ->reorderable('sort_order')
+            ->filters([
+                Tables\Filters\TernaryFilter::make('is_active')->label('Status Aktif'),
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
-            ->headerActions([
-                Tables\Actions\CreateAction::make(),
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 

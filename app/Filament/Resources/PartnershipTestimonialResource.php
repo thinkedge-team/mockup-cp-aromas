@@ -57,6 +57,7 @@ class PartnershipTestimonialResource extends Resource
                         ->image()
                         ->imageEditor()
                         ->imageEditorAspectRatios(['1:1'])
+                        ->disk('public')
                         ->directory('testimonials/avatars')
                         ->maxSize(2048)
                         ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
@@ -85,13 +86,23 @@ class PartnershipTestimonialResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('sort_order')->label('#')->sortable(),
+                Tables\Columns\TextColumn::make('sort_order')
+                    ->label('#')
+                    ->sortable(),
                 Tables\Columns\ImageColumn::make('avatar_url')
                     ->label('Foto')
+                    ->disk('public')
                     ->circular()
                     ->defaultImageUrl(fn () => 'https://ui-avatars.com/api/?background=228b22&color=fff&name=M'),
-                Tables\Columns\TextColumn::make('name')->label('Nama')->searchable(),
-                Tables\Columns\TextColumn::make('role')->label('Jabatan')->limit(30),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nama')
+                    ->searchable()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('role')
+                    ->label('Jabatan')
+                    ->limit(30)
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\BadgeColumn::make('program_type')
                     ->label('Program')
                     ->colors([
@@ -100,17 +111,41 @@ class PartnershipTestimonialResource extends Resource
                         'info'    => 'agen',
                         'purple'  => 'maklon',
                         'danger'  => 'implan',
-                    ]),
-                Tables\Columns\IconColumn::make('is_active')->label('Aktif')->boolean(),
+                    ])
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\IconColumn::make('is_active')
+                    ->label('Aktif')
+                    ->boolean()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Diperbarui')
+                    ->since()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->defaultSort('sort_order')
             ->reorderable('sort_order')
+            ->filters([
+                Tables\Filters\TernaryFilter::make('is_active')->label('Status Aktif'),
+                Tables\Filters\SelectFilter::make('program_type')
+                    ->label('Tipe Program')
+                    ->options([
+                        'franchise'   => '🏅 Franchise',
+                        'distributor' => '🚚 Distributor',
+                        'agen'        => '🏪 Agen / Reseller',
+                        'maklon'      => '⚙️ Maklon',
+                        'implan'      => '🏢 Implan Korporasi',
+                    ]),
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
-            ->headerActions([
-                Tables\Actions\CreateAction::make(),
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 
