@@ -55,6 +55,15 @@ class DatabaseSeeder extends Seeder
             AboutMilestoneSeeder::class,
             AboutCertificationSeeder::class,
             AboutCtaSettingSeeder::class,
+            // Partnership seeders
+            PartnershipHeroSettingSeeder::class,
+            PartnershipStatSeeder::class,
+            PartnershipProgramSeeder::class,
+            PartnershipAdvantageSeeder::class,
+            PartnershipCompareSettingSeeder::class,
+            PartnershipTestimonialSeeder::class,
+            PartnershipFaqSeeder::class,
+            PartnershipCtaSettingSeeder::class,
         ]);
     }
 }
