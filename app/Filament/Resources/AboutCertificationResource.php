@@ -72,23 +72,36 @@ class AboutCertificationResource extends Resource
                     ->label('#')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('icon')
-                    ->label('Icon'),
+                    ->label('Icon')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('issuer')
                     ->label('Penerbit')
-                    ->limit(40),
+                    ->limit(40)
+                    ->searchable()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('year')
                     ->label('Tahun')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('Aktif')
-                    ->boolean(),
+                    ->boolean()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Diperbarui')
+                    ->since()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->defaultSort('sort_order')
             ->reorderable('sort_order')
-            ->filters([])
+            ->filters([
+                Tables\Filters\TernaryFilter::make('is_active')->label('Status Aktif'),
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),

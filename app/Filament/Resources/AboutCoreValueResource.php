@@ -66,20 +66,32 @@ class AboutCoreValueResource extends Resource
                     ->label('#')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('icon')
-                    ->label('Icon'),
+                    ->label('Icon')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('title')
                     ->label('Judul')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('description')
                     ->label('Deskripsi')
-                    ->limit(50),
+                    ->limit(60)
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('Aktif')
-                    ->boolean(),
+                    ->boolean()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Diperbarui')
+                    ->since()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->defaultSort('sort_order')
             ->reorderable('sort_order')
-            ->filters([])
+            ->filters([
+                Tables\Filters\TernaryFilter::make('is_active')->label('Status Aktif'),
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
