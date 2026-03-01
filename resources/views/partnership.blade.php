@@ -1,5 +1,24 @@
 @extends('layouts.app')
 
+@php
+try {
+    $heroSetting    = \App\Models\PartnershipHeroSetting::first();
+    $statsSetting   = \App\Models\PartnershipStat::active()->first();
+    $programs       = \App\Models\PartnershipProgram::active()->get();
+    $advantages     = \App\Models\PartnershipAdvantage::active()->get();
+    $compareSetting = \App\Models\PartnershipCompareSetting::active()->first();
+    $testimonials   = \App\Models\PartnershipTestimonial::active()->get();
+    $faqs           = \App\Models\PartnershipFaq::active()->get();
+    $ctaSetting     = \App\Models\PartnershipCtaSetting::active()->first();
+    $waNumber       = $heroSetting?->wa_number ?? '6281234567890';
+} catch (\Throwable $e) {
+    logger()->error('Partnership page error: ' . $e->getMessage());
+    $heroSetting = $statsSetting = $compareSetting = $ctaSetting = null;
+    $programs = $advantages = $testimonials = $faqs = collect();
+    $waNumber = '6281234567890';
+}
+@endphp
+
 @section('content')
 <!-- HERO SECTION -->
 <section class="partner-hero">
@@ -12,51 +31,35 @@
     <div class="container text-center">
         <div class="row justify-content-center">
             <div class="col-lg-9 col-md-11" data-aos="fade-up">
-                <span class="hero-badge"><i class="bi bi-people-fill"></i> Program Kemitraan AROMAS</span>
+                <span class="hero-badge"><i class="bi bi-people-fill"></i> {{ $heroSetting?->badge_text ?? 'Program Kemitraan AROMAS' }}</span>
                 <h1 class="hero-title">
-                    Tumbuh Bersama Kami,<br />
-                    <span class="italic text-gradient">Raih Sukses Bersama</span>
+                    {{ $heroSetting?->title_main ?? 'Tumbuh Bersama Kami,' }}<br />
+                    <span class="italic text-gradient">{{ $heroSetting?->title_italic ?? 'Raih Sukses Bersama' }}</span>
                 </h1>
+                @if($heroSetting?->description)
+                <p class="hero-desc">{{ $heroSetting->description }}</p>
+                @else
                 <p class="hero-desc">
                     Bergabunglah dengan ribuan mitra sukses AROMAS di seluruh Indonesia. Kami menawarkan
                     lima jalur kemitraan yang fleksibel, menguntungkan, dan didukung penuh oleh tim profesional kami.
                 </p>
+                @endif
                 <div class="hero-partner-types" data-aos="fade-up" data-aos-delay="150">
+                    @forelse($programs as $prog)
+                    <div class="ptype-chip ptype-{{ $prog->slug }}" onclick="switchPanel('{{ $prog->slug }}'); scrollToSection()">
+                        <i class="bi bi-{{ $prog->icon }}"></i>
+                        <div>
+                            <div class="chip-label">Program</div>
+                            <div class="chip-name">{{ $prog->name }}</div>
+                        </div>
+                    </div>
+                    @empty
+                    {{-- Fallback chips --}}
                     <div class="ptype-chip ptype-franchise" onclick="switchPanel('franchise'); scrollToSection()">
                         <i class="bi bi-award-fill"></i>
-                        <div>
-                            <div class="chip-label">Program</div>
-                            <div class="chip-name">Franchise</div>
-                        </div>
+                        <div><div class="chip-label">Program</div><div class="chip-name">Franchise</div></div>
                     </div>
-                    <div class="ptype-chip ptype-distributor" onclick="switchPanel('distributor'); scrollToSection()">
-                        <i class="bi bi-truck-front-fill"></i>
-                        <div>
-                            <div class="chip-label">Program</div>
-                            <div class="chip-name">Distributor</div>
-                        </div>
-                    </div>
-                    <div class="ptype-chip ptype-agen" onclick="switchPanel('agen'); scrollToSection()">
-                        <i class="bi bi-shop-window"></i>
-                        <div>
-                            <div class="chip-label">Program</div>
-                            <div class="chip-name">Agen / Reseller</div>
-                        </div>
-                    </div>
-                    <div class="ptype-chip ptype-maklon" onclick="switchPanel('maklon'); scrollToSection()">
-                        <i class="bi bi-gear-wide-connected"></i>
-                        <div>
-                            <div class="chip-label">Program</div>
-                            <div class="chip-name">Maklon</div>
-                        </div>
-                    </div>
-                    <div class="ptype-chip ptype-implan" onclick="switchPanel('implan'); scrollToSection()">
-                        <i class="bi bi-building-fill-up"></i>
-                        <div>
-                            <div class="chip-label">Program</div>
-                            <div class="chip-name">Implan Korporasi</div>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -83,30 +86,24 @@
 <div class="stats-strip">
     <div class="container">
         <div class="row g-0">
+            @php
+                $statsItems = $statsSetting?->stats ?? [
+                    ['value'=>'500','suffix'=>'+','label'=>'Mitra Aktif'],
+                    ['value'=>'34', 'suffix'=>'', 'label'=>'Provinsi Terjangkau'],
+                    ['value'=>'15', 'suffix'=>'+','label'=>'Tahun Pengalaman'],
+                    ['value'=>'98', 'suffix'=>'%','label'=>'Kepuasan Mitra'],
+                ];
+            @endphp
+            @foreach($statsItems as $idx => $stat)
             <div class="col-6 col-md-3">
-                <div class="stat-item" data-aos="fade-up" data-aos-delay="0">
-                    <div class="stat-num"><span class="counter" data-target="500">0</span>+</div>
-                    <div class="stat-label">Mitra Aktif</div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="{{ $idx * 80 }}">
+                    <div class="stat-num">
+                        <span class="counter" data-target="{{ $stat['value'] ?? 0 }}">0</span>{{ $stat['suffix'] ?? '' }}
+                    </div>
+                    <div class="stat-label">{{ $stat['label'] ?? '' }}</div>
                 </div>
             </div>
-            <div class="col-6 col-md-3">
-                <div class="stat-item" data-aos="fade-up" data-aos-delay="80">
-                    <div class="stat-num"><span class="counter" data-target="34">0</span></div>
-                    <div class="stat-label">Provinsi Terjangkau</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="stat-item" data-aos="fade-up" data-aos-delay="160">
-                    <div class="stat-num"><span class="counter" data-target="15">0</span>+</div>
-                    <div class="stat-label">Tahun Pengalaman</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="stat-item" data-aos="fade-up" data-aos-delay="240">
-                    <div class="stat-num"><span class="counter" data-target="98">0</span>%</div>
-                    <div class="stat-label">Kepuasan Mitra</div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
@@ -126,26 +123,17 @@
 
         <!-- TAB NAV -->
         <div class="partner-nav" data-aos="fade-up" data-aos-delay="100">
+            @forelse($programs as $i => $prog)
+            <button class="pnav-btn {{ $i === 0 ? 'active' : '' }}" data-target="{{ $prog->slug }}" onclick="switchPanel('{{ $prog->slug }}')">
+                <i class="bi bi-{{ $prog->icon }}" style="color:{{ $prog->color_hex }};"></i>
+                <span>{{ $prog->name }}</span>
+            </button>
+            @empty
             <button class="pnav-btn active" data-target="franchise" onclick="switchPanel('franchise')">
                 <i class="bi bi-award-fill" style="color:#d4a017;"></i>
                 <span>Franchise</span>
             </button>
-            <button class="pnav-btn" data-target="distributor" onclick="switchPanel('distributor')">
-                <i class="bi bi-truck-front-fill" style="color:#228b22;"></i>
-                <span>Distributor</span>
-            </button>
-            <button class="pnav-btn" data-target="agen" onclick="switchPanel('agen')">
-                <i class="bi bi-shop-window" style="color:#0077b6;"></i>
-                <span>Agen / Reseller</span>
-            </button>
-            <button class="pnav-btn" data-target="maklon" onclick="switchPanel('maklon')">
-                <i class="bi bi-gear-wide-connected" style="color:#7b2d8b;"></i>
-                <span>Maklon</span>
-            </button>
-            <button class="pnav-btn" data-target="implan" onclick="switchPanel('implan')">
-                <i class="bi bi-building-fill-up" style="color:#c0392b;"></i>
-                <span>Implan Korporasi</span>
-            </button>
+            @endforelse
         </div>
 
         @include('partials.partnership-panels')
@@ -165,76 +153,44 @@
                 </p>
             </div>
             <div class="row g-4">
-                <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
+                @forelse($advantages as $adv)
+                @php $aDelay = ($loop->index % 4) * 80; @endphp
+                <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="{{ $aDelay }}">
+                    <div class="why-card">
+                        <div class="why-icon"><i class="bi bi-{{ $adv->icon }}"></i></div>
+                        <h4>{{ $adv->title }}</h4>
+                        <p>{{ $adv->description }}</p>
+                    </div>
+                </div>
+                @empty
+                {{-- Static fallback --}}
+                <div class="col-sm-6 col-lg-3" data-aos="fade-up">
                     <div class="why-card">
                         <div class="why-icon"><i class="bi bi-award-fill"></i></div>
                         <h4>Produk Bersertifikat</h4>
-                        <p>Halal MUI, BPOM, SNI, dan ISO 22000 — standar kualitas internasional yang tidak perlu diragukan.</p>
+                        <p>Halal MUI, BPOM, SNI, dan ISO 22000 — standar kualitas internasional.</p>
                     </div>
                 </div>
-                <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
-                    <div class="why-card">
-                        <div class="why-icon"><i class="bi bi-headset"></i></div>
-                        <h4>Support 24/7</h4>
-                        <p>Tim dedicated untuk setiap mitra, siap membantu operasional, pemasaran, dan pengembangan bisnis.</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
-                    <div class="why-card">
-                        <div class="why-icon"><i class="bi bi-graph-up-arrow"></i></div>
-                        <h4>Pertumbuhan Terbukti</h4>
-                        <p>98% mitra AROMAS mencatatkan pertumbuhan omzet positif dalam 12 bulan pertama kemitraan.</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
-                    <div class="why-card">
-                        <div class="why-icon"><i class="bi bi-truck-front-fill"></i></div>
-                        <h4>Distribusi Nasional</h4>
-                        <p>Jaringan logistik ke 34 provinsi dengan armada pengiriman tepat waktu dan sistem tracking real-time.</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
-                    <div class="why-card">
-                        <div class="why-icon"><i class="bi bi-currency-exchange"></i></div>
-                        <h4>Harga Kompetitif</h4>
-                        <p>Struktur harga khusus mitra yang memastikan margin keuntungan optimal di setiap level kemitraan.</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
-                    <div class="why-card">
-                        <div class="why-icon"><i class="bi bi-megaphone-fill"></i></div>
-                        <h4>Dukungan Marketing</h4>
-                        <p>Materi iklan, konten digital, dan kampanye promosi nasional yang mendukung penjualan mitra.</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
-                    <div class="why-card">
-                        <div class="why-icon"><i class="bi bi-mortarboard-fill"></i></div>
-                        <h4>Pelatihan Berkelanjutan</h4>
-                        <p>Program training reguler: product knowledge, teknik penjualan, dan manajemen bisnis untuk tim Anda.</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
-                    <div class="why-card">
-                        <div class="why-icon"><i class="bi bi-shield-fill-check"></i></div>
-                        <h4>Kontrak Transparan</h4>
-                        <p>Perjanjian kemitraan yang adil, transparan, dan melindungi kepentingan kedua belah pihak.</p>
-                    </div>
-                </div>
+                @endforelse
             </div>
         </div>
     </section>
 
     <!-- ═══ COMPARISON TABLE ═══ -->
+    @if($compareSetting)
     <section class="compare-section">
         <div class="container">
             <div class="sec-header text-center" data-aos="fade-up">
                 <div class="d-flex justify-content-center mb-2">
                     <span class="sec-tag"><i class="bi bi-table"></i> Perbandingan</span>
                 </div>
-                <h2 class="section-title">Bandingkan <span class="italic text-gradient">Program Kemitraan</span></h2>
-                <p class="section-desc mx-auto" style="max-width:540px;">Pilih program yang paling sesuai dengan kapasitas, tujuan, dan skala bisnis Anda.</p>
+                <h2 class="section-title">{{ $compareSetting->section_title ?? 'Bandingkan' }} <span class="italic text-gradient">Program Kemitraan</span></h2>
+                @if($compareSetting->section_subtitle)
+                <p class="section-desc mx-auto" style="max-width:540px;">{{ $compareSetting->section_subtitle }}</p>
+                @endif
             </div>
+            @php $compareRows = is_array($compareSetting->rows) ? $compareSetting->rows : []; @endphp
+            @if(!empty($compareRows))
             <div class="compare-table-wrap" data-aos="fade-up" data-aos-delay="80">
                 <table class="compare-table">
                     <thead>
@@ -248,93 +204,38 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($compareRows as $row)
+                        @php
+                            $cols = ['franchise_val','distributor_val','agen_val','maklon_val','implan_val'];
+                        @endphp
                         <tr>
-                            <td>Modal Awal</td>
-                            <td>Rp 50 – 150 Jt</td>
-                            <td>Rp 100 – 500 Jt</td>
-                            <td>Rp 5 – 25 Jt</td>
-                            <td>Sesuai Volume</td>
-                            <td>Kontrak MoU</td>
+                            <td>{{ $row['feature'] ?? '' }}</td>
+                            @foreach($cols as $col)
+                            @php $val = $row[$col] ?? ''; @endphp
+                            <td>
+                                @if($val === 'yes')
+                                    <i class="bi bi-check-circle-fill check-yes"></i>
+                                @elseif($val === 'no')
+                                    <i class="bi bi-x-circle-fill check-no"></i>
+                                @elseif($val === 'partial')
+                                    <i class="bi bi-dash-circle-fill check-partial"></i>
+                                @else
+                                    {{ $val }}
+                                @endif
+                            </td>
+                            @endforeach
                         </tr>
-                        <tr>
-                            <td>Merek Sendiri</td>
-                            <td><i class="bi bi-x-circle-fill check-no"></i></td>
-                            <td><i class="bi bi-x-circle-fill check-no"></i></td>
-                            <td><i class="bi bi-x-circle-fill check-no"></i></td>
-                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
-                            <td><i class="bi bi-dash-circle-fill check-partial"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Wilayah Eksklusif</td>
-                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
-                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
-                            <td><i class="bi bi-dash-circle-fill check-partial"></i></td>
-                            <td><i class="bi bi-dash-circle-fill check-partial"></i></td>
-                            <td><i class="bi bi-x-circle-fill check-no"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Dukungan Pemasaran</td>
-                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
-                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
-                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
-                            <td><i class="bi bi-dash-circle-fill check-partial"></i></td>
-                            <td><i class="bi bi-dash-circle-fill check-partial"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Pelatihan Tim</td>
-                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
-                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
-                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
-                            <td><i class="bi bi-dash-circle-fill check-partial"></i></td>
-                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Margin Keuntungan</td>
-                            <td>Tinggi</td>
-                            <td>Sangat Tinggi</td>
-                            <td>Menengah</td>
-                            <td>Custom</td>
-                            <td>Harga Korporasi</td>
-                        </tr>
-                        <tr>
-                            <td>Custom Kemasan</td>
-                            <td><i class="bi bi-x-circle-fill check-no"></i></td>
-                            <td><i class="bi bi-x-circle-fill check-no"></i></td>
-                            <td><i class="bi bi-x-circle-fill check-no"></i></td>
-                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
-                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Min. Order Bulanan</td>
-                            <td>500 L</td>
-                            <td>5.000 L</td>
-                            <td>100 L</td>
-                            <td>10.000 L/batch</td>
-                            <td>50.000 L</td>
-                        </tr>
-                        <tr>
-                            <td>Program Bonus</td>
-                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
-                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
-                            <td><i class="bi bi-check-circle-fill check-yes"></i></td>
-                            <td><i class="bi bi-dash-circle-fill check-partial"></i></td>
-                            <td><i class="bi bi-x-circle-fill check-no"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Cocok Untuk</td>
-                            <td>Pengusaha berpengalaman</td>
-                            <td>Perusahaan distribusi</td>
-                            <td>Pemula &amp; UMKM<span class="badge-recommended">Rekomendasi</span></td>
-                            <td>Pemilik merek</td>
-                            <td>Korporasi / Instansi<span class="badge-recommended" style="background:#c0392b;">B2B</span></td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
+            @endif
         </div>
     </section>
+    @endif
 
     <!-- ═══ TESTIMONIALS ═══ -->
+    @if($testimonials->isNotEmpty())
     <section class="testi-section">
         <div class="container">
             <div class="sec-header text-center" data-aos="fade-up">
@@ -349,95 +250,36 @@
             <div class="p-testi-slider-wrapper" data-aos="fade-up" data-aos-delay="80">
                 <div class="p-testi-slider-track" id="pTestiTrack">
 
-                    <!-- Slide 1 - Franchise -->
+                    @foreach($testimonials as $testi)
+                    @php
+                        $ttypeClass = 'ttype-' . $testi->program_type;
+                        $progIcons  = ['franchise'=>'award-fill','distributor'=>'truck-front-fill','agen'=>'shop-window','maklon'=>'gear-wide-connected','implan'=>'building-fill-up'];
+                        $progIcon   = $progIcons[$testi->program_type] ?? 'people-fill';
+                        $progLabel  = ucfirst(str_replace('agen', 'Agen', $testi->program_type));
+                    @endphp
                     <div class="p-testi-slide">
                         <div class="testi-card">
                             <div class="testi-quote">"</div>
-                            <div class="testi-text">Bergabung sebagai franchisee AROMAS adalah keputusan terbaik. Dalam 14 bulan modal sudah kembali. Tim support-nya luar biasa responsif.</div>
+                            <div class="testi-text">{{ $testi->text }}</div>
                             <div class="testi-author">
                                 <div class="testi-avatar">
-                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Budi Santoso" />
+                                    @if($testi->avatar_url)
+                                    <img src="{{ \Str::startsWith($testi->avatar_url, 'http') ? $testi->avatar_url : \Illuminate\Support\Facades\Storage::url($testi->avatar_url) }}" alt="{{ $testi->name }}" />
+                                    @else
+                                    <div class="testi-avatar-placeholder"><i class="bi bi-person-fill"></i></div>
+                                    @endif
                                 </div>
                                 <div>
-                                    <div class="testi-name">Budi Santoso</div>
-                                    <div class="testi-role">Gerai AROMAS Bekasi</div>
-                                    <div class="testi-type ttype-franchise"><i class="bi bi-award-fill"></i> Franchise</div>
+                                    <div class="testi-name">{{ $testi->name }}</div>
+                                    <div class="testi-role">{{ $testi->role }}</div>
+                                    <div class="testi-type {{ $ttypeClass }}">
+                                        <i class="bi bi-{{ $progIcon }}"></i> {{ $progLabel }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Slide 2 - Distributor -->
-                    <div class="p-testi-slide">
-                        <div class="testi-card">
-                            <div class="testi-quote">"</div>
-                            <div class="testi-text">Sebagai distributor eksklusif Kabupaten Semarang, omzet kami tumbuh 340% dalam 2 tahun. Sistem order online sangat memudahkan operasional.</div>
-                            <div class="testi-author">
-                                <div class="testi-avatar">
-                                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Hendra Wijaya" />
-                                </div>
-                                <div>
-                                    <div class="testi-name">Hendra Wijaya</div>
-                                    <div class="testi-role">PT Sari Distribusi, Semarang</div>
-                                    <div class="testi-type ttype-distributor"><i class="bi bi-truck-front-fill"></i> Distributor</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 3 - Agen -->
-                    <div class="p-testi-slide">
-                        <div class="testi-card">
-                            <div class="testi-quote">"</div>
-                            <div class="testi-text">Modal awal hanya Rp 8 juta, sekarang bisa raup Rp 15–20 juta per bulan dari jualan di Shopee dan Tokopedia. Materi promosi digital-nya sangat membantu!</div>
-                            <div class="testi-author">
-                                <div class="testi-avatar">
-                                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&h=100&fit=crop&crop=face" alt="Dewi Rahayu" />
-                                </div>
-                                <div>
-                                    <div class="testi-name">Dewi Rahayu</div>
-                                    <div class="testi-role">Reseller Online, Surabaya</div>
-                                    <div class="testi-type ttype-agen"><i class="bi bi-shop-window"></i> Agen</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 4 - Maklon -->
-                    <div class="p-testi-slide">
-                        <div class="testi-card">
-                            <div class="testi-quote">"</div>
-                            <div class="testi-text">Layanan maklon AROMAS sangat profesional. Merek Goldenia kami kini sudah hadir di 8 provinsi. Kualitas produksi konsisten dan sertifikasi halal diproses cepat.</div>
-                            <div class="testi-author">
-                                <div class="testi-avatar">
-                                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&crop=face" alt="Rizal Firmansyah" />
-                                </div>
-                                <div>
-                                    <div class="testi-name">Rizal Firmansyah</div>
-                                    <div class="testi-role">Direktur PT Goldenia Food</div>
-                                    <div class="testi-type ttype-maklon"><i class="bi bi-gear-wide-connected"></i> Maklon</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 5 - Implan Korporasi -->
-                    <div class="p-testi-slide">
-                        <div class="testi-card">
-                            <div class="testi-quote">"</div>
-                            <div class="testi-text">Program Implan Korporasi AROMAS sangat menguntungkan perusahaan kami. Harga kompetitif, pengiriman tepat waktu, dan account manager kami selalu responsif setiap saat.</div>
-                            <div class="testi-author">
-                                <div class="testi-avatar">
-                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Agus Pramono" />
-                                </div>
-                                <div>
-                                    <div class="testi-name">Agus Pramono</div>
-                                    <div class="testi-role">GM Procurement PT Nusa Sentosa</div>
-                                    <div class="testi-type ttype-implan"><i class="bi bi-building-fill-up"></i> Implan Korporasi</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
 
                 </div><!-- /track -->
             </div><!-- /wrapper -->
@@ -451,8 +293,10 @@
 
         </div>
     </section>
+    @endif
 
     <!-- ═══ FAQ ═══ -->
+    @if($faqs->isNotEmpty())
     <section class="faq-section" id="faq-section">
         <div class="container">
             <div class="row">
@@ -460,103 +304,61 @@
                     <div class="sec-tag mb-3"><i class="bi bi-question-circle-fill"></i> FAQ</div>
                     <h2 class="section-title">Pertanyaan <span class="italic text-gradient">Umum</span></h2>
                     <p class="section-desc mb-4">Belum menemukan jawaban yang Anda cari? Tim kami siap membantu.</p>
-                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20bertanya%20tentang%20program%20kemitraan%20AROMAS" target="_blank" class="btn-pwa d-inline-flex mb-2"><i class="bi bi-whatsapp"></i> Chat Langsung</a>
+                    @php $faqWa = rawurlencode('Halo, saya ingin bertanya tentang program kemitraan AROMAS'); @endphp
+                    <a href="https://wa.me/{{ $waNumber }}?text={{ $faqWa }}" target="_blank" class="btn-pwa d-inline-flex mb-2"><i class="bi bi-whatsapp"></i> Chat Langsung</a>
                 </div>
                 <div class="col-lg-8" data-aos="fade-left" data-aos-delay="100">
                     <div class="accordion" id="faqAccordion">
+                        @foreach($faqs as $fi => $faq)
+                        @php $faqId = 'faq-' . $faq->id; @endphp
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                    Apa perbedaan utama antara Distributor dan Agen/Reseller?
+                                <button class="accordion-button {{ $fi > 0 ? 'collapsed' : '' }}"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#{{ $faqId }}">
+                                    {{ $faq->question }}
                                 </button>
                             </h2>
-                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Distributor memiliki wilayah eksklusif, gudang sendiri, armada pengiriman, dan bertanggung jawab mendistribusikan ke retailer & agen di wilayahnya. Sementara Agen/Reseller beroperasi lebih fleksibel, bisa berjualan di berbagai platform termasuk online, dengan modal lebih kecil dan min. order lebih rendah. Agen/Reseller juga tidak memerlukan gudang besar.
-                                </div>
+                            <div id="{{ $faqId }}" class="accordion-collapse collapse {{ $fi === 0 ? 'show' : '' }}" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">{{ $faq->answer }}</div>
                             </div>
                         </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                    Apakah ada biaya pendaftaran untuk menjadi mitra?
-                                </button>
-                            </h2>
-                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Untuk program Agen/Reseller, pendaftaran gratis. Program Franchise memerlukan biaya franchise fee yang sudah termasuk dalam paket investasi. Program Distributor memerlukan deposit modal kerja awal. Konsultasi awal selalu gratis untuk semua program.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                    Berapa lama proses pendaftaran hingga menjadi mitra aktif?
-                                </button>
-                            </h2>
-                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Agen/Reseller: 3–5 hari kerja. Distributor: 2–3 minggu (termasuk site visit dan review dokumen). Franchise: 4–8 minggu (termasuk survey lokasi, negosiasi, dan setup gerai). Maklon: 2–4 minggu untuk R&D dan approval sampel, kemudian 14–30 hari untuk produksi batch pertama.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                                    Apakah bisa bergabung sebagai maklon tanpa badan usaha?
-                                </button>
-                            </h2>
-                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Untuk skema maklon, disarankan memiliki badan usaha (PT/CV) karena diperlukan untuk proses pengurusan sertifikasi Halal dan BPOM atas nama merek Anda. Namun kami bisa mendiskusikan alternatif solusi untuk perorangan yang serius membangun merek sendiri.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
-                                    Apakah ada program upgrade dari Reseller ke Distributor?
-                                </button>
-                            </h2>
-                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Ya! AROMAS memiliki program upgrade tier yang jelas. Reseller berprestasi dapat mengajukan upgrade ke Agen, kemudian Distributor berdasarkan track record penjualan, kapasitas operasional, dan wilayah yang tersedia. Tim kami akan mendampingi proses upgrade ini.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
-                                    Bagaimana sistem pembayaran dan kredit untuk mitra?
-                                </button>
-                            </h2>
-                            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Mitra baru umumnya menggunakan sistem pembayaran di muka atau COD. Setelah 3–6 bulan kemitraan berjalan baik, dapat mengajukan fasilitas kredit dengan tenor 7–30 hari bergantung level kemitraan dan track record. Franchise dan Distributor dapat mengajukan kredit lebih awal dengan perjanjian tertulis.
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    @endif
 
     <!-- ═══ CTA STRIP ═══ -->
     <section class="cta-strip">
         <div class="container">
             <div class="row align-items-center gy-4">
                 <div class="col-lg-7" data-aos="fade-right">
+                    @if($ctaSetting)
+                    <h2>{{ $ctaSetting->headline }}</h2>
+                    @if($ctaSetting->subtext)
+                    <p>{{ $ctaSetting->subtext }}</p>
+                    @endif
+                    @else
                     <h2>Siap Memulai Perjalanan <span class="italic text-gradient">Kemitraan Anda?</span></h2>
                     <p>Bergabunglah dengan 500+ mitra sukses AROMAS di seluruh Indonesia. Konsultasi pertama selalu gratis.</p>
+                    @endif
                 </div>
                 <div class="col-lg-5 text-lg-end" data-aos="fade-left">
                     <div class="d-flex gap-3 flex-wrap justify-content-lg-end">
-                        <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20bergabung%20sebagai%20mitra" target="_blank" class="btn-cta-gold">
-                            <i class="bi bi-whatsapp"></i> Mulai Konsultasi
+                        @php
+                            $ctaWaNum = $ctaSetting?->wa_number ?? $waNumber;
+                            $ctaWaMsg = rawurlencode($ctaSetting?->wa_message ?? 'Halo AROMAS, saya ingin bergabung sebagai mitra');
+                            $ctaBtn1  = $ctaSetting?->button_1_text ?? 'Mulai Konsultasi';
+                            $ctaBtn2  = $ctaSetting?->button_2_text ?? 'Kirim Formulir';
+                            $ctaBtn2Url = $ctaSetting?->button_2_url ?? '/contact';
+                        @endphp
+                        <a href="https://wa.me/{{ $ctaWaNum }}?text={{ $ctaWaMsg }}" target="_blank" class="btn-cta-gold">
+                            <i class="bi bi-whatsapp"></i> {{ $ctaBtn1 }}
                         </a>
-                        <a href="{{ url('/contact') }}" class="btn-cta-ol">
-                            <i class="bi bi-envelope-fill"></i> Kirim Formulir
+                        <a href="{{ url($ctaBtn2Url) }}" class="btn-cta-ol">
+                            <i class="bi bi-envelope-fill"></i> {{ $ctaBtn2 }}
                         </a>
                     </div>
                 </div>

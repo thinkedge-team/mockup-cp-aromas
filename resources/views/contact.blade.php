@@ -1,6 +1,100 @@
 @extends('layouts.app')
 
+@php
+try {
+    $hero   = \App\Models\ContactHeroSetting::first();
+    $info   = \App\Models\ContactInfoSetting::first();
+    $why    = \App\Models\ContactWhySetting::first();
+    $map    = \App\Models\ContactMapSetting::first();
+    $faqs   = \App\Models\ContactFaq::active()->orderBy('sort_order')->get();
+    $cta    = \App\Models\ContactCtaSetting::first();
+    $branches = \App\Models\Branch::active()->get();
+} catch (\Exception $e) {
+    $hero = $info = $why = $map = $cta = null;
+    $faqs = collect();
+    $branches = collect();
+}
+
+// Hero fallbacks
+$heroBadge   = $hero?->badge_text    ?? 'Kami Siap Membantu';
+$heroLine1   = $hero?->title_line1   ?? 'Hubungi Tim';
+$heroHL      = $hero?->title_highlight ?? 'AROMAS';
+$heroDesc    = $hero?->description   ?? 'Apakah Anda ingin memesan produk, menjadi mitra distribusi, atau sekadar bertanya? Tim kami siap merespons dengan cepat dan profesional di setiap saluran komunikasi.';
+$chip1Icon   = $hero?->chip_1_icon   ?? 'lightning-charge-fill';
+$chip1Text   = $hero?->chip_1_text   ?? 'Respon Cepat';
+$chip1Val    = $hero?->chip_1_value  ?? '≤ 2 Jam';
+$chip2Icon   = $hero?->chip_2_icon   ?? 'clock-fill';
+$chip2Text   = $hero?->chip_2_text   ?? 'Layanan';
+$chip2Val    = $hero?->chip_2_value  ?? 'Sen–Jum, 08.00–17.00';
+$chip3Icon   = $hero?->chip_3_icon   ?? 'whatsapp';
+$chip3Text   = $hero?->chip_3_text   ?? 'WA 24 Jam';
+$chip3Val    = $hero?->chip_3_value  ?? 'Khusus Order';
+
+// Info fallbacks
+$addrTitle   = $info?->address_title       ?? 'Kantor Pusat';
+$addrText    = $info?->address_text        ?? 'Jl. Industri Raya No. 123, Jakarta 12345';
+$addrMaps    = $info?->address_maps_url    ?? 'https://maps.google.com/';
+$addrAction  = $info?->address_action_label ?? 'Lihat di Maps';
+$phoneTitle  = $info?->phone_title         ?? 'Telepon & Fax';
+$phoneOffice = $info?->phone_office        ?? '(021) 1234-5678';
+$phoneFax    = $info?->phone_fax           ?? '(021) 1234-5679';
+$phoneEmail  = $info?->phone_email         ?? 'info@aromas.co.id';
+$phoneNum    = $info?->phone_number        ?? '02112345678';
+$phoneAction = $info?->phone_action_label  ?? 'Hubungi Sekarang';
+$waTitle     = $info?->wa_title            ?? 'WhatsApp';
+$waSalesLbl  = $info?->wa_sales_label      ?? 'Sales';
+$waSalesDsp  = $info?->wa_sales_display    ?? '+62 812-3456-7890';
+$waSalesNum  = $info?->wa_sales_number     ?? '6281234567890';
+$waDistLbl   = $info?->wa_dist_label       ?? 'Distribusi';
+$waDistDsp   = $info?->wa_dist_display     ?? '+62 811-2345-6789';
+$waNote      = $info?->wa_note             ?? '● Aktif 24 jam untuk order';
+$waAction    = $info?->wa_action_label     ?? 'Chat Sekarang';
+$hrsTitle    = $info?->hours_title         ?? 'Jam Operasional';
+$hrsWdLbl    = $info?->hours_weekday_label ?? 'Kantor';
+$hrsWdVal    = $info?->hours_weekday_value ?? 'Sen – Jum: 08.00 – 17.00';
+$hrsSatLbl   = $info?->hours_saturday_label ?? 'Fax';
+$hrsSatVal   = $info?->hours_saturday_value ?? 'Sabtu: 08.00 – 13.00';
+$hrsSunVal   = $info?->hours_sunday_value  ?? 'Minggu: Tutup';
+
+// Why sidebar fallbacks
+$whyLabel    = $why?->label           ?? 'Mengapa Hubungi Kami?';
+$whyTitle    = $why?->title           ?? 'Kami Mitra Bisnis';
+$whyHL       = $why?->title_highlight ?? 'Terpercaya';
+$whyItems    = $why?->why_items       ?? [];
+$hrsWkday    = $why?->hours_weekday   ?? 'Senin – Jumat : 08.00 – 17.00';
+$hrsSat      = $why?->hours_saturday  ?? 'Sabtu : 08.00 – 13.00';
+$hrsSun      = $why?->hours_sunday    ?? 'Minggu & Hari Libur : Tutup';
+$hrsWaNote   = $why?->hours_wa_note   ?? 'WhatsApp Order : 24 Jam / 7 Hari';
+$socWa       = $why?->wa_url          ?? '#';
+$socIg       = $why?->instagram_url   ?? '#';
+$socFb       = $why?->facebook_url    ?? '#';
+$socYt       = $why?->youtube_url     ?? '#';
+$socTt       = $why?->tiktok_url      ?? '#';
+$socEmail    = $why?->email_address   ?? 'info@aromas.co.id';
+
+// Map fallbacks
+$mapLabel    = $map?->section_label         ?? 'Lokasi Kami';
+$mapTitle    = $map?->section_title         ?? 'Temukan Kantor & Cabang AROMAS';
+$mapDesc     = $map?->section_desc          ?? 'Kami memiliki kantor pusat di Jakarta dan jaringan cabang di seluruh Indonesia.';
+$mapEmbed    = $map?->map_embed_url         ?? '';
+$mapCardTtl  = $map?->map_card_title        ?? 'AROMAS Kantor Pusat';
+$mapCardAddr = $map?->map_card_address      ?? 'Jl. Industri Raya No. 123, Jakarta 12345';
+$mapCardDir  = $map?->map_card_direction_url ?? '#';
+$branchTitle = $map?->branch_section_title  ?? 'Cabang & Outlet Kami';
+
+// CTA fallbacks
+$ctaTitle    = $cta?->title            ?? 'Masih Punya Pertanyaan?';
+$ctaDesc     = $cta?->description      ?? 'Tim AROMAS siap membantu Anda 24 jam via WhatsApp atau di jam kerja via telepon dan email.';
+$ctaWaLbl    = $cta?->btn_wa_label     ?? 'Chat WhatsApp';
+$ctaWaNum    = $cta?->btn_wa_number    ?? '6281234567890';
+$ctaWaMsg    = $cta?->btn_wa_message   ?? 'Halo AROMAS, saya ingin bertanya';
+$ctaPhoneLbl = $cta?->btn_phone_label  ?? 'Telepon Kami';
+$ctaPhoneNum = $cta?->btn_phone_number ?? '02112345678';
+$ctaWaUrl    = 'https://wa.me/' . $ctaWaNum . '?text=' . urlencode($ctaWaMsg);
+@endphp
+
 @section('content')
+
 <!-- ══════ HERO ══════ -->
 <section class="contact-hero">
     <div class="ch-overlay"></div>
@@ -13,28 +107,24 @@
     <div class="container text-center">
         <div class="row justify-content-center">
             <div class="col-lg-7 col-md-10" data-aos="fade-up">
-                <span class="ch-badge"><i class="bi bi-chat-dots-fill"></i> Kami Siap Membantu</span>
+                <span class="ch-badge"><i class="bi bi-chat-dots-fill"></i> {{ $heroBadge }}</span>
                 <h1 class="ch-title">
-                    Hubungi Tim<br />
-                    <span class="italic text-gradient">AROMAS</span>
+                    {{ $heroLine1 }}<br />
+                    <span class="italic text-gradient">{{ $heroHL }}</span>
                 </h1>
-                <p class="ch-desc">
-                    Apakah Anda ingin memesan produk, menjadi mitra distribusi,
-                    atau sekadar bertanya? Tim kami siap merespons dengan cepat
-                    dan profesional di setiap saluran komunikasi.
-                </p>
+                <p class="ch-desc">{{ $heroDesc }}</p>
                 <div class="ch-chips">
                     <div class="ch-chip">
-                        <i class="bi bi-lightning-charge-fill"></i>
-                        Respon Cepat <span>≤ 2 Jam</span>
+                        <i class="bi bi-{{ $chip1Icon }}"></i>
+                        {{ $chip1Text }} <span>{{ $chip1Val }}</span>
                     </div>
                     <div class="ch-chip">
-                        <i class="bi bi-clock-fill"></i>
-                        Layanan <span>Sen–Jum, 08.00–17.00</span>
+                        <i class="bi bi-{{ $chip2Icon }}"></i>
+                        {{ $chip2Text }} <span>{{ $chip2Val }}</span>
                     </div>
                     <div class="ch-chip">
-                        <i class="bi bi-whatsapp"></i>
-                        WA 24 Jam <span>Khusus Order</span>
+                        <i class="bi bi-{{ $chip3Icon }}"></i>
+                        {{ $chip3Text }} <span>{{ $chip3Val }}</span>
                     </div>
                 </div>
             </div>
@@ -65,49 +155,49 @@
             <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
                 <div class="info-card">
                     <div class="ic-icon green"><i class="bi bi-geo-alt-fill"></i></div>
-                    <h4>Kantor Pusat</h4>
-                    <p>Jl. Industri Raya No. 123<br/>Kawasan Industri, Jakarta 12345<br/>DKI Jakarta, Indonesia</p>
-                    <a href="https://maps.google.com/?q=Jakarta+Pusat" target="_blank" class="ic-action">
-                        Lihat di Maps <i class="bi bi-arrow-right"></i>
+                    <h4>{{ $addrTitle }}</h4>
+                    <p>{!! nl2br(e($addrText)) !!}</p>
+                    <a href="{{ $addrMaps }}" target="_blank" class="ic-action">
+                        {{ $addrAction }} <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
                 <div class="info-card">
                     <div class="ic-icon gold"><i class="bi bi-telephone-fill"></i></div>
-                    <h4>Telepon & Fax</h4>
+                    <h4>{{ $phoneTitle }}</h4>
                     <p>
-                        <strong style="color:var(--g800);">Kantor:</strong> (021) 1234-5678<br/>
-                        <strong style="color:var(--g800);">Fax:</strong> (021) 1234-5679<br/>
-                        <a href="mailto:info@aromas.co.id">info@aromas.co.id</a>
+                        <strong style="color:var(--g800);">{{ $hrsWdLbl }}:</strong> {{ $phoneOffice }}<br/>
+                        <strong style="color:var(--g800);">{{ $hrsSatLbl }}:</strong> {{ $phoneFax }}<br/>
+                        <a href="mailto:{{ $phoneEmail }}">{{ $phoneEmail }}</a>
                     </p>
-                    <a href="tel:02112345678" class="ic-action">
-                        Hubungi Sekarang <i class="bi bi-arrow-right"></i>
+                    <a href="tel:{{ $phoneNum }}" class="ic-action">
+                        {{ $phoneAction }} <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
                 <div class="info-card">
                     <div class="ic-icon wa"><i class="bi bi-whatsapp"></i></div>
-                    <h4>WhatsApp</h4>
+                    <h4>{{ $waTitle }}</h4>
                     <p>
-                        <strong style="color:var(--g800);">Sales:</strong> +62 812-3456-7890<br/>
-                        <strong style="color:var(--g800);">Distribusi:</strong> +62 811-2345-6789<br/>
-                        <span style="font-size:.78rem;color:var(--green-dk);font-weight:600;">● Aktif 24 jam untuk order</span>
+                        <strong style="color:var(--g800);">{{ $waSalesLbl }}:</strong> {{ $waSalesDsp }}<br/>
+                        <strong style="color:var(--g800);">{{ $waDistLbl }}:</strong> {{ $waDistDsp }}<br/>
+                        <span style="font-size:.78rem;color:var(--green-dk);font-weight:600;">{{ $waNote }}</span>
                     </p>
-                    <a href="https://wa.me/6281234567890" target="_blank" class="ic-action">
-                        Chat Sekarang <i class="bi bi-arrow-right"></i>
+                    <a href="https://wa.me/{{ $waSalesNum }}" target="_blank" class="ic-action">
+                        {{ $waAction }} <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="320">
                 <div class="info-card">
                     <div class="ic-icon dark"><i class="bi bi-clock-fill"></i></div>
-                    <h4>Jam Operasional</h4>
+                    <h4>{{ $hrsTitle }}</h4>
                     <p>
-                        <strong style="color:var(--g800);">Sen – Jum:</strong> 08.00 – 17.00<br/>
-                        <strong style="color:var(--g800);">Sabtu:</strong> 08.00 – 13.00<br/>
-                        <strong style="color:var(--g400);">Minggu:</strong> Tutup
+                        <strong style="color:var(--g800);">{{ $hrsWdVal }}</strong><br/>
+                        <strong style="color:var(--g800);">{{ $hrsSatVal }}</strong><br/>
+                        <strong style="color:var(--g400);">{{ $hrsSunVal }}</strong>
                     </p>
                     <span id="statusBadge" class="ic-action" style="cursor:default;">
                         <i class="bi bi-circle-fill" id="statusIcon" style="font-size:.55rem;"></i>
@@ -270,6 +360,10 @@
                                 </div>
                             </div>
 
+                            <div id="formError" style="display:none; background:#fee2e2; color:#b91c1c; border:1px solid #f87171; padding:14px 18px; border-radius:12px; margin-bottom:20px; font-size:0.9rem;">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i> <span id="errorText">Terjadi kesalahan.</span>
+                            </div>
+
                             <button type="submit" class="btn-submit" id="submitBtn">
                                 <i class="bi bi-arrow-repeat spin"></i>
                                 <span class="send-txt"><i class="bi bi-send-fill"></i> Kirim Pesan Sekarang</span>
@@ -294,29 +388,15 @@
 
                 <div class="why-box">
                     <div class="why-box-inner">
-                        <div class="why-label">Mengapa Hubungi Kami?</div>
-                        <h3>Kami Mitra Bisnis <span class="italic" style="-webkit-text-fill-color:var(--gold-lt);color:var(--gold-lt);">Terpercaya</span></h3>
+                        <div class="why-label">{{ $whyLabel }}</div>
+                        <h3>{{ $whyTitle }} <span class="italic" style="-webkit-text-fill-color:var(--gold-lt);color:var(--gold-lt);">{{ $whyHL }}</span></h3>
                         <ul class="why-list">
+                            @foreach((array)$whyItems as $item)
                             <li>
-                                <div class="why-dot"><i class="bi bi-lightning-charge-fill"></i></div>
-                                <span><strong style="color:#fff;">Respon Cepat</strong> — rata-rata balasan dalam 2 jam kerja via email, lebih cepat via WhatsApp.</span>
+                                <div class="why-dot"><i class="bi bi-{{ $item['icon'] ?? 'check' }}"></i></div>
+                                <span><strong style="color:#fff;">{{ $item['title'] ?? '' }}</strong>{{ isset($item['text']) ? ' — ' . $item['text'] : '' }}</span>
                             </li>
-                            <li>
-                                <div class="why-dot"><i class="bi bi-percent"></i></div>
-                                <span><strong style="color:#fff;">Harga Kompetitif</strong> — kami menawarkan harga khusus untuk pembelian volume besar & kontrak jangka panjang.</span>
-                            </li>
-                            <li>
-                                <div class="why-dot"><i class="bi bi-truck"></i></div>
-                                <span><strong style="color:#fff;">Distribusi Luas</strong> — armada distribusi aktif di 34 provinsi dengan mitra logistik terpercaya.</span>
-                            </li>
-                            <li>
-                                <div class="why-dot"><i class="bi bi-headset"></i></div>
-                                <span><strong style="color:#fff;">After-sales Support</strong> — tim kami mendampingi dari pemesanan hingga pengiriman produk tiba.</span>
-                            </li>
-                            <li>
-                                <div class="why-dot"><i class="bi bi-award-fill"></i></div>
-                                <span><strong style="color:#fff;">Produk Bersertifikat</strong> — Halal MUI, BPOM, SNI, dan ISO 22000 untuk ketenangan pikiran Anda.</span>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -324,12 +404,12 @@
                 <div class="hours-box">
                     <h4><i class="bi bi-clock-fill"></i> Jam Operasional</h4>
                     <ul class="hours-list">
-                        <li><span class="hours-day">Senin – Jumat</span><span class="hours-time">08.00 – 17.00</span></li>
-                        <li><span class="hours-day">Sabtu</span><span class="hours-time">08.00 – 13.00</span></li>
-                        <li><span class="hours-day">Minggu & Hari Libur</span><span class="hours-time closed">Tutup</span></li>
+                        <li><span class="hours-day">{{ Str::before($hrsWkday, ':') }}</span><span class="hours-time">{{ trim(Str::after($hrsWkday, ':')) }}</span></li>
+                        <li><span class="hours-day">{{ Str::before($hrsSat, ':') }}</span><span class="hours-time">{{ trim(Str::after($hrsSat, ':')) }}</span></li>
+                        <li><span class="hours-day">{{ Str::before($hrsSun, ':') }}</span><span class="hours-time closed">{{ trim(Str::after($hrsSun, ':')) }}</span></li>
                         <li>
-                            <span class="hours-day" style="font-size:.78rem;color:var(--g500);">WhatsApp Order</span>
-                            <span class="hours-time" style="color:var(--gold-dk);">24 Jam / 7 Hari</span>
+                            <span class="hours-day" style="font-size:.78rem;color:var(--g500);">{{ Str::before($hrsWaNote, ':') }}</span>
+                            <span class="hours-time" style="color:var(--gold-dk);">{{ trim(Str::after($hrsWaNote, ':')) }}</span>
                         </li>
                     </ul>
                     <div class="live-badge" id="liveBadge">
@@ -341,12 +421,12 @@
                 <div class="social-box">
                     <h4>Terhubung Bersama Kami</h4>
                     <div class="social-grid">
-                        <a href="https://wa.me/6281234567890" target="_blank" class="soc-btn wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
-                        <a href="#" target="_blank" class="soc-btn ig"><i class="bi bi-instagram"></i> Instagram</a>
-                        <a href="#" target="_blank" class="soc-btn fb"><i class="bi bi-facebook"></i> Facebook</a>
-                        <a href="#" target="_blank" class="soc-btn yt"><i class="bi bi-youtube"></i> YouTube</a>
-                        <a href="#" target="_blank" class="soc-btn tt"><i class="bi bi-tiktok"></i> TikTok</a>
-                        <a href="mailto:info@aromas.co.id" class="soc-btn em"><i class="bi bi-envelope-fill"></i> Email</a>
+                        <a href="{{ $socWa }}" target="_blank" class="soc-btn wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+                        <a href="{{ $socIg }}" target="_blank" class="soc-btn ig"><i class="bi bi-instagram"></i> Instagram</a>
+                        <a href="{{ $socFb }}" target="_blank" class="soc-btn fb"><i class="bi bi-facebook"></i> Facebook</a>
+                        <a href="{{ $socYt }}" target="_blank" class="soc-btn yt"><i class="bi bi-youtube"></i> YouTube</a>
+                        <a href="{{ $socTt }}" target="_blank" class="soc-btn tt"><i class="bi bi-tiktok"></i> TikTok</a>
+                        <a href="mailto:{{ $socEmail }}" class="soc-btn em"><i class="bi bi-envelope-fill"></i> Email</a>
                     </div>
                 </div>
             </div>
@@ -358,72 +438,56 @@
 <section class="map-section">
     <div class="container">
         <div class="map-header" data-aos="fade-up">
-            <span class="section-label"><i class="bi bi-geo-alt-fill me-1"></i> Lokasi Kami</span>
-            <h2 class="section-title">Temukan <span class="italic">Kantor & Cabang</span> AROMAS</h2>
-            <p class="section-desc" style="max-width:560px;">Kami memiliki kantor pusat di Jakarta dan jaringan cabang di seluruh Indonesia yang siap melayani kebutuhan Anda.</p>
+            <span class="section-label"><i class="bi bi-geo-alt-fill me-1"></i> {{ $mapLabel }}</span>
+            <h2 class="section-title">{{ $mapTitle }}</h2>
+            <p class="section-desc" style="max-width:560px;">{{ $mapDesc }}</p>
         </div>
         <div class="map-wrap" data-aos="zoom-in" data-aos-delay="80">
+            @if($mapEmbed)
             <iframe
                 class="map-embed"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322283!2d106.8197!3d-6.2088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTInMzEuNyJTIDEwNsKwNDknMTEuMCJF!5e0!3m2!1sid!2sid!4v1609459200000!5m2!1sid!2sid"
+                src="{{ $mapEmbed }}"
                 allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
                 title="Lokasi AROMAS di Google Maps">
             </iframe>
+            @endif
             <div class="map-overlay-card">
-                <strong><i class="bi bi-droplet-fill me-1" style="color:var(--gold-lt);"></i> AROMAS Kantor Pusat</strong>
-                <p>Jl. Industri Raya No. 123, Kawasan Industri, Jakarta 12345</p>
-                <a href="https://maps.google.com/?q=Jl+Industri+Raya+Jakarta" target="_blank" class="map-dir-btn">
+                <strong><i class="bi bi-droplet-fill me-1" style="color:var(--gold-lt);"></i> {{ $mapCardTtl }}</strong>
+                <p>{{ $mapCardAddr }}</p>
+                <a href="{{ $mapCardDir }}" target="_blank" class="map-dir-btn">
                     <i class="bi bi-map-fill"></i> Petunjuk Arah
                 </a>
             </div>
         </div>
 
         <div class="branch-grid" data-aos="fade-up" data-aos-delay="120">
+            @forelse($branches as $branch)
             <div class="branch-card">
                 <div class="bc-top">
                     <div class="bc-avatar"><i class="bi bi-building"></i></div>
                     <div>
-                        <div class="bc-name">Cabang Jakarta Pusat</div>
-                        <div class="bc-type">Outlet Premium</div>
+                        <div class="bc-name">{{ $branch->name }}</div>
+                        <div class="bc-type">{{ $branch->category }}</div>
                     </div>
                 </div>
-                <p class="bc-detail">Jl. Industri Raya No. 123, Kawasan Industri, Jakarta 12345<br/>
-                <i class="bi bi-clock me-1" style="color:var(--gold);"></i>Sen–Jum 08.00–17.00</p>
+                <p class="bc-detail">{{ $branch->address }}<br/>
+                @if(isset($branch->operating_hours['days']))
+                <i class="bi bi-clock me-1" style="color:var(--gold);"></i>{{ $branch->operating_hours['days'] }}
+                {{ isset($branch->operating_hours['open']) ? $branch->operating_hours['open'] : '' }}–{{ isset($branch->operating_hours['close']) ? $branch->operating_hours['close'] : '' }}
+                @endif
+                </p>
                 <div class="bc-actions">
-                    <a href="https://wa.me/6281234567890" target="_blank" class="bc-btn wa"><i class="bi bi-whatsapp"></i> WA</a>
-                    <a href="https://maps.google.com/?q=Jakarta+Pusat" target="_blank" class="bc-btn maps"><i class="bi bi-map-fill"></i> Maps</a>
+                    @if($branch->whatsapp)
+                    <a href="https://wa.me/{{ $branch->whatsapp }}" target="_blank" class="bc-btn wa"><i class="bi bi-whatsapp"></i> WA</a>
+                    @endif
+                    @if($branch->map_link)
+                    <a href="{{ $branch->map_link }}" target="_blank" class="bc-btn maps"><i class="bi bi-map-fill"></i> Maps</a>
+                    @endif
                 </div>
             </div>
-            <div class="branch-card">
-                <div class="bc-top">
-                    <div class="bc-avatar" style="background:linear-gradient(135deg,var(--gold),var(--gold-dk));"><i class="bi bi-building"></i></div>
-                    <div>
-                        <div class="bc-name">Cabang Surabaya Timur</div>
-                        <div class="bc-type">Outlet Standar</div>
-                    </div>
-                </div>
-                <p class="bc-detail">Jl. Raya Surabaya No. 45, Jawa Timur 60111<br/>
-                <i class="bi bi-clock me-1" style="color:var(--gold);"></i>Sen–Jum 08.00–17.00</p>
-                <div class="bc-actions">
-                    <a href="https://wa.me/6281345678901" target="_blank" class="bc-btn wa"><i class="bi bi-whatsapp"></i> WA</a>
-                    <a href="https://maps.google.com/?q=Surabaya" target="_blank" class="bc-btn maps"><i class="bi bi-map-fill"></i> Maps</a>
-                </div>
-            </div>
-            <div class="branch-card">
-                <div class="bc-top">
-                    <div class="bc-avatar" style="background:linear-gradient(135deg,#1a6b3a,var(--green-dk));"><i class="bi bi-building"></i></div>
-                    <div>
-                        <div class="bc-name">Cabang Bandung Utara</div>
-                        <div class="bc-type">Outlet Premium</div>
-                    </div>
-                </div>
-                <p class="bc-detail">Jl. Braga No. 67, Bandung 40111, Jawa Barat<br/>
-                <i class="bi bi-clock me-1" style="color:var(--gold);"></i>Sen–Jum 08.00–17.00</p>
-                <div class="bc-actions">
-                    <a href="https://wa.me/6281456789012" target="_blank" class="bc-btn wa"><i class="bi bi-whatsapp"></i> WA</a>
-                    <a href="https://maps.google.com/?q=Braga+Bandung" target="_blank" class="bc-btn maps"><i class="bi bi-map-fill"></i> Maps</a>
-                </div>
-            </div>
+            @empty
+            <p class="text-center" style="color:var(--g500);">Tidak ada data cabang aktif saat ini.</p>
+            @endforelse
         </div>
     </div>
 </section>
@@ -439,73 +503,20 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="faq-accordion" data-aos="fade-up" data-aos-delay="80">
-
-                    <div class="faq-item open">
+                    @forelse($faqs as $loop_faq)
+                    <div class="faq-item {{ $loop->first ? 'open' : '' }}">
                         <div class="faq-q">
-                            <div class="faq-q-icon"><i class="bi bi-truck"></i></div>
-                            <span class="faq-q-text">Apakah AROMAS melayani pengiriman ke seluruh Indonesia?</span>
+                            <div class="faq-q-icon"><i class="bi bi-{{ $loop_faq->icon }}"></i></div>
+                            <span class="faq-q-text">{{ $loop_faq->question }}</span>
                             <span class="faq-toggle"><i class="bi bi-plus-lg"></i></span>
                         </div>
                         <div class="faq-a">
-                            <p>Ya! AROMAS memiliki jaringan distribusi aktif di seluruh 34 provinsi Indonesia. Kami bermitra dengan lebih dari 500 distributor lokal dan menggunakan jasa pengiriman terpercaya untuk memastikan produk tiba dalam kondisi sempurna.</p>
+                            <p>{{ $loop_faq->answer }}</p>
                         </div>
                     </div>
-
-                    <div class="faq-item">
-                        <div class="faq-q">
-                            <div class="faq-q-icon"><i class="bi bi-bag-check"></i></div>
-                            <span class="faq-q-text">Berapa minimum pemesanan untuk pembelian grosir?</span>
-                            <span class="faq-toggle"><i class="bi bi-plus-lg"></i></span>
-                        </div>
-                        <div class="faq-a">
-                            <p>Untuk pembelian grosir, minimum order dimulai dari 1 karton (isi sesuai varian produk). Untuk kontrak distribusi jangka panjang, kami memiliki ketentuan khusus. Hubungi tim sales kami untuk mendapatkan informasi harga dan MOQ terbaru.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-q">
-                            <div class="faq-q-icon"><i class="bi bi-diagram-3"></i></div>
-                            <span class="faq-q-text">Bagaimana cara mendaftar sebagai mitra distributor AROMAS?</span>
-                            <span class="faq-toggle"><i class="bi bi-plus-lg"></i></span>
-                        </div>
-                        <div class="faq-a">
-                            <p>Isi formulir di halaman ini dengan topik "Kemitraan / Distribusi", atau hubungi tim kami via WhatsApp. Tim business development akan menghubungi Anda dalam 1×24 jam untuk menjelaskan syarat, benefit, dan proses pendaftaran mitra AROMAS.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-q">
-                            <div class="faq-q-icon"><i class="bi bi-award"></i></div>
-                            <span class="faq-q-text">Apa saja sertifikasi produk AROMAS?</span>
-                            <span class="faq-toggle"><i class="bi bi-plus-lg"></i></span>
-                        </div>
-                        <div class="faq-a">
-                            <p>Produk AROMAS telah memperoleh: <strong>Halal MUI</strong> (sejak 2013), <strong>BPOM RI</strong> (izin edar pangan), <strong>SNI</strong> (Standar Nasional Indonesia), <strong>ISO 22000:2018</strong> (manajemen keamanan pangan internasional), serta penghargaan <strong>Top Brand Award</strong> 2024 dan <strong>RSPO</strong> (sustainable palm oil).</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-q">
-                            <div class="faq-q-icon"><i class="bi bi-clock-history"></i></div>
-                            <span class="faq-q-text">Berapa lama waktu pengiriman setelah order dikonfirmasi?</span>
-                            <span class="faq-toggle"><i class="bi bi-plus-lg"></i></span>
-                        </div>
-                        <div class="faq-a">
-                            <p>Untuk area Jabodetabek: 1–2 hari kerja. Jawa (luar Jabodetabek): 2–4 hari kerja. Luar Jawa: 4–7 hari kerja tergantung armada dan lokasi. Untuk order besar dengan kontrak, kami dapat mengatur jadwal pengiriman rutin sesuai kebutuhan Anda.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-q">
-                            <div class="faq-q-icon"><i class="bi bi-credit-card"></i></div>
-                            <span class="faq-q-text">Metode pembayaran apa saja yang tersedia?</span>
-                            <span class="faq-toggle"><i class="bi bi-plus-lg"></i></span>
-                        </div>
-                        <div class="faq-a">
-                            <p>Kami menerima: Transfer Bank (BCA, Mandiri, BRI, BNI), Virtual Account, QRIS, dan untuk mitra distributor terdaftar tersedia opsi pembayaran dengan termin (NET 14/30). Detail pembayaran akan diinformasikan oleh tim sales kami.</p>
-                        </div>
-                    </div>
-
+                    @empty
+                    <p class="text-center" style="color:var(--g500);">Belum ada FAQ yang ditambahkan.</p>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -517,16 +528,16 @@
     <div class="container">
         <div class="row align-items-center gy-4">
             <div class="col-lg-7" data-aos="fade-right">
-                <h2>Masih Punya Pertanyaan?</h2>
-                <p>Tim AROMAS siap membantu Anda 24 jam via WhatsApp atau di jam kerja via telepon dan email.</p>
+                <h2>{{ $ctaTitle }}</h2>
+                <p>{{ $ctaDesc }}</p>
             </div>
             <div class="col-lg-5 text-lg-end" data-aos="fade-left">
                 <div class="d-flex gap-3 flex-wrap justify-content-lg-end">
-                    <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20bertanya" target="_blank" class="btn-cta-w">
-                        <i class="bi bi-whatsapp"></i> Chat WhatsApp
+                    <a href="{{ $ctaWaUrl }}" target="_blank" class="btn-cta-w">
+                        <i class="bi bi-whatsapp"></i> {{ $ctaWaLbl }}
                     </a>
-                    <a href="tel:02112345678" class="btn-cta-ol">
-                        <i class="bi bi-telephone-fill"></i> Telepon Kami
+                    <a href="tel:{{ $ctaPhoneNum }}" class="btn-cta-ol">
+                        <i class="bi bi-telephone-fill"></i> {{ $ctaPhoneLbl }}
                     </a>
                 </div>
             </div>
@@ -1056,19 +1067,75 @@ const formSuccess = document.getElementById('formSuccess');
 const successName = document.getElementById('successName');
 
 if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        
+        if (!document.getElementById('fterms').checked) {
+            alert('Anda harus menyetujui Kebijakan Privasi.');
+            return;
+        }
+
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
-        
-        setTimeout(() => {
-            const fname = document.getElementById('fname').value;
-            if (successName) successName.textContent = fname.split(' ')[0];
-            if (formWrap) formWrap.style.display = 'none';
-            if (formSuccess) formSuccess.classList.add('show');
-            window.scrollTo({ top: formSuccess.offsetTop - 100, behavior: 'smooth' });
-        }, 1500);
+        const errDiv = document.getElementById('formError');
+        if (errDiv) errDiv.style.display = 'none';
+
+        const formData = new FormData();
+        formData.append('_token', '{{ csrf_token() }}');
+        formData.append('subject', document.getElementById('subjectVal').value || '');
+        formData.append('name', document.getElementById('fname').value || '');
+        formData.append('company', document.getElementById('fcompany').value || '');
+        formData.append('email', document.getElementById('femail').value || '');
+        formData.append('phone', document.getElementById('fphone').value || '');
+        formData.append('product', document.getElementById('fproduct').value || '');
+        formData.append('volume', document.getElementById('fvolume').value || '');
+        formData.append('city', document.getElementById('fcity').value || '');
+        formData.append('message', document.getElementById('fmessage').value || '');
+
+        const fileInputNodes = document.getElementById('fileInput').files;
+        for (let i = 0; i < fileInputNodes.length; i++) {
+            formData.append('files[]', fileInputNodes[i]);
+        }
+
+        try {
+            const response = await fetch('{{ route("contact.send") }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                const fname = document.getElementById('fname').value;
+                if (successName) successName.textContent = fname.split(' ')[0];
+                if (formWrap) formWrap.style.display = 'none';
+                if (formSuccess) formSuccess.classList.add('show');
+                window.scrollTo({ top: formSuccess.offsetTop - 100, behavior: 'smooth' });
+            } else {
+                showError(result.message || 'Gagal mengirim pesan. Mohon periksa kembali isian Anda.');
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+            }
+        } catch (error) {
+            showError('Terjadi gangguan jaringan atau server. Silakan coba beberapa saat lagi.');
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+        }
     });
+
+    function showError(msg) {
+        const errDiv = document.getElementById('formError');
+        const errTxt = document.getElementById('errorText');
+        if (errDiv && errTxt) {
+            errTxt.textContent = msg;
+            errDiv.style.display = 'block';
+        } else {
+            alert(msg);
+        }
+    }
 }
 
 // Reset Form
@@ -1078,6 +1145,8 @@ if (resetBtn) {
         if (contactForm) contactForm.reset();
         if (formWrap) formWrap.style.display = 'block';
         if (formSuccess) formSuccess.classList.remove('show');
+        const errDiv = document.getElementById('formError');
+        if (errDiv) errDiv.style.display = 'none';
         if (submitBtn) {
             submitBtn.classList.remove('loading');
             submitBtn.disabled = false;
