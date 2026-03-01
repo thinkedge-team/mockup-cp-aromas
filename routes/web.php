@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PromoPageController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,9 +27,15 @@ Route::get('/our-machine', function () {
 
 Route::get('/promo', [PromoPageController::class, 'index'])->name('promo');
 
-Route::get('/blog', function () {
-    return view('blog');
-});
+// Blog routes
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/search', [BlogController::class, 'search'])->name('blog.search');
+Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
+Route::get('/blog/tag/{slug}', [BlogController::class, 'tag'])->name('blog.tag');
+Route::post('/blog/comment', [BlogController::class, 'submitComment'])->name('blog.comment.submit');
+Route::post('/blog/post/{id}/like', [BlogController::class, 'likePost'])->name('blog.post.like');
+Route::post('/blog/comment/{id}/like', [BlogController::class, 'likeComment'])->name('blog.comment.like');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
 Route::get('/portfolio', function () {
     return view('portfolio');
@@ -36,8 +43,4 @@ Route::get('/portfolio', function () {
 
 Route::get('/partnership', function () {
     return view('partnership');
-});
-
-Route::get('/blog/cara-memilih-minyak-goreng-sehat', function () {
-    return view('blog-detail');
 });

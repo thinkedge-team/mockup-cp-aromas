@@ -54,6 +54,13 @@ class FooterSettingResource extends Resource
                 ->columns(2),
 
             Forms\Components\Section::make("Contact Information")->schema([
+                Forms\Components\TextInput::make("whatsapp_number")
+                    ->label("WhatsApp Number")
+                    ->placeholder("e.g., 6281234567890")
+                    ->helperText("Format: Country code + number (e.g., 6281234567890)")
+                    ->maxLength(20)
+                    ->columnSpanFull(),
+
                 Forms\Components\KeyValue::make("contact_info")
                     ->label("Contact Info")
                     ->keyLabel("Field")

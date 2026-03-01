@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
+@section('title', $blogSettings->meta_title ?? 'Blog AROMAS - Tips, Resep & Edukasi Memasak')
+@section('meta_description', $blogSettings->meta_description ?? 'Baca artikel terbaru tentang tips memasak, resep lezat, dan edukasi kesehatan dari para ahli AROMAS.')
+
 @section('content')
 <!-- HERO -->
+@if($blogSettings && $blogSettings->is_active)
 <section class="blog-hero">
   <div class="hero-bg-layer hbl-gradient"></div>
   <div class="hero-bg-layer hbl-grain"></div>
@@ -13,32 +17,41 @@
     <div class="orb orb3"></div>
   </div>
   <div class="hero-content">
-    <span class="hero-badge"><span class="hero-badge-dot"></span> Blog &amp; Artikel Resmi</span>
-    <h1 class="hero-title">Tips, Resep &amp; Edukasi<br/><em class="hero-title-em">Seputar Memasak</em></h1>
+    <span class="hero-badge"><span class="hero-badge-dot"></span> {{ $blogSettings->badge_text }}</span>
+    <h1 class="hero-title">{{ $blogSettings->title }}<br/><em class="hero-title-em">{{ $blogSettings->title_emphasis }}</em></h1>
     <div class="hero-divider">
       <div class="hdiv-line"></div>
       <i class="bi bi-droplet-fill hdiv-icon"></i>
       <div class="hdiv-line"></div>
     </div>
-    <p class="hero-desc">Inspirasi memasak, tips memilih minyak goreng yang sehat, resep lezat,<br/>dan edukasi seputar industri sawit dari para ahli AROMAS.</p>
-    <div class="hero-search-wrap">
+    <p class="hero-desc">{!! nl2br(e($blogSettings->description)) !!}</p>
+    <form action="{{ route('blog.search') }}" method="GET" class="hero-search-wrap">
       <i class="bi bi-search hs-icon"></i>
-      <input type="text" class="hero-search" id="heroSearch" placeholder="Cari artikel, tips, resep, atau topik…"/>
-      <button class="hs-btn" onclick="doHeroSearch()"><i class="bi bi-arrow-right"></i></button>
-    </div>
+      <input type="text" name="q" value="{{ request('q') }}" class="hero-search" id="heroSearch" placeholder="Cari artikel, tips, resep, atau topik…"/>
+      <button type="submit" class="hs-btn"><i class="bi bi-arrow-right"></i></button>
+    </form>
+    @if($blogSettings->stats && count($blogSettings->stats) > 0)
     <div class="hero-stats">
-      <div class="hstat"><span class="hstat-num">24+</span><span class="hstat-label">Artikel</span></div>
-      <div class="hstat-div"></div>
-      <div class="hstat"><span class="hstat-num">4</span><span class="hstat-label">Kategori</span></div>
-      <div class="hstat-div"></div>
-      <div class="hstat"><span class="hstat-num">12K+</span><span class="hstat-label">Pembaca</span></div>
+      @foreach($blogSettings->stats as $stat)
+      <div class="hstat"><span class="hstat-num">{{ $stat['number'] }}</span><span class="hstat-label">{{ $stat['label'] }}</span></div>
+      @if(!$loop->last)<div class="hstat-div"></div>@endif
+      @endforeach
     </div>
+    @endif
   </div>
   <div class="scroll-indicator">
     <div class="scroll-arrow"><div class="sa"></div><div class="sa"></div><div class="sa"></div></div>
     <span>Scroll</span>
   </div>
 </section>
+@else
+<section class="blog-hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Blog AROMAS</h1>
+    <p class="hero-desc">Artikel, tips, dan resep terbaru</p>
+  </div>
+</section>
+@endif
 
 <!-- BREADCRUMB -->
 <div class="bc-bar">
@@ -56,18 +69,19 @@
   <div class="container">
     <div class="filter-row">
       <div class="filter-tabs" id="filterTabs">
-        <button class="ftab active" data-cat="all"><i class="bi bi-grid-fill"></i> Semua</button>
-        <button class="ftab" data-cat="tips"><i class="bi bi-lightbulb-fill"></i> Tips Memasak</button>
-        <button class="ftab" data-cat="resep"><i class="bi bi-book-fill"></i> Resep</button>
-        <button class="ftab" data-cat="edukasi"><i class="bi bi-mortarboard-fill"></i> Edukasi</button>
-        <button class="ftab" data-cat="industri"><i class="bi bi-building-fill"></i> Industri</button>
+        <button class="ftab active" data-cat="all" onclick="window.location.href='{{ route('blog.index') }}'"><i class="bi bi-grid-fill"></i> Semua</button>
+        @foreach($categories as $category)
+        <button class="ftab" data-cat="{{ $category->slug }}" onclick="window.location.href='{{ route('blog.category', $category->slug) }}'">
+          <i class="bi {{ $category->icon }}"></i> {{ $category->name }}
+        </button>
+        @endforeach
       </div>
       <div class="filter-right">
         <span class="sort-label">Urutkan:</span>
-        <select class="sort-select" id="sortSelect">
-          <option value="newest">Terbaru</option>
-          <option value="popular">Terpopuler</option>
-          <option value="oldest">Terlama</option>
+        <select class="sort-select" id="sortSelect" onchange="window.location.href=this.value">
+          <option value="{{ route('blog.index', array_merge(request()->query(), ['sort' => 'newest'])) }}" {{ request('sort') == 'newest' ? 'selected' : '' }}>Terbaru</option>
+          <option value="{{ route('blog.index', array_merge(request()->query(), ['sort' => 'popular'])) }}" {{ request('sort') == 'popular' ? 'selected' : '' }}>Terpopuler</option>
+          <option value="{{ route('blog.index', array_merge(request()->query(), ['sort' => 'oldest'])) }}" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Terlama</option>
         </select>
       </div>
     </div>
@@ -76,38 +90,45 @@
 </div>
 
 <!-- FEATURED -->
+@if($featuredPost)
 <section class="featured-section">
   <div class="container">
     <div class="section-eyebrow">Artikel Pilihan</div>
     <div class="featured-card" data-reveal>
       <div class="fc-media">
-        <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=900&h=600&fit=crop&auto=format" alt="Cara Memilih Minyak Goreng Sehat"/>
+        <img src="{{ Storage::url($featuredPost->featured_image) }}" alt="{{ $featuredPost->title }}"/>
         <div class="fc-media-overlay"></div>
         <div class="fc-ribbon"><i class="bi bi-star-fill"></i> Featured</div>
-        <div class="fc-reading-badge"><i class="bi bi-clock"></i> 7 menit baca</div>
+        <div class="fc-reading-badge"><i class="bi bi-clock"></i> {{ $featuredPost->reading_time }} menit baca</div>
       </div>
       <div class="fc-body">
-        <div class="fc-cat"><i class="bi bi-lightbulb-fill"></i> Tips Memasak</div>
-        <h2 class="fc-title"><a href="{{ url('/blog/detail') }}">Cara Memilih Minyak Goreng yang Sehat untuk Keluarga: Panduan Lengkap dari Ahli Gizi</a></h2>
-        <p class="fc-excerpt">Tidak semua minyak goreng sama. Pelajari cara memilih minyak goreng yang tepat berdasarkan titik asap, kandungan lemak, sertifikasi, dan teknik memasak — agar masakan lebih sehat dan lezat setiap hari.</p>
+        <div class="fc-cat"><i class="bi {{ $featuredPost->category->icon ?? 'bi-grid-fill' }}"></i> {{ $featuredPost->category->name ?? 'Uncategorized' }}</div>
+        <h2 class="fc-title"><a href="{{ route('blog.show', $featuredPost->slug) }}">{{ $featuredPost->title }}</a></h2>
+        <p class="fc-excerpt">{{ $featuredPost->excerpt }}</p>
         <div class="fc-author-row">
-          <div class="fc-avatar">R</div>
+          @if($featuredPost->author && $featuredPost->author->avatar)
+          <div class="fc-avatar" style="background-image:url('{{ Storage::url($featuredPost->author->avatar) }}');background-size:cover;background-position:center;"></div>
+          @else
+          <div class="fc-avatar">{{ $featuredPost->author->initials ?? substr($featuredPost->author->name ?? 'A', 0, 1) }}</div>
+          @endif
           <div>
-            <div class="fc-author-name">Rizky Andrianto, S.Gz</div>
-            <div class="fc-author-meta"><i class="bi bi-calendar3"></i> 15 Januari 2026 &nbsp;·&nbsp; <i class="bi bi-eye"></i> 3.2K views</div>
+            <div class="fc-author-name">{{ $featuredPost->author->name ?? 'AROMAS' }}</div>
+            <div class="fc-author-meta"><i class="bi bi-calendar3"></i> {{ $featuredPost->published_at->format('d M Y') }} &nbsp;·&nbsp; <i class="bi bi-eye"></i> {{ number_format($featuredPost->view_count/1000, 1) }}K views</div>
           </div>
         </div>
+        @if($featuredPost->tags && count($featuredPost->tags) > 0)
         <div class="fc-tags">
-          <span class="fc-tag">Kesehatan</span>
-          <span class="fc-tag">Minyak Goreng</span>
-          <span class="fc-tag">Tips Dapur</span>
-          <span class="fc-tag">Keluarga</span>
+          @foreach(array_slice($featuredPost->tags, 0, 4) as $tag)
+          <span class="fc-tag">#{{ ucfirst($tag) }}</span>
+          @endforeach
         </div>
-        <a href="{{ url('/blog/detail') }}" class="btn-read">Baca Artikel Lengkap <i class="bi bi-arrow-right br-arrow"></i></a>
+        @endif
+        <a href="{{ route('blog.show', $featuredPost->slug) }}" class="btn-read">Baca Artikel Lengkap <i class="bi bi-arrow-right br-arrow"></i></a>
       </div>
     </div>
   </div>
 </section>
+@endif
 
 <!-- MAIN -->
 <section class="main-section">
@@ -115,39 +136,59 @@
     <div class="row g-5">
       <div class="col-lg-8">
         <div class="d-flex align-items-center justify-content-between mb-4">
-          <h5 style="color:var(--g600);font-weight:600;font-size:.85rem;" id="resultLabel">Menampilkan semua artikel</h5>
+          <h5 style="color:var(--g600);font-weight:600;font-size:.85rem;" id="resultLabel">Menampilkan {{ $posts->total() }} artikel</h5>
         </div>
-        <div class="row g-4" id="articlesGrid"></div>
+        @if($posts->count() > 0)
+        <div class="row g-4" id="articlesGrid">
+          @foreach($posts as $post)
+          <div class="col-md-6 col-lg-6">
+            <article class="article-card">
+              <div class="ac-img-wrap">
+                <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->title }}"/>
+                <div class="ac-category cat-{{ $post->category->slug ?? 'tips' }}">{{ $post->category->name ?? 'Uncategorized' }}</div>
+                <div class="ac-read-pill"><i class="bi bi-clock"></i> {{ $post->reading_time }} min</div>
+                <div class="ac-hover-overlay">
+                  <div class="ac-quick-read"><i class="bi bi-eye"></i> {{ number_format($post->view_count/1000, 0) }}K reads</div>
+                </div>
+              </div>
+              <div class="ac-body">
+                <div class="ac-cat-label"><i class="bi {{ $post->category->icon ?? 'bi-grid-fill' }}"></i> {{ $post->category->name ?? 'Uncategorized' }}</div>
+                <h3 class="ac-title"><a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }}</a></h3>
+                <p class="ac-excerpt">{{ Str::limit($post->excerpt, 100) }}</p>
+                <div class="ac-footer">
+                  <div class="ac-meta-row">
+                    @if($post->author && $post->author->avatar)
+                    <div class="ac-mini-avatar" style="background-image:url('{{ Storage::url($post->author->avatar) }}');background-size:cover;background-position:center;"></div>
+                    @else
+                    <div class="ac-mini-avatar">{{ $post->author->initials ?? substr($post->author->name ?? 'A', 0, 1) }}</div>
+                    @endif
+                    <div class="ac-meta-info">
+                      <span class="ac-author">{{ $post->author->name ?? 'AROMAS' }}</span>
+                      <span class="ac-date"><i class="bi bi-calendar3"></i> {{ $post->published_at->format('d M Y') }}</span>
+                    </div>
+                  </div>
+                  <a href="{{ route('blog.show', $post->slug) }}" class="ac-cta">Baca <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+            </article>
+          </div>
+          @endforeach
+        </div>
+        <div class="pagination-row" id="paginationWrap">
+          <div class="pagination-simple">{{ $posts->links() }}</div>
+        </div>
+        @else
         <div class="no-results" id="noResults">
           <div class="nr-icon"><i class="bi bi-search"></i></div>
           <div class="nr-title">Tidak ada artikel ditemukan</div>
           <div class="nr-sub">Coba kata kunci atau kategori lain</div>
         </div>
-        <div class="pagination-row" id="paginationWrap"></div>
+        @endif
       </div>
 
       <!-- SIDEBAR -->
       <div class="col-lg-4">
         @include('partials.blog-sidebar')
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section">
-  <div class="container cta-inner">
-    <div class="row align-items-center gy-4">
-      <div class="col-lg-7" data-reveal>
-        <div class="cta-badge">Siap Berkolaborasi</div>
-        <h2 class="cta-title">Punya Pertanyaan Seputar Produk?</h2>
-        <p class="cta-desc">Tim ahli AROMAS siap menjawab pertanyaan Anda tentang produk, pemesanan, atau peluang kemitraan.</p>
-      </div>
-      <div class="col-lg-5" data-reveal="right">
-        <div class="gap-cta justify-content-lg-end">
-          <a href="{{ url('/product') }}" class="btn-cta-primary"><i class="bi bi-box-seam-fill"></i> Lihat Produk</a>
-          <a href="{{ url('/contact') }}" class="btn-cta-outline"><i class="bi bi-chat-dots-fill"></i> Hubungi Kami</a>
-        </div>
       </div>
     </div>
   </div>
@@ -412,195 +453,23 @@ img{max-width:100%;height:auto;display:block;}
 
 @push('scripts')
 <script>
-/* ─── DATA ─────────────────────────────────────────── */
-const articles=[
-  {id:1,cat:'tips',catLabel:'Tips Memasak',catClass:'cat-tips',
-    title:'Cara Memilih Minyak Goreng yang Sehat untuk Keluarga',
-    excerpt:'Panduan lengkap memilih minyak goreng berkualitas — dari titik asap, kandungan lemak jenuh, hingga sertifikasi yang wajib dicek sebelum membeli.',
-    img:'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=700&h=480&fit=crop&auto=format',
-    author:'Rizky A.',authorInit:'R',date:'15 Jan 2026',readTime:'7 mnt',tags:['Kesehatan','Minyak Goreng','Tips'],views:3200},
-  {id:2,cat:'resep',catLabel:'Resep',catClass:'cat-resep',
-    title:'5 Resep Gorengan Crispy yang Wajib Dicoba di Rumah',
-    excerpt:'Kumpulan resep gorengan renyah dan lezat — dari pisang goreng tepung hingga ayam crispy bumbu rempah khas Nusantara menggunakan AROMAS.',
-    img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=700&h=480&fit=crop&auto=format',
-    author:'Sari W.',authorInit:'S',date:'8 Jan 2026',readTime:'5 mnt',tags:['Resep','Gorengan','Dapur'],views:2800},
-  {id:3,cat:'edukasi',catLabel:'Edukasi',catClass:'cat-edukasi',
-    title:'Fakta Menarik Tentang Minyak Kelapa Sawit Indonesia',
-    excerpt:'Indonesia penghasil minyak sawit terbesar di dunia. Pelajari fakta mengejutkan tentang proses produksi, manfaat, dan peran strategis sawit bagi perekonomian.',
-    img:'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=700&h=480&fit=crop&auto=format',
-    author:'Budi S.',authorInit:'B',date:'2 Jan 2026',readTime:'6 mnt',tags:['Sawit','Edukasi','Industri'],views:1900},
-  {id:4,cat:'edukasi',catLabel:'Edukasi',catClass:'cat-edukasi',
-    title:'Perbedaan Minyak Goreng Botol, Jeriken, dan BIB: Mana yang Tepat?',
-    excerpt:'Memilih kemasan minyak goreng yang tepat bergantung pada kebutuhan. Panduan perbandingan ketiga jenis kemasan AROMAS untuk rumah tangga hingga industri.',
-    img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&h=480&fit=crop&auto=format',
-    author:'Rizky A.',authorInit:'R',date:'28 Des 2025',readTime:'5 mnt',tags:['Kemasan','AROMAS','Tips'],views:1500},
-  {id:5,cat:'tips',catLabel:'Tips Memasak',catClass:'cat-tips',
-    title:'Cara Menggoreng Ayam Agar Renyah di Luar, Juicy di Dalam',
-    excerpt:'Rahasia ayam goreng renyah sempurna ada pada suhu minyak, cara marinasi, dan teknik penggorengan yang benar. Ikuti 7 langkah simpel dari chef profesional.',
-    img:'https://images.unsplash.com/photo-1612392062631-94e91ad9be83?w=700&h=480&fit=crop&auto=format',
-    author:'Chef Dian',authorInit:'D',date:'20 Des 2025',readTime:'4 mnt',tags:['Ayam','Tips','Dapur'],views:2100},
-  {id:6,cat:'industri',catLabel:'Industri',catClass:'cat-industri',
-    title:'Sejarah & Perkembangan Industri Minyak Goreng Sawit Indonesia',
-    excerpt:'Dari kebun sawit pertama di Sumatera Utara hingga industri senilai miliaran dolar — perjalanan panjang industri minyak goreng sawit Indonesia dalam 100 tahun.',
-    img:'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=700&h=480&fit=crop&auto=format',
-    author:'Budi S.',authorInit:'B',date:'12 Des 2025',readTime:'8 mnt',tags:['Sejarah','Industri','Sawit'],views:1200}
-];
+// AOS Animation initialization
+document.addEventListener('DOMContentLoaded', function() {
+  // Simple reveal animation for data-reveal elements
+  const revealElements = document.querySelectorAll('[data-reveal]');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const delay = parseInt(entry.target.dataset.revealDelay || 0);
+        setTimeout(() => {
+          entry.target.classList.add('revealed');
+        }, delay);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-let currentCat='all', currentSearch='', currentPage=1;
-const perPage=6;
-
-document.addEventListener('DOMContentLoaded',()=>{
-  initReveal();
-  initFilterTabs();
-  initSidebarCats();
-  initSidebarSearch();
-  initSort();
-  renderArticles();
-  document.getElementById('heroSearch').addEventListener('keydown',e=>{ if(e.key==='Enter')doHeroSearch(); });
+  revealElements.forEach(el => revealObserver.observe(el));
 });
-
-function initReveal(){
-  const els=document.querySelectorAll('[data-reveal]');
-  const obs=new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(!entry.isIntersecting)return;
-      const delay=parseInt(entry.target.dataset.revealDelay||0);
-      setTimeout(()=>entry.target.classList.add('revealed'),delay);
-      obs.unobserve(entry.target);
-    });
-  },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
-  els.forEach(el=>obs.observe(el));
-}
-
-function initFilterTabs(){
-  document.querySelectorAll('#filterTabs .ftab').forEach(tab=>{
-    tab.addEventListener('click',function(){
-      document.querySelectorAll('#filterTabs .ftab').forEach(t=>t.classList.remove('active'));
-      this.classList.add('active');
-      currentCat=this.dataset.cat;
-      currentPage=1;
-      syncSidebarCat(currentCat);
-      renderArticles();
-      updateProgress();
-    });
-  });
-}
-
-function initSidebarCats(){
-  document.querySelectorAll('#sidebarCats a[data-scat]').forEach(c=>{
-    c.addEventListener('click',e=>{
-      e.preventDefault();
-      document.querySelectorAll('#sidebarCats a').forEach(x=>x.classList.remove('active-cat'));
-      c.classList.add('active-cat');
-      currentCat=c.dataset.scat;
-      currentPage=1;
-      syncFilterTab(currentCat);
-      renderArticles();
-    });
-  });
-}
-
-function syncSidebarCat(cat){
-  document.querySelectorAll('#sidebarCats a[data-scat]').forEach(c=>{
-    c.classList.toggle('active-cat',c.dataset.scat===cat);
-  });
-}
-
-function syncFilterTab(cat){
-  document.querySelectorAll('#filterTabs .ftab').forEach(t=>{
-    t.classList.toggle('active',t.dataset.cat===cat);
-  });
-}
-
-function updateProgress(){
-  const total=articles.length, filtered=getFiltered().length;
-  document.getElementById('filterProgress').style.width=(total>0?(filtered/total*100):100)+'%';
-}
-
-function initSidebarSearch(){
-  let t;
-  document.getElementById('sidebarSearch').addEventListener('input',function(){
-    clearTimeout(t);
-    const val=this.value;
-    t=setTimeout(()=>{ currentSearch=val.toLowerCase().trim(); currentPage=1; renderArticles(); },280);
-  });
-}
-
-function doHeroSearch(){
-  const val=document.getElementById('heroSearch').value;
-  currentSearch=val.toLowerCase().trim();
-  document.getElementById('sidebarSearch').value=val;
-  currentPage=1;
-  renderArticles();
-  const ms=document.querySelector('.main-section');
-  if(ms)window.scrollTo({top:ms.getBoundingClientRect().top+pageYOffset-80,behavior:'smooth'});
-}
-
-function filterByTag(tag){
-  currentSearch=tag.toLowerCase(); currentCat='all'; currentPage=1;
-  document.getElementById('sidebarSearch').value=tag;
-  syncSidebarCat('all'); syncFilterTab('all'); renderArticles();
-}
-
-function initSort(){
-  document.getElementById('sortSelect').addEventListener('change',()=>{ currentPage=1;renderArticles(); });
-}
-
-function getFiltered(){
-  let arr=articles.slice();
-  if(currentCat!=='all')arr=arr.filter(a=>a.cat===currentCat);
-  if(currentSearch)arr=arr.filter(a=>(a.title+' '+a.excerpt+' '+a.tags.join(' ')).toLowerCase().includes(currentSearch));
-  const sv=document.getElementById('sortSelect').value;
-  if(sv==='popular')arr.sort((a,b)=>b.views-a.views);
-  else if(sv==='oldest')arr.sort((a,b)=>a.id-b.id);
-  else arr.sort((a,b)=>b.id-a.id);
-  return arr;
-}
-
-function renderArticles(){
-  const filtered=getFiltered(), grid=document.getElementById('articlesGrid'), noRes=document.getElementById('noResults'), pagWrap=document.getElementById('paginationWrap'), label=document.getElementById('resultLabel');
-  const total=filtered.length, totalPages=Math.ceil(total/perPage);
-  if(currentPage>totalPages&&totalPages>0)currentPage=1;
-  const start=(currentPage-1)*perPage, pageItems=filtered.slice(start,start+perPage);
-  grid.innerHTML='';
-  if(pageItems.length===0){ noRes.classList.add('show'); if(pagWrap)pagWrap.innerHTML=''; if(label)label.textContent='Tidak ada artikel'; return; }
-  noRes.classList.remove('show');
-  pageItems.forEach(a=>{
-    const col=document.createElement('div'); col.className='col-md-6';
-    col.innerHTML=`<article class="article-card" data-reveal>
-      <div class="ac-img-wrap">
-        <img src="${a.img}" alt="${a.title}" loading="lazy"/>
-        <span class="ac-category ${a.catClass}">${a.catLabel}</span>
-        <span class="ac-read-pill"><i class="bi bi-clock"></i> ${a.readTime}</span>
-        <div class="ac-hover-overlay"><span class="ac-quick-read"><i class="bi bi-bookmark-fill"></i> Baca sekarang</span></div>
-      </div>
-      <div class="ac-body">
-        <div class="ac-cat-label">${a.catLabel}</div>
-        <h3 class="ac-title"><a href="{{ url('/blog/detail') }}?id=${a.id}">${a.title}</a></h3>
-        <p class="ac-excerpt">${a.excerpt}</p>
-        <div class="ac-footer">
-          <div class="ac-meta-row">
-            <div class="ac-mini-avatar">${a.authorInit}</div>
-            <div class="ac-meta-info"><span class="ac-author">${a.author}</span><span class="ac-date">${a.date}</span></div>
-          </div>
-          <a href="{{ url('/blog/detail') }}?id=${a.id}" class="ac-cta">Baca <i class="bi bi-arrow-right"></i></a>
-        </div>
-      </div>
-    </article>`;
-    grid.appendChild(col);
-  });
-  setTimeout(()=>initReveal(),0);
-  if(label)label.textContent=`Menampilkan ${pageItems.length} dari ${total} artikel`;
-  if(pagWrap){
-    if(totalPages<=1){ pagWrap.innerHTML=''; return; }
-    let html='';
-    for(let i=1;i<=totalPages;i++){
-      html+=`<button class="pg ${i===currentPage?'pg-active':''}" onclick="goToPage(${i})">${i}</button>`;
-    }
-    pagWrap.innerHTML=html;
-  }
-}
-
-function goToPage(n){ currentPage=n; renderArticles(); window.scrollTo({top:0,behavior:'smooth'}); }
 </script>
 @endpush
