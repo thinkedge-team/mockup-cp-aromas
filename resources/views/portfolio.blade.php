@@ -12,6 +12,27 @@
     <div class="container text-center">
         <div class="row justify-content-center">
             <div class="col-lg-9 col-md-10" data-aos="fade-up">
+                @if($portfolioSettings && $portfolioSettings->is_active)
+                <span class="hero-badge"><i class="bi {{ $portfolioSettings->badge_icon ?? 'bi-briefcase-fill' }}"></i> {{ $portfolioSettings->badge_text ?? 'Portofolio Kemitraan' }}</span>
+                <h1 class="hero-main-title">
+                    {{ $portfolioSettings->title ?? 'Dipercaya Ribuan Mitra' }}<br />
+                    <span class="italic">{{ $portfolioSettings->title_emphasis ?? 'Di Seluruh Indonesia' }}</span>
+                </h1>
+                <p class="hero-description">
+                    {{ $portfolioSettings->description ?? 'Dari UMKM hingga korporasi besar — AROMAS bangga menjadi bagian dari ribuan kisah sukses mitra bisnis kami di berbagai sektor industri.' }}
+                </p>
+
+                @if($portfolioSettings->stats && count($portfolioSettings->stats) > 0)
+                <div class="hero-stats">
+                    @foreach($portfolioSettings->stats as $stat)
+                    <div class="hero-stat-pill">
+                        <div class="hero-stat-icon"><i class="bi {{ $stat['icon'] ?? 'bi-people-fill' }}"></i></div>
+                        <div class="hero-stat-info"><strong>{{ $stat['number'] }}</strong><span>{{ $stat['label'] }}</span></div>
+                    </div>
+                    @endforeach
+                </div>
+                @endif
+                @else
                 <span class="hero-badge"><i class="bi bi-briefcase-fill"></i> Portofolio Kemitraan</span>
                 <h1 class="hero-main-title">
                     Dipercaya Ribuan Mitra<br />
@@ -20,33 +41,23 @@
                 <p class="hero-description">
                     Dari UMKM hingga korporasi besar — AROMAS bangga menjadi bagian dari ribuan kisah sukses mitra bisnis kami di berbagai sektor industri.
                 </p>
+                @endif
 
-                <div class="hero-stats">
-                    <div class="hero-stat-pill">
-                        <div class="hero-stat-icon"><i class="bi bi-people-fill"></i></div>
-                        <div class="hero-stat-info"><strong>1Jt+</strong><span>Pelanggan Setia</span></div>
-                    </div>
-                    <div class="hero-stat-pill">
-                        <div class="hero-stat-icon"><i class="bi bi-building"></i></div>
-                        <div class="hero-stat-info"><strong>500+</strong><span>Mitra Distribusi</span></div>
-                    </div>
-                    <div class="hero-stat-pill">
-                        <div class="hero-stat-icon"><i class="bi bi-geo-alt-fill"></i></div>
-                        <div class="hero-stat-info"><strong>34</strong><span>Provinsi Terjangkau</span></div>
-                    </div>
-                    <div class="hero-stat-pill">
-                        <div class="hero-stat-icon"><i class="bi bi-star-fill"></i></div>
-                        <div class="hero-stat-info"><strong>4.9/5</strong><span>Rating Kepuasan</span></div>
-                    </div>
-                </div>
+                @php
+                    $totalPartners = $partners->flatten()->count();
+                    $retailCount = $partners['retail']?->count() ?? 0;
+                    $horecaCount = $partners['horeca']?->count() ?? 0;
+                    $industriCount = $partners['industri']?->count() ?? 0;
+                    $cateringCount = $partners['catering']?->count() ?? 0;
+                @endphp
 
                 <!-- Hero filter chips — synced with sticky bar -->
                 <div class="hero-filter-chips">
                     <span class="hchip active" data-filter="all"><i class="bi bi-grid-fill"></i> Semua Mitra</span>
-                    <span class="hchip" data-filter="retail"><i class="bi bi-shop"></i> Retail <small style="background:rgba(255,255,255,.2);border-radius:10px;padding:1px 7px;margin-left:4px;font-size:.7rem;">3</small></span>
-                    <span class="hchip" data-filter="horeca"><i class="bi bi-cup-hot-fill"></i> Hotel & Resto <small style="background:rgba(255,255,255,.2);border-radius:10px;padding:1px 7px;margin-left:4px;font-size:.7rem;">3</small></span>
-                    <span class="hchip" data-filter="industri"><i class="bi bi-buildings-fill"></i> Industri <small style="background:rgba(255,255,255,.2);border-radius:10px;padding:1px 7px;margin-left:4px;font-size:.7rem;">3</small></span>
-                    <span class="hchip" data-filter="catering"><i class="bi bi-egg-fried"></i> Katering <small style="background:rgba(255,255,255,.2);border-radius:10px;padding:1px 7px;margin-left:4px;font-size:.7rem;">3</small></span>
+                    <span class="hchip" data-filter="retail"><i class="bi bi-shop"></i> Retail <small style="background:rgba(255,255,255,.2);border-radius:10px;padding:1px 7px;margin-left:4px;font-size:.7rem;">{{ $retailCount }}</small></span>
+                    <span class="hchip" data-filter="horeca"><i class="bi bi-cup-hot-fill"></i> Hotel & Resto <small style="background:rgba(255,255,255,.2);border-radius:10px;padding:1px 7px;margin-left:4px;font-size:.7rem;">{{ $horecaCount }}</small></span>
+                    <span class="hchip" data-filter="industri"><i class="bi bi-buildings-fill"></i> Industri <small style="background:rgba(255,255,255,.2);border-radius:10px;padding:1px 7px;margin-left:4px;font-size:.7rem;">{{ $industriCount }}</small></span>
+                    <span class="hchip" data-filter="catering"><i class="bi bi-egg-fried"></i> Katering <small style="background:rgba(255,255,255,.2);border-radius:10px;padding:1px 7px;margin-left:4px;font-size:.7rem;">{{ $cateringCount }}</small></span>
                 </div>
             </div>
         </div>
@@ -76,23 +87,23 @@
             <div class="filter-tabs">
                 <button class="ftab active" data-filter="all">
                     <i class="bi bi-grid-fill"></i> Semua
-                    <span class="tab-count" id="count-all">12</span>
+                    <span class="tab-count" id="count-all">{{ $totalPartners }}</span>
                 </button>
                 <button class="ftab" data-filter="retail">
                     <i class="bi bi-shop"></i> Retail
-                    <span class="tab-count">3</span>
+                    <span class="tab-count">{{ $retailCount }}</span>
                 </button>
                 <button class="ftab" data-filter="horeca">
                     <i class="bi bi-cup-hot-fill"></i> Horeca
-                    <span class="tab-count">3</span>
+                    <span class="tab-count">{{ $horecaCount }}</span>
                 </button>
                 <button class="ftab" data-filter="industri">
                     <i class="bi bi-buildings-fill"></i> Industri
-                    <span class="tab-count">3</span>
+                    <span class="tab-count">{{ $industriCount }}</span>
                 </button>
                 <button class="ftab" data-filter="catering">
                     <i class="bi bi-egg-fried"></i> Katering
-                    <span class="tab-count">3</span>
+                    <span class="tab-count">{{ $cateringCount }}</span>
                 </button>
             </div>
             <div class="filter-right">
@@ -100,7 +111,7 @@
                     <i class="bi bi-funnel-fill"></i> Filter: <strong id="activeFilterLabel">Retail</strong>
                     <i class="bi bi-x-circle-fill btn-clear-pill" onclick="resetFilter(); event.stopPropagation();"></i>
                 </span>
-                <span class="result-count">Menampilkan <strong id="portCount">12</strong> mitra</span>
+                <span class="result-count">Menampilkan <strong id="portCount">{{ $totalPartners }}</strong> mitra</span>
             </div>
         </div>
     </div>
@@ -133,81 +144,26 @@
 
         <div class="testi-slider-wrapper" data-aos="fade-up" data-aos-delay="100">
             <div class="testi-slider-track" id="testiSliderTrack">
-                <!-- Slide 1 -->
+                @foreach($testimonials as $testimonial)
                 <div class="testi-slide">
                     <div class="testi-card">
                         <div class="testi-quote-icon">"</div>
-                        <p class="testi-text">Kualitas minyak AROMAS sangat konsisten. Titik asap tinggi membuat gorengan kami renyah sempurna. Sudah 5 tahun setia memakai AROMAS!</p>
+                        <p class="testi-text">{{ $testimonial->testimonial_text }}</p>
                         <div class="testi-author">
-                            <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=100&h=100&fit=crop&crop=face" alt="Chef Rudi" /></div>
+                            @if($testimonial->author_avatar)
+                            <div class="testi-avatar"><img src="{{ Storage::url($testimonial->author_avatar) }}" alt="{{ $testimonial->author_name }}" /></div>
+                            @else
+                            <div class="testi-avatar">{{ substr($testimonial->author_name, 0, 1) }}</div>
+                            @endif
                             <div>
-                                <div class="testi-name">Chef Rudi Santoso</div>
-                                <div class="testi-role">Executive Chef, Grand Hotel Horizon</div>
-                                <div class="testi-rating"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                                <div class="testi-name">{{ $testimonial->author_name }}</div>
+                                <div class="testi-role">{{ $testimonial->author_role }}</div>
+                                <div class="testi-rating">{!! str_repeat('<i class="bi bi-star-fill"></i>', floor($testimonial->rating)) !!}{{ $testimonial->rating % 1 >= 0.5 ? '<i class="bi bi-star-half"></i>' : '' }}</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Slide 2 -->
-                <div class="testi-slide">
-                    <div class="testi-card">
-                        <div class="testi-quote-icon">"</div>
-                        <p class="testi-text">Supply selalu tepat waktu, tidak pernah ada kendala. Tim sales AROMAS sangat responsif dan profesional. Sangat direkomendasikan!</p>
-                        <div class="testi-author">
-                            <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&h=100&fit=crop&crop=face" alt="Bu Sari" /></div>
-                            <div>
-                                <div class="testi-name">Sari Dewi</div>
-                                <div class="testi-role">Owner, Catering Nusantara</div>
-                                <div class="testi-rating"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Slide 3 -->
-                <div class="testi-slide">
-                    <div class="testi-card">
-                        <div class="testi-quote-icon">"</div>
-                        <p class="testi-text">Sebagai produsen snack ekspor, kami butuh minyak dengan kualitas stabil. AROMAS memenuhi standar kami bahkan melebihi ekspektasi.</p>
-                        <div class="testi-author">
-                            <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Pak Budi" /></div>
-                            <div>
-                                <div class="testi-name">Budi Hartono</div>
-                                <div class="testi-role">Direktur Produksi, IndoSnack Factory</div>
-                                <div class="testi-rating"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Slide 4 -->
-                <div class="testi-slide">
-                    <div class="testi-card">
-                        <div class="testi-quote-icon">"</div>
-                        <p class="testi-text">Beralih ke AROMAS adalah keputusan terbaik untuk bisnis kami. Penjualan minyak goreng naik 30% karena pelanggan puas dengan kualitasnya yang jernih dan murni.</p>
-                        <div class="testi-author">
-                            <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face" alt="Ibu Ratna" /></div>
-                            <div>
-                                <div class="testi-name">Ratna Kusuma</div>
-                                <div class="testi-role">Pemilik, Toko Kelontong Berkah</div>
-                                <div class="testi-rating"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Slide 5 -->
-                <div class="testi-slide">
-                    <div class="testi-card">
-                        <div class="testi-quote-icon">"</div>
-                        <p class="testi-text">Kemasan AROMAS sangat kokoh, zero kebocoran dalam pengiriman e-commerce. Desain kemasan premium juga meningkatkan daya tarik produk di katalog digital kami.</p>
-                        <div class="testi-author">
-                            <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Pak Andi" /></div>
-                            <div>
-                                <div class="testi-name">Andi Wijaya</div>
-                                <div class="testi-role">CEO, NusaMart Online</div>
-                                <div class="testi-rating"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
 
@@ -233,30 +189,14 @@
             <p style="color:rgba(255,255,255,.7); max-width:520px; margin: 0 auto;">Angka-angka nyata yang mencerminkan kepercayaan mitra dan pelanggan kami.</p>
         </div>
         <div class="row g-4">
-            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="100">
+            @foreach($impactStats as $stat)
+            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="{{ 100 * $loop->index }}">
                 <div class="impact-card">
-                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=160&fit=crop" alt="Experience" class="impact-img" />
-                    <div class="impact-stat"><h3><span class="counter" data-target="15">0</span>+</h3><p>Tahun Pengalaman</p></div>
+                    <img src="{{ $stat->image ? Storage::url($stat->image) : 'https://via.placeholder.com/300x160' }}" alt="{{ $stat->label }}" class="impact-img" />
+                    <div class="impact-stat"><h3><span class="counter" data-target="{{ preg_replace('/[^0-9]/', '', $stat->number) }}">{{ $stat->number }}</span></h3><p>{{ $stat->label }}</p></div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="impact-card">
-                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&h=160&fit=crop" alt="Partners" class="impact-img" />
-                    <div class="impact-stat"><h3><span class="counter" data-target="500">0</span>+</h3><p>Mitra Distribusi</p></div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="300">
-                <div class="impact-card">
-                    <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=300&h=160&fit=crop" alt="Provinces" class="impact-img" />
-                    <div class="impact-stat"><h3><span class="counter" data-target="34">0</span></h3><p>Provinsi Terjangkau</p></div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="400">
-                <div class="impact-card">
-                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=160&fit=crop" alt="Customers" class="impact-img" />
-                    <div class="impact-stat"><h3><span class="counter" data-target="1000000">0</span>+</h3><p>Pelanggan Setia</p></div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -269,34 +209,15 @@
             <p style="color:rgba(255,255,255,.7); max-width:560px; margin: 0 auto;">Kualitas bukan sekadar janji — ini standar yang kami jaga di setiap tetes produk dan setiap layanan.</p>
         </div>
         <div class="row g-4">
-            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+            @foreach($keunggulan as $item)
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="{{ 80 * $loop->iteration }}">
                 <div class="kel-card">
-                    <div class="kel-icon"><i class="bi bi-award-fill"></i></div>
-                    <h4>Halal & Bersertifikat</h4>
-                    <p>Sertifikasi Halal MUI, BPOM RI, dan ISO 22000 — jaminan keamanan pangan tanpa kompromi.</p>
+                    @if($item->icon)<div class="kel-icon"><i class="bi {{ $item->icon }}"></i></div>@endif
+                    <h4>{{ $item->title }}</h4>
+                    <p>{{ $item->description }}</p>
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
-                <div class="kel-card">
-                    <div class="kel-icon"><i class="bi bi-truck"></i></div>
-                    <h4>Pengiriman Tepat Waktu</h4>
-                    <p>Jaringan logistik luas dengan tingkat ketepatan pengiriman 99% ke seluruh Indonesia.</p>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
-                <div class="kel-card">
-                    <div class="kel-icon"><i class="bi bi-headset"></i></div>
-                    <h4>Dukungan 24/7</h4>
-                    <p>Tim sales dan customer service siap membantu pertanyaan, pesanan, dan solusi bisnis Anda.</p>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="320">
-                <div class="kel-card">
-                    <div class="kel-icon"><i class="bi bi-graph-up-arrow"></i></div>
-                    <h4>Harga Kompetitif</h4>
-                    <p>Program harga khusus untuk mitra volume tinggi dengan kontrak jangka panjang yang menguntungkan.</p>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -306,37 +227,57 @@
     <div class="container">
         <h3 class="text-center mb-2" style="font-size: 1rem; color: var(--gray-500); font-weight: 500;" data-aos="fade-up">Didistribusikan Melalui Jaringan Terkemuka</h3>
         <div class="mitra-logos" data-aos="fade-up" data-aos-delay="100">
-            <div class="mitra-logo"><i class="bi bi-shop"></i><span>Indomaret</span></div>
-            <div class="mitra-logo"><i class="bi bi-shop"></i><span>Alfamart</span></div>
-            <div class="mitra-logo"><i class="bi bi-cart4"></i><span>Hypermart</span></div>
-            <div class="mitra-logo"><i class="bi bi-bag"></i><span>Giant</span></div>
-            <div class="mitra-logo"><i class="bi bi-basket"></i><span>Superindo</span></div>
-            <div class="mitra-logo"><i class="bi bi-globe"></i><span>Tokopedia</span></div>
+            @foreach($mitraLogos as $logo)
+            <div class="mitra-logo">
+                @if($logo->logo)
+                    @if($logo->url)
+                    <a href="{{ $logo->url }}" target="_blank" rel="noopener">
+                        <img src="{{ Storage::url($logo->logo) }}" alt="{{ $logo->name }}" />
+                    </a>
+                    @else
+                    <img src="{{ Storage::url($logo->logo) }}" alt="{{ $logo->name }}" />
+                    @endif
+                @else
+                <i class="bi bi-shop"></i>
+                @endif
+                <span>{{ $logo->name }}</span>
+            </div>
+            @endforeach
         </div>
     </div>
 </section>
 
 <!-- CTA -->
+@if($ctaSettings && $ctaSettings->is_active)
 <section class="cta-section">
     <div class="container">
         <div class="row align-items-center gy-4">
             <div class="col-lg-7" data-aos="fade-right">
-                <h2>Siap Bergabung<br /><span class="italic" style="-webkit-text-fill-color:inherit; color:var(--white);">Bersama Mitra AROMAS?</span></h2>
-                <p>Hubungi tim kami sekarang dan dapatkan penawaran harga khusus sesuai volume kebutuhan bisnis Anda.</p>
+                <h2>{{ $ctaSettings->title ?? 'Siap Bergabung' }}<br /><span class="italic" style="-webkit-text-fill-color:inherit; color:var(--white);">{{ $ctaSettings->title_emphasis ?? 'Bersama Mitra AROMAS?' }}</span></h2>
+                <p>{{ $ctaSettings->description ?? 'Hubungi tim kami sekarang dan dapatkan penawaran harga khusus sesuai volume kebutuhan bisnis Anda.' }}</p>
             </div>
             <div class="col-lg-5 text-lg-end" data-aos="fade-left">
                 <div class="d-flex gap-3 flex-wrap justify-content-lg-end">
+                    @if($ctaSettings->buttons && count($ctaSettings->buttons) > 0)
+                    @foreach($ctaSettings->buttons as $button)
+                    <a href="{{ $button['url'] }}" target="_blank" class="btn-cta-{{ $button['style'] ?? 'white' }}">
+                        <i class="bi {{ $button['icon'] ?? 'bi-whatsapp' }}"></i> {{ $button['label'] }}
+                    </a>
+                    @endforeach
+                    @else
                     <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20menjadi%20mitra" target="_blank" class="btn-cta-white">
                         <i class="bi bi-whatsapp"></i> Chat via WhatsApp
                     </a>
                     <a href="{{ url('/contact') }}" class="btn-cta-outline">
                         <i class="bi bi-envelope-fill"></i> Kirim Pesan
                     </a>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 </section>
+@endif
 
 @include('partials.portfolio-modals')
 @endsection
@@ -700,7 +641,25 @@ img { max-width: 100%; height: auto; }
 .modal-box { position: relative; z-index: 2; background: var(--white); border-radius: 26px; max-width: 800px; width: 100%; max-height: 92vh; overflow-y: auto; box-shadow: 0 30px 90px rgba(0,0,0,.3); transform: translateY(30px) scale(.97); transition: transform .38s cubic-bezier(.22,1,.36,1); }
 .port-modal.open .modal-box { transform: translateY(0) scale(1); }
 .modal-close { position: absolute; top: 16px; right: 16px; width: 38px; height: 38px; border-radius: 50%; background: var(--gray-100); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--gray-600); transition: all .2s ease; z-index: 20; }
-.modal-close:hover { background: var(--green); color: #fff; transform: rotate(90deg); }
+.modal-close:hover { background: var(--forest-green); color: #fff; transform: rotate(90deg); }
+.modal-inner { padding: 32px; }
+.modal-cat-tag { display: inline-block; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--forest-green); background: rgba(34,139,34,.1); padding: 4px 12px; border-radius: 50px; margin-bottom: 12px; }
+.modal-title { font-size: 1.75rem; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; font-family: var(--font-secondary); }
+.modal-sub { font-size: .95rem; color: var(--gray-500); margin-bottom: 16px; }
+.modal-img-inline { width: 100%; height: 280px; border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
+.modal-img-inline img { width: 100%; height: 100%; object-fit: cover; }
+.modal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px; }
+.modal-detail { background: var(--gray-100); padding: 14px 16px; border-radius: 12px; }
+.modal-detail-label { font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; color: var(--gray-500); margin-bottom: 6px; }
+.modal-detail-val { font-size: .9rem; font-weight: 600; color: var(--gray-800); }
+.modal-story-title { font-size: 1.1rem; font-weight: 700; color: var(--gray-800); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.modal-story-title i { color: var(--primary-gold); }
+.modal-story { font-size: .95rem; color: var(--gray-600); line-height: 1.8; margin-bottom: 24px; }
+.modal-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-modal-green { flex: 1; min-width: 150px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, var(--forest-green), var(--forest-green-dark)); color: #fff; padding: 14px 24px; border-radius: 12px; font-weight: 600; text-decoration: none; transition: all .25s ease; }
+.btn-modal-green:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(34,139,34,.3); color: #fff; }
+.btn-modal-wa { flex: 1; min-width: 150px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #25d366, #128c7e); color: #fff; padding: 14px 24px; border-radius: 12px; font-weight: 600; text-decoration: none; transition: all .25s ease; }
+.btn-modal-wa:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,.3); color: #fff; }
 
 /* RESPONSIVE */
 @media (max-width: 991px) {
@@ -711,6 +670,9 @@ img { max-width: 100%; height: auto; }
     .testi-slide { min-width: calc(50% - 12px); }
     .cta-section h2 { font-size: 2.25rem; }
     .sticky-filter-bar { top: 0; }
+    .modal-inner { padding: 24px; }
+    .modal-grid { grid-template-columns: 1fr; }
+    .modal-img-inline { height: 200px; }
 }
 
 @media (max-width: 575px) {
@@ -721,6 +683,11 @@ img { max-width: 100%; height: auto; }
     .filter-right { width: 100%; justify-content: space-between; }
     .cat-title { font-size: 1.5rem; }
     .impact-stat h3 { font-size: 2rem; }
+    .modal-inner { padding: 20px; }
+    .modal-title { font-size: 1.4rem; }
+    .modal-img-inline { height: 180px; }
+    .modal-actions { flex-direction: column; }
+    .btn-modal-green, .btn-modal-wa { min-width: 100%; }
 }
 </style>
 @endpush
@@ -914,6 +881,14 @@ function initTestiSlider() {
 
     createDots();
     updateSlider();
+}
+
+function openModal(id) {
+    const modal = document.getElementById('modal-' + id);
+    if (modal) {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
 }
 
 function closeModal(id) {

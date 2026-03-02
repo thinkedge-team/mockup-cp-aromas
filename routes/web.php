@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\PromoPageController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,9 +38,7 @@ Route::post('/blog/post/{id}/like', [BlogController::class, 'likePost'])->name('
 Route::post('/blog/comment/{id}/like', [BlogController::class, 'likeComment'])->name('blog.comment.like');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
-Route::get('/portfolio', function () {
-    return view('portfolio');
-});
+Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');
 
 Route::get('/partnership', function () {
     return view('partnership');

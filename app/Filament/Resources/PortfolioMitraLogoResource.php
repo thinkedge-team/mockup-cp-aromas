@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Filament\Resources;
+
+use App\Filament\Resources\PortfolioMitraLogoResource\Pages;
+use App\Models\PortfolioMitraLogo;
+use Filament\Forms;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Table;
+
+class PortfolioMitraLogoResource extends Resource
+{
+    protected static ?string $model = PortfolioMitraLogo::class;
+    protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
+    protected static ?string $navigationGroup = 'Portfolio & Kemitraan';
+    protected static ?string $navigationLabel = 'Mitra Logos';
+    protected static ?int $navigationSort = 6;
+
+    public static function form(Form $form): Form
+    {
+        return $form->schema([
+            Forms\Components\Section::make('Mitra Logo')
+                ->schema([
+                    Forms\Components\TextInput::make('name')->label('Company Name')->required()->maxLength(255)->columnSpan(1),
+                    Forms\Components\FileUpload::make('logo')->label('Logo Image')->image()->directory('portfolio/logos')->maxSize(2048)->columnSpan(1),
+                    Forms\Components\TextInput::make('url')->label('Website URL')->maxLength(500)->columnSpanFull(),
+                    Forms\Components\TextInput::make('sort_order')->label('Sort Order')->numeric()->default(0)->columnSpan(1),
+                    Forms\Components\Toggle::make('is_active')->label('Active')->default(true)->columnSpan(1),
+                ])->columns(2),
+        ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table->columns([
+            Tables\Columns\ImageColumn::make('logo')->label('Logo')->circular(),
+            Tables\Columns\TextColumn::make('name')->label('Name')->searchable()->sortable(),
+            Tables\Columns\TextColumn::make('sort_order')->label('Order')->numeric()->sortable(),
+            Tables\Columns\IconColumn::make('is_active')->label('Active')->boolean()->sortable(),
+        ])->defaultSort('sort_order', 'asc')->actions([Tables\Actions\EditAction::make(), Tables\Actions\DeleteAction::make()])->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])]);
+    }
+
+    public static function getPages(): array
+    {
+        return ['index' => Pages\ListPortfolioMitraLogos::route('/')];
+    }
+}
