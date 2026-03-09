@@ -4,25 +4,10 @@
     <div class="sw-icon"><i class="bi bi-search"></i></div>
     <div class="sw-title">Cari Artikel</div>
   </div>
-  <div class="sw-search-group">
-    <input type="text" class="sw-search" id="sidebarSearch" placeholder="Ketik kata kunci…"/>
+  <form action="{{ route('blog.search') }}" method="GET" class="sw-search-group">
+    <input type="text" name="q" value="{{ request('q') }}" class="sw-search" id="sidebarSearch" placeholder="Ketik kata kunci…"/>
     <i class="bi bi-search sw-search-icon"></i>
-  </div>
-</div>
-
-<!-- Categories -->
-<div class="sidebar-widget" data-reveal="right" data-reveal-delay="120">
-  <div class="sw-header">
-    <div class="sw-icon"><i class="bi bi-bookmark-fill"></i></div>
-    <div class="sw-title">Kategori</div>
-  </div>
-  <ul class="cat-list" id="sidebarCats">
-    <li class="cat-item"><a href="#" class="active-cat" data-scat="all"><span><i class="bi bi-grid-fill"></i> Semua Artikel</span><span class="cat-count">6</span></a></li>
-    <li class="cat-item"><a href="#" data-scat="tips"><span><i class="bi bi-lightbulb-fill" style="color:#e65100"></i> Tips Memasak</span><span class="cat-count">2</span></a></li>
-    <li class="cat-item"><a href="#" data-scat="resep"><span><i class="bi bi-book-fill" style="color:#c62828"></i> Resep</span><span class="cat-count">1</span></a></li>
-    <li class="cat-item"><a href="#" data-scat="edukasi"><span><i class="bi bi-mortarboard-fill" style="color:var(--sage)"></i> Edukasi</span><span class="cat-count">2</span></a></li>
-    <li class="cat-item"><a href="#" data-scat="industri"><span><i class="bi bi-building-fill" style="color:var(--gold)"></i> Industri</span><span class="cat-count">1</span></a></li>
-  </ul>
+  </form>
 </div>
 
 <!-- Popular Posts -->
@@ -31,30 +16,16 @@
     <div class="sw-icon"><i class="bi bi-fire"></i></div>
     <div class="sw-title">Artikel Terpopuler</div>
   </div>
-  <div class="pop-post">
-    <div class="pop-thumb"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=200&h=160&fit=crop&auto=format" alt=""/></div>
+  @foreach($popularPosts as $post)
+  <div class="pop-post" onclick="location.href='{{ route('blog.show', $post->slug) }}'">
+    <div class="pop-thumb"><img src="{{ $post->featured_image }}" alt="{{ $post->title }}"/></div>
     <div>
-      <div class="pop-cat">Tips Memasak</div>
-      <a href="{{ url('/blog/detail') }}"><div class="pop-title">Cara Memilih Minyak Goreng yang Sehat untuk Keluarga</div></a>
-      <div class="pop-date"><i class="bi bi-calendar3"></i>15 Jan 2026 · 7 mnt</div>
+      <div class="pop-cat">{{ $post->category->name ?? 'Uncategorized' }}</div>
+      <div class="pop-title">{{ Str::limit($post->title, 50) }}</div>
+      <div class="pop-date"><i class="bi bi-calendar3"></i>{{ $post->published_at->format('d M Y') }} · {{ $post->reading_time }} mnt</div>
     </div>
   </div>
-  <div class="pop-post">
-    <div class="pop-thumb"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=200&h=160&fit=crop&auto=format" alt=""/></div>
-    <div>
-      <div class="pop-cat">Resep</div>
-      <a href="{{ url('/blog/detail') }}"><div class="pop-title">5 Resep Gorengan Crispy yang Wajib Dicoba di Rumah</div></a>
-      <div class="pop-date"><i class="bi bi-calendar3"></i>8 Jan 2026 · 5 mnt</div>
-    </div>
-  </div>
-  <div class="pop-post">
-    <div class="pop-thumb"><img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=200&h=160&fit=crop&auto=format" alt=""/></div>
-    <div>
-      <div class="pop-cat">Edukasi</div>
-      <a href="{{ url('/blog/detail') }}"><div class="pop-title">Fakta Menarik Tentang Minyak Kelapa Sawit Indonesia</div></a>
-      <div class="pop-date"><i class="bi bi-calendar3"></i>2 Jan 2026 · 6 mnt</div>
-    </div>
-  </div>
+  @endforeach
 </div>
 
 <!-- Tags -->
@@ -64,15 +35,8 @@
     <div class="sw-title">Tag Populer</div>
   </div>
   <div class="tags-cloud">
-    <span class="tag-chip" onclick="filterByTag('Minyak Goreng')">Minyak Goreng</span>
-    <span class="tag-chip" onclick="filterByTag('Kesehatan')">Kesehatan</span>
-    <span class="tag-chip" onclick="filterByTag('Resep')">Resep</span>
-    <span class="tag-chip" onclick="filterByTag('Gorengan')">Gorengan</span>
-    <span class="tag-chip" onclick="filterByTag('Sawit')">Sawit</span>
-    <span class="tag-chip" onclick="filterByTag('Dapur')">Dapur</span>
-    <span class="tag-chip" onclick="filterByTag('AROMAS')">AROMAS</span>
-    <span class="tag-chip" onclick="filterByTag('Nutrisi')">Nutrisi</span>
-    <span class="tag-chip" onclick="filterByTag('Industri')">Industri</span>
-    <span class="tag-chip" onclick="filterByTag('Tips')">Tips</span>
+    @foreach($tags as $tag)
+    <span class="tag-chip" onclick="window.location.href='{{ route('blog.tag', $tag->slug) }}'">{{ $tag->name }}</span>
+    @endforeach
   </div>
 </div>

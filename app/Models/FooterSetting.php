@@ -15,6 +15,7 @@ class FooterSetting extends Model implements HasMedia
         'logo',
         'company_description',
         'contact_info',
+        'whatsapp_number',
         'social_links',
         'copyright_text',
         'legal_links',

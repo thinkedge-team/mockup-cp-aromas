@@ -64,6 +64,7 @@ class DatabaseSeeder extends Seeder
             PartnershipTestimonialSeeder::class,
             PartnershipFaqSeeder::class,
             PartnershipCtaSettingSeeder::class,
+            PortfolioSeeder::class,
         ]);
     }
 }
