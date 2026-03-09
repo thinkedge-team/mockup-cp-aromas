@@ -231,6 +231,14 @@ $ctaWaUrl    = 'https://wa.me/' . $ctaWaNum . '?text=' . urlencode($ctaWaMsg);
                         <form id="contactForm" novalidate>
                             <input type="hidden" id="subjectVal" value="Pemesanan Produk" />
 
+                            {{-- Honeypot: field ini tersembunyi dari pengguna nyata.
+                                 Bot biasanya mengisi semua field yang ditemukannya.
+                                 Jangan hapus atau isi field ini. --}}
+                            <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;" tabindex="-1">
+                                <label for="website">Website</label>
+                                <input type="text" id="website" name="website" value="" autocomplete="off" tabindex="-1" />
+                            </div>
+
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -801,6 +809,8 @@ img{max-width:100%;height:auto;}
 .form-control.no-icon{padding-left:16px;}
 select.form-control{cursor:pointer;}
 textarea.form-control{resize:vertical;min-height:140px;line-height:1.6;}
+.form-control.is-invalid{border-color:#e53935!important;box-shadow:0 0 0 4px rgba(229,57,53,.12)!important;}
+.form-control.is-invalid+.field-icon{color:#e53935!important;}
 
 .char-count{position:absolute;right:14px;bottom:12px;font-size:.72rem;color:var(--g400);pointer-events:none;}
 .form-hint{font-size:.76rem;color:var(--g500);margin-top:6px;display:flex;align-items:center;gap:5px;}
@@ -1061,81 +1071,215 @@ if (subjectTabs) {
 
 // Form Submit
 const contactForm = document.getElementById('contactForm');
-const submitBtn = document.getElementById('submitBtn');
-const formWrap = document.getElementById('formWrap');
+const submitBtn   = document.getElementById('submitBtn');
+const formWrap    = document.getElementById('formWrap');
 const formSuccess = document.getElementById('formSuccess');
 const successName = document.getElementById('successName');
 
+// Peta field-id ke label yang ramah pengguna (untuk highlight border merah)
+const fieldMap = {
+    name:    'fname',
+    email:   'femail',
+    phone:   'fphone',
+    city:    'fcity',
+    message: 'fmessage',
+    subject: null,
+};
+
+function clearFieldErrors() {
+    document.querySelectorAll('.form-control.is-invalid').forEach(el => {
+        el.classList.remove('is-invalid');
+    });
+    document.querySelectorAll('.field-error-msg').forEach(el => el.remove());
+}
+
+function highlightFieldError(fieldKey, msg) {
+    const elId = fieldMap[fieldKey];
+    if (!elId) return;
+    const el = document.getElementById(elId);
+    if (!el) return;
+    el.classList.add('is-invalid');
+    // Tampilkan pesan di bawah field
+    let errEl = el.closest('.form-group')?.querySelector('.field-error-msg');
+    if (!errEl) {
+        errEl = document.createElement('div');
+        errEl.className = 'field-error-msg';
+        errEl.style.cssText = 'font-size:.78rem;color:#b91c1c;margin-top:5px;display:flex;align-items:center;gap:4px;';
+        el.closest('.field-wrap')?.insertAdjacentElement('afterend', errEl);
+    }
+    errEl.innerHTML = '<i class="bi bi-exclamation-circle-fill"></i> ' + msg;
+}
+
+function showError(msg, errors) {
+    clearFieldErrors();
+    const errDiv = document.getElementById('formError');
+    const errTxt = document.getElementById('errorText');
+    if (errDiv && errTxt) {
+        errTxt.textContent = msg;
+        errDiv.style.display = 'block';
+        // Scroll ke error banner
+        errDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    // Highlight field-field yang error
+    if (errors && typeof errors === 'object') {
+        Object.keys(errors).forEach(key => {
+            const fieldErrors = errors[key];
+            const firstMsg = Array.isArray(fieldErrors) ? fieldErrors[0] : fieldErrors;
+            highlightFieldError(key, firstMsg);
+        });
+    }
+}
+
 if (contactForm) {
+    // Hapus highlight merah saat user mulai mengetik
+    contactForm.querySelectorAll('.form-control').forEach(el => {
+        el.addEventListener('input', function () {
+            this.classList.remove('is-invalid');
+            const errEl = this.closest('.form-group')?.querySelector('.field-error-msg');
+            if (errEl) errEl.remove();
+        });
+    });
+
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        if (!document.getElementById('fterms').checked) {
-            alert('Anda harus menyetujui Kebijakan Privasi.');
-            return;
-        }
 
-        submitBtn.classList.add('loading');
-        submitBtn.disabled = true;
+        // ── Validasi sisi klien sebelum kirim ──────────────────────────────
+        clearFieldErrors();
         const errDiv = document.getElementById('formError');
         if (errDiv) errDiv.style.display = 'none';
 
+        let clientError = null;
+
+        if (!document.getElementById('fterms').checked) {
+            clientError = 'Harap centang persetujuan Kebijakan Privasi AROMAS sebelum mengirim pesan.';
+            showError(clientError);
+            return;
+        }
+        if (!document.getElementById('fname').value.trim()) {
+            clientError = 'Nama lengkap wajib diisi.';
+            showError(clientError, { name: [clientError] });
+            return;
+        }
+        const emailVal = document.getElementById('femail').value.trim();
+        if (!emailVal) {
+            clientError = 'Alamat email wajib diisi.';
+            showError(clientError, { email: [clientError] });
+            return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+            clientError = 'Format email tidak valid. Contoh: nama@domain.com';
+            showError(clientError, { email: [clientError] });
+            return;
+        }
+        if (!document.getElementById('fphone').value.trim()) {
+            clientError = 'Nomor WhatsApp wajib diisi.';
+            showError(clientError, { phone: [clientError] });
+            return;
+        }
+        if (!document.getElementById('fcity').value.trim()) {
+            clientError = 'Kota / Provinsi wajib diisi.';
+            showError(clientError, { city: [clientError] });
+            return;
+        }
+        if (!document.getElementById('fmessage').value.trim()) {
+            clientError = 'Isi pesan wajib diisi.';
+            showError(clientError, { message: [clientError] });
+            return;
+        }
+
+        // Validasi file sebelum upload
+        const fileInputNodes = document.getElementById('fileInput').files;
+        const allowedMimes   = ['application/pdf','image/jpeg','image/png',
+                                 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+        const allowedExt     = ['pdf','jpg','jpeg','png','xlsx'];
+        for (let i = 0; i < fileInputNodes.length; i++) {
+            const f = fileInputNodes[i];
+            const ext = f.name.split('.').pop().toLowerCase();
+            if (!allowedExt.includes(ext)) {
+                showError('Format file "' + f.name + '" tidak didukung. Gunakan PDF, JPG, PNG, atau XLSX.');
+                return;
+            }
+            if (f.size > 5 * 1024 * 1024) {
+                showError('Ukuran file "' + f.name + '" melebihi batas 5 MB. Harap kompres file terlebih dahulu.');
+                return;
+            }
+        }
+        if (fileInputNodes.length > 5) {
+            showError('Maksimal 5 file lampiran yang diperbolehkan.');
+            return;
+        }
+
+        // ── Kirim ke server ────────────────────────────────────────────────
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
+
         const formData = new FormData();
         formData.append('_token', '{{ csrf_token() }}');
+        formData.append('website', ''); // honeypot — selalu kosong dari user asli
         formData.append('subject', document.getElementById('subjectVal').value || '');
-        formData.append('name', document.getElementById('fname').value || '');
-        formData.append('company', document.getElementById('fcompany').value || '');
-        formData.append('email', document.getElementById('femail').value || '');
-        formData.append('phone', document.getElementById('fphone').value || '');
+        formData.append('name',    document.getElementById('fname').value.trim());
+        formData.append('company', document.getElementById('fcompany').value.trim());
+        formData.append('email',   emailVal);
+        formData.append('phone',   document.getElementById('fphone').value.trim());
         formData.append('product', document.getElementById('fproduct').value || '');
-        formData.append('volume', document.getElementById('fvolume').value || '');
-        formData.append('city', document.getElementById('fcity').value || '');
-        formData.append('message', document.getElementById('fmessage').value || '');
+        formData.append('volume',  document.getElementById('fvolume').value || '');
+        formData.append('city',    document.getElementById('fcity').value.trim());
+        formData.append('message', document.getElementById('fmessage').value.trim());
 
-        const fileInputNodes = document.getElementById('fileInput').files;
         for (let i = 0; i < fileInputNodes.length; i++) {
             formData.append('files[]', fileInputNodes[i]);
         }
 
         try {
             const response = await fetch('{{ route("contact.send") }}', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
+                method:  'POST',
+                body:    formData,
+                headers: { 'Accept': 'application/json' },
             });
 
-            const result = await response.json();
+            let result;
+            try {
+                result = await response.json();
+            } catch (_) {
+                throw new Error('Respons server tidak dapat dibaca. Silakan coba lagi.');
+            }
 
             if (response.ok && result.success) {
-                const fname = document.getElementById('fname').value;
+                // ── SUKSES ──
+                const fname = document.getElementById('fname').value.trim();
                 if (successName) successName.textContent = fname.split(' ')[0];
-                if (formWrap) formWrap.style.display = 'none';
+                if (formWrap)    formWrap.style.display = 'none';
                 if (formSuccess) formSuccess.classList.add('show');
-                window.scrollTo({ top: formSuccess.offsetTop - 100, behavior: 'smooth' });
+                window.scrollTo({ top: formSuccess.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+
+            } else if (response.status === 429) {
+                // ── RATE LIMIT terlampaui ──
+                const msg = result.message || 'Anda terlalu sering mengirim pesan. Silakan tunggu beberapa menit sebelum mencoba lagi.';
+                showError(msg);
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+
+            } else if (response.status === 422 && result.errors) {
+                // ── ERROR VALIDASI dari server (422) ──
+                const firstMsg = result.message || 'Beberapa isian belum benar, mohon periksa kembali.';
+                showError(firstMsg, result.errors);
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+
             } else {
-                showError(result.message || 'Gagal mengirim pesan. Mohon periksa kembali isian Anda.');
+                // ── ERROR SERVER LAINNYA ──
+                const msg = result.message || 'Terjadi kesalahan. Silakan coba lagi atau hubungi kami via WhatsApp.';
+                showError(msg);
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
             }
-        } catch (error) {
-            showError('Terjadi gangguan jaringan atau server. Silakan coba beberapa saat lagi.');
+
+        } catch (networkErr) {
+            showError('Tidak dapat terhubung ke server. Periksa koneksi internet Anda, lalu coba lagi.');
             submitBtn.classList.remove('loading');
             submitBtn.disabled = false;
         }
     });
-
-    function showError(msg) {
-        const errDiv = document.getElementById('formError');
-        const errTxt = document.getElementById('errorText');
-        if (errDiv && errTxt) {
-            errTxt.textContent = msg;
-            errDiv.style.display = 'block';
-        } else {
-            alert(msg);
-        }
-    }
 }
 
 // Reset Form
