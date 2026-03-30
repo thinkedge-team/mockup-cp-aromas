@@ -3,13 +3,15 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Attachment;
+use Illuminate\Support\Facades\Storage;
 
-class ContactFormMail extends Mailable
+class ContactFormMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -51,13 +53,20 @@ class ContactFormMail extends Mailable
     public function attachments(): array
     {
         $attachments = [];
-        if (isset($this->data['files']) && is_array($this->data['files'])) {
-            foreach ($this->data['files'] as $file) {
-                $attachments[] = Attachment::fromPath($file->getRealPath())
-                                ->as($file->getClientOriginalName())
-                                ->withMime($file->getMimeType());
+        
+        // Handle file attachments yang sudah tersimpan di storage
+        if (isset($this->data['attachments']) && is_array($this->data['attachments'])) {
+            foreach ($this->data['attachments'] as $file) {
+                $fullPath = Storage::disk('public')->path($file['path']);
+                
+                if (file_exists($fullPath)) {
+                    $attachments[] = Attachment::fromPath($fullPath)
+                                    ->as($file['original_name'])
+                                    ->withMime($file['mime']);
+                }
             }
         }
+        
         return $attachments;
     }
 }

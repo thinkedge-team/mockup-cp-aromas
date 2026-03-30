@@ -115,4 +115,17 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Sales Email Address
+    |--------------------------------------------------------------------------
+    |
+    | Email address untuk menerima notifikasi dari contact form.
+    | Konfigurasi ini digunakan oleh ContactFormController untuk mengirim
+    | email notifikasi saat ada pesan baru dari formulir kontak website.
+    |
+    */
+
+    'sales_email' => env('SALES_EMAIL', 'sales@aromas.co.id'),
+
 ];

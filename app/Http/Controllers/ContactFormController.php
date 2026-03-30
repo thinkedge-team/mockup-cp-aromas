@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContactMessage;
+use App\Mail\ContactFormMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -117,6 +119,30 @@ class ContactFormController extends Controller
                 'success' => false,
                 'message' => 'Maaf, sistem kami sedang mengalami gangguan. Silakan hubungi kami langsung melalui tombol WhatsApp di halaman ini.',
             ], 500);
+        }
+
+        // ── 4. Kirim email notifikasi ke Sales ─────────────────────────────
+        try {
+            $salesEmail = config('mail.sales_email', 'sales@aromas.co.id');
+            
+            Mail::to($salesEmail)->queue(new ContactFormMail([
+                'subject'     => $validated['subject'],
+                'name'        => $validated['name'],
+                'company'     => $validated['company'] ?? '-',
+                'email'       => $validated['email'],
+                'phone'       => $validated['phone'],
+                'city'        => $validated['city'],
+                'product'     => $validated['product'] ?? '-',
+                'volume'      => $validated['volume'] ?? '-',
+                'message'     => $validated['message'],
+                'attachments' => $attachmentPaths,
+            ]));
+            
+            Log::info('Contact form: email queued untuk sales', ['email' => $salesEmail]);
+        } catch (\Exception $e) {
+            // Jangan gagalkan proses jika email error, tetap return sukses
+            // karena data sudah tersimpan di database
+            Log::error('Contact form: gagal queue email - ' . $e->getMessage());
         }
 
         return response()->json([
