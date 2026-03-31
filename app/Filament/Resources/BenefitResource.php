@@ -30,7 +30,25 @@ class BenefitResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('icon')
-                    ->required(),
+                    ->label('Bootstrap Icon')
+                    ->required()
+                    ->placeholder('bi-heart-pulse')
+                    ->helperText('Masukkan nama icon dari Bootstrap Icons (format: bi-nama-icon). Cari icon di: https://icons.getbootstrap.com/')
+                    ->rules([
+                        'required',
+                        'regex:/^bi-[a-z0-9-]+$/',
+                    ])
+                    ->validationMessages([
+                        'regex' => 'Format icon harus: bi-nama-icon (contoh: bi-heart-pulse, bi-fire, bi-star). Gunakan huruf kecil dan tanda strip (-) saja.',
+                    ])
+                    ->suffixIcon('heroicon-m-information-circle')
+                    ->suffixAction(
+                        Forms\Components\Actions\Action::make('browse_icons')
+                            ->label('Browse Icons')
+                            ->icon('heroicon-m-magnifying-glass')
+                            ->url('https://icons.getbootstrap.com/', shouldOpenInNewTab: true)
+                            ->color('primary')
+                    ),
                 Forms\Components\TextInput::make('title')
                     ->required(),
                 Forms\Components\Textarea::make('description')
@@ -50,7 +68,14 @@ class BenefitResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('icon')
-                    ->searchable(),
+                    ->label('Icon')
+                    ->formatStateUsing(fn (string $state): string => 
+                        '<i class="bi ' . $state . '" style="font-size: 1.5rem; margin-right: 8px;"></i>' . 
+                        '<span style="font-family: monospace; font-size: 0.875rem;">' . $state . '</span>'
+                    )
+                    ->html()
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('order')
