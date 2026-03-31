@@ -1,10 +1,18 @@
 <!-- ========== HEADER / NAVIGATION ========== -->
+@php
+    $footer = \App\Models\FooterSetting::where('is_active', true)->first();
+@endphp
+
 <header id="header">
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <!-- Logo -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('assets/images/logo.png') }}" alt="AROMAS" style="height:44px;width:auto;" />
+                @if($footer && $footer->logo)
+                    <img src="{{ Storage::url($footer->logo) }}" alt="AROMAS" style="height:44px;width:auto;" />
+                @else
+                    <img src="{{ asset('assets/images/logo.png') }}" alt="AROMAS" style="height:44px;width:auto;" />
+                @endif
             </a>
 
             <!-- Mobile Toggle Button -->

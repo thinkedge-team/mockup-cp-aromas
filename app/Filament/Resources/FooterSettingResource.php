@@ -28,7 +28,8 @@ class FooterSettingResource extends Resource
             Forms\Components\Section::make("Footer Content")
                 ->schema([
                     Forms\Components\FileUpload::make("logo")
-                        ->label("Footer Logo")
+                        ->label("Site Logo (Navbar & Footer)")
+                        ->helperText("Logo ini akan ditampilkan di navbar dan footer website")
                         ->image()
                         ->directory("footer/logo")
                         ->maxSize(5120)
