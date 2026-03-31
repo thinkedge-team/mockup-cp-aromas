@@ -36,8 +36,17 @@ class AwardResource extends Resource
                 Forms\Components\TextInput::make('year')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('status_color')
-                    ->required(),
+                Forms\Components\Select::make('status_color')
+                    ->label('Status Color')
+                    ->options([
+                        'green' => 'Green',
+                        'yellow' => 'Yellow',
+                        'red' => 'Red',
+                    ])
+                    ->required()
+                    ->default('green')
+                    ->native(false)
+                    ->helperText('Pilih warna indikator status award'),
                 Forms\Components\TextInput::make('order')
                     ->required()
                     ->numeric()
@@ -58,8 +67,16 @@ class AwardResource extends Resource
                 Tables\Columns\TextColumn::make('year')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('status_color')
-                    ->searchable(),
+                Tables\Columns\BadgeColumn::make('status_color')
+                    ->label('Status')
+                    ->colors([
+                        'success' => 'green',
+                        'warning' => 'yellow',
+                        'danger' => 'red',
+                    ])
+                    ->formatStateUsing(fn ($state) => ucfirst($state))
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('order')
                     ->numeric()
                     ->sortable(),
