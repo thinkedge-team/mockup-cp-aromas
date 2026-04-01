@@ -153,10 +153,13 @@
                 @if($missionSection)
                     {{ $missionSection->mission_text }}
                     <span class="highlight">{{ $missionSection->highlight_text }}</span>
-                    dengan kualitas
-                    <span class="eco-badge"><i class="bi bi-check-circle"></i> {{ $missionSection->eco_badge_text }}</span>
-                    dan proses produksi berkelanjutan. {{ $missionSection->mission_text_continued }}
-                    <span class="leaf-icon"><i class="bi bi-award"></i></span>
+                    {{ $missionSection->middle_text ?? 'dengan kualitas' }}
+                    <span class="eco-badge"><i class="bi {{ $missionSection->eco_badge_icon ?? 'bi-check-circle' }}"></i> {{ $missionSection->eco_badge_text }}</span>
+                    {{ $missionSection->transition_text ?? 'dan proses produksi berkelanjutan.' }} {{ $missionSection->mission_text_continued }}
+                    <span class="leaf-icon"><i class="bi {{ $missionSection->leaf_icon ?? 'bi-award' }}"></i></span>
+                    @if($missionSection->final_text)
+                        {{ $missionSection->final_text }}
+                    @endif
                 @else
                     Di AROMAS, kami berkomitmen menghadirkan
                     <span class="highlight">minyak goreng premium</span>

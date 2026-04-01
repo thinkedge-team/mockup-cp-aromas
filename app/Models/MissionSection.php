@@ -12,8 +12,13 @@ class MissionSection extends Model
     protected $fillable = [
         'mission_text',
         'highlight_text',
+        'middle_text',
+        'eco_badge_icon',
         'eco_badge_text',
+        'transition_text',
         'mission_text_continued',
+        'leaf_icon',
+        'final_text',
         'is_active',
     ];
 
