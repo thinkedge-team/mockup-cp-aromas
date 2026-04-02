@@ -90,6 +90,10 @@ class BranchResource extends Resource
                         Forms\Components\Toggle::make('is_active')
                             ->label('Active')
                             ->default(true),
+                        Forms\Components\Toggle::make('is_under_construction')
+                            ->label('Coming Soon Status')
+                            ->helperText('Tandai cabang ini sebagai "Coming Soon" jika masih dalam pembangunan')
+                            ->default(false),
                     ])->columns(1),
             ]);
     }
@@ -115,6 +119,9 @@ class BranchResource extends Resource
                 Tables\Columns\TextColumn::make('map_link')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_active')
+                    ->boolean(),
+                Tables\Columns\IconColumn::make('is_under_construction')
+                    ->label('Coming Soon')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

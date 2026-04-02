@@ -16,7 +16,7 @@ class BlogCommentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
 
-    protected static ?string $navigationGroup = 'Blog Management';
+    protected static ?string $navigationGroup = 'Blog';
 
     protected static ?string $navigationLabel = 'Comments';
 

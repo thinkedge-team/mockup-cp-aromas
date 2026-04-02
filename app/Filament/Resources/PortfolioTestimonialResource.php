@@ -14,7 +14,7 @@ class PortfolioTestimonialResource extends Resource
 {
     protected static ?string $model = PortfolioTestimonial::class;
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
-    protected static ?string $navigationGroup = 'Portfolio & Kemitraan';
+    protected static ?string $navigationGroup = 'Portofolio';
     protected static ?string $navigationLabel = 'Testimonials';
     protected static ?int $navigationSort = 3;
 

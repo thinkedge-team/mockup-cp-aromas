@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FooterSetting;
 use App\Models\PortfolioCtaSetting;
 use App\Models\PortfolioImpactStat;
 use App\Models\PortfolioKeunggulan;
@@ -36,6 +37,12 @@ class PortfolioController extends Controller
         // Get CTA settings
         $ctaSettings = PortfolioCtaSetting::getInstance();
 
+        // Get WhatsApp number from Footer Setting
+        $footer = FooterSetting::getActive();
+        $whatsappNumber = $footer && isset($footer->contact_info['whatsapp']) 
+            ? preg_replace('/[^0-9]/', '', $footer->contact_info['whatsapp']) 
+            : '6281234567890';
+
         return view('portfolio', compact(
             'portfolioSettings',
             'partners',
@@ -43,7 +50,8 @@ class PortfolioController extends Controller
             'impactStats',
             'keunggulan',
             'mitraLogos',
-            'ctaSettings'
+            'ctaSettings',
+            'whatsappNumber'
         ));
     }
 }

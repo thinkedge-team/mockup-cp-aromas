@@ -30,7 +30,7 @@
             @endif
             <div class="modal-actions">
                 <a href="{{ url('/contact') }}" class="btn-modal-green"><i class="bi bi-handshake-fill"></i> Jadilah Mitra Kami</a>
-                <a href="https://wa.me/6281234567890" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+                <a href="https://wa.me/{{ $whatsappNumber }}" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
             </div>
         </div>
     </div>

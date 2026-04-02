@@ -15,7 +15,7 @@ class PartnershipHeroSettingResource extends Resource
     protected static ?string $model = PartnershipHeroSetting::class;
     protected static ?string $navigationIcon = 'heroicon-o-home';
     protected static ?string $navigationLabel = 'Hero Section';
-    protected static ?string $navigationGroup = 'Kemitraan';
+    protected static ?string $navigationGroup = 'Partnership';
     protected static ?int $navigationSort = 1;
     protected static ?string $modelLabel = 'Hero Setting';
 

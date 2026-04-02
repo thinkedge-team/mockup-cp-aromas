@@ -14,7 +14,7 @@ class PortfolioKeunggulanResource extends Resource
 {
     protected static ?string $model = PortfolioKeunggulan::class;
     protected static ?string $navigationIcon = 'heroicon-o-star';
-    protected static ?string $navigationGroup = 'Portfolio & Kemitraan';
+    protected static ?string $navigationGroup = 'Portofolio';
     protected static ?string $navigationLabel = 'Keunggulan';
     protected static ?int $navigationSort = 5;
 

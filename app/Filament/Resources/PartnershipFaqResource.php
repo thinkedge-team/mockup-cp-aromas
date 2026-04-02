@@ -15,7 +15,7 @@ class PartnershipFaqResource extends Resource
     protected static ?string $model = PartnershipFaq::class;
     protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';
     protected static ?string $navigationLabel = 'FAQ Kemitraan';
-    protected static ?string $navigationGroup = 'Kemitraan';
+    protected static ?string $navigationGroup = 'Partnership';
     protected static ?int $navigationSort = 7;
     protected static ?string $modelLabel = 'FAQ';
     protected static ?string $pluralModelLabel = 'FAQ Kemitraan';

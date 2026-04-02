@@ -3615,6 +3615,57 @@ img {
     filter: brightness(1) saturate(1.2);
 }
 
+/* ── Coming Soon Badge Overlay ── */
+.coming-soon-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.coming-soon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: linear-gradient(135deg, #ff9800, #ffc107);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);
+    animation: comingSoonPulse 2s ease-in-out infinite;
+}
+
+.coming-soon-badge i {
+    font-size: 0.8rem;
+    animation: starRotate 3s linear infinite;
+}
+
+@keyframes comingSoonPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes starRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 /* ── Card Info Body ── */
 .card-info {
     flex: 1;

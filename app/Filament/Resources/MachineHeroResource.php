@@ -16,7 +16,7 @@ class MachineHeroResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
 
-    protected static ?string $navigationGroup = 'Our Machine';
+    protected static ?string $navigationGroup = 'Mesin';
 
     protected static ?int $navigationSort = 1;
 

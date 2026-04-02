@@ -15,7 +15,7 @@ class PartnershipCompareSettingResource extends Resource
     protected static ?string $model = PartnershipCompareSetting::class;
     protected static ?string $navigationIcon = 'heroicon-o-table-cells';
     protected static ?string $navigationLabel = 'Tabel Perbandingan';
-    protected static ?string $navigationGroup = 'Kemitraan';
+    protected static ?string $navigationGroup = 'Partnership';
     protected static ?int $navigationSort = 6;
     protected static ?string $modelLabel = 'Tabel Perbandingan';
 

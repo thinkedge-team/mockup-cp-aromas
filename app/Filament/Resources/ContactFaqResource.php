@@ -15,7 +15,7 @@ class ContactFaqResource extends Resource
     protected static ?string $model = ContactFaq::class;
     protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';
     protected static ?string $navigationLabel = 'FAQ Kontak';
-    protected static ?string $navigationGroup = 'Hubungi Kami';
+    protected static ?string $navigationGroup = 'Kontak';
     protected static ?int $navigationSort = 5;
     protected static ?string $modelLabel = 'FAQ';
     protected static ?string $pluralModelLabel = 'FAQ Kontak';

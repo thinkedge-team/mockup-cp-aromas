@@ -16,7 +16,7 @@ class PromoHeroSettingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';
 
-    protected static ?string $navigationGroup = 'Promo Management';
+    protected static ?string $navigationGroup = 'Promo';
 
     protected static ?string $navigationLabel = "Hero Settings";
 

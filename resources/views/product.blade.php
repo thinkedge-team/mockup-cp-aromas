@@ -4,11 +4,18 @@
     use App\Models\Product;
     use App\Models\ProductAdvantage;
     use App\Models\ProductCta;
+    use App\Models\FooterSetting;
 
     $productHero = ProductHero::active()->first();
     $categories = ProductCategory::active()->orderBy('order')->get();
     $advantages = ProductAdvantage::active()->get();
     $productCta = ProductCta::active()->first();
+    
+    // Get WhatsApp number from Footer Setting
+    $footer = FooterSetting::getActive();
+    $whatsappNumber = $footer && isset($footer->contact_info['whatsapp']) 
+        ? preg_replace('/[^0-9]/', '', $footer->contact_info['whatsapp']) 
+        : '6281234567890';
 @endphp
 
 @extends('layouts.app')
@@ -371,7 +378,7 @@
                             </ul>
                             <div class="card-footer-row">
                                 <span class="btn-detail"><i class="bi bi-eye"></i> Detail</span>
-                                <a href="https://wa.me/6281234567890?text={{ urlencode($product->whatsapp_message ?? 'Halo, saya tertarik dengan ' . $product->name) }}" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                                <a href="https://wa.me/{{ $whatsappNumber }}?text={{ urlencode($product->whatsapp_message ?? 'Halo, saya tertarik dengan ' . $product->name) }}" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
                             </div>
                         </div>
                     </div>
@@ -427,13 +434,13 @@
                 <div class="d-flex gap-3 flex-wrap justify-content-lg-end">
                     @if($productCta)
                     <a href="{{ $productCta->primary_button_url }}" target="_blank" class="btn-cta-w">
-                        <i class="bi bi-whatsapp"></i> {{ $productCta->primary_button_text }}
+                        <i class="bi {{ $productCta->primary_button_icon ?? 'bi-whatsapp' }}"></i> {{ $productCta->primary_button_text }}
                     </a>
                     <a href="{{ $productCta->secondary_button_url }}" class="btn-cta-ol">
-                        <i class="bi bi-envelope-fill"></i> {{ $productCta->secondary_button_text }}
+                        <i class="bi {{ $productCta->secondary_button_icon ?? 'bi-envelope-fill' }}"></i> {{ $productCta->secondary_button_text }}
                     </a>
                     @else
-                    <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20tanya%20harga%20produk" target="_blank" class="btn-cta-w">
+                    <a href="https://wa.me/{{ $whatsappNumber }}?text=Halo%20AROMAS,%20saya%20ingin%20tanya%20harga%20produk" target="_blank" class="btn-cta-w">
                         <i class="bi bi-whatsapp"></i> Tanya via WhatsApp
                     </a>
                     <a href="{{ url('/contact') }}" class="btn-cta-ol">
@@ -531,7 +538,7 @@
             @endif
 
             <div class="modal-actions">
-                <a href="https://wa.me/6281234567890?text={{ urlencode($product->whatsapp_message ?? 'Halo, saya ingin pesan ' . $product->name) }}" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+                <a href="https://wa.me/{{ $whatsappNumber }}?text={{ urlencode($product->whatsapp_message ?? 'Halo, saya ingin pesan ' . $product->name) }}" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
                 <a href="{{ url('/contact') }}" class="btn-modal-primary">Minta Penawaran</a>
             </div>
         </div>

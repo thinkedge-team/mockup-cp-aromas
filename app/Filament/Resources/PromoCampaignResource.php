@@ -16,7 +16,7 @@ class PromoCampaignResource extends Resource
 
     protected static ?string $navigationIcon = "heroicon-s-gift";
 
-    protected static ?string $navigationGroup = "Promo Management";
+    protected static ?string $navigationGroup = "Promo";
 
     protected static ?string $navigationLabel = "Promo Campaigns";
 

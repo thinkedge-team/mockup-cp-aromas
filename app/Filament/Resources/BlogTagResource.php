@@ -16,7 +16,7 @@ class BlogTagResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
-    protected static ?string $navigationGroup = 'Blog Management';
+    protected static ?string $navigationGroup = 'Blog';
 
     protected static ?string $navigationLabel = 'Tags';
 

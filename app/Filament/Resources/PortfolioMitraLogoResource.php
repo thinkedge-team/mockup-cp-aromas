@@ -14,7 +14,7 @@ class PortfolioMitraLogoResource extends Resource
 {
     protected static ?string $model = PortfolioMitraLogo::class;
     protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
-    protected static ?string $navigationGroup = 'Portfolio & Kemitraan';
+    protected static ?string $navigationGroup = 'Portofolio';
     protected static ?string $navigationLabel = 'Mitra Logos';
     protected static ?int $navigationSort = 6;
 

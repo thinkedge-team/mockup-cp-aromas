@@ -15,7 +15,7 @@ class ContactHeroSettingResource extends Resource
     protected static ?string $model = ContactHeroSetting::class;
     protected static ?string $navigationIcon = 'heroicon-o-megaphone';
     protected static ?string $navigationLabel = 'Hero Section';
-    protected static ?string $navigationGroup = 'Hubungi Kami';
+    protected static ?string $navigationGroup = 'Kontak';
     protected static ?int $navigationSort = 1;
     protected static ?string $modelLabel = 'Hero Section';
 

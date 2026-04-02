@@ -49,7 +49,7 @@
                     @endif
                     <div class="card-actions">
                         <a href="javascript:void(0)" class="btn-detail" onclick="openModal('{{ $partner->slug }}'); event.stopPropagation();"><i class="bi bi-eye-fill"></i> Lihat Detail</a>
-                        <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa-card" onclick="event.stopPropagation()"><i class="bi bi-whatsapp"></i></a>
+                        <a href="https://wa.me/{{ $whatsappNumber }}" target="_blank" class="btn-wa-card" onclick="event.stopPropagation()"><i class="bi bi-whatsapp"></i></a>
                     </div>
                 </div>
             </div>

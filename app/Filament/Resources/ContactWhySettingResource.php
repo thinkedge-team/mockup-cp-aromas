@@ -15,7 +15,7 @@ class ContactWhySettingResource extends Resource
     protected static ?string $model = ContactWhySetting::class;
     protected static ?string $navigationIcon = 'heroicon-o-star';
     protected static ?string $navigationLabel = 'Mengapa Kami';
-    protected static ?string $navigationGroup = 'Hubungi Kami';
+    protected static ?string $navigationGroup = 'Kontak';
     protected static ?int $navigationSort = 3;
     protected static ?string $modelLabel = 'Mengapa Kami';
 

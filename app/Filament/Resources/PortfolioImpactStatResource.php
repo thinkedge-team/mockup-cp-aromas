@@ -14,7 +14,7 @@ class PortfolioImpactStatResource extends Resource
 {
     protected static ?string $model = PortfolioImpactStat::class;
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
-    protected static ?string $navigationGroup = 'Portfolio & Kemitraan';
+    protected static ?string $navigationGroup = 'Portofolio';
     protected static ?string $navigationLabel = 'Impact Stats';
     protected static ?int $navigationSort = 4;
 

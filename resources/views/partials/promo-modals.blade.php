@@ -169,7 +169,7 @@
             @endif
 
             <div class="modal-actions">
-                <a href="https://wa.me/6281234567890?text={{ urlencode($promo->whatsapp_message) }}" target="_blank" class="btn-modal-wa">
+                <a href="https://wa.me/{{ $whatsappNumber }}?text={{ urlencode($promo->whatsapp_message) }}" target="_blank" class="btn-modal-wa">
                     <i class="bi bi-whatsapp"></i> {{ $promo->button_label ?: 'Klaim Sekarang' }}
                 </a>
                 @if($promo->button_link)

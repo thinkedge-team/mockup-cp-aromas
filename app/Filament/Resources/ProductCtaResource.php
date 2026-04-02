@@ -16,7 +16,7 @@ class ProductCtaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-phone';
 
-    protected static ?string $navigationGroup = 'Products';
+    protected static ?string $navigationGroup = 'Produk';
 
     protected static ?int $navigationSort = 5;
 
@@ -48,7 +48,19 @@ class ProductCtaResource extends Resource
                                     ->label('Primary Button URL')
                                     ->default('https://wa.me/6281234567890')
                                     ->url(),
-                            ])->columns(2),
+                                Forms\Components\TextInput::make('primary_button_icon')
+                                    ->label('Primary Button Icon')
+                                    ->placeholder('bi-whatsapp')
+                                    ->default('bi-whatsapp')
+                                    ->helperText('Masukkan nama icon dari Bootstrap Icons. Contoh: bi-whatsapp, bi-telephone-fill')
+                                    ->suffixAction(
+                                        Forms\Components\Actions\Action::make('browse_icons_primary')
+                                            ->label('Browse')
+                                            ->icon('heroicon-m-magnifying-glass')
+                                            ->url('https://icons.getbootstrap.com/', shouldOpenInNewTab: true)
+                                            ->color('primary')
+                                    ),
+                            ])->columns(3),
                         Forms\Components\Group::make()
                             ->schema([
                                 Forms\Components\TextInput::make('secondary_button_text')
@@ -58,7 +70,19 @@ class ProductCtaResource extends Resource
                                     ->label('Secondary Button URL')
                                     ->default('tel:02112345678')
                                     ->url(),
-                            ])->columns(2),
+                                Forms\Components\TextInput::make('secondary_button_icon')
+                                    ->label('Secondary Button Icon')
+                                    ->placeholder('bi-envelope-fill')
+                                    ->default('bi-envelope-fill')
+                                    ->helperText('Masukkan nama icon dari Bootstrap Icons. Contoh: bi-envelope-fill, bi-chat-dots')
+                                    ->suffixAction(
+                                        Forms\Components\Actions\Action::make('browse_icons_secondary')
+                                            ->label('Browse')
+                                            ->icon('heroicon-m-magnifying-glass')
+                                            ->url('https://icons.getbootstrap.com/', shouldOpenInNewTab: true)
+                                            ->color('primary')
+                                    ),
+                            ])->columns(3),
                         Forms\Components\Toggle::make('is_active')
                             ->label('Active')
                             ->default(true),

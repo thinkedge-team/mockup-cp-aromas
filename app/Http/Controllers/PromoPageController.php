@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FooterSetting;
 use App\Models\PromoCampaign;
 use App\Models\PromoCtaSection;
 use App\Models\PromoFilterCategory;
@@ -41,6 +42,12 @@ class PromoPageController extends Controller
         // Count active promos
         $activePromoCount = $promos->count();
 
+        // Get WhatsApp number from Footer Setting
+        $footer = FooterSetting::getActive();
+        $whatsappNumber = $footer && isset($footer->contact_info['whatsapp']) 
+            ? preg_replace('/[^0-9]/', '', $footer->contact_info['whatsapp']) 
+            : '6281234567890';
+
         return view('promo', compact(
             'heroSettings',
             'howtoSettings',
@@ -48,7 +55,8 @@ class PromoPageController extends Controller
             'filterCategories',
             'promos',
             'featuredPromo',
-            'activePromoCount'
+            'activePromoCount',
+            'whatsappNumber'
         ));
     }
 }

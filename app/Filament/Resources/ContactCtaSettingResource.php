@@ -15,7 +15,7 @@ class ContactCtaSettingResource extends Resource
     protected static ?string $model = ContactCtaSetting::class;
     protected static ?string $navigationIcon = 'heroicon-o-cursor-arrow-rays';
     protected static ?string $navigationLabel = 'CTA Strip';
-    protected static ?string $navigationGroup = 'Hubungi Kami';
+    protected static ?string $navigationGroup = 'Kontak';
     protected static ?int $navigationSort = 6;
     protected static ?string $modelLabel = 'CTA Strip';
 

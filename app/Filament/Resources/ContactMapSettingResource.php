@@ -15,7 +15,7 @@ class ContactMapSettingResource extends Resource
     protected static ?string $model = ContactMapSetting::class;
     protected static ?string $navigationIcon = 'heroicon-o-map';
     protected static ?string $navigationLabel = 'Peta & Lokasi';
-    protected static ?string $navigationGroup = 'Hubungi Kami';
+    protected static ?string $navigationGroup = 'Kontak';
     protected static ?int $navigationSort = 4;
     protected static ?string $modelLabel = 'Peta & Lokasi';
 

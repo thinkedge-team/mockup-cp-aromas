@@ -15,7 +15,7 @@ class PartnershipTestimonialResource extends Resource
     protected static ?string $model = PartnershipTestimonial::class;
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
     protected static ?string $navigationLabel = 'Testimoni Mitra';
-    protected static ?string $navigationGroup = 'Kemitraan';
+    protected static ?string $navigationGroup = 'Partnership';
     protected static ?int $navigationSort = 5;
     protected static ?string $modelLabel = 'Testimoni';
     protected static ?string $pluralModelLabel = 'Testimoni Mitra';

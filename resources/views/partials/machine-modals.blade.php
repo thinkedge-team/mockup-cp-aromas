@@ -1,4 +1,13 @@
 <!-- Dynamic Machine Modals -->
+@php
+    // Ensure WhatsApp number is available (fallback if not passed from parent)
+    if (!isset($whatsappNumber)) {
+        $footer = \App\Models\FooterSetting::getActive();
+        $whatsappNumber = $footer && isset($footer->contact_info['whatsapp']) 
+            ? preg_replace('/[^0-9]/', '', $footer->contact_info['whatsapp']) 
+            : '6281234567890';
+    }
+@endphp
 @foreach($categories as $category)
     @foreach($category->machines()->active()->get() as $machine)
     <div class="machine-modal" id="modal-machine-{{ $machine->id }}" role="dialog" aria-modal="true">
@@ -73,7 +82,7 @@
                     @endif
                     
                     <div class="modal-actions">
-                        <a href="https://wa.me/6281234567890?text={{ urlencode($machine->whatsapp_message ?? 'Halo, saya ingin tanya tentang ' . $machine->name) }}" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> Tanya via WhatsApp</a>
+                        <a href="https://wa.me/{{ $whatsappNumber }}?text={{ urlencode($machine->whatsapp_message ?? 'Halo, saya ingin tanya tentang ' . $machine->name) }}" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> Tanya via WhatsApp</a>
                         <a href="{{ url('/contact') }}" class="btn-modal-primary"><i class="bi bi-envelope-fill"></i> Jadwalkan Kunjungan</a>
                     </div>
                 </div>

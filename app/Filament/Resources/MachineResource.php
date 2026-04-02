@@ -16,7 +16,7 @@ class MachineResource extends Resource
 
     protected static ?string $navigationIcon = "heroicon-o-cog-6-tooth";
 
-    protected static ?string $navigationGroup = "Our Machine";
+    protected static ?string $navigationGroup = "Mesin";
 
     protected static ?int $navigationSort = 3;
 

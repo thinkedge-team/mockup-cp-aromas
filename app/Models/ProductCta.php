@@ -14,8 +14,10 @@ class ProductCta extends Model
         'description',
         'primary_button_text',
         'primary_button_url',
+        'primary_button_icon',
         'secondary_button_text',
         'secondary_button_url',
+        'secondary_button_icon',
         'is_active',
     ];
 

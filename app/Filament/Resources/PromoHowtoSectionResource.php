@@ -16,7 +16,7 @@ class PromoHowtoSectionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';
 
-    protected static ?string $navigationGroup = 'Promo Management';
+    protected static ?string $navigationGroup = 'Promo';
 
     protected static ?string $navigationLabel = 'How to Claim';
 

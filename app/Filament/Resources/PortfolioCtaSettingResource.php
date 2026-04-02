@@ -14,7 +14,7 @@ class PortfolioCtaSettingResource extends Resource
 {
     protected static ?string $model = PortfolioCtaSetting::class;
     protected static ?string $navigationIcon = 'heroicon-o-phone-arrow-up-right';
-    protected static ?string $navigationGroup = 'Portfolio & Kemitraan';
+    protected static ?string $navigationGroup = 'Portofolio';
     protected static ?string $navigationLabel = 'CTA Settings';
     protected static ?int $navigationSort = 7;
 

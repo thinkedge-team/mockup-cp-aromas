@@ -16,7 +16,7 @@ class BlogSettingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
 
-    protected static ?string $navigationGroup = 'Blog Management';
+    protected static ?string $navigationGroup = 'Blog';
 
     protected static ?string $navigationLabel = 'Blog Settings';
 

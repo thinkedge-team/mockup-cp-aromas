@@ -20,6 +20,7 @@ class Branch extends Model
         'map_link',
         'operating_hours',
         'is_active',
+        'is_under_construction',
     ];
 
     protected $casts = [
@@ -27,6 +28,7 @@ class Branch extends Model
         'longitude' => 'decimal:8',
         'operating_hours' => 'array',
         'is_active' => 'boolean',
+        'is_under_construction' => 'boolean',
     ];
 
     public function scopeActive($query)

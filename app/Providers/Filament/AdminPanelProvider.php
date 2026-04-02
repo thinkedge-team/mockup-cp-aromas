@@ -17,6 +17,8 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\View\PanelsRenderHook;
+use Livewire\Livewire;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -34,14 +36,35 @@ class AdminPanelProvider extends PanelProvider
             ->brandName("AROMAS CMS")
             ->favicon(asset("favicon.ico"))
             ->navigationGroups([
-                "Beranda" => \Filament\Navigation\NavigationGroup::make()
+                \Filament\Navigation\NavigationGroup::make()
                     ->label("Beranda")
                     ->collapsed(true),
-                "Settings" => \Filament\Navigation\NavigationGroup::make()
-                    ->label("Settings")
+                \Filament\Navigation\NavigationGroup::make()
+                    ->label("Tentang Kami")
                     ->collapsed(true),
-                "Promo Management" => \Filament\Navigation\NavigationGroup::make()
-                    ->label("Promo Management")
+                \Filament\Navigation\NavigationGroup::make()
+                    ->label("Produk")
+                    ->collapsed(true),
+                \Filament\Navigation\NavigationGroup::make()
+                    ->label("Mesin")
+                    ->collapsed(true),
+                \Filament\Navigation\NavigationGroup::make()
+                    ->label("Promo")
+                    ->collapsed(true),
+                \Filament\Navigation\NavigationGroup::make()
+                    ->label("Blog")
+                    ->collapsed(true),
+                \Filament\Navigation\NavigationGroup::make()
+                    ->label("Portofolio")
+                    ->collapsed(true),
+                \Filament\Navigation\NavigationGroup::make()
+                    ->label("Kontak")
+                    ->collapsed(true),
+                \Filament\Navigation\NavigationGroup::make()
+                    ->label("Partnership")
+                    ->collapsed(true),
+                \Filament\Navigation\NavigationGroup::make()
+                    ->label("Settings")
                     ->collapsed(true),
             ])
             ->discoverResources(
@@ -61,6 +84,10 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
+            ->renderHook(
+                PanelsRenderHook::TOPBAR_END,
+                fn () => view('components.navigation-search-hook'),
+            )
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

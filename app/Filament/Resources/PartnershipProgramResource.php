@@ -15,7 +15,7 @@ class PartnershipProgramResource extends Resource
     protected static ?string $model = PartnershipProgram::class;
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
     protected static ?string $navigationLabel = 'Program Kemitraan';
-    protected static ?string $navigationGroup = 'Kemitraan';
+    protected static ?string $navigationGroup = 'Partnership';
     protected static ?int $navigationSort = 3;
     protected static ?string $modelLabel = 'Program';
     protected static ?string $pluralModelLabel = 'Program Kemitraan';

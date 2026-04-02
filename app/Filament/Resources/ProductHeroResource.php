@@ -16,7 +16,7 @@ class ProductHeroResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-megaphone';
 
-    protected static ?string $navigationGroup = 'Products';
+    protected static ?string $navigationGroup = 'Produk';
 
     protected static ?int $navigationSort = 1;
 

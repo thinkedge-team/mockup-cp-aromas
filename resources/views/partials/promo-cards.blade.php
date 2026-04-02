@@ -61,7 +61,7 @@
             @endif
             <div class="pc-footer">
                 <button class="pc-btn-main"><i class="bi bi-eye-fill"></i> Lihat Detail</button>
-                <button class="pc-btn-wa" onclick="event.stopPropagation(); window.open('https://wa.me/6281234567890?text={{ urlencode($promo->whatsapp_message) }}', '_blank')">
+                <button class="pc-btn-wa" onclick="event.stopPropagation(); window.open('https://wa.me/{{ $whatsappNumber }}?text={{ urlencode($promo->whatsapp_message) }}', '_blank')">
                     <i class="bi bi-whatsapp"></i>
                 </button>
             </div>

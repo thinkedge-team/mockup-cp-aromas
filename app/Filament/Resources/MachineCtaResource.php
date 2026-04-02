@@ -16,7 +16,7 @@ class MachineCtaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
 
-    protected static ?string $navigationGroup = 'Our Machine';
+    protected static ?string $navigationGroup = 'Mesin';
 
     protected static ?int $navigationSort = 5;
 

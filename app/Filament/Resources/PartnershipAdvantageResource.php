@@ -15,7 +15,7 @@ class PartnershipAdvantageResource extends Resource
     protected static ?string $model = PartnershipAdvantage::class;
     protected static ?string $navigationIcon = 'heroicon-o-shield-check';
     protected static ?string $navigationLabel = 'Keunggulan Kami';
-    protected static ?string $navigationGroup = 'Kemitraan';
+    protected static ?string $navigationGroup = 'Partnership';
     protected static ?int $navigationSort = 4;
     protected static ?string $modelLabel = 'Keunggulan';
     protected static ?string $pluralModelLabel = 'Keunggulan Kami';

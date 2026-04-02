@@ -15,7 +15,7 @@ class ContactInfoSettingResource extends Resource
     protected static ?string $model = ContactInfoSetting::class;
     protected static ?string $navigationIcon = 'heroicon-o-information-circle';
     protected static ?string $navigationLabel = 'Info Kontak';
-    protected static ?string $navigationGroup = 'Hubungi Kami';
+    protected static ?string $navigationGroup = 'Kontak';
     protected static ?int $navigationSort = 2;
     protected static ?string $modelLabel = 'Info Kontak';
 

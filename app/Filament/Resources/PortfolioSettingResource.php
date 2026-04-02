@@ -16,7 +16,7 @@ class PortfolioSettingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
 
-    protected static ?string $navigationGroup = 'Portfolio & Kemitraan';
+    protected static ?string $navigationGroup = 'Portofolio';
 
     protected static ?string $navigationLabel = 'Portfolio Settings';
 

@@ -15,7 +15,7 @@ class PartnershipStatResource extends Resource
     protected static ?string $model = PartnershipStat::class;
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
     protected static ?string $navigationLabel = 'Statistik';
-    protected static ?string $navigationGroup = 'Kemitraan';
+    protected static ?string $navigationGroup = 'Partnership';
     protected static ?int $navigationSort = 2;
     protected static ?string $modelLabel = 'Statistik Kemitraan';
 

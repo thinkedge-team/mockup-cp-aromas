@@ -152,16 +152,19 @@ function renderInfoCards() {
             const statusClass = isOpen ? "open" : "closed";
             const statusText = isOpen ? "Buka" : "Tutup";
             const hours = branch.operatingHours || {};
+            const isComingSoon = branch.isUnderConstruction || false;
+            
             return `
         <div class="info-card" data-id="${branch.id}">
             <div class="card-image">
                 <img src="${branch.foto_url || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=300&h=200&fit=crop'}" alt="${branch.name}" class="card-photo" loading="lazy">
+                ${isComingSoon ? '<div class="coming-soon-overlay"><span class="coming-soon-badge"><i class="bi bi-star-fill"></i> Coming Soon</span></div>' : ''}
             </div>
             <div class="card-info">
-                <span class="card-status-badge ${statusClass}">
+                ${!isComingSoon ? `<span class="card-status-badge ${statusClass}">
                     <span class="card-status-dot"></span>
                     ${statusText} · ${hours.open || '08:00'}–${hours.close || '17:00'}
-                </span>
+                </span>` : ''}
                 <h3 class="card-name">${branch.name}</h3>
                 <span class="card-category">${branch.category || 'Outlet'}</span>
                 <p class="card-address">

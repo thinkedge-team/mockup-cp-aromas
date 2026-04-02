@@ -16,7 +16,7 @@ class PromoCtaSectionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-megaphone';
 
-    protected static ?string $navigationGroup = 'Promo Management';
+    protected static ?string $navigationGroup = 'Promo';
 
     protected static ?string $navigationLabel = 'CTA Settings';
 

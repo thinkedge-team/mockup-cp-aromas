@@ -103,7 +103,7 @@
                     </div>
                     @endif
                     <div class="banner-actions">
-                        <a href="https://wa.me/6281234567890?text={{ urlencode($featuredPromo->whatsapp_message) }}" target="_blank" class="btn-wa-promo"><i class="bi bi-whatsapp"></i> Pesan Sekarang</a>
+                        <a href="https://wa.me/{{ $whatsappNumber }}?text={{ urlencode($featuredPromo->whatsapp_message) }}" target="_blank" class="btn-wa-promo"><i class="bi bi-whatsapp"></i> Pesan Sekarang</a>
                         <button class="btn-detail-link" onclick="openPromoModal('promo-{{ $featuredPromo->id }}')"><i class="bi bi-info-circle-fill"></i> Detail Promo</button>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
                 </div>
                 @else
                 <div class="d-flex gap-3 flex-wrap justify-content-lg-end">
-                    <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20tahu%20promo%20yang%20tersedia" target="_blank" class="btn-cta-w"><i class="bi bi-whatsapp"></i> Hubungi Sekarang</a>
+                    <a href="https://wa.me/{{ $whatsappNumber }}?text=Halo%20AROMAS,%20saya%20ingin%20tahu%20promo%20yang%20tersedia" target="_blank" class="btn-cta-w"><i class="bi bi-whatsapp"></i> Hubungi Sekarang</a>
                     <a href="{{ url('/product') }}" class="btn-cta-ol"><i class="bi bi-box-seam-fill"></i> Lihat Produk</a>
                 </div>
                 @endif

@@ -19,7 +19,7 @@ class MachineCategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
-    protected static ?string $navigationGroup = 'Our Machine';
+    protected static ?string $navigationGroup = 'Mesin';
 
     protected static ?int $navigationSort = 2;
 

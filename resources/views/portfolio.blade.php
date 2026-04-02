@@ -265,7 +265,7 @@
                     </a>
                     @endforeach
                     @else
-                    <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20menjadi%20mitra" target="_blank" class="btn-cta-white">
+                    <a href="https://wa.me/{{ $whatsappNumber }}?text=Halo%20AROMAS,%20saya%20ingin%20menjadi%20mitra" target="_blank" class="btn-cta-white">
                         <i class="bi bi-whatsapp"></i> Chat via WhatsApp
                     </a>
                     <a href="{{ url('/contact') }}" class="btn-cta-outline">

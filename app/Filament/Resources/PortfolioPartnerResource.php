@@ -16,7 +16,7 @@ class PortfolioPartnerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
 
-    protected static ?string $navigationGroup = 'Portfolio & Kemitraan';
+    protected static ?string $navigationGroup = 'Portofolio';
 
     protected static ?string $navigationLabel = 'Mitra Partner';
 

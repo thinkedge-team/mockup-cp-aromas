@@ -19,7 +19,7 @@ class ProductCategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-folder';
 
-    protected static ?string $navigationGroup = 'Products';
+    protected static ?string $navigationGroup = 'Produk';
 
     protected static ?int $navigationSort = 2;
 

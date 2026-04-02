@@ -16,7 +16,7 @@ class PromoFilterCategoryResource extends Resource
 
     protected static ?string $navigationIcon = "heroicon-s-funnel";
 
-    protected static ?string $navigationGroup = "Promo Management";
+    protected static ?string $navigationGroup = "Promo";
 
     protected static ?string $navigationLabel = "Filter Categories";
 

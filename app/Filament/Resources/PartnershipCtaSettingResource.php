@@ -15,7 +15,7 @@ class PartnershipCtaSettingResource extends Resource
     protected static ?string $model = PartnershipCtaSetting::class;
     protected static ?string $navigationIcon = 'heroicon-o-megaphone';
     protected static ?string $navigationLabel = 'CTA Strip';
-    protected static ?string $navigationGroup = 'Kemitraan';
+    protected static ?string $navigationGroup = 'Partnership';
     protected static ?int $navigationSort = 8;
     protected static ?string $modelLabel = 'CTA Strip';
 

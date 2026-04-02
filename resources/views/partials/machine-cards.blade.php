@@ -1,3 +1,12 @@
+@php
+    // Ensure WhatsApp number is available (fallback if not passed from parent)
+    if (!isset($whatsappNumber)) {
+        $footer = \App\Models\FooterSetting::getActive();
+        $whatsappNumber = $footer && isset($footer->contact_info['whatsapp']) 
+            ? preg_replace('/[^0-9]/', '', $footer->contact_info['whatsapp']) 
+            : '6281234567890';
+    }
+@endphp
 <!-- MACHINE 1: Blowing Machine -->
 <div class="col-md-6 col-lg-4 machine-item" data-cat="blowing" data-aos="fade-up" data-aos-delay="0">
     <div class="machine-card" onclick="openMachineModal('m1')">
@@ -30,7 +39,7 @@
             </ul>
             <div class="card-footer-row">
                 <button class="btn-detail"><i class="bi bi-eye"></i> Lihat Detail</button>
-                <button class="btn-inquiry" title="Tanya via WhatsApp" onclick="event.stopPropagation(); window.open('https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20tanya%20tentang%20Blowing%20Machine%20AROMAS','_blank')"><i class="bi bi-whatsapp"></i></button>
+                <button class="btn-inquiry" title="Tanya via WhatsApp" onclick="event.stopPropagation(); window.open('https://wa.me/{{ $whatsappNumber }}?text=Halo,%20saya%20ingin%20tanya%20tentang%20Blowing%20Machine%20AROMAS','_blank')"><i class="bi bi-whatsapp"></i></button>
             </div>
         </div>
     </div>
@@ -66,7 +75,7 @@
             </ul>
             <div class="card-footer-row">
                 <button class="btn-detail"><i class="bi bi-eye"></i> Lihat Detail</button>
-                <button class="btn-inquiry" onclick="event.stopPropagation(); window.open('https://wa.me/6281234567890','_blank')"><i class="bi bi-whatsapp"></i></button>
+                <button class="btn-inquiry" onclick="event.stopPropagation(); window.open('https://wa.me/{{ $whatsappNumber }}','_blank')"><i class="bi bi-whatsapp"></i></button>
             </div>
         </div>
     </div>
@@ -102,7 +111,7 @@
             </ul>
             <div class="card-footer-row">
                 <button class="btn-detail"><i class="bi bi-eye"></i> Lihat Detail</button>
-                <button class="btn-inquiry" onclick="event.stopPropagation(); window.open('https://wa.me/6281234567890','_blank')"><i class="bi bi-whatsapp"></i></button>
+                <button class="btn-inquiry" onclick="event.stopPropagation(); window.open('https://wa.me/{{ $whatsappNumber }}','_blank')"><i class="bi bi-whatsapp"></i></button>
             </div>
         </div>
     </div>
@@ -138,7 +147,7 @@
             </ul>
             <div class="card-footer-row">
                 <button class="btn-detail"><i class="bi bi-eye"></i> Lihat Detail</button>
-                <button class="btn-inquiry" onclick="event.stopPropagation(); window.open('https://wa.me/6281234567890','_blank')"><i class="bi bi-whatsapp"></i></button>
+                <button class="btn-inquiry" onclick="event.stopPropagation(); window.open('https://wa.me/{{ $whatsappNumber }}','_blank')"><i class="bi bi-whatsapp"></i></button>
             </div>
         </div>
     </div>
@@ -174,7 +183,7 @@
             </ul>
             <div class="card-footer-row">
                 <button class="btn-detail"><i class="bi bi-eye"></i> Lihat Detail</button>
-                <button class="btn-inquiry" onclick="event.stopPropagation(); window.open('https://wa.me/6281234567890','_blank')"><i class="bi bi-whatsapp"></i></button>
+                <button class="btn-inquiry" onclick="event.stopPropagation(); window.open('https://wa.me/{{ $whatsappNumber }}','_blank')"><i class="bi bi-whatsapp"></i></button>
             </div>
         </div>
     </div>
@@ -210,7 +219,7 @@
             </ul>
             <div class="card-footer-row">
                 <button class="btn-detail"><i class="bi bi-eye"></i> Lihat Detail</button>
-                <button class="btn-inquiry" onclick="event.stopPropagation(); window.open('https://wa.me/6281234567890','_blank')"><i class="bi bi-whatsapp"></i></button>
+                <button class="btn-inquiry" onclick="event.stopPropagation(); window.open('https://wa.me/{{ $whatsappNumber }}','_blank')"><i class="bi bi-whatsapp"></i></button>
             </div>
         </div>
     </div>
@@ -246,7 +255,7 @@
             </ul>
             <div class="card-footer-row">
                 <button class="btn-detail"><i class="bi bi-eye"></i> Lihat Detail</button>
-                <button class="btn-inquiry" onclick="event.stopPropagation(); window.open('https://wa.me/6281234567890','_blank')"><i class="bi bi-whatsapp"></i></button>
+                <button class="btn-inquiry" onclick="event.stopPropagation(); window.open('https://wa.me/{{ $whatsappNumber }}','_blank')"><i class="bi bi-whatsapp"></i></button>
             </div>
         </div>
     </div>
@@ -284,7 +293,7 @@
             </ul>
             <div class="card-footer-row">
                 <button class="btn-detail"><i class="bi bi-eye"></i> Lihat Detail</button>
-                <button class="btn-inquiry" onclick="event.stopPropagation(); window.open('https://wa.me/6281234567890','_blank')"><i class="bi bi-whatsapp"></i></button>
+                <button class="btn-inquiry" onclick="event.stopPropagation(); window.open('https://wa.me/{{ $whatsappNumber }}','_blank')"><i class="bi bi-whatsapp"></i></button>
             </div>
         </div>
     </div>

@@ -4,11 +4,18 @@
     use App\Models\Machine;
     use App\Models\CapacityStat;
     use App\Models\MachineCta;
+    use App\Models\FooterSetting;
 
     $machineHero = MachineHero::active()->first();
     $categories = MachineCategory::active()->orderBy('order')->get();
     $capacityStats = CapacityStat::active()->orderBy('order')->get();
     $machineCta = MachineCta::active()->first();
+    
+    // Get WhatsApp number from Footer Setting
+    $footer = FooterSetting::getActive();
+    $whatsappNumber = $footer && isset($footer->contact_info['whatsapp']) 
+        ? preg_replace('/[^0-9]/', '', $footer->contact_info['whatsapp']) 
+        : '6281234567890';
 @endphp
 
 @extends('layouts.app')
@@ -191,7 +198,7 @@
                                     <div class="card-footer-row">
                                         <button class="btn-detail"><i class="bi bi-eye"></i> Lihat Detail</button>
                                         <button class="btn-inquiry" title="Tanya via WhatsApp"
-                                            onclick="event.stopPropagation(); window.open('https://wa.me/6281234567890?text={{ urlencode($machine->whatsapp_message ?? 'Halo, saya ingin tanya tentang ' . $machine->name) }}','_blank')"><i
+                                            onclick="event.stopPropagation(); window.open('https://wa.me/{{ $whatsappNumber }}?text={{ urlencode($machine->whatsapp_message ?? 'Halo, saya ingin tanya tentang ' . $machine->name) }}','_blank')"><i
                                                 class="bi bi-whatsapp"></i></button>
                                     </div>
                                 </div>
@@ -251,7 +258,7 @@
                                 <i class="bi bi-envelope-fill"></i> {{ $machineCta->secondary_button_text }}
                             </a>
                         @else
-                            <a href="https://wa.me/6281234567890?text=Halo%20AROMAS,%20saya%20ingin%20kunjungan%20pabrik"
+                            <a href="https://wa.me/{{ $whatsappNumber }}?text=Halo%20AROMAS,%20saya%20ingin%20kunjungan%20pabrik"
                                 target="_blank" class="btn-cta-w">
                                 <i class="bi bi-whatsapp"></i> Jadwalkan Kunjungan
                             </a>

@@ -32,6 +32,7 @@
             'whatsapp' => $branch->whatsapp,
             'mapLink' => $branch->map_link,
             'operatingHours' => $branch->operating_hours,
+            'isUnderConstruction' => $branch->is_under_construction,
         ];
     })->values();
 @endphp

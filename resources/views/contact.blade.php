@@ -470,7 +470,12 @@ $ctaWaUrl    = 'https://wa.me/' . $ctaWaNum . '?text=' . urlencode($ctaWaMsg);
 
         <div class="branch-grid" data-aos="fade-up" data-aos-delay="120">
             @forelse($branches as $branch)
-            <div class="branch-card">
+            <div class="branch-card {{ $branch->is_under_construction ? 'coming-soon-card' : '' }}">
+                @if($branch->is_under_construction)
+                <div class="branch-coming-soon-badge">
+                    <i class="bi bi-star-fill"></i> Coming Soon
+                </div>
+                @endif
                 <div class="bc-top">
                     <div class="bc-avatar"><i class="bi bi-building"></i></div>
                     <div>
@@ -479,7 +484,7 @@ $ctaWaUrl    = 'https://wa.me/' . $ctaWaNum . '?text=' . urlencode($ctaWaMsg);
                     </div>
                 </div>
                 <p class="bc-detail">{{ $branch->address }}<br/>
-                @if(isset($branch->operating_hours['days']))
+                @if(isset($branch->operating_hours['days']) && !$branch->is_under_construction)
                 <i class="bi bi-clock me-1" style="color:var(--gold);"></i>{{ $branch->operating_hours['days'] }}
                 {{ isset($branch->operating_hours['open']) ? $branch->operating_hours['open'] : '' }}–{{ isset($branch->operating_hours['close']) ? $branch->operating_hours['close'] : '' }}
                 @endif
@@ -965,9 +970,28 @@ textarea.form-control{resize:vertical;min-height:140px;line-height:1.6;}
 .branch-card{
     background:#fff;border-radius:16px;padding:24px 22px;
     border:1px solid rgba(34,139,34,.1);box-shadow:var(--sh-sm);
-    transition:all .28s ease;
+    transition:all .28s ease;position:relative;
 }
 .branch-card:hover{transform:translateY(-4px);box-shadow:var(--sh-md);border-color:rgba(34,139,34,.25);}
+.branch-card.coming-soon-card{
+    background:#fafafa;border-color:rgba(255,152,0,.2);
+}
+.branch-coming-soon-badge{
+    position:absolute;top:16px;right:16px;
+    display:inline-flex;align-items:center;gap:5px;
+    background:linear-gradient(135deg,#ff9800,#ffc107);
+    color:#fff;padding:5px 12px;border-radius:20px;
+    font-size:.68rem;font-weight:700;text-transform:uppercase;
+    letter-spacing:.5px;box-shadow:0 4px 12px rgba(255,152,0,.3);
+    z-index:10;
+}
+.branch-coming-soon-badge i{
+    font-size:.75rem;animation:starRotate 3s linear infinite;
+}
+@keyframes starRotate{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+}
 .bc-top{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
 .bc-avatar{
     width:48px;height:48px;border-radius:12px;
