@@ -61,13 +61,12 @@
     class="fi-navigation-search relative"
 >
     <!-- Search Input Container -->
-    <div class="relative group">
-        <!-- Search Icon -->
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <!-- Default Search Icon -->
+    <div class="fi-search-input-row">
+        <!-- Search Icon / Loading Spinner -->
+        <div class="fi-search-icon-wrap pointer-events-none">
             <svg 
                 x-show="!loading" 
-                class="w-4 h-4 text-gray-400 dark:text-gray-500 group-focus-within:text-primary-500 dark:group-focus-within:text-primary-400 transition-colors duration-200" 
+                class="fi-search-icon"
                 fill="none" 
                 stroke="currentColor" 
                 stroke-width="2"
@@ -75,11 +74,10 @@
             >
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
-            <!-- Loading Spinner -->
             <svg 
                 x-show="loading" 
                 x-cloak
-                class="w-4 h-4 text-primary-500 dark:text-primary-400 animate-spin" 
+                class="fi-search-icon fi-search-icon--spin"
                 xmlns="http://www.w3.org/2000/svg" 
                 fill="none" 
                 viewBox="0 0 24 24"
@@ -101,27 +99,16 @@
             type="text" 
             placeholder="Cari menu..."
             autocomplete="off"
-            class="fi-input w-64 h-9 pl-10 pr-9 text-sm rounded-lg
-                   bg-gray-100 dark:bg-white/5
-                   border border-transparent
-                   text-gray-900 dark:text-white
-                   placeholder:text-gray-500 dark:placeholder:text-gray-400
-                   hover:bg-gray-200/70 dark:hover:bg-white/10
-                   focus:bg-white dark:focus:bg-white/5
-                   focus:border-primary-500 dark:focus:border-primary-500
-                   focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-500/30
-                   focus:outline-none
-                   transition duration-200 ease-in-out"
+            class="fi-search-field"
         >
         
         <!-- Keyboard Shortcut Badge -->
         <div 
             x-show="search.length === 0"
-            class="absolute inset-y-0 right-0 flex items-center pr-2.5 pointer-events-none"
+            class="fi-search-kbd-wrap pointer-events-none"
         >
-            <kbd class="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[10px] font-medium text-gray-400 dark:text-gray-500 bg-gray-200/80 dark:bg-white/10 rounded border-0 font-mono">
-                ⌘K
-            </kbd>
+            <kbd class="fi-search-kbd">⌘</kbd>
+            <kbd class="fi-search-kbd">K</kbd>
         </div>
         
         <!-- Clear Button -->
@@ -136,9 +123,9 @@
             x-transition:leave-end="opacity-0 scale-90"
             @click="search = ''; $wire.set('search', ''); open = false; selectedIndex = -1; $refs.searchInput.focus()"
             type="button"
-            class="absolute inset-y-0 right-0 flex items-center pr-2.5 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+            class="fi-search-clear-btn"
         >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
@@ -154,61 +141,47 @@
         x-transition:leave-start="opacity-100 translate-y-0"
         x-transition:leave-end="opacity-0 translate-y-1"
         x-cloak
-        class="absolute right-0 top-full mt-2 w-80 
-               bg-white dark:bg-gray-900 
-               rounded-xl 
-               shadow-lg shadow-gray-900/10 dark:shadow-gray-900/50
-               ring-1 ring-gray-200 dark:ring-white/10
-               overflow-hidden z-50"
+        class="fi-search-dropdown"
     >
         <!-- Results Header -->
-        <div class="flex items-center justify-between px-4 py-2.5 border-b border-gray-100 dark:border-white/10">
-            <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+        <div class="fi-search-dropdown-header">
+            <span class="fi-search-dropdown-header-label">
                 Hasil Pencarian
             </span>
-            <span class="text-xs text-gray-400 dark:text-gray-500 tabular-nums">
+            <span class="fi-search-dropdown-count">
                 {{ count($results) }} menu
             </span>
         </div>
 
         <!-- Results List -->
-        <div class="max-h-72 overflow-y-auto overscroll-contain fi-search-results">
+        <div class="fi-search-results">
             @forelse($results as $index => $result)
                 <a 
                     href="{{ $result['url'] }}"
                     wire:click="selectItem('{{ $result['url'] }}', '{{ addslashes($result['label']) }}', '{{ addslashes($result['group']) }}', '{{ $result['icon'] }}')"
                     data-search-result
                     data-index="{{ $index }}"
-                    :class="{ 
-                        'bg-gray-50 dark:bg-white/5': selectedIndex === {{ $index }}
-                    }"
-                    class="flex items-center gap-3 px-4 py-2.5 
-                           hover:bg-gray-50 dark:hover:bg-white/5 
-                           transition-colors duration-75 
-                           cursor-pointer group"
+                    :class="{ 'fi-search-result--active': selectedIndex === {{ $index }} }"
+                    class="fi-search-result group"
                 >
                     <!-- Icon -->
-                    <div class="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-lg 
-                                bg-primary-50 dark:bg-primary-500/10
-                                text-primary-600 dark:text-primary-400
-                                group-hover:bg-primary-100 dark:group-hover:bg-primary-500/20
-                                transition-colors duration-150">
+                    <div class="fi-search-result-icon">
                         <x-filament::icon 
                             :icon="$result['icon']" 
-                            class="w-5 h-5"
+                            class="w-4 h-4"
                         />
                     </div>
                     
                     <!-- Content -->
-                    <div class="flex-1 min-w-0">
-                        <div class="text-sm font-medium text-gray-900 dark:text-white truncate">
+                    <div class="fi-search-result-content">
+                        <div class="fi-search-result-label">
                             {!! $indexer->highlightMatch($result['label'], $search) !!}
                         </div>
-                        <div class="flex items-center gap-1.5 mt-0.5">
-                            <svg class="w-3 h-3 text-gray-400 dark:text-gray-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <div class="fi-search-result-group">
+                            <svg class="w-2.5 h-2.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
                             </svg>
-                            <span class="text-xs text-gray-500 dark:text-gray-400 truncate">
+                            <span class="truncate">
                                 {!! $indexer->highlightMatch($result['group'], $search) !!}
                             </span>
                         </div>
@@ -216,11 +189,8 @@
                     
                     <!-- Arrow -->
                     <svg 
-                        class="w-4 h-4 text-gray-300 dark:text-gray-600 
-                               group-hover:text-gray-400 dark:group-hover:text-gray-500
-                               group-hover:translate-x-0.5
-                               transition-all duration-150 flex-shrink-0"
-                        :class="{ 'text-gray-400 dark:text-gray-500 translate-x-0.5': selectedIndex === {{ $index }} }"
+                        class="fi-search-result-arrow"
+                        :class="{ 'fi-search-result-arrow--active': selectedIndex === {{ $index }} }"
                         fill="none" 
                         stroke="currentColor" 
                         stroke-width="2"
@@ -231,33 +201,33 @@
                 </a>
             @empty
                 <!-- Empty State -->
-                <div class="px-4 py-10 text-center">
-                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-white/5 mb-3">
-                        <svg class="w-6 h-6 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 16.318A4.486 4.486 0 0012.016 15a4.486 4.486 0 00-3.198 1.318M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"></path>
+                <div class="fi-search-empty">
+                    <div class="fi-search-empty-icon-wrap">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </div>
-                    <p class="text-sm font-medium text-gray-900 dark:text-white">Tidak ditemukan</p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Coba kata kunci lain</p>
+                    <p class="fi-search-empty-title">Tidak ditemukan</p>
+                    <p class="fi-search-empty-subtitle">Coba kata kunci lain</p>
                 </div>
             @endforelse
         </div>
 
         <!-- Footer with Keyboard Hints -->
         @if(count($results) > 0)
-        <div class="flex items-center justify-center gap-4 px-4 py-2 border-t border-gray-100 dark:border-white/10 bg-gray-50/50 dark:bg-white/[0.02]">
-            <div class="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500">
-                <kbd class="inline-flex items-center justify-center w-5 h-5 text-[10px] font-medium bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 shadow-sm">↑</kbd>
-                <kbd class="inline-flex items-center justify-center w-5 h-5 text-[10px] font-medium bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 shadow-sm">↓</kbd>
-                <span class="ml-1">navigasi</span>
+        <div class="fi-search-footer">
+            <div class="fi-search-hint">
+                <kbd class="fi-search-hint-kbd">↑</kbd>
+                <kbd class="fi-search-hint-kbd">↓</kbd>
+                <span>navigasi</span>
             </div>
-            <div class="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500">
-                <kbd class="inline-flex items-center justify-center h-5 px-1.5 text-[10px] font-medium bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 shadow-sm">↵</kbd>
-                <span class="ml-1">buka</span>
+            <div class="fi-search-hint">
+                <kbd class="fi-search-hint-kbd">↵</kbd>
+                <span>buka</span>
             </div>
-            <div class="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500">
-                <kbd class="inline-flex items-center justify-center h-5 px-1.5 text-[10px] font-medium bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 shadow-sm">esc</kbd>
-                <span class="ml-1">tutup</span>
+            <div class="fi-search-hint">
+                <kbd class="fi-search-hint-kbd">esc</kbd>
+                <span>tutup</span>
             </div>
         </div>
         @endif
@@ -267,43 +237,436 @@
 <style>
 [x-cloak] { display: none !important; }
 
-/* Custom Scrollbar for Results */
-.fi-search-results::-webkit-scrollbar {
-    width: 6px;
+/* =============================================
+   INPUT ROW — flex container menggantikan
+   pendekatan absolute-positioning lama
+   ============================================= */
+.fi-search-input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 272px;
+    height: 38px;
+    padding: 0 10px 0 12px;
+    background: #ffffff;
+    border: 1.5px solid #e5e3de;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    cursor: text;
 }
 
-.fi-search-results::-webkit-scrollbar-track {
+.dark .fi-search-input-row {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+}
+
+.fi-search-input-row:focus-within {
+    border-color: rgb(var(--primary-500));
+    box-shadow: 0 0 0 3px rgba(var(--primary-500), 0.15), 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+/* Icon wrapper — ukuran tetap agar tidak menempel placeholder */
+.fi-search-icon-wrap {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+}
+
+.fi-search-icon {
+    width: 15px;
+    height: 15px;
+    color: #a09e98;
+    transition: color 0.15s ease;
+}
+
+.fi-search-input-row:focus-within .fi-search-icon {
+    color: rgb(var(--primary-500));
+}
+
+.fi-search-icon--spin {
+    color: rgb(var(--primary-500));
+    animation: fi-spin 0.75s linear infinite;
+}
+
+@keyframes fi-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Input field — flex: 1 mengisi sisa ruang */
+.fi-search-field {
+    flex: 1;
+    min-width: 0;
+    border: none;
     background: transparent;
+    outline: none;
+    font-size: 13.5px;
+    line-height: 1;
+    color: #111827;
+    font-family: inherit;
 }
 
-.fi-search-results::-webkit-scrollbar-thumb {
-    background-color: rgba(156, 163, 175, 0.4);
-    border-radius: 3px;
+.dark .fi-search-field {
+    color: #f9fafb;
 }
 
-.fi-search-results::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(156, 163, 175, 0.6);
+.fi-search-field::placeholder {
+    color: #b5b2aa;
 }
 
-.dark .fi-search-results::-webkit-scrollbar-thumb {
-    background-color: rgba(75, 85, 99, 0.5);
+.dark .fi-search-field::placeholder {
+    color: #6b7280;
 }
 
-.dark .fi-search-results::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(75, 85, 99, 0.7);
+/* ⌘K badge — dua kbd terpisah */
+.fi-search-kbd-wrap {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 3px;
 }
 
-/* Search Highlight */
-.fi-navigation-search mark {
-    background-color: #fef08a;
-    color: #854d0e;
-    padding: 0.125rem 0.25rem;
-    border-radius: 0.25rem;
+.fi-search-kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    min-width: 20px;
+    padding: 0 5px;
+    font-size: 11px;
+    font-family: inherit;
+    font-weight: 500;
+    color: #b5b2aa;
+    background: #f3f2ef;
+    border: 1px solid #e5e3de;
+    border-radius: 5px;
+    line-height: 1;
+}
+
+.dark .fi-search-kbd {
+    color: #6b7280;
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Clear button */
+.fi-search-clear-btn {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: #a09e98;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.1s, background 0.1s;
+}
+
+.fi-search-clear-btn:hover {
+    color: #374151;
+    background: #f3f2ef;
+}
+
+.dark .fi-search-clear-btn:hover {
+    color: #e5e7eb;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* =============================================
+   DROPDOWN PANEL
+   ============================================= */
+.fi-search-dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    width: 320px;
+    background: #ffffff;
+    border: 1.5px solid #e5e3de;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    z-index: 50;
+}
+
+.dark .fi-search-dropdown {
+    background: #111827;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Dropdown header */
+.fi-search-dropdown-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-bottom: 1px solid #f0ede8;
+}
+
+.dark .fi-search-dropdown-header {
+    border-bottom-color: rgba(255, 255, 255, 0.07);
+}
+
+.fi-search-dropdown-header-label {
+    font-size: 10.5px;
     font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #a09e98;
+}
+
+.dark .fi-search-dropdown-header-label {
+    color: #6b7280;
+}
+
+.fi-search-dropdown-count {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #b5b2aa;
+    background: #f5f4f1;
+    border-radius: 20px;
+    padding: 2px 9px;
+}
+
+.dark .fi-search-dropdown-count {
+    color: #6b7280;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Results list scrollable */
+.fi-search-results {
+    max-height: 288px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.fi-search-results::-webkit-scrollbar { width: 5px; }
+.fi-search-results::-webkit-scrollbar-track { background: transparent; }
+.fi-search-results::-webkit-scrollbar-thumb { background: rgba(156, 163, 175, 0.35); border-radius: 3px; }
+.fi-search-results::-webkit-scrollbar-thumb:hover { background: rgba(156, 163, 175, 0.55); }
+.dark .fi-search-results::-webkit-scrollbar-thumb { background: rgba(75, 85, 99, 0.45); }
+.dark .fi-search-results::-webkit-scrollbar-thumb:hover { background: rgba(75, 85, 99, 0.65); }
+
+/* Result item */
+.fi-search-result {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px 14px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.08s ease;
+}
+
+.fi-search-result:hover,
+.fi-search-result--active {
+    background: #faf9f7;
+}
+
+.dark .fi-search-result:hover,
+.dark .fi-search-result--active {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* Result icon box */
+.fi-search-result-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: rgb(var(--primary-50, 238 242 255));
+    color: rgb(var(--primary-600, 79 70 229));
+    transition: background 0.12s ease;
+}
+
+.dark .fi-search-result-icon {
+    background: rgba(var(--primary-500, 99 102 241), 0.12);
+    color: rgb(var(--primary-400, 129 140 248));
+}
+
+.fi-search-result:hover .fi-search-result-icon,
+.fi-search-result--active .fi-search-result-icon {
+    background: rgb(var(--primary-100, 224 231 255));
+}
+
+.dark .fi-search-result:hover .fi-search-result-icon,
+.dark .fi-search-result--active .fi-search-result-icon {
+    background: rgba(var(--primary-500, 99 102 241), 0.2);
+}
+
+/* Result text content */
+.fi-search-result-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.fi-search-result-label {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #111827;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dark .fi-search-result-label {
+    color: #f9fafb;
+}
+
+.fi-search-result-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 2px;
+    color: #b5b2aa;
+    font-size: 11.5px;
+}
+
+.dark .fi-search-result-group {
+    color: #6b7280;
+}
+
+/* Arrow */
+.fi-search-result-arrow {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    color: #d1cdc7;
+    transition: transform 0.1s ease, color 0.1s ease;
+}
+
+.dark .fi-search-result-arrow {
+    color: #4b5563;
+}
+
+.fi-search-result:hover .fi-search-result-arrow,
+.fi-search-result-arrow--active {
+    transform: translateX(2px);
+    color: #a09e98;
+}
+
+.dark .fi-search-result:hover .fi-search-result-arrow,
+.dark .fi-search-result-arrow--active {
+    color: #9ca3af;
+}
+
+/* Empty state */
+.fi-search-empty {
+    padding: 36px 16px;
+    text-align: center;
+}
+
+.fi-search-empty-icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #f5f4f1;
+    color: #c0bdb6;
+    margin-bottom: 10px;
+}
+
+.dark .fi-search-empty-icon-wrap {
+    background: rgba(255, 255, 255, 0.05);
+    color: #6b7280;
+}
+
+.fi-search-empty-title {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.dark .fi-search-empty-title {
+    color: #f9fafb;
+}
+
+.fi-search-empty-subtitle {
+    font-size: 12px;
+    color: #b5b2aa;
+    margin-top: 3px;
+}
+
+.dark .fi-search-empty-subtitle {
+    color: #6b7280;
+}
+
+/* Footer keyboard hints */
+.fi-search-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 8px 14px;
+    border-top: 1px solid #f0ede8;
+    background: #faf9f7;
+}
+
+.dark .fi-search-footer {
+    border-top-color: rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.fi-search-hint {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #b5b2aa;
+}
+
+.dark .fi-search-hint {
+    color: #6b7280;
+}
+
+.fi-search-hint-kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    font-size: 10px;
+    font-family: inherit;
+    font-weight: 500;
+    background: #ffffff;
+    border: 1px solid #e5e3de;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    color: #a09e98;
+}
+
+.dark .fi-search-hint-kbd {
+    background: #1f2937;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+    color: #6b7280;
+}
+
+/* Search highlight mark */
+.fi-navigation-search mark {
+    background-color: #fef3c7;
+    color: #92400e;
+    padding: 1px 3px;
+    border-radius: 3px;
+    font-weight: 600;
+    font-style: normal;
 }
 
 .dark .fi-navigation-search mark {
-    background-color: rgba(250, 204, 21, 0.2);
+    background-color: rgba(250, 204, 21, 0.18);
     color: #fde047;
 }
 </style>
