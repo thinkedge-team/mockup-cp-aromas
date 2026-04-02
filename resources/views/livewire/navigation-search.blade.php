@@ -165,10 +165,11 @@
                     class="fi-search-result group"
                 >
                     <!-- Icon -->
-                    <div class="fi-search-result-icon">
+                    <div class="fi-search-result-icon" style="width:34px;min-width:34px;max-width:34px;height:34px;min-height:34px;max-height:34px;overflow:hidden;">
                         <x-filament::icon 
                             :icon="$result['icon']" 
                             class="w-4 h-4"
+                            style="width:16px;height:16px;min-width:16px;min-height:16px;max-width:16px;max-height:16px;display:block;"
                         />
                     </div>
                     
@@ -463,11 +464,24 @@
     cursor: pointer;
     text-decoration: none;
     transition: background 0.08s ease;
+    min-height: 56px;
+    max-height: 64px;
+    overflow: hidden;
+    border-bottom: 1px solid transparent;
 }
 
 .fi-search-result:hover,
 .fi-search-result--active {
     background: #faf9f7;
+    border-bottom-color: transparent;
+}
+
+.fi-search-result + .fi-search-result {
+    border-top: 1px solid #f5f3f0;
+}
+
+.dark .fi-search-result + .fi-search-result {
+    border-top-color: rgba(255, 255, 255, 0.05);
 }
 
 .dark .fi-search-result:hover,
@@ -475,18 +489,37 @@
     background: rgba(255, 255, 255, 0.04);
 }
 
-/* Result icon box */
+/* Result icon box — overflow:hidden + constraint child agar tidak melar */
 .fi-search-result-icon {
     flex-shrink: 0;
+    flex-grow: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 34px;
+    min-width: 34px;
+    max-width: 34px;
     height: 34px;
+    min-height: 34px;
+    max-height: 34px;
     border-radius: 9px;
+    overflow: hidden;
     background: rgb(var(--primary-50, 238 242 255));
     color: rgb(var(--primary-600, 79 70 229));
     transition: background 0.12s ease;
+}
+
+/* Paksa semua SVG/img di dalam icon box ke ukuran tetap */
+.fi-search-result-icon svg,
+.fi-search-result-icon img {
+    display: block;
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px;
+    min-height: 16px;
+    max-width: 16px;
+    max-height: 16px;
+    flex-shrink: 0;
 }
 
 .dark .fi-search-result-icon {
