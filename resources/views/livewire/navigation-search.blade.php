@@ -4,7 +4,6 @@
         search: @entangle('search'),
         selectedIndex: -1,
         loading: false,
-        results: [],
         init() {
             this.$watch('search', value => {
                 this.open = value.length > 0;
@@ -59,26 +58,28 @@
     @keydown.ctrl.k.window.prevent="focusInput()"
     @keydown.meta.k.window.prevent="focusInput()"
     @keydown.slash.window="if(document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') { $event.preventDefault(); focusInput(); }"
-    class="navigation-search-wrapper relative"
+    class="fi-navigation-search relative"
 >
-    <!-- Search Input -->
+    <!-- Search Input Container -->
     <div class="relative group">
         <!-- Search Icon -->
-        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <!-- Default Search Icon -->
             <svg 
                 x-show="!loading" 
-                class="h-4 w-4 text-gray-400 group-focus-within:text-primary-500 transition-colors duration-200" 
+                class="w-4 h-4 text-gray-400 dark:text-gray-500 group-focus-within:text-primary-500 dark:group-focus-within:text-primary-400 transition-colors duration-200" 
                 fill="none" 
                 stroke="currentColor" 
+                stroke-width="2"
                 viewBox="0 0 24 24"
             >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
             <!-- Loading Spinner -->
             <svg 
                 x-show="loading" 
                 x-cloak
-                class="h-4 w-4 text-primary-500 animate-spin" 
+                class="w-4 h-4 text-primary-500 dark:text-primary-400 animate-spin" 
                 xmlns="http://www.w3.org/2000/svg" 
                 fill="none" 
                 viewBox="0 0 24 24"
@@ -98,61 +99,80 @@
             @keydown.arrow-up.prevent="selectPrev()"
             @keydown.enter.prevent="confirmSelection()"
             type="text" 
-            placeholder="Cari menu... (Ctrl+K)"
-            class="block w-[260px] pl-9 pr-8 py-1.5 text-sm border border-gray-200 rounded-lg 
-                   bg-gray-50 hover:bg-white hover:border-gray-300
-                   focus:bg-white focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 
-                   transition-all duration-200 placeholder-gray-400
-                   dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 dark:hover:border-gray-600
-                   dark:focus:bg-gray-800 dark:focus:border-primary-500 dark:placeholder-gray-500 dark:text-gray-200"
+            placeholder="Cari menu..."
+            autocomplete="off"
+            class="fi-input w-64 h-9 pl-10 pr-9 text-sm rounded-lg
+                   bg-gray-100 dark:bg-white/5
+                   border border-transparent
+                   text-gray-900 dark:text-white
+                   placeholder:text-gray-500 dark:placeholder:text-gray-400
+                   hover:bg-gray-200/70 dark:hover:bg-white/10
+                   focus:bg-white dark:focus:bg-white/5
+                   focus:border-primary-500 dark:focus:border-primary-500
+                   focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-500/30
+                   focus:outline-none
+                   transition duration-200 ease-in-out"
         >
+        
+        <!-- Keyboard Shortcut Badge -->
+        <div 
+            x-show="search.length === 0"
+            class="absolute inset-y-0 right-0 flex items-center pr-2.5 pointer-events-none"
+        >
+            <kbd class="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[10px] font-medium text-gray-400 dark:text-gray-500 bg-gray-200/80 dark:bg-white/10 rounded border-0 font-mono">
+                ⌘K
+            </kbd>
+        </div>
         
         <!-- Clear Button -->
         <button 
             x-show="search.length > 0"
-            x-transition:enter="transition ease-out duration-150"
-            x-transition:enter-start="opacity-0 scale-75"
+            x-cloak
+            x-transition:enter="transition ease-out duration-100"
+            x-transition:enter-start="opacity-0 scale-90"
             x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-100"
+            x-transition:leave="transition ease-in duration-75"
             x-transition:leave-start="opacity-100 scale-100"
-            x-transition:leave-end="opacity-0 scale-75"
+            x-transition:leave-end="opacity-0 scale-90"
             @click="search = ''; $wire.set('search', ''); open = false; selectedIndex = -1; $refs.searchInput.focus()"
             type="button"
-            class="absolute inset-y-0 right-0 pr-2.5 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+            class="absolute inset-y-0 right-0 flex items-center pr-2.5 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
         >
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
     </div>
 
-    <!-- Dropdown Results -->
+    <!-- Dropdown Results Panel -->
     <div 
         x-show="open && search.length > 0" 
         x-transition:enter="transition ease-out duration-200"
-        x-transition:enter-start="opacity-0 -translate-y-2 scale-95"
-        x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+        x-transition:enter-start="opacity-0 translate-y-1"
+        x-transition:enter-end="opacity-100 translate-y-0"
         x-transition:leave="transition ease-in duration-150"
-        x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-        x-transition:leave-end="opacity-0 -translate-y-2 scale-95"
+        x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 translate-y-1"
         x-cloak
-        class="absolute left-0 top-full mt-2 w-[340px] bg-white dark:bg-gray-900 rounded-xl shadow-2xl shadow-gray-200/50 dark:shadow-black/30 border border-gray-100 dark:border-gray-800 overflow-hidden z-50"
+        class="absolute right-0 top-full mt-2 w-80 
+               bg-white dark:bg-gray-900 
+               rounded-xl 
+               shadow-lg shadow-gray-900/10 dark:shadow-gray-900/50
+               ring-1 ring-gray-200 dark:ring-white/10
+               overflow-hidden z-50"
     >
         <!-- Results Header -->
-        <div class="px-3 py-2 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-800">
-            <div class="flex items-center justify-between">
-                <span class="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1.5">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
-                    </svg>
-                    Hasil Pencarian
-                </span>
-                <span class="text-xs text-gray-400 dark:text-gray-500 tabular-nums">{{ count($results) }} ditemukan</span>
-            </div>
+        <div class="flex items-center justify-between px-4 py-2.5 border-b border-gray-100 dark:border-white/10">
+            <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                Hasil Pencarian
+            </span>
+            <span class="text-xs text-gray-400 dark:text-gray-500 tabular-nums">
+                {{ count($results) }} menu
+            </span>
         </div>
 
         <!-- Results List -->
-        <div class="max-h-[300px] overflow-y-auto overscroll-contain">
+        <div class="max-h-72 overflow-y-auto overscroll-contain fi-search-results">
             @forelse($results as $index => $result)
                 <a 
                     href="{{ $result['url'] }}"
@@ -160,75 +180,84 @@
                     data-search-result
                     data-index="{{ $index }}"
                     :class="{ 
-                        'bg-primary-50 dark:bg-primary-900/20 border-l-2 border-l-primary-500': selectedIndex === {{ $index }},
-                        'border-l-2 border-l-transparent': selectedIndex !== {{ $index }}
+                        'bg-gray-50 dark:bg-white/5': selectedIndex === {{ $index }}
                     }"
-                    class="flex items-center gap-3 px-3 py-2.5 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-100 group cursor-pointer"
+                    class="flex items-center gap-3 px-4 py-2.5 
+                           hover:bg-gray-50 dark:hover:bg-white/5 
+                           transition-colors duration-75 
+                           cursor-pointer group"
                 >
-                    <!-- Icon Container -->
-                    <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500/10 to-primary-600/10 dark:from-primary-400/20 dark:to-primary-500/20 flex items-center justify-center group-hover:from-primary-500/20 group-hover:to-primary-600/20 transition-all duration-200"
-                         :class="{ 'from-primary-500/20 to-primary-600/20 dark:from-primary-400/30 dark:to-primary-500/30': selectedIndex === {{ $index }} }">
+                    <!-- Icon -->
+                    <div class="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-lg 
+                                bg-primary-50 dark:bg-primary-500/10
+                                text-primary-600 dark:text-primary-400
+                                group-hover:bg-primary-100 dark:group-hover:bg-primary-500/20
+                                transition-colors duration-150">
                         <x-filament::icon 
                             :icon="$result['icon']" 
-                            class="h-4 w-4 text-primary-600 dark:text-primary-400"
+                            class="w-5 h-5"
                         />
                     </div>
                     
                     <!-- Content -->
                     <div class="flex-1 min-w-0">
-                        <div class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors"
-                             :class="{ 'text-primary-600 dark:text-primary-400': selectedIndex === {{ $index }} }">
+                        <div class="text-sm font-medium text-gray-900 dark:text-white truncate">
                             {!! $indexer->highlightMatch($result['label'], $search) !!}
                         </div>
-                        <div class="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1 mt-0.5">
-                            <svg class="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <div class="flex items-center gap-1.5 mt-0.5">
+                            <svg class="w-3 h-3 text-gray-400 dark:text-gray-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
                             </svg>
-                            <span class="truncate">{!! $indexer->highlightMatch($result['group'], $search) !!}</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 truncate">
+                                {!! $indexer->highlightMatch($result['group'], $search) !!}
+                            </span>
                         </div>
                     </div>
                     
-                    <!-- Arrow Indicator -->
-                    <div class="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                         :class="{ 'opacity-100': selectedIndex === {{ $index }} }">
-                        <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                        </svg>
-                    </div>
+                    <!-- Arrow -->
+                    <svg 
+                        class="w-4 h-4 text-gray-300 dark:text-gray-600 
+                               group-hover:text-gray-400 dark:group-hover:text-gray-500
+                               group-hover:translate-x-0.5
+                               transition-all duration-150 flex-shrink-0"
+                        :class="{ 'text-gray-400 dark:text-gray-500 translate-x-0.5': selectedIndex === {{ $index }} }"
+                        fill="none" 
+                        stroke="currentColor" 
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                    >
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+                    </svg>
                 </a>
             @empty
                 <!-- Empty State -->
-                <div class="px-4 py-8 text-center">
-                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                <div class="px-4 py-10 text-center">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-white/5 mb-3">
+                        <svg class="w-6 h-6 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 16.318A4.486 4.486 0 0012.016 15a4.486 4.486 0 00-3.198 1.318M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"></path>
                         </svg>
                     </div>
-                    <p class="text-sm font-medium text-gray-600 dark:text-gray-300 mb-1">Menu tidak ditemukan</p>
-                    <p class="text-xs text-gray-400 dark:text-gray-500">Coba kata kunci lain</p>
+                    <p class="text-sm font-medium text-gray-900 dark:text-white">Tidak ditemukan</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Coba kata kunci lain</p>
                 </div>
             @endforelse
         </div>
 
-        <!-- Footer Hint -->
+        <!-- Footer with Keyboard Hints -->
         @if(count($results) > 0)
-        <div class="px-3 py-2 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-100 dark:border-gray-800">
-            <div class="flex items-center justify-center gap-3 text-xs text-gray-400 dark:text-gray-500">
-                <span class="flex items-center gap-1">
-                    <kbd class="px-1.5 py-0.5 text-[10px] font-medium bg-white dark:bg-gray-700 rounded border border-gray-200 dark:border-gray-600 shadow-sm">↑</kbd>
-                    <kbd class="px-1.5 py-0.5 text-[10px] font-medium bg-white dark:bg-gray-700 rounded border border-gray-200 dark:border-gray-600 shadow-sm">↓</kbd>
-                    <span class="ml-0.5">navigasi</span>
-                </span>
-                <span class="text-gray-300 dark:text-gray-600">|</span>
-                <span class="flex items-center gap-1">
-                    <kbd class="px-1.5 py-0.5 text-[10px] font-medium bg-white dark:bg-gray-700 rounded border border-gray-200 dark:border-gray-600 shadow-sm">Enter</kbd>
-                    <span class="ml-0.5">buka</span>
-                </span>
-                <span class="text-gray-300 dark:text-gray-600">|</span>
-                <span class="flex items-center gap-1">
-                    <kbd class="px-1.5 py-0.5 text-[10px] font-medium bg-white dark:bg-gray-700 rounded border border-gray-200 dark:border-gray-600 shadow-sm">Esc</kbd>
-                    <span class="ml-0.5">tutup</span>
-                </span>
+        <div class="flex items-center justify-center gap-4 px-4 py-2 border-t border-gray-100 dark:border-white/10 bg-gray-50/50 dark:bg-white/[0.02]">
+            <div class="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500">
+                <kbd class="inline-flex items-center justify-center w-5 h-5 text-[10px] font-medium bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 shadow-sm">↑</kbd>
+                <kbd class="inline-flex items-center justify-center w-5 h-5 text-[10px] font-medium bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 shadow-sm">↓</kbd>
+                <span class="ml-1">navigasi</span>
+            </div>
+            <div class="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500">
+                <kbd class="inline-flex items-center justify-center h-5 px-1.5 text-[10px] font-medium bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 shadow-sm">↵</kbd>
+                <span class="ml-1">buka</span>
+            </div>
+            <div class="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500">
+                <kbd class="inline-flex items-center justify-center h-5 px-1.5 text-[10px] font-medium bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 shadow-sm">esc</kbd>
+                <span class="ml-1">tutup</span>
             </div>
         </div>
         @endif
@@ -238,44 +267,43 @@
 <style>
 [x-cloak] { display: none !important; }
 
-/* Custom Scrollbar */
-.navigation-search-wrapper .max-h-\[300px\]::-webkit-scrollbar {
+/* Custom Scrollbar for Results */
+.fi-search-results::-webkit-scrollbar {
     width: 6px;
 }
 
-.navigation-search-wrapper .max-h-\[300px\]::-webkit-scrollbar-track {
+.fi-search-results::-webkit-scrollbar-track {
     background: transparent;
 }
 
-.navigation-search-wrapper .max-h-\[300px\]::-webkit-scrollbar-thumb {
-    background: #e5e7eb;
-    border-radius: 10px;
-}
-
-.navigation-search-wrapper .max-h-\[300px\]::-webkit-scrollbar-thumb:hover {
-    background: #d1d5db;
-}
-
-.dark .navigation-search-wrapper .max-h-\[300px\]::-webkit-scrollbar-thumb {
-    background: #374151;
-}
-
-.dark .navigation-search-wrapper .max-h-\[300px\]::-webkit-scrollbar-thumb:hover {
-    background: #4b5563;
-}
-
-/* Highlight Styling */
-.navigation-search-wrapper mark {
-    background: linear-gradient(120deg, #fef3c7 0%, #fde68a 100%);
-    color: #92400e;
-    font-weight: 600;
-    padding: 1px 4px;
+.fi-search-results::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.4);
     border-radius: 3px;
-    box-decoration-break: clone;
 }
 
-.dark .navigation-search-wrapper mark {
-    background: linear-gradient(120deg, #78350f 0%, #92400e 100%);
-    color: #fef3c7;
+.fi-search-results::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(156, 163, 175, 0.6);
+}
+
+.dark .fi-search-results::-webkit-scrollbar-thumb {
+    background-color: rgba(75, 85, 99, 0.5);
+}
+
+.dark .fi-search-results::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(75, 85, 99, 0.7);
+}
+
+/* Search Highlight */
+.fi-navigation-search mark {
+    background-color: #fef08a;
+    color: #854d0e;
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+}
+
+.dark .fi-navigation-search mark {
+    background-color: rgba(250, 204, 21, 0.2);
+    color: #fde047;
 }
 </style>
