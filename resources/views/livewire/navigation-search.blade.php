@@ -13,7 +13,6 @@
                 }
             });
             
-            // Watch for Livewire updates
             Livewire.hook('message.processed', (message, component) => {
                 if (component.name === 'navigation-search') {
                     this.loading = false;
@@ -60,35 +59,21 @@
     @keydown.slash.window="if(document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') { $event.preventDefault(); focusInput(); }"
     class="fi-navigation-search relative"
 >
-    <!-- Search Input Container -->
+    {{-- ===================== INPUT ROW ===================== --}}
     <div class="fi-search-input-row">
-        <!-- Search Icon / Loading Spinner -->
-        <div class="fi-search-icon-wrap pointer-events-none">
-            <svg 
-                x-show="!loading" 
-                class="fi-search-icon"
-                fill="none" 
-                stroke="currentColor" 
-                stroke-width="2"
-                viewBox="0 0 24 24"
-            >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        {{-- Icon / Spinner --}}
+        <div class="fi-search-icon-wrap" aria-hidden="true">
+            <svg x-show="!loading" class="fi-search-svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
             </svg>
-            <svg 
-                x-show="loading" 
-                x-cloak
-                class="fi-search-icon fi-search-icon--spin"
-                xmlns="http://www.w3.org/2000/svg" 
-                fill="none" 
-                viewBox="0 0 24 24"
-            >
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            <svg x-show="loading" x-cloak class="fi-search-svg fi-search-svg--spin" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
             </svg>
         </div>
-        
-        <!-- Input Field -->
-        <input 
+
+        {{-- Input --}}
+        <input
             x-ref="searchInput"
             wire:model.live.debounce.200ms="search"
             @focus="if(search.length > 0) open = true"
@@ -96,23 +81,20 @@
             @keydown.arrow-down.prevent="selectNext()"
             @keydown.arrow-up.prevent="selectPrev()"
             @keydown.enter.prevent="confirmSelection()"
-            type="text" 
+            type="text"
             placeholder="Cari menu..."
             autocomplete="off"
             class="fi-search-field"
         >
-        
-        <!-- Keyboard Shortcut Badge -->
-        <div 
-            x-show="search.length === 0"
-            class="fi-search-kbd-wrap pointer-events-none"
-        >
+
+        {{-- ⌘K badge --}}
+        <div x-show="search.length === 0" class="fi-search-kbd-wrap" aria-hidden="true">
             <kbd class="fi-search-kbd">⌘</kbd>
             <kbd class="fi-search-kbd">K</kbd>
         </div>
-        
-        <!-- Clear Button -->
-        <button 
+
+        {{-- Clear button --}}
+        <button
             x-show="search.length > 0"
             x-cloak
             x-transition:enter="transition ease-out duration-100"
@@ -124,16 +106,17 @@
             @click="search = ''; $wire.set('search', ''); open = false; selectedIndex = -1; $refs.searchInput.focus()"
             type="button"
             class="fi-search-clear-btn"
+            aria-label="Hapus pencarian"
         >
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+            <svg style="width:13px;height:13px;display:block;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
             </svg>
         </button>
     </div>
 
-    <!-- Dropdown Results Panel -->
-    <div 
-        x-show="open && search.length > 0" 
+    {{-- ===================== DROPDOWN ===================== --}}
+    <div
+        x-show="open && search.length > 0"
         x-transition:enter="transition ease-out duration-200"
         x-transition:enter-start="opacity-0 translate-y-1"
         x-transition:enter-end="opacity-100 translate-y-0"
@@ -143,69 +126,61 @@
         x-cloak
         class="fi-search-dropdown"
     >
-        <!-- Results Header -->
+        {{-- Header --}}
         <div class="fi-search-dropdown-header">
-            <span class="fi-search-dropdown-header-label">
-                Hasil Pencarian
-            </span>
-            <span class="fi-search-dropdown-count">
-                {{ count($results) }} menu
-            </span>
+            <span class="fi-search-dropdown-label">Hasil Pencarian</span>
+            <span class="fi-search-dropdown-count">{{ count($results) }} menu</span>
         </div>
 
-        <!-- Results List -->
-        <div class="fi-search-results">
+        {{-- Results --}}
+        <div class="fi-search-results-list">
             @forelse($results as $index => $result)
-                <a 
+                <a
                     href="{{ $result['url'] }}"
                     wire:click="selectItem('{{ $result['url'] }}', '{{ addslashes($result['label']) }}', '{{ addslashes($result['group']) }}', '{{ $result['icon'] }}')"
                     data-search-result
                     data-index="{{ $index }}"
-                    :class="{ 'fi-search-result--active': selectedIndex === {{ $index }} }"
-                    class="fi-search-result group"
+                    :class="{ 'fi-search-item--active': selectedIndex === {{ $index }} }"
+                    class="fi-search-item"
                 >
-                    <!-- Icon -->
-                    <div class="fi-search-result-icon" style="width:34px;min-width:34px;max-width:34px;height:34px;min-height:34px;max-height:34px;overflow:hidden;">
-                        <x-filament::icon 
-                            :icon="$result['icon']" 
-                            class="w-4 h-4"
-                            style="width:16px;height:16px;min-width:16px;min-height:16px;max-width:16px;max-height:16px;display:block;"
+                    {{-- Icon box: ukuran dikunci ketat, overflow hidden --}}
+                    <span class="fi-search-item-icon" aria-hidden="true">
+                        <x-filament::icon
+                            :icon="$result['icon']"
+                            class="fi-search-item-icon-svg"
                         />
-                    </div>
-                    
-                    <!-- Content -->
-                    <div class="fi-search-result-content">
-                        <div class="fi-search-result-label">
+                    </span>
+
+                    {{-- Teks --}}
+                    <span class="fi-search-item-body">
+                        <span class="fi-search-item-label">
                             {!! $indexer->highlightMatch($result['label'], $search) !!}
-                        </div>
-                        <div class="fi-search-result-group">
-                            <svg class="w-2.5 h-2.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
+                        </span>
+                        <span class="fi-search-item-group">
+                            <svg style="width:10px;height:10px;flex-shrink:0;display:block;" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/>
                             </svg>
-                            <span class="truncate">
+                            <span class="fi-search-item-group-text">
                                 {!! $indexer->highlightMatch($result['group'], $search) !!}
                             </span>
-                        </div>
-                    </div>
-                    
-                    <!-- Arrow -->
-                    <svg 
-                        class="fi-search-result-arrow"
-                        :class="{ 'fi-search-result-arrow--active': selectedIndex === {{ $index }} }"
-                        fill="none" 
-                        stroke="currentColor" 
-                        stroke-width="2"
-                        viewBox="0 0 24 24"
+                        </span>
+                    </span>
+
+                    {{-- Arrow --}}
+                    <svg
+                        class="fi-search-item-arrow"
+                        :class="{ 'fi-search-item-arrow--active': selectedIndex === {{ $index }} }"
+                        style="width:13px;height:13px;flex-shrink:0;display:block;"
+                        fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
                     >
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
                     </svg>
                 </a>
             @empty
-                <!-- Empty State -->
                 <div class="fi-search-empty">
-                    <div class="fi-search-empty-icon-wrap">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    <div class="fi-search-empty-icon">
+                        <svg style="width:20px;height:20px;display:block;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
                     </div>
                     <p class="fi-search-empty-title">Tidak ditemukan</p>
@@ -214,22 +189,22 @@
             @endforelse
         </div>
 
-        <!-- Footer with Keyboard Hints -->
+        {{-- Footer --}}
         @if(count($results) > 0)
         <div class="fi-search-footer">
-            <div class="fi-search-hint">
+            <span class="fi-search-hint">
                 <kbd class="fi-search-hint-kbd">↑</kbd>
                 <kbd class="fi-search-hint-kbd">↓</kbd>
-                <span>navigasi</span>
-            </div>
-            <div class="fi-search-hint">
+                <span class="fi-search-hint-text">navigasi</span>
+            </span>
+            <span class="fi-search-hint">
                 <kbd class="fi-search-hint-kbd">↵</kbd>
-                <span>buka</span>
-            </div>
-            <div class="fi-search-hint">
+                <span class="fi-search-hint-text">buka</span>
+            </span>
+            <span class="fi-search-hint">
                 <kbd class="fi-search-hint-kbd">esc</kbd>
-                <span>tutup</span>
-            </div>
+                <span class="fi-search-hint-text">tutup</span>
+            </span>
         </div>
         @endif
     </div>
@@ -238,10 +213,9 @@
 <style>
 [x-cloak] { display: none !important; }
 
-/* =============================================
-   INPUT ROW — flex container menggantikan
-   pendekatan absolute-positioning lama
-   ============================================= */
+/* ============================================================
+   INPUT ROW
+   ============================================================ */
 .fi-search-input-row {
     display: flex;
     align-items: center;
@@ -252,53 +226,47 @@
     background: #ffffff;
     border: 1.5px solid #e5e3de;
     border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+    transition: border-color .15s, box-shadow .15s;
     cursor: text;
 }
-
 .dark .fi-search-input-row {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255,255,255,.05);
+    border-color: rgba(255,255,255,.1);
     box-shadow: none;
 }
-
 .fi-search-input-row:focus-within {
-    border-color: rgb(var(--primary-500));
-    box-shadow: 0 0 0 3px rgba(var(--primary-500), 0.15), 0 1px 3px rgba(0, 0, 0, 0.06);
+    border-color: rgb(var(--primary-500, 99 102 241));
+    box-shadow: 0 0 0 3px rgba(var(--primary-500, 99 102 241),.15), 0 1px 3px rgba(0,0,0,.06);
 }
 
-/* Icon wrapper — ukuran tetap agar tidak menempel placeholder */
+/* Icon wrap — dimensi tetap, tidak bisa melar */
 .fi-search-icon-wrap {
-    flex-shrink: 0;
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 18px;
-    height: 18px;
+    overflow: hidden;
 }
-
-.fi-search-icon {
+.fi-search-svg {
+    display: block;
     width: 15px;
     height: 15px;
     color: #a09e98;
-    transition: color 0.15s ease;
+    transition: color .15s;
 }
-
-.fi-search-input-row:focus-within .fi-search-icon {
-    color: rgb(var(--primary-500));
+.fi-search-input-row:focus-within .fi-search-svg {
+    color: rgb(var(--primary-500, 99 102 241));
 }
-
-.fi-search-icon--spin {
-    color: rgb(var(--primary-500));
-    animation: fi-spin 0.75s linear infinite;
+.fi-search-svg--spin {
+    color: rgb(var(--primary-500, 99 102 241));
+    animation: fi-spin .75s linear infinite;
 }
+@keyframes fi-spin { to { transform: rotate(360deg); } }
 
-@keyframes fi-spin {
-    to { transform: rotate(360deg); }
-}
-
-/* Input field — flex: 1 mengisi sisa ruang */
+/* Input field */
 .fi-search-field {
     flex: 1;
     min-width: 0;
@@ -310,27 +278,17 @@
     color: #111827;
     font-family: inherit;
 }
+.dark .fi-search-field { color: #f9fafb; }
+.fi-search-field::placeholder { color: #b5b2aa; }
+.dark .fi-search-field::placeholder { color: #6b7280; }
 
-.dark .fi-search-field {
-    color: #f9fafb;
-}
-
-.fi-search-field::placeholder {
-    color: #b5b2aa;
-}
-
-.dark .fi-search-field::placeholder {
-    color: #6b7280;
-}
-
-/* ⌘K badge — dua kbd terpisah */
+/* ⌘K badge */
 .fi-search-kbd-wrap {
-    flex-shrink: 0;
+    flex: 0 0 auto;
     display: flex;
     align-items: center;
     gap: 3px;
 }
-
 .fi-search-kbd {
     display: inline-flex;
     align-items: center;
@@ -347,42 +305,38 @@
     border-radius: 5px;
     line-height: 1;
 }
-
 .dark .fi-search-kbd {
     color: #6b7280;
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.1);
 }
 
 /* Clear button */
 .fi-search-clear-btn {
-    flex-shrink: 0;
+    flex: 0 0 22px;
+    width: 22px;
+    height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
     border-radius: 50%;
-    color: #a09e98;
-    background: transparent;
     border: none;
+    background: transparent;
+    color: #a09e98;
     cursor: pointer;
-    transition: color 0.1s, background 0.1s;
+    transition: color .1s, background .1s;
+    padding: 0;
 }
-
 .fi-search-clear-btn:hover {
     color: #374151;
     background: #f3f2ef;
 }
+.dark .fi-search-clear-btn { color: #6b7280; }
+.dark .fi-search-clear-btn:hover { color: #e5e7eb; background: rgba(255,255,255,.08); }
 
-.dark .fi-search-clear-btn:hover {
-    color: #e5e7eb;
-    background: rgba(255, 255, 255, 0.08);
-}
-
-/* =============================================
-   DROPDOWN PANEL
-   ============================================= */
+/* ============================================================
+   DROPDOWN
+   ============================================================ */
 .fi-search-dropdown {
     position: absolute;
     right: 0;
@@ -391,15 +345,14 @@
     background: #ffffff;
     border: 1.5px solid #e5e3de;
     border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 30px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.06);
     overflow: hidden;
     z-index: 50;
 }
-
 .dark .fi-search-dropdown {
     background: #111827;
-    border-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255,255,255,.1);
+    box-shadow: 0 8px 30px rgba(0,0,0,.4);
 }
 
 /* Dropdown header */
@@ -407,25 +360,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 14px;
+    padding: 9px 14px;
     border-bottom: 1px solid #f0ede8;
 }
+.dark .fi-search-dropdown-header { border-bottom-color: rgba(255,255,255,.07); }
 
-.dark .fi-search-dropdown-header {
-    border-bottom-color: rgba(255, 255, 255, 0.07);
-}
-
-.fi-search-dropdown-header-label {
+.fi-search-dropdown-label {
     font-size: 10.5px;
     font-weight: 600;
-    letter-spacing: 0.07em;
+    letter-spacing: .07em;
     text-transform: uppercase;
     color: #a09e98;
 }
-
-.dark .fi-search-dropdown-header-label {
-    color: #6b7280;
-}
+.dark .fi-search-dropdown-label { color: #6b7280; }
 
 .fi-search-dropdown-count {
     font-size: 11.5px;
@@ -435,171 +382,169 @@
     border-radius: 20px;
     padding: 2px 9px;
 }
+.dark .fi-search-dropdown-count { color: #6b7280; background: rgba(255,255,255,.06); }
 
-.dark .fi-search-dropdown-count {
-    color: #6b7280;
-    background: rgba(255, 255, 255, 0.06);
-}
-
-/* Results list scrollable */
-.fi-search-results {
+/* Results list */
+.fi-search-results-list {
     max-height: 288px;
     overflow-y: auto;
     overscroll-behavior: contain;
 }
+.fi-search-results-list::-webkit-scrollbar { width: 4px; }
+.fi-search-results-list::-webkit-scrollbar-track { background: transparent; }
+.fi-search-results-list::-webkit-scrollbar-thumb { background: rgba(156,163,175,.3); border-radius: 2px; }
+.fi-search-results-list::-webkit-scrollbar-thumb:hover { background: rgba(156,163,175,.5); }
+.dark .fi-search-results-list::-webkit-scrollbar-thumb { background: rgba(75,85,99,.4); }
 
-.fi-search-results::-webkit-scrollbar { width: 5px; }
-.fi-search-results::-webkit-scrollbar-track { background: transparent; }
-.fi-search-results::-webkit-scrollbar-thumb { background: rgba(156, 163, 175, 0.35); border-radius: 3px; }
-.fi-search-results::-webkit-scrollbar-thumb:hover { background: rgba(156, 163, 175, 0.55); }
-.dark .fi-search-results::-webkit-scrollbar-thumb { background: rgba(75, 85, 99, 0.45); }
-.dark .fi-search-results::-webkit-scrollbar-thumb:hover { background: rgba(75, 85, 99, 0.65); }
-
-/* Result item */
-.fi-search-result {
+/* ============================================================
+   RESULT ITEM
+   ============================================================ */
+.fi-search-item {
+    /* Layout utama: flex row, tinggi terkunci */
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 11px;
     padding: 10px 14px;
-    cursor: pointer;
+    min-height: 54px;
+    max-height: 54px;          /* kunci tinggi agar tidak melar */
+    overflow: hidden;           /* potong apapun yang keluar batas */
     text-decoration: none;
-    transition: background 0.08s ease;
-    min-height: 56px;
-    max-height: 64px;
-    overflow: hidden;
-    border-bottom: 1px solid transparent;
+    cursor: pointer;
+    border-bottom: 1px solid #f5f3f0;
+    transition: background .08s;
+    box-sizing: border-box;
 }
+.fi-search-item:last-child { border-bottom: none; }
+.dark .fi-search-item { border-bottom-color: rgba(255,255,255,.05); }
 
-.fi-search-result:hover,
-.fi-search-result--active {
+.fi-search-item:hover,
+.fi-search-item--active {
     background: #faf9f7;
-    border-bottom-color: transparent;
+}
+.dark .fi-search-item:hover,
+.dark .fi-search-item--active {
+    background: rgba(255,255,255,.04);
 }
 
-.fi-search-result + .fi-search-result {
-    border-top: 1px solid #f5f3f0;
-}
-
-.dark .fi-search-result + .fi-search-result {
-    border-top-color: rgba(255, 255, 255, 0.05);
-}
-
-.dark .fi-search-result:hover,
-.dark .fi-search-result--active {
-    background: rgba(255, 255, 255, 0.04);
-}
-
-/* Result icon box — overflow:hidden + constraint child agar tidak melar */
-.fi-search-result-icon {
-    flex-shrink: 0;
-    flex-grow: 0;
+/* Icon box — triple-locked: flex, width/height, overflow */
+.fi-search-item-icon {
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    max-width: 32px;
+    max-height: 32px;
+    border-radius: 8px;
+    overflow: hidden;           /* potong apapun yang melebihi box */
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    min-width: 34px;
-    max-width: 34px;
-    height: 34px;
-    min-height: 34px;
-    max-height: 34px;
-    border-radius: 9px;
-    overflow: hidden;
     background: rgb(var(--primary-50, 238 242 255));
     color: rgb(var(--primary-600, 79 70 229));
-    transition: background 0.12s ease;
+    transition: background .12s;
+    box-sizing: border-box;
 }
-
-/* Paksa semua SVG/img di dalam icon box ke ukuran tetap */
-.fi-search-result-icon svg,
-.fi-search-result-icon img {
-    display: block;
-    width: 16px !important;
-    height: 16px !important;
-    min-width: 16px;
-    min-height: 16px;
-    max-width: 16px;
-    max-height: 16px;
-    flex-shrink: 0;
-}
-
-.dark .fi-search-result-icon {
-    background: rgba(var(--primary-500, 99 102 241), 0.12);
+.dark .fi-search-item-icon {
+    background: rgba(var(--primary-500, 99 102 241), .12);
     color: rgb(var(--primary-400, 129 140 248));
 }
-
-.fi-search-result:hover .fi-search-result-icon,
-.fi-search-result--active .fi-search-result-icon {
+.fi-search-item:hover .fi-search-item-icon,
+.fi-search-item--active .fi-search-item-icon {
     background: rgb(var(--primary-100, 224 231 255));
 }
-
-.dark .fi-search-result:hover .fi-search-result-icon,
-.dark .fi-search-result--active .fi-search-result-icon {
-    background: rgba(var(--primary-500, 99 102 241), 0.2);
+.dark .fi-search-item:hover .fi-search-item-icon,
+.dark .fi-search-item--active .fi-search-item-icon {
+    background: rgba(var(--primary-500, 99 102 241), .2);
 }
 
-/* Result text content */
-.fi-search-result-content {
+/* Force semua child di dalam icon box ke 16×16 — tidak bisa keluar */
+.fi-search-item-icon *,
+.fi-search-item-icon svg,
+.fi-search-item-icon img,
+.fi-search-item-icon-svg {
+    display: block !important;
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    min-height: 16px !important;
+    max-width: 16px !important;
+    max-height: 16px !important;
+    flex-shrink: 0 !important;
+    object-fit: contain !important;
+}
+
+/* Body teks */
+.fi-search-item-body {
     flex: 1;
     min-width: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
-.fi-search-result-label {
+.fi-search-item-label {
+    display: block;
     font-size: 13.5px;
     font-weight: 500;
     color: #111827;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1.3;
+}
+.dark .fi-search-item-label { color: #f9fafb; }
+
+/* Sembunyikan elemen non-teks yang mungkin dirender di dalam label */
+.fi-search-item-label img,
+.fi-search-item-label svg,
+.fi-search-item-group-text img,
+.fi-search-item-group-text svg {
+    display: none !important;
 }
 
-.dark .fi-search-result-label {
-    color: #f9fafb;
-}
-
-.fi-search-result-group {
+.fi-search-item-group {
     display: flex;
     align-items: center;
     gap: 4px;
-    margin-top: 2px;
     color: #b5b2aa;
-    font-size: 11.5px;
+    overflow: hidden;
 }
+.dark .fi-search-item-group { color: #6b7280; }
 
-.dark .fi-search-result-group {
-    color: #6b7280;
+.fi-search-item-group-text {
+    font-size: 11.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
 }
 
 /* Arrow */
-.fi-search-result-arrow {
-    flex-shrink: 0;
-    width: 14px;
-    height: 14px;
+.fi-search-item-arrow {
     color: #d1cdc7;
-    transition: transform 0.1s ease, color 0.1s ease;
+    transition: transform .1s, color .1s;
+    flex-shrink: 0;
 }
-
-.dark .fi-search-result-arrow {
-    color: #4b5563;
-}
-
-.fi-search-result:hover .fi-search-result-arrow,
-.fi-search-result-arrow--active {
+.dark .fi-search-item-arrow { color: #4b5563; }
+.fi-search-item:hover .fi-search-item-arrow,
+.fi-search-item-arrow--active {
     transform: translateX(2px);
     color: #a09e98;
 }
+.dark .fi-search-item:hover .fi-search-item-arrow,
+.dark .fi-search-item-arrow--active { color: #9ca3af; }
 
-.dark .fi-search-result:hover .fi-search-result-arrow,
-.dark .fi-search-result-arrow--active {
-    color: #9ca3af;
-}
-
-/* Empty state */
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
 .fi-search-empty {
     padding: 36px 16px;
     text-align: center;
 }
-
-.fi-search-empty-icon-wrap {
+.fi-search-empty-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -610,60 +555,46 @@
     color: #c0bdb6;
     margin-bottom: 10px;
 }
-
-.dark .fi-search-empty-icon-wrap {
-    background: rgba(255, 255, 255, 0.05);
-    color: #6b7280;
-}
-
+.dark .fi-search-empty-icon { background: rgba(255,255,255,.05); color: #6b7280; }
 .fi-search-empty-title {
     font-size: 13.5px;
     font-weight: 500;
     color: #374151;
 }
-
-.dark .fi-search-empty-title {
-    color: #f9fafb;
-}
-
+.dark .fi-search-empty-title { color: #f9fafb; }
 .fi-search-empty-subtitle {
     font-size: 12px;
     color: #b5b2aa;
     margin-top: 3px;
 }
+.dark .fi-search-empty-subtitle { color: #6b7280; }
 
-.dark .fi-search-empty-subtitle {
-    color: #6b7280;
-}
-
-/* Footer keyboard hints */
+/* ============================================================
+   FOOTER KEYBOARD HINTS
+   ============================================================ */
 .fi-search-footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 18px;
+    gap: 16px;
     padding: 8px 14px;
     border-top: 1px solid #f0ede8;
     background: #faf9f7;
 }
-
 .dark .fi-search-footer {
-    border-top-color: rgba(255, 255, 255, 0.07);
-    background: rgba(255, 255, 255, 0.02);
+    border-top-color: rgba(255,255,255,.07);
+    background: rgba(255,255,255,.02);
 }
-
 .fi-search-hint {
     display: flex;
     align-items: center;
     gap: 4px;
+}
+.fi-search-hint-text {
     font-size: 11px;
     color: #b5b2aa;
 }
-
-.dark .fi-search-hint {
-    color: #6b7280;
-}
-
+.dark .fi-search-hint-text { color: #6b7280; }
 .fi-search-hint-kbd {
     display: inline-flex;
     align-items: center;
@@ -677,18 +608,19 @@
     background: #ffffff;
     border: 1px solid #e5e3de;
     border-radius: 5px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 2px rgba(0,0,0,.06);
     color: #a09e98;
 }
-
 .dark .fi-search-hint-kbd {
     background: #1f2937;
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255,255,255,.1);
     box-shadow: none;
     color: #6b7280;
 }
 
-/* Search highlight mark */
+/* ============================================================
+   HIGHLIGHT MARK
+   ============================================================ */
 .fi-navigation-search mark {
     background-color: #fef3c7;
     color: #92400e;
@@ -697,9 +629,8 @@
     font-weight: 600;
     font-style: normal;
 }
-
 .dark .fi-navigation-search mark {
-    background-color: rgba(250, 204, 21, 0.18);
+    background-color: rgba(250,204,21,.18);
     color: #fde047;
 }
 </style>
