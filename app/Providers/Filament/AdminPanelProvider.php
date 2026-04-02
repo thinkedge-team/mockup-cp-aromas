@@ -29,6 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->id("admin")
             ->path("admin")
             ->login()
+            ->globalSearch(false) // Disable default global search
             ->colors([
                 "primary" => Color::hex("#d4a017"), // AROMAS Gold
                 "success" => Color::hex("#228b22"), // Forest Green
@@ -85,7 +86,7 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\FilamentInfoWidget::class,
             ])
             ->renderHook(
-                PanelsRenderHook::TOPBAR_END,
+                PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
                 fn () => view('components.navigation-search-hook'),
             )
             ->middleware([
