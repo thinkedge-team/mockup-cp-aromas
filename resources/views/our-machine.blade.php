@@ -48,8 +48,18 @@
                             <span class="italic text-gradient">{{ $machineHero->title_gradient }}</span>
                         </h1>
                         <div class="hero-prod-img-wrap" data-aos="fade-up" data-aos-delay="80">
-                            <img src="{{ $machineHero->production_line_image ? Storage::url($machineHero->production_line_image) : asset('assets/images/machine line.png') }}"
-                                alt="Lini Produksi AROMAS" class="hero-prod-img" />
+                            @if($machineHero->production_line_image)
+                                <img src="{{ Storage::url($machineHero->production_line_image) }}"
+                                    alt="Lini Produksi AROMAS" class="hero-prod-img" />
+                            @elseif(file_exists(public_path('assets/images/machine line.png')))
+                                <img src="{{ asset('assets/images/machine line.png') }}" 
+                                    alt="Lini Produksi AROMAS" class="hero-prod-img" />
+                            @else
+                                <div class="hero-prod-img-placeholder">
+                                    <i class="bi bi-camera-fill"></i>
+                                    <span class="placeholder-label">Image Not Available</span>
+                                </div>
+                            @endif
                         </div>
                         @if ($machineHero->hero_stats)
                             <div class="hero-machine-stats" data-aos="fade-up" data-aos-delay="150">
@@ -71,8 +81,15 @@
                             <span class="italic text-gradient">Kualitas Tanpa Kompromi</span>
                         </h1>
                         <div class="hero-prod-img-wrap" data-aos="fade-up" data-aos-delay="80">
-                            <img src="{{ asset('assets/images/machine line.png') }}" alt="Lini Produksi AROMAS"
-                                class="hero-prod-img" />
+                            @if(file_exists(public_path('assets/images/machine line.png')))
+                                <img src="{{ asset('assets/images/machine line.png') }}" alt="Lini Produksi AROMAS"
+                                    class="hero-prod-img" />
+                            @else
+                                <div class="hero-prod-img-placeholder">
+                                    <i class="bi bi-camera-fill"></i>
+                                    <span class="placeholder-label">Image Not Available</span>
+                                </div>
+                            @endif
                         </div>
                         <div class="hero-machine-stats" data-aos="fade-up" data-aos-delay="150">
                             <div class="hmstat">
@@ -163,32 +180,39 @@
                             data-aos-delay="{{ $loop->parent->index * 80 + $loop->index * 80 }}">
                             <div class="machine-card" onclick="openMachineModal('machine-{{ $machine->id }}')">
                                 <div class="card-gallery" id="gallery-machine-{{ $machine->id }}">
-                                    <div class="card-gallery-slides" id="slides-machine-{{ $machine->id }}">
-                                        @foreach ($machine->images ?? [] as $index => $image)
-                                            <div class="gallery-slide {{ $index === 0 ? 'active' : '' }}">
-                                                <img src="{{ Storage::url($image['url']) }}" alt="{{ $machine->name }}" />
+                                    @if ($machine->images && count($machine->images) > 0)
+                                        <div class="card-gallery-slides" id="slides-machine-{{ $machine->id }}">
+                                            @foreach ($machine->images as $index => $image)
+                                                <div class="gallery-slide {{ $index === 0 ? 'active' : '' }}">
+                                                    <img src="{{ Storage::url($image['url']) }}" alt="{{ $machine->name }}" />
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        @if (count($machine->images) > 1)
+                                            <button class="gallery-prev"
+                                                onclick="slideCard(event,'machine-{{ $machine->id }}',-1)"><i
+                                                    class="bi bi-chevron-left"></i></button>
+                                            <button class="gallery-next"
+                                                onclick="slideCard(event,'machine-{{ $machine->id }}',1)"><i
+                                                    class="bi bi-chevron-right"></i></button>
+                                            <div class="gallery-dots" id="dots-machine-{{ $machine->id }}">
+                                                @foreach ($machine->images as $index => $image)
+                                                    <div class="gdot {{ $index === 0 ? 'active' : '' }}"
+                                                        onclick="goToSlide(event,'machine-{{ $machine->id }}',{{ $index }})">
+                                                    </div>
+                                                @endforeach
                                             </div>
-                                        @endforeach
-                                    </div>
+                                        @endif
+                                    @else
+                                        <div class="machine-card-img-placeholder">
+                                            <i class="bi bi-camera-fill"></i>
+                                            <span class="placeholder-text">Image Not Available</span>
+                                        </div>
+                                    @endif
                                     <span class="card-cat-badge" style="background: {{ $category->color }};"><i
                                             class="bi {{ $category->icon }}"></i> {{ $category->name }}</span>
                                     <span class="card-unit-badge"><i class="bi bi-check-circle-fill"></i>
                                         {{ $machine->unit_count }} Unit</span>
-                                    @if (count($machine->images ?? []) > 1)
-                                        <button class="gallery-prev"
-                                            onclick="slideCard(event,'machine-{{ $machine->id }}',-1)"><i
-                                                class="bi bi-chevron-left"></i></button>
-                                        <button class="gallery-next"
-                                            onclick="slideCard(event,'machine-{{ $machine->id }}',1)"><i
-                                                class="bi bi-chevron-right"></i></button>
-                                        <div class="gallery-dots" id="dots-machine-{{ $machine->id }}">
-                                            @foreach ($machine->images ?? [] as $index => $image)
-                                                <div class="gdot {{ $index === 0 ? 'active' : '' }}"
-                                                    onclick="goToSlide(event,'machine-{{ $machine->id }}',{{ $index }})">
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    @endif
                                 </div>
                                 <div class="card-body-inner">
                                     <div class="card-capacity"><i class="bi bi-lightning-charge-fill"></i>
@@ -1599,6 +1623,61 @@
                 width: 100%;
                 justify-content: center;
             }
+        }
+
+        /* IMAGE PLACEHOLDERS - Unified Style */
+        .machine-card-img-placeholder,
+        .modal-machine-img-placeholder,
+        .hero-prod-img-placeholder {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px dashed rgba(0,0,0,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .machine-card-img-placeholder::before,
+        .modal-machine-img-placeholder::before,
+        .hero-prod-img-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0,0,0,0.02) 20px, rgba(0,0,0,0.02) 40px);
+            pointer-events: none;
+        }
+
+        .machine-card-img-placeholder i,
+        .modal-machine-img-placeholder i,
+        .hero-prod-img-placeholder i {
+            font-size: 2.5rem;
+            color: #6c757d;
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        .machine-card-img-placeholder .placeholder-text,
+        .modal-machine-img-placeholder .placeholder-label,
+        .hero-prod-img-placeholder .placeholder-label {
+            color: #6c757d;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        /* Specific heights for each context */
+        .machine-card-img-placeholder { height: 260px; } /* Match .card-gallery height */
+        .modal-machine-img-placeholder { height: 360px; } /* Match .modal-gallery height */
+        .hero-prod-img-placeholder { 
+            height: 100%; 
+            min-height: 300px;
+            border-radius: 16px;
         }
     </style>
 @endpush

@@ -307,6 +307,52 @@
         .brand-tab{padding:8px 14px;font-size:.8rem;}
         .brand-tab img{width:20px;height:20px;}
     }
+
+    /* IMAGE PLACEHOLDERS - Unified Style */
+    .product-card-img-placeholder,
+    .product-modal-img-placeholder {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border: 2px dashed rgba(0,0,0,0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 14px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .product-card-img-placeholder::before,
+    .product-modal-img-placeholder::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0,0,0,0.02) 20px, rgba(0,0,0,0.02) 40px);
+        pointer-events: none;
+    }
+
+    .product-card-img-placeholder i,
+    .product-modal-img-placeholder i {
+        font-size: 2.5rem;
+        color: #6c757d;
+        opacity: 0.6;
+        z-index: 1;
+    }
+
+    .product-card-img-placeholder .placeholder-text,
+    .product-modal-img-placeholder .placeholder-label {
+        color: #6c757d;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+        z-index: 1;
+    }
+
+    /* Specific heights for each context */
+    .product-card-img-placeholder { height: 230px; } /* Match .card-img-wrap height */
+    .product-modal-img-placeholder { height: 250px; } /* Match modal-img-band img max-height */
 </style>
 @endpush
 
@@ -446,7 +492,14 @@
                         <div class="prod-card" onclick="openModal('product-{{ $product->id }}')">
                             <div class="card-img-wrap">
                                 <span class="card-badge">{{ $product->badge_text }}</span>
-                                <img src="{{ Storage::url($product->banner_image) }}" alt="{{ $product->name }}" />
+                                @if($product->banner_image)
+                                    <img src="{{ Storage::url($product->banner_image) }}" alt="{{ $product->name }}" />
+                                @else
+                                    <div class="product-card-img-placeholder">
+                                        <i class="bi bi-camera-fill"></i>
+                                        <span class="placeholder-text">Image Not Available</span>
+                                    </div>
+                                @endif
                             </div>
                             <div class="card-body-inner">
                                 <div class="card-sizes">
@@ -580,29 +633,41 @@
                     }
                 @endphp
                 
-                @if(count($images) > 1)
-                <!-- Image Gallery Slider -->
-                <div class="product-image-slider" data-product-id="{{ $product->id }}">
-                    @foreach($images as $index => $image)
-                    <div class="slider-image {{ $index === $bannerIndex ? 'active' : '' }}" data-index="{{ $index }}">
-                        <img src="{{ Storage::url($image['url']) }}" alt="{{ $product->name }} {{ $index + 1 }}" />
-                    </div>
-                    @endforeach
-                    
+                @if(count($images) > 0 && !empty($images[0]['url'] ?? ''))
                     @if(count($images) > 1)
-                    <button class="slider-prev" onclick="slideImage({{ $product->id }}, -1)"><i class="bi bi-chevron-left"></i></button>
-                    <button class="slider-next" onclick="slideImage({{ $product->id }}, 1)"><i class="bi bi-chevron-right"></i></button>
-                    
-                    <div class="slider-dots">
+                    <!-- Image Gallery Slider -->
+                    <div class="product-image-slider" data-product-id="{{ $product->id }}">
                         @foreach($images as $index => $image)
-                        <span class="slider-dot {{ $index === $bannerIndex ? 'active' : '' }}" onclick="goToSlide({{ $product->id }}, {{ $index }})"></span>
+                        @if(!empty($image['url']))
+                        <div class="slider-image {{ $index === $bannerIndex ? 'active' : '' }}" data-index="{{ $index }}">
+                            <img src="{{ Storage::url($image['url']) }}" alt="{{ $product->name }} {{ $index + 1 }}" />
+                        </div>
+                        @endif
                         @endforeach
+                        
+                        @if(count($images) > 1)
+                        <button class="slider-prev" onclick="slideImage({{ $product->id }}, -1)"><i class="bi bi-chevron-left"></i></button>
+                        <button class="slider-next" onclick="slideImage({{ $product->id }}, 1)"><i class="bi bi-chevron-right"></i></button>
+                        
+                        <div class="slider-dots">
+                            @foreach($images as $index => $image)
+                            @if(!empty($image['url']))
+                            <span class="slider-dot {{ $index === $bannerIndex ? 'active' : '' }}" onclick="goToSlide({{ $product->id }}, {{ $index }})"></span>
+                            @endif
+                            @endforeach
+                        </div>
+                        @endif
                     </div>
+                    @else
+                    <!-- Single Image -->
+                    <img src="{{ Storage::url($images[0]['url']) }}" alt="{{ $product->name }}" />
                     @endif
-                </div>
                 @else
-                <!-- Single Image -->
-                <img src="{{ Storage::url($images[0]['url'] ?? '') }}" alt="{{ $product->name }}" />
+                    <!-- No Image Placeholder -->
+                    <div class="product-modal-img-placeholder">
+                        <i class="bi bi-camera-fill"></i>
+                        <span class="placeholder-label">Image Not Available</span>
+                    </div>
                 @endif
             </div>
 

@@ -18,22 +18,29 @@
             <div class="modal-inner">
                 <!-- Modal Gallery -->
                 <div class="modal-gallery">
-                    <div class="modal-gallery-slides" id="mslides-machine-{{ $machine->id }}">
-                        @foreach($machine->images ?? [] as $index => $image)
-                        <div class="modal-gallery-slide {{ $index === 0 ? 'active' : '' }}">
-                            <img src="{{ Storage::url($image['url']) }}" alt="{{ $machine->name }}" />
+                    @if($machine->images && count($machine->images) > 0)
+                        <div class="modal-gallery-slides" id="mslides-machine-{{ $machine->id }}">
+                            @foreach($machine->images as $index => $image)
+                            <div class="modal-gallery-slide {{ $index === 0 ? 'active' : '' }}">
+                                <img src="{{ Storage::url($image['url']) }}" alt="{{ $machine->name }}" />
+                            </div>
+                            @endforeach
                         </div>
-                        @endforeach
-                    </div>
-                    <div class="modal-gallery-overlay"></div>
-                    @if(count($machine->images ?? []) > 1)
-                    <button class="modal-gall-prev" onclick="slideModal('machine-{{ $machine->id }}',-1)"><i class="bi bi-chevron-left"></i></button>
-                    <button class="modal-gall-next" onclick="slideModal('machine-{{ $machine->id }}',1)"><i class="bi bi-chevron-right"></i></button>
-                    <div class="modal-gall-dots" id="mdots-machine-{{ $machine->id }}">
-                        @foreach($machine->images ?? [] as $index => $image)
-                        <div class="modal-gdot {{ $index === 0 ? 'active' : '' }}" onclick="goToModalSlide('machine-{{ $machine->id }}',{{ $index }})"></div>
-                        @endforeach
-                    </div>
+                        <div class="modal-gallery-overlay"></div>
+                        @if(count($machine->images) > 1)
+                        <button class="modal-gall-prev" onclick="slideModal('machine-{{ $machine->id }}',-1)"><i class="bi bi-chevron-left"></i></button>
+                        <button class="modal-gall-next" onclick="slideModal('machine-{{ $machine->id }}',1)"><i class="bi bi-chevron-right"></i></button>
+                        <div class="modal-gall-dots" id="mdots-machine-{{ $machine->id }}">
+                            @foreach($machine->images as $index => $image)
+                            <div class="modal-gdot {{ $index === 0 ? 'active' : '' }}" onclick="goToModalSlide('machine-{{ $machine->id }}',{{ $index }})"></div>
+                            @endforeach
+                        </div>
+                        @endif
+                    @else
+                        <div class="modal-machine-img-placeholder">
+                            <i class="bi bi-camera-fill"></i>
+                            <span class="placeholder-label">Image Not Available</span>
+                        </div>
                     @endif
                 </div>
                 
