@@ -22,10 +22,13 @@
         <div class="pc-img">
             @if($promo->images && count($promo->images) > 0)
                 <img src="{{ Storage::url($promo->images[0]['url']) }}" alt="{{ $promo->name }}" />
+                <div class="pc-img-overlay"></div>
             @else
-                <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=700&h=400&fit=crop" alt="{{ $promo->name }}" />
+                <div class="pc-img-placeholder">
+                    <i class="bi {{ $typeIcons[$promoType] ?? 'bi-gift-fill' }} main-icon"></i>
+                    <span class="placeholder-text">{{ $promo->category?->name ?? 'Promo' }}</span>
+                </div>
             @endif
-            <div class="pc-img-overlay"></div>
             <span class="pc-cat c-{{ $promoType }}">
                 <i class="bi {{ $typeIcons[$promoType] ?? 'bi-gift-fill' }}"></i> {{ ucfirst(str_replace('_', ' ', $promo->category?->name ?? 'Promo')) }}
             </span>

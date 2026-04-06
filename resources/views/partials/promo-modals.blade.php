@@ -56,12 +56,13 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
+            <div class="img-overlay" style="background:linear-gradient(to top,{{ str_replace('0.9', '0.75', $color) }} 0%,transparent 55%);"></div>
             @else
-            <div class="img-grid single">
-                <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=800&h=360&fit=crop" alt="{{ $promo->name }}" />
+            <div class="modal-img-placeholder">
+                <i class="bi {{ $typeInfo['icon'] }}"></i>
+                <span class="placeholder-label">{{ $typeInfo['label'] }}</span>
             </div>
             @endif
-            <div class="img-overlay" style="background:linear-gradient(to top,{{ str_replace('0.9', '0.75', $color) }} 0%,transparent 55%);"></div>
             <div class="modal-img-content">
                 <span class="modal-type-badge" style="background:{{ $color }};">
                     <i class="bi {{ $typeInfo['icon'] }} me-1"></i> {{ $typeInfo['label'] }}

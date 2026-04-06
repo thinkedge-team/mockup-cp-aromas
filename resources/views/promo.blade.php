@@ -65,19 +65,18 @@
 <div class="container">
     <div class="featured-banner" data-aos="fade-up">
         <div class="row g-0">
+            @if($featuredPromo->images && count($featuredPromo->images) > 0)
             <div class="col-lg-5">
                 <div class="banner-img-grid">
-                    @if($featuredPromo->images && count($featuredPromo->images) > 0)
-                        @foreach(array_slice($featuredPromo->images, 0, 2) as $image)
-                        <img src="{{ $image['url'] }}" alt="{{ $featuredPromo->name }}" />
-                        @endforeach
-                    @else
-                        <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=500&h=320&fit=crop" alt="{{ $featuredPromo->name }}" />
-                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=320&fit=crop" alt="{{ $featuredPromo->name }}" />
-                    @endif
+                    @foreach(array_slice($featuredPromo->images, 0, 2) as $image)
+                    <img src="{{ $image['url'] }}" alt="{{ $featuredPromo->name }}" />
+                    @endforeach
                 </div>
             </div>
             <div class="col-lg-7">
+            @else
+            <div class="col-lg-12">
+            @endif
                 <div class="banner-content">
                     <div class="banner-promo-type">
                         <i class="bi bi-truck-front-fill"></i> {{ ucfirst($featuredPromo->type) }} — Promo Unggulan
@@ -357,6 +356,19 @@
 .pc-status.terbatas{color:#dc2626;}
 .pc-status.flash{color:#92400e;}
 @keyframes dotPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
+
+/* IMAGE PLACEHOLDERS */
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+.pc-img-placeholder{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;position:relative;overflow:hidden;height:100%;}
+.pc-img-placeholder::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 12px,rgba(255,255,255,.04) 12px,rgba(255,255,255,.04) 24px);pointer-events:none;}
+.pc-img-placeholder i.main-icon{font-size:4.5rem;color:var(--gold);opacity:.95;z-index:1;animation:float 3s ease-in-out infinite;}
+.pc-img-placeholder .placeholder-text{color:rgba(255,255,255,.75);font-size:.8rem;text-transform:uppercase;letter-spacing:1.2px;font-weight:600;z-index:1;}
+
+.modal-img-placeholder{background:linear-gradient(135deg,var(--green-darker) 0%,var(--green-dark) 100%);height:300px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;position:relative;overflow:hidden;}
+.modal-img-placeholder::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 15px,rgba(212,160,23,.06) 15px,rgba(212,160,23,.06) 30px);pointer-events:none;}
+.modal-img-placeholder i{font-size:6rem;color:var(--gold);opacity:.9;z-index:1;animation:float 3.5s ease-in-out infinite;}
+.modal-img-placeholder .placeholder-label{color:rgba(255,255,255,.7);font-size:.9rem;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;z-index:1;}
 
 /* HOW TO CLAIM */
 .howto-section{padding:60px 0;background:var(--white);}
