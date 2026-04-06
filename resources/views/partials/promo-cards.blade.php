@@ -25,8 +25,8 @@
                 <div class="pc-img-overlay"></div>
             @else
                 <div class="pc-img-placeholder">
-                    <i class="bi {{ $typeIcons[$promoType] ?? 'bi-gift-fill' }} main-icon"></i>
-                    <span class="placeholder-text">{{ $promo->category?->name ?? 'Promo' }}</span>
+                    <i class="bi bi-camera-fill"></i>
+                    <span class="placeholder-text">Image Not Available</span>
                 </div>
             @endif
             <span class="pc-cat c-{{ $promoType }}">

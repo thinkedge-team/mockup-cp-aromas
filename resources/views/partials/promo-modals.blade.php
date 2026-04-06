@@ -59,8 +59,8 @@
             <div class="img-overlay" style="background:linear-gradient(to top,{{ str_replace('0.9', '0.75', $color) }} 0%,transparent 55%);"></div>
             @else
             <div class="modal-img-placeholder">
-                <i class="bi {{ $typeInfo['icon'] }}"></i>
-                <span class="placeholder-label">{{ $typeInfo['label'] }}</span>
+                <i class="bi bi-camera-fill"></i>
+                <span class="placeholder-label">Image Not Available</span>
             </div>
             @endif
             <div class="modal-img-content">
