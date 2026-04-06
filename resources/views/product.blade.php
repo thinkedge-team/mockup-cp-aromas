@@ -682,7 +682,27 @@
         initBrandTabs();
         initCategoryTabs();
         initHeroChips();
-        updateCategoryTabs(currentBrand);
+        
+        // Check URL parameter for brand selection
+        var urlParams = new URLSearchParams(window.location.search);
+        var brandParam = urlParams.get('brand');
+        
+        if (brandParam && brandParam !== currentBrand) {
+            var brandTab = document.querySelector('.brand-tab[data-brand="' + brandParam + '"]');
+            if (brandTab) {
+                brandTab.click();
+                // Also update hero chip
+                var heroChip = document.querySelector('.chip[data-brand="' + brandParam + '"]');
+                if (heroChip) {
+                    document.querySelectorAll('.chip[data-brand]').forEach(function(c) { c.classList.remove('active'); });
+                    heroChip.classList.add('active');
+                }
+            } else {
+                updateCategoryTabs(currentBrand);
+            }
+        } else {
+            updateCategoryTabs(currentBrand);
+        }
     });
 
     function initBrandTabs() {

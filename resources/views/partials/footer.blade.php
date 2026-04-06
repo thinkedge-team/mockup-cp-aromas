@@ -1,6 +1,7 @@
 <!-- ========== FOOTER ========== -->
 @php
     $footer = \App\Models\FooterSetting::where('is_active', true)->first();
+    $footerBrands = \App\Models\ProductBrand::active()->get();
 @endphp
 
 <style>
@@ -31,7 +32,7 @@
     <div class="container">
         <div class="footer-divider"></div>
         <div class="row g-5">
-            <div class="col-lg-5 col-md-6">
+            <div class="col-lg-4 col-md-6">
                 <div class="footer-brand-name">
                     @if($footer && $footer->logo)
                         <img src="{{ Storage::url($footer->logo) }}" alt="AROMAS" style="height:50px;width:auto;" />
@@ -71,7 +72,7 @@
                     @endif
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-6">
+            <div class="col-lg-2 col-md-6 col-6">
                 <div class="footer-col-title">Navigasi</div>
                 <ul class="footer-links">
                     <li><a href="{{ url('/') }}">Beranda</a></li>
@@ -82,6 +83,16 @@
                     <li><a href="{{ url('/contact') }}">Kontak</a></li>
                 </ul>
             </div>
+            @if($footerBrands->count() > 0)
+            <div class="col-lg-2 col-md-6 col-6">
+                <div class="footer-col-title">Produk</div>
+                <ul class="footer-links">
+                    @foreach($footerBrands as $brand)
+                    <li><a href="{{ url('/product') }}?brand={{ $brand->slug }}">{{ $brand->name }}</a></li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
             <div class="col-lg-4 col-md-6">
                 <div class="footer-col-title">Hubungi Kami</div>
                 <ul class="footer-contact-list">
