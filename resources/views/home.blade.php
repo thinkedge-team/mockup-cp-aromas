@@ -9,8 +9,16 @@
     use App\Models\FaqItem;
     use App\Models\Branch;
     use App\Models\MissionSection;
+    use App\Models\BlogPost;
 
     $heroSlides = HeroSlide::active()->get();
+    
+    // Fetch 6 artikel terbaru yang sudah dipublish
+    $latestPosts = BlogPost::published()
+        ->with(['category'])
+        ->latest('published_at')
+        ->take(6)
+        ->get();
     $impactStats = ImpactStat::active()->get();
     $awards = Award::active()->get();
     $services = Service::active()->get();
@@ -345,47 +353,29 @@
         <div class="blog-header" data-aos="fade-up">
             <h2 class="section-title">Tips &amp; Artikel <span class="italic">Seputar Memasak</span> dari AROMAS</h2>
         </div>
+        
+        @if($latestPosts->count() > 0)
         <div class="blog-slider-wrapper mt-4" data-aos="fade-up" data-aos-delay="100">
             <div class="blog-slider-track" id="blogSliderTrack">
+                @foreach($latestPosts as $post)
                 <div class="blog-slide">
-                    <div class="blog-card">
+                    <div class="blog-card {{ $loop->iteration == 2 ? 'featured' : '' }}">
                         <div class="blog-image">
-                            <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop" alt="Blog 1" />
-                            <span class="blog-tag">Tips Memasak</span>
+                            @if($post->featured_image)
+                            <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->title }}" />
+                            @else
+                            <img src="{{ asset('assets/images/blog-placeholder.jpg') }}" alt="{{ $post->title }}" />
+                            @endif
+                            <span class="blog-tag">{{ $post->category->name ?? 'Artikel' }}</span>
                         </div>
                         <div class="blog-content">
-                            <h4>Cara Memilih Minyak Goreng yang Sehat untuk Keluarga</h4>
-                            <p>Panduan lengkap memilih minyak goreng berkualitas untuk menjaga kesehatan keluarga tercinta.</p>
-                            <a href="{{ url('/blog/1') }}" class="blog-link">BACA SELENGKAPNYA <i class="bi bi-arrow-right"></i></a>
+                            <h4>{{ $post->title }}</h4>
+                            <p>{{ Str::limit($post->excerpt ?? strip_tags($post->content), 100) }}</p>
+                            <a href="{{ route('blog.show', $post->slug) }}" class="blog-link">BACA SELENGKAPNYA <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
-                <div class="blog-slide">
-                    <div class="blog-card featured">
-                        <div class="blog-image">
-                            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop" alt="Blog 2" />
-                            <span class="blog-tag">Resep</span>
-                        </div>
-                        <div class="blog-content">
-                            <h4>5 Resep Gorengan Crispy yang Wajib Dicoba di Rumah</h4>
-                            <p>Kumpulan resep gorengan renyah dan lezat menggunakan minyak goreng AROMAS.</p>
-                            <a href="{{ url('/blog/2') }}" class="blog-link">BACA SELENGKAPNYA <i class="bi bi-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog-slide">
-                    <div class="blog-card">
-                        <div class="blog-image">
-                            <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=400&h=300&fit=crop" alt="Blog 3" />
-                            <span class="blog-tag">Edukasi</span>
-                        </div>
-                        <div class="blog-content">
-                            <h4>Fakta Menarik Tentang Minyak Kelapa Sawit Indonesia</h4>
-                            <p>Ketahui manfaat dan proses produksi minyak kelapa sawit yang menjadi kebanggaan Indonesia.</p>
-                            <a href="{{ url('/blog/3') }}" class="blog-link">BACA SELENGKAPNYA <i class="bi bi-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
         <div class="blog-dots" id="blogDots"></div>
@@ -393,6 +383,23 @@
             <button class="nav-arrow prev" id="blogPrev" aria-label="Artikel sebelumnya"><i class="bi bi-arrow-left"></i></button>
             <button class="nav-arrow next" id="blogNext" aria-label="Artikel berikutnya"><i class="bi bi-arrow-right"></i></button>
         </div>
+        @else
+        {{-- Empty State: Tidak ada artikel --}}
+        <div class="blog-empty-state" data-aos="fade-up" data-aos-delay="100">
+            <div class="empty-state-content">
+                <div class="empty-state-icon">
+                    <i class="bi bi-journal-richtext"></i>
+                </div>
+                <h4>Artikel Sedang Dalam Persiapan</h4>
+                <p>Nantikan tips memasak, resep lezat, dan edukasi menarik dari AROMAS!</p>
+                <div class="empty-state-decoration">
+                    <span class="decoration-dot"></span>
+                    <span class="decoration-dot"></span>
+                    <span class="decoration-dot"></span>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 </section>
 
