@@ -2,18 +2,28 @@
     use App\Models\ProductHero;
     use App\Models\ProductCategory;
     use App\Models\ProductBrand;
+    use App\Models\BrandCategory;
     use App\Models\Product;
     use App\Models\ProductAdvantage;
     use App\Models\ProductCta;
     use App\Models\FooterSetting;
 
     $productHero = ProductHero::active()->first();
-    $brands = ProductBrand::active()->with(['categories' => function($q) {
-        $q->active()->orderBy('order');
-    }, 'categories.products' => function($q) {
-        $q->active()->orderBy('order');
-    }])->get();
-    $categories = ProductCategory::active()->orderBy('order')->get();
+    
+    // Get active brands with their active brand-category combinations
+    $brands = ProductBrand::active()
+        ->whereHas('brandCategories', function($q) {
+            $q->where('is_active', true)
+              ->whereHas('category', fn($c) => $c->where('is_active', true));
+        })
+        ->with(['brandCategories' => function($q) {
+            $q->where('is_active', true)
+              ->whereHas('category', fn($c) => $c->where('is_active', true))
+              ->orderBy('order')
+              ->with('category');
+        }])
+        ->get();
+    
     $advantages = ProductAdvantage::active()->get();
     $productCta = ProductCta::active()->first();
     
@@ -403,13 +413,17 @@
     <div class="container" id="productsContainer">
         @foreach($brands as $brand)
         <div class="brand-block" data-brand="{{ $brand->slug }}" @if(!$loop->first) style="display:none;" @endif>
+            @forelse($brand->brandCategories as $brandCategory)
             @php
-                $brandCategories = $brand->categories()->active()->orderBy('order')->get();
-            @endphp
-            
-            @forelse($brandCategories as $category)
-            @php
-                $categoryProducts = $category->products()->active()->orderBy('order')->get();
+                $category = $brandCategory->category;
+                if (!$category) continue;
+                
+                // Get products for this brand + category combination
+                $categoryProducts = Product::where('brand_id', $brand->id)
+                    ->where('category_id', $category->id)
+                    ->where('is_active', true)
+                    ->orderBy('order')
+                    ->get();
             @endphp
             <div class="cat-block" data-brand="{{ $brand->slug }}" data-category="{{ $category->slug }}">
                 <div class="cat-header" data-aos="fade-up">
@@ -542,8 +556,9 @@
 
 <!-- PRODUCT DETAIL MODALS -->
 @foreach($brands as $brand)
-@foreach($brand->categories as $category)
-@foreach($category->products()->active()->get() as $product)
+@foreach($brand->brandCategories as $brandCategory)
+@php $category = $brandCategory->category; @endphp
+@foreach($brand->products()->where('category_id', $category->id)->active()->get() as $product)
 <div class="prod-modal" id="modal-product-{{ $product->id }}" role="dialog" aria-modal="true" aria-label="Detail {{ $product->name }}">
     <div class="modal-backdrop" onclick="closeModal('product-{{ $product->id }}')"></div>
     <div class="modal-box">
@@ -644,13 +659,14 @@
         return [
             'slug' => $brand->slug,
             'name' => $brand->name,
-            'categories' => $brand->categories->map(function($cat) {
+            'categories' => $brand->brandCategories->map(function($brandCategory) {
+                $cat = $brandCategory->category;
                 return [
                     'slug' => $cat->slug,
                     'label' => $cat->label,
                     'title' => $cat->title,
                     'icon' => $cat->icon,
-                    'productCount' => $cat->products()->active()->count()
+                    'productCount' => $brand->products()->where('category_id', $cat->id)->active()->count()
                 ];
             })
         ];

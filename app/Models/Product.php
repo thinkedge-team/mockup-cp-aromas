@@ -10,6 +10,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
+        'brand_id',
         'category_id',
         'name',
         'tagline',
@@ -27,6 +28,7 @@ class Product extends Model
     ];
 
     protected $casts = [
+        'brand_id' => 'integer',
         'category_id' => 'integer',
         'images' => 'array',
         'sizes' => 'array',
@@ -37,21 +39,78 @@ class Product extends Model
         'is_active' => 'boolean',
     ];
 
+    /**
+     * Get the brand for this product
+     */
+    public function brand()
+    {
+        return $this->belongsTo(ProductBrand::class, 'brand_id');
+    }
+
+    /**
+     * Get the category for this product
+     */
     public function category()
     {
-        return $this->belongsTo(ProductCategory::class);
+        return $this->belongsTo(ProductCategory::class, 'category_id');
     }
 
+    /**
+     * Scope for fully active products
+     * Checks: product active, brand active, category active, brand-category combination active
+     */
     public function scopeActive($query)
     {
-        return $query->where('is_active', true)->orderBy('order');
+        return $query->where('products.is_active', true)
+            ->whereHas('brand', fn($q) => $q->where('is_active', true))
+            ->whereHas('category', fn($q) => $q->where('is_active', true))
+            ->where(function ($q) {
+                $q->whereExists(function ($subQuery) {
+                    $subQuery->from('brand_category')
+                        ->whereColumn('brand_category.brand_id', 'products.brand_id')
+                        ->whereColumn('brand_category.category_id', 'products.category_id')
+                        ->where('brand_category.is_active', true);
+                });
+            })
+            ->orderBy('products.order');
     }
 
+    /**
+     * Scope for products by brand
+     */
+    public function scopeForBrand($query, $brandId)
+    {
+        return $query->where('brand_id', $brandId);
+    }
+
+    /**
+     * Scope for products by category
+     */
     public function scopeByCategory($query, $slug)
     {
         return $query->whereHas('category', function ($q) use ($slug) {
             $q->where('slug', $slug);
         });
+    }
+
+    /**
+     * Scope for products by brand and category
+     */
+    public function scopeForBrandCategory($query, $brandId, $categoryId)
+    {
+        return $query->where('brand_id', $brandId)
+            ->where('category_id', $categoryId);
+    }
+
+    /**
+     * Check if the brand-category combination is active
+     */
+    public function isBrandCategoryActive()
+    {
+        return BrandCategory::where('brand_id', $this->brand_id)
+            ->where('category_id', $this->category_id)
+            ->where('is_active', true)
+            ->exists();
     }
 
     /**
@@ -76,5 +135,13 @@ class Product extends Model
     {
         $images = $this->images ?? [];
         return array_filter($images, fn($img) => empty($img['is_banner']));
+    }
+
+    /**
+     * Get products that are fully displayable (all parent entities active)
+     */
+    public static function getDisplayable()
+    {
+        return static::active()->with(['brand', 'category'])->get();
     }
 }

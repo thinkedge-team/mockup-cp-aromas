@@ -3,12 +3,18 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
+use App\Models\BrandCategory;
 use App\Models\Product;
+use App\Models\ProductBrand;
+use App\Models\ProductCategory;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Collection;
 
 class ProductResource extends Resource
 {
@@ -18,7 +24,7 @@ class ProductResource extends Resource
 
     protected static ?string $navigationGroup = 'Produk';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 4;
 
     protected static ?string $navigationLabel = 'Products';
 
@@ -26,12 +32,51 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Section::make('Brand & Category')
+                    ->description('Select brand first, then category will be filtered based on available brand-category combinations')
+                    ->schema([
+                        Forms\Components\Select::make('brand_id')
+                            ->label('Brand')
+                            ->options(ProductBrand::orderBy('order')->pluck('name', 'id'))
+                            ->searchable()
+                            ->preload()
+                            ->required()
+                            ->live()
+                            ->afterStateUpdated(function (Set $set) {
+                                $set('category_id', null);
+                            })
+                            ->helperText('Select brand first'),
+
+                        Forms\Components\Select::make('category_id')
+                            ->label('Category')
+                            ->options(function (Get $get): Collection {
+                                $brandId = $get('brand_id');
+                                if (!$brandId) {
+                                    return collect();
+                                }
+
+                                // Get categories that are linked to this brand via brand_category pivot
+                                return ProductCategory::whereHas('brandCategories', function ($q) use ($brandId) {
+                                    $q->where('brand_id', $brandId)
+                                      ->where('is_active', true);
+                                })
+                                ->where('is_active', true)
+                                ->orderBy('order')
+                                ->pluck('title', 'id');
+                            })
+                            ->searchable()
+                            ->preload()
+                            ->required()
+                            ->disabled(fn (Get $get): bool => !$get('brand_id'))
+                            ->helperText(fn (Get $get): string => 
+                                $get('brand_id') 
+                                    ? 'Select category for this brand' 
+                                    : 'Please select a brand first'
+                            ),
+                    ])->columns(2),
+
                 Forms\Components\Section::make('Basic Information')
                     ->schema([
-                        Forms\Components\Select::make('category_id')
-                            ->relationship('category', 'title')
-                            ->required()
-                            ->label('Category'),
                         Forms\Components\TextInput::make('name')
                             ->required()
                             ->maxLength(255),
@@ -182,41 +227,79 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('brand.name')
+                    ->label('Brand')
+                    ->sortable()
+                    ->searchable()
+                    ->badge()
+                    ->color('warning'),
+
                 Tables\Columns\TextColumn::make('category.title')
                     ->label('Category')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable()
+                    ->badge()
+                    ->color('info'),
+
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
+                    ->searchable()
+                    ->weight('bold'),
+
                 Tables\Columns\TextColumn::make('badge_text')
                     ->searchable()
-                    ->badge(),
-                Tables\Columns\ImageColumn::make('image')
-                    ->label('Image'),
+                    ->badge()
+                    ->color('success'),
+
+                Tables\Columns\ImageColumn::make('banner_image')
+                    ->label('Image')
+                    ->circular(),
+
                 Tables\Columns\TextColumn::make('order')
                     ->numeric()
                     ->sortable(),
+
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('Active')
                     ->boolean(),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->defaultSort('order', 'asc')
+            ->groups([
+                Tables\Grouping\Group::make('brand.name')
+                    ->label('Brand')
+                    ->collapsible(),
+                Tables\Grouping\Group::make('category.title')
+                    ->label('Category')
+                    ->collapsible(),
+            ])
             ->filters([
+                Tables\Filters\SelectFilter::make('brand_id')
+                    ->label('Brand')
+                    ->relationship('brand', 'name')
+                    ->searchable()
+                    ->preload(),
+
                 Tables\Filters\SelectFilter::make('category_id')
+                    ->label('Category')
                     ->relationship('category', 'title')
-                    ->label('Category'),
+                    ->searchable()
+                    ->preload(),
+
                 Tables\Filters\TernaryFilter::make('is_active')
                     ->label('Active'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

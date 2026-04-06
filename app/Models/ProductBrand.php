@@ -41,19 +41,62 @@ class ProductBrand extends Model
     }
 
     /**
-     * Get all categories for this brand
+     * Get all brand-category pivot records for this brand
      */
-    public function categories()
+    public function brandCategories()
     {
-        return $this->hasMany(ProductCategory::class, 'brand_id');
+        return $this->hasMany(BrandCategory::class, 'brand_id');
     }
 
     /**
-     * Get all products for this brand (through categories)
+     * Get active brand-category combinations
+     */
+    public function activeBrandCategories()
+    {
+        return $this->hasMany(BrandCategory::class, 'brand_id')
+            ->where('is_active', true)
+            ->whereHas('category', fn($q) => $q->where('is_active', true))
+            ->orderBy('order');
+    }
+
+    /**
+     * Get categories through pivot (many-to-many)
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(ProductCategory::class, 'brand_category', 'brand_id', 'category_id')
+            ->withPivot(['order', 'is_active'])
+            ->withTimestamps();
+    }
+
+    /**
+     * Get active categories for this brand
+     */
+    public function activeCategories()
+    {
+        return $this->belongsToMany(ProductCategory::class, 'brand_category', 'brand_id', 'category_id')
+            ->withPivot(['order', 'is_active'])
+            ->wherePivot('is_active', true)
+            ->where('product_categories.is_active', true)
+            ->orderBy('brand_category.order');
+    }
+
+    /**
+     * Get all products for this brand
      */
     public function products()
     {
-        return $this->hasManyThrough(Product::class, ProductCategory::class, 'brand_id', 'category_id');
+        return $this->hasMany(Product::class, 'brand_id');
+    }
+
+    /**
+     * Get active products for this brand
+     */
+    public function activeProducts()
+    {
+        return $this->hasMany(Product::class, 'brand_id')
+            ->where('is_active', true)
+            ->orderBy('order');
     }
 
     /**
@@ -62,5 +105,16 @@ class ProductBrand extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true)->orderBy('order');
+    }
+
+    /**
+     * Check if brand has any active products
+     */
+    public function hasActiveProducts()
+    {
+        return $this->products()
+            ->where('is_active', true)
+            ->whereHas('category', fn($q) => $q->where('is_active', true))
+            ->exists();
     }
 }

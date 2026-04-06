@@ -3,16 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductCategoryResource\Pages;
-use App\Filament\Resources\ProductCategoryResource\RelationManagers;
-use App\Models\ProductBrand;
 use App\Models\ProductCategory;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ProductCategoryResource extends Resource
 {
@@ -31,29 +27,12 @@ class ProductCategoryResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Section::make('Category Information')
-                    ->description('Manage product category details')
+                    ->description('Manage product category master data')
                     ->schema([
-                        Forms\Components\Select::make('brand_id')
-                            ->label('Brand')
-                            ->relationship('brand', 'name')
-                            ->searchable()
-                            ->preload()
-                            ->required()
-                            ->createOptionForm([
-                                Forms\Components\TextInput::make('name')
-                                    ->required()
-                                    ->maxLength(255),
-                                Forms\Components\TextInput::make('slug')
-                                    ->required()
-                                    ->maxLength(255),
-                                Forms\Components\Toggle::make('is_active')
-                                    ->default(true),
-                            ])
-                            ->helperText('Select the brand this category belongs to'),
-
                         Forms\Components\TextInput::make('icon')
                             ->required()
-                            ->helperText('Bootstrap Icon class (e.g., bi-box)'),
+                            ->placeholder('bi-box')
+                            ->helperText('Bootstrap Icon class (e.g., bi-box, bi-droplet)'),
 
                         Forms\Components\TextInput::make('label')
                             ->required()
@@ -85,7 +64,7 @@ class ProductCategoryResource extends Resource
                         Forms\Components\Toggle::make('is_active')
                             ->label('Active')
                             ->default(true)
-                            ->helperText('Inactive categories will not be displayed'),
+                            ->helperText('Inactive categories will not be displayed anywhere'),
                     ])
                     ->columns(2),
             ]);
@@ -95,27 +74,28 @@ class ProductCategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('brand.name')
-                    ->label('Brand')
-                    ->searchable()
-                    ->sortable()
-                    ->badge()
-                    ->color('primary'),
-
                 Tables\Columns\TextColumn::make('icon')
-                    ->searchable(),
+                    ->formatStateUsing(fn($state) => "<i class='bi {$state}'></i>")
+                    ->html()
+                    ->label('Icon'),
 
                 Tables\Columns\TextColumn::make('label')
                     ->searchable()
                     ->weight('bold'),
 
                 Tables\Columns\TextColumn::make('title')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->searchable(),
 
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable()
-                    ->color('gray'),
+                    ->color('gray')
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                Tables\Columns\TextColumn::make('brands_count')
+                    ->label('Brands')
+                    ->getStateUsing(fn($record) => $record->brands()->count())
+                    ->badge()
+                    ->color('warning'),
 
                 Tables\Columns\TextColumn::make('products_count')
                     ->label('Products')
@@ -144,12 +124,6 @@ class ProductCategoryResource extends Resource
             ->defaultSort('order')
             ->reorderable('order')
             ->filters([
-                Tables\Filters\SelectFilter::make('brand')
-                    ->relationship('brand', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->label('Filter by Brand'),
-
                 Tables\Filters\TernaryFilter::make('is_active')
                     ->label('Active Status')
                     ->boolean()
