@@ -1,12 +1,18 @@
 @php
     use App\Models\ProductHero;
     use App\Models\ProductCategory;
+    use App\Models\ProductBrand;
     use App\Models\Product;
     use App\Models\ProductAdvantage;
     use App\Models\ProductCta;
     use App\Models\FooterSetting;
 
     $productHero = ProductHero::active()->first();
+    $brands = ProductBrand::active()->with(['categories' => function($q) {
+        $q->active()->orderBy('order');
+    }, 'categories.products' => function($q) {
+        $q->active()->orderBy('order');
+    }])->get();
     $categories = ProductCategory::active()->orderBy('order')->get();
     $advantages = ProductAdvantage::active()->get();
     $productCta = ProductCta::active()->first();
@@ -16,6 +22,9 @@
     $whatsappNumber = $footer && isset($footer->contact_info['whatsapp']) 
         ? preg_replace('/[^0-9]/', '', $footer->contact_info['whatsapp']) 
         : '6281234567890';
+    
+    // Get first active brand as default
+    $defaultBrand = $brands->first();
 @endphp
 
 @extends('layouts.app')
@@ -109,6 +118,33 @@
     .ftab i{font-size:1.05rem;}
     .result-count{font-size:.9rem;color:var(--gray-500);font-weight:500;white-space:nowrap;letter-spacing:normal;}
     .result-count strong{color:var(--green);font-weight:700;}
+
+    /* BRAND TABS */
+    .brand-section{padding:40px 0 0;background:var(--white);}
+    .brand-tabs-wrapper{display:flex;flex-direction:column;gap:24px;}
+    .brand-tabs-header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+    .brand-tabs-title{font-size:1rem;font-weight:600;color:var(--gray-700);display:flex;align-items:center;gap:8px;}
+    .brand-tabs-title i{color:var(--gold);}
+    .brand-tabs{display:flex;gap:12px;flex-wrap:wrap;}
+    .brand-tab{display:inline-flex;align-items:center;gap:10px;padding:12px 24px;border-radius:14px;font-size:.92rem;font-weight:600;border:2px solid rgba(212,160,23,.25);background:var(--white);color:var(--gray-700);cursor:pointer;transition:all .28s ease;position:relative;overflow:hidden;}
+    .brand-tab::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold),var(--gold-dark));opacity:0;transition:opacity .28s ease;z-index:0;}
+    .brand-tab:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 4px 16px rgba(212,160,23,.2);}
+    .brand-tab.active{border-color:transparent;box-shadow:0 6px 24px rgba(212,160,23,.35);}
+    .brand-tab.active::before{opacity:1;}
+    .brand-tab span,.brand-tab img{position:relative;z-index:1;}
+    .brand-tab.active{color:#fff;}
+    .brand-tab img{width:28px;height:28px;object-fit:contain;border-radius:6px;background:#fff;padding:2px;}
+    .brand-tab.active img{box-shadow:0 2px 8px rgba(0,0,0,.15);}
+    .category-tabs-wrapper{background:linear-gradient(135deg,#f8faf8,#fffdf8);border-radius:16px;padding:20px 24px;border:1px solid rgba(34,139,34,.1);}
+    .category-tabs-label{font-size:.75rem;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+    .category-tabs-label i{color:var(--gold);font-size:.85rem;}
+    .category-tabs{display:flex;gap:10px;flex-wrap:wrap;}
+    .cat-tab{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;font-size:.85rem;font-weight:600;border:1px solid rgba(34,139,34,.18);background:var(--white);color:var(--gray-600);cursor:pointer;transition:all .25s ease;}
+    .cat-tab:hover{border-color:var(--green);color:var(--green);background:var(--green-pale);}
+    .cat-tab.active{background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;border-color:transparent;box-shadow:0 3px 12px rgba(34,139,34,.25);}
+    .cat-tab i{font-size:.95rem;}
+    .cat-tab .count{background:rgba(255,255,255,.25);padding:2px 8px;border-radius:10px;font-size:.72rem;margin-left:4px;}
+    .cat-tab.active .count{background:rgba(255,255,255,.3);}
 
     /* CATEGORY SECTION */
     .cat-section{padding:32px 0 80px;background:var(--white);}
@@ -231,17 +267,24 @@
     /* HIDDEN CLASS for filter */
     .cat-block{transition:all .4s ease;}
     .cat-block.hidden-cat{display:none;}
+    .brand-block{transition:all .4s ease;}
 
     /* RESPONSIVE */
     @media(max-width:991.98px){
         .prod-hero{min-height:auto;padding:110px 0 72px;}
         .detail-grid{grid-template-columns:1fr;}
         .modal-feat-grid{grid-template-columns:1fr;}
+        .brand-tabs-header{flex-direction:column;align-items:flex-start;gap:12px;}
     }
     @media(max-width:767.98px){
         .hero-title{font-size:2rem;}
         .filter-wrap{flex-direction:column;align-items:flex-start;}
         .sizes-grid{grid-template-columns:repeat(4,1fr);}
+        .brand-tabs{gap:8px;}
+        .brand-tab{padding:10px 16px;font-size:.85rem;}
+        .brand-tab img{width:24px;height:24px;}
+        .category-tabs-wrapper{padding:16px 18px;}
+        .cat-tab{padding:8px 14px;font-size:.82rem;}
     }
     @media(max-width:575.98px){
         .hero-title{font-size:1.75rem;}
@@ -249,6 +292,10 @@
         .modal-actions{flex-direction:column;}
         .btn-modal-primary,.btn-modal-wa{width:100%;justify-content:center;}
         .sizes-grid{grid-template-columns:repeat(3,1fr);}
+        .hero-chips{gap:8px;}
+        .chip{padding:8px 14px;font-size:.8rem;}
+        .brand-tab{padding:8px 14px;font-size:.8rem;}
+        .brand-tab img{width:20px;height:20px;}
     }
 </style>
 @endpush
@@ -285,12 +332,14 @@
                 </p>
                 @endif
                 <div class="hero-chips">
-                    <span class="chip active" data-filter="all">
-                        <i class="bi bi-grid-fill"></i> Semua Produk
-                    </span>
-                    @foreach($categories as $category)
-                    <span class="chip" data-filter="{{ $category->slug }}">
-                        <i class="bi {{ $category->icon }}"></i> {{ $category->title }}
+                    @foreach($brands as $brand)
+                    <span class="chip @if($loop->first) active @endif" data-brand="{{ $brand->slug }}">
+                        @if($brand->logo)
+                        <img src="{{ Storage::url($brand->logo) }}" alt="{{ $brand->name }}" style="width:20px;height:20px;object-fit:contain;border-radius:4px;">
+                        @else
+                        <i class="bi bi-building-fill"></i>
+                        @endif
+                        {{ $brand->name }}
                     </span>
                     @endforeach
                 </div>
@@ -315,81 +364,119 @@
     </div>
 </div>
 
-<!-- FILTER TABS -->
-<section class="filter-section">
+<!-- BRAND & CATEGORY FILTER -->
+<section class="brand-section">
     <div class="container">
-        <div class="filter-wrap">
-            <div class="filter-tabs">
-                <button class="ftab active" data-filter="all"><i class="bi bi-grid-fill"></i> Semua</button>
-                @foreach($categories as $category)
-                <button class="ftab" data-filter="{{ $category->slug }}">
-                    <i class="bi {{ $category->icon }}"></i> {{ $category->title }}
-                </button>
-                @endforeach
+        <div class="brand-tabs-wrapper">
+            <!-- Brand Tabs -->
+            <div class="brand-tabs-header" data-aos="fade-up">
+                <div class="brand-tabs-title"><i class="bi bi-building-fill"></i> Pilih Brand</div>
+                <div class="brand-tabs">
+                    @foreach($brands as $brand)
+                    <button class="brand-tab @if($loop->first) active @endif" data-brand="{{ $brand->slug }}">
+                        @if($brand->logo)
+                        <img src="{{ Storage::url($brand->logo) }}" alt="{{ $brand->name }}">
+                        @endif
+                        <span>{{ $brand->name }}</span>
+                    </button>
+                    @endforeach
+                </div>
             </div>
-            <span class="result-count">Menampilkan <strong id="prodCount">{{ $categories->count() }}</strong> kategori produk</span>
+            
+            <!-- Category Tabs (filtered by brand) -->
+            <div class="category-tabs-wrapper" data-aos="fade-up" data-aos-delay="100">
+                <div class="category-tabs-label"><i class="bi bi-folder-fill"></i> Kategori Produk</div>
+                <div class="category-tabs" id="categoryTabs">
+                    <button class="cat-tab active" data-category="all">
+                        <i class="bi bi-grid-fill"></i> Semua
+                        <span class="count" id="allCount">0</span>
+                    </button>
+                    <!-- Category tabs will be populated by JavaScript based on selected brand -->
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- PRODUCTS CATEGORIES -->
+<!-- PRODUCTS BY BRAND & CATEGORY -->
 <section class="cat-section">
-    <div class="container">
-        @foreach($categories as $category)
-        @php
-            $categoryProducts = Product::active()->where('category_id', $category->id)->orderBy('order')->get();
-        @endphp
-        <div class="cat-block" id="cat-{{ $category->slug }}" data-cat="{{ $category->slug }}">
-            <div class="cat-header" data-aos="fade-up">
-                <div class="cat-icon-wrap" @if($category->slug !== 'botol') style="background:linear-gradient(135deg,var(--gold),var(--gold-dark));" @endif>
-                    <i class="bi {{ $category->icon }}"></i>
+    <div class="container" id="productsContainer">
+        @foreach($brands as $brand)
+        <div class="brand-block" data-brand="{{ $brand->slug }}" @if(!$loop->first) style="display:none;" @endif>
+            @php
+                $brandCategories = $brand->categories()->active()->orderBy('order')->get();
+            @endphp
+            
+            @forelse($brandCategories as $category)
+            @php
+                $categoryProducts = $category->products()->active()->orderBy('order')->get();
+            @endphp
+            <div class="cat-block" data-brand="{{ $brand->slug }}" data-category="{{ $category->slug }}">
+                <div class="cat-header" data-aos="fade-up">
+                    <div class="cat-icon-wrap">
+                        <i class="bi {{ $category->icon }}"></i>
+                    </div>
+                    <div class="cat-header-info">
+                        <div class="cat-label">{{ $brand->name }} · {{ $category->label }}</div>
+                        <h2 class="cat-title">{{ $category->title }}</h2>
+                    </div>
                 </div>
-                <div class="cat-header-info">
-                    <div class="cat-label">{{ $category->label }}</div>
-                    <h2 class="cat-title">{{ $category->title }}</h2>
+                <div class="cat-desc-row" data-aos="fade-up" data-aos-delay="80">
+                    <p>{{ $category->description }}</p>
                 </div>
-            </div>
-            <div class="cat-desc-row" data-aos="fade-up" data-aos-delay="80">
-                <p>{{ $category->description }}</p>
-            </div>
 
-            <div class="row g-4">
-                @foreach($categoryProducts as $product)
-                <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ 100 * ($loop->index + 1) }}">
-                    <div class="prod-card" onclick="openModal('product-{{ $product->id }}')">
-                        <div class="card-img-wrap">
-                            <span class="card-badge">{{ $product->badge_text }}</span>
-                            <img src="{{ Storage::url($product->banner_image) }}" alt="{{ $product->name }}" />
-                        </div>
-                        <div class="card-body-inner">
-                            <div class="card-sizes">
-                                @foreach(array_slice($product->sizes ?? [], 0, 5) as $size)
-                                <span class="size-tag @if($size['is_popular'] ?? false) highlight @endif">
-                                    {{ $size['volume'] }} {{ $size['unit'] }}
-                                </span>
-                                @endforeach
+                @if($categoryProducts->count() > 0)
+                <div class="row g-4">
+                    @foreach($categoryProducts as $product)
+                    <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ 100 * ($loop->index + 1) }}">
+                        <div class="prod-card" onclick="openModal('product-{{ $product->id }}')">
+                            <div class="card-img-wrap">
+                                <span class="card-badge">{{ $product->badge_text }}</span>
+                                <img src="{{ Storage::url($product->banner_image) }}" alt="{{ $product->name }}" />
                             </div>
-                            <div class="card-name">{{ $product->name }}</div>
-                            <div class="card-tagline">{{ $product->tagline }}</div>
-                            <ul class="card-features">
-                                @foreach(array_slice($product->features ?? [], 0, 3) as $feature)
-                                <li><i class="bi bi-check-circle-fill"></i>{{ $feature['text'] }}</li>
-                                @endforeach
-                            </ul>
-                            <div class="card-footer-row">
-                                <span class="btn-detail"><i class="bi bi-eye"></i> Detail</span>
-                                <a href="https://wa.me/{{ $whatsappNumber }}?text={{ urlencode($product->whatsapp_message ?? 'Halo, saya tertarik dengan ' . $product->name) }}" target="_blank" class="btn-wa-card"><i class="bi bi-whatsapp"></i></a>
+                            <div class="card-body-inner">
+                                <div class="card-sizes">
+                                    @foreach(array_slice($product->sizes ?? [], 0, 5) as $size)
+                                    <span class="size-tag @if($size['is_popular'] ?? false) highlight @endif">
+                                        {{ $size['volume'] }} {{ $size['unit'] }}
+                                    </span>
+                                    @endforeach
+                                </div>
+                                <div class="card-name">{{ $product->name }}</div>
+                                <div class="card-tagline">{{ $product->tagline }}</div>
+                                <ul class="card-features">
+                                    @foreach(array_slice($product->features ?? [], 0, 3) as $feature)
+                                    <li><i class="bi bi-check-circle-fill"></i>{{ $feature['text'] }}</li>
+                                    @endforeach
+                                </ul>
+                                <div class="card-footer-row">
+                                    <span class="btn-detail"><i class="bi bi-eye"></i> Detail</span>
+                                    <a href="https://wa.me/{{ $whatsappNumber }}?text={{ urlencode($product->whatsapp_message ?? 'Halo, saya tertarik dengan ' . $product->name) }}" target="_blank" class="btn-wa-card" onclick="event.stopPropagation();"><i class="bi bi-whatsapp"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
+                @else
+                <div class="text-center py-5">
+                    <i class="bi bi-box-seam text-muted" style="font-size:3rem;"></i>
+                    <p class="text-muted mt-3">Belum ada produk dalam kategori ini</p>
+                </div>
+                @endif
             </div>
-        </div>
 
-        @if(!$loop->last)
-        <hr style="border:0;border-top:1px solid var(--gray-200);margin:60px 0;" class="cat-block" data-cat="all-div{{ $loop->index }}">
-        @endif
+            @if(!$loop->last)
+            <hr style="border:0;border-top:1px solid var(--gray-200);margin:60px 0;" class="cat-divider" data-brand="{{ $brand->slug }}">
+            @endif
+            @empty
+            <div class="text-center py-5">
+                <i class="bi bi-folder2-open text-muted" style="font-size:4rem;"></i>
+                <h4 class="text-muted mt-3">Belum Ada Kategori</h4>
+                <p class="text-muted">Kategori produk untuk brand {{ $brand->name }} belum tersedia</p>
+            </div>
+            @endforelse
+        </div>
         @endforeach
     </div>
 </section>
@@ -454,7 +541,8 @@
 </section>
 
 <!-- PRODUCT DETAIL MODALS -->
-@foreach($categories as $category)
+@foreach($brands as $brand)
+@foreach($brand->categories as $category)
 @foreach($category->products()->active()->get() as $product)
 <div class="prod-modal" id="modal-product-{{ $product->id }}" role="dialog" aria-modal="true" aria-label="Detail {{ $product->name }}">
     <div class="modal-backdrop" onclick="closeModal('product-{{ $product->id }}')"></div>
@@ -462,7 +550,7 @@
         <div class="modal-header-band"></div>
         <button class="modal-close" onclick="closeModal('product-{{ $product->id }}')"><i class="bi bi-x-lg"></i></button>
         <div class="modal-inner">
-            <div class="modal-tag">{{ $category->label }} · {{ $product->badge_text }}</div>
+            <div class="modal-tag">{{ $brand->name }} · {{ $category->label }} · {{ $product->badge_text }}</div>
             <div class="modal-title">{{ $product->modal_title ?? $product->name }}</div>
             <div class="modal-sub">{{ $product->modal_subtitle ?? $product->tagline }}</div>
             <div class="modal-img-band">
@@ -546,68 +634,154 @@
 </div>
 @endforeach
 @endforeach
+@endforeach
 @endsection
 
 @push('scripts')
 <script>
+    // Brand and Category data from server
+    var brandsData = @json($brands->map(function($brand) {
+        return [
+            'slug' => $brand->slug,
+            'name' => $brand->name,
+            'categories' => $brand->categories->map(function($cat) {
+                return [
+                    'slug' => $cat->slug,
+                    'label' => $cat->label,
+                    'title' => $cat->title,
+                    'icon' => $cat->icon,
+                    'productCount' => $cat->products()->active()->count()
+                ];
+            })
+        ];
+    }));
+
+    var currentBrand = brandsData.length > 0 ? brandsData[0].slug : null;
+    var currentCategory = 'all';
+
     document.addEventListener('DOMContentLoaded', function () {
-        initFilter();
+        initBrandTabs();
+        initCategoryTabs();
         initHeroChips();
+        updateCategoryTabs(currentBrand);
     });
 
-    function initFilter() {
-        var tabs = document.querySelectorAll('.ftab');
-        var countEl = document.getElementById('prodCount');
-
-        tabs.forEach(function (tab) {
-            tab.addEventListener('click', function () {
-                var filter = this.dataset.filter;
-                tabs.forEach(function (t) { t.classList.remove('active'); });
+    function initBrandTabs() {
+        var brandTabs = document.querySelectorAll('.brand-tab');
+        
+        brandTabs.forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                var brand = this.dataset.brand;
+                
+                // Update active state
+                brandTabs.forEach(function(t) { t.classList.remove('active'); });
                 this.classList.add('active');
-
-                var blocks = document.querySelectorAll('.cat-block');
-                var count = 0;
-
-                blocks.forEach(function (block) {
-                    var cat = block.dataset.cat;
-                    if (filter === 'all' || cat === filter || cat === 'all-div' || cat === 'all-div2') {
-                        block.classList.remove('hidden-cat');
+                
+                // Update current brand
+                currentBrand = brand;
+                currentCategory = 'all';
+                
+                // Show/hide brand blocks
+                document.querySelectorAll('.brand-block').forEach(function(block) {
+                    if (block.dataset.brand === brand) {
                         block.style.display = '';
-                        if (cat !== 'all-div' && cat !== 'all-div2') count++;
                     } else {
-                        block.classList.add('hidden-cat');
                         block.style.display = 'none';
                     }
                 });
+                
+                // Update category tabs
+                updateCategoryTabs(brand);
+                
+                // Scroll to products
+                scrollToProducts();
+            });
+        });
+    }
 
-                if (filter !== 'all') {
-                    document.querySelectorAll('[data-cat="all-div"], [data-cat="all-div2"]').forEach(function (d) {
-                        d.style.display = 'none';
-                    });
-                }
+    function updateCategoryTabs(brandSlug) {
+        var categoryTabsContainer = document.getElementById('categoryTabs');
+        var brandData = brandsData.find(function(b) { return b.slug === brandSlug; });
+        
+        if (!brandData || !categoryTabsContainer) return;
+        
+        var categories = brandData.categories;
+        var totalProducts = categories.reduce(function(sum, cat) { return sum + cat.productCount; }, 0);
+        
+        // Build category tabs HTML
+        var html = '<button class="cat-tab active" data-category="all">' +
+                   '<i class="bi bi-grid-fill"></i> Semua' +
+                   '<span class="count">' + totalProducts + '</span>' +
+                   '</button>';
+        
+        categories.forEach(function(cat) {
+            html += '<button class="cat-tab" data-category="' + cat.slug + '">' +
+                    '<i class="bi ' + cat.icon + '"></i> ' + cat.title +
+                    '<span class="count">' + cat.productCount + '</span>' +
+                    '</button>';
+        });
+        
+        categoryTabsContainer.innerHTML = html;
+        
+        // Reinitialize category tab listeners
+        initCategoryTabs();
+    }
 
-                if (countEl) countEl.textContent = filter === 'all' ? '3' : '1';
-
-                var catSec = document.querySelector('.cat-section');
-                if (catSec) {
-                    var offsetPos = catSec.getBoundingClientRect().top + window.pageYOffset - 100;
-                    window.scrollTo({ top: offsetPos, behavior: 'smooth' });
-                }
+    function initCategoryTabs() {
+        var categoryTabs = document.querySelectorAll('.cat-tab');
+        
+        categoryTabs.forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                var category = this.dataset.category;
+                
+                // Update active state
+                categoryTabs.forEach(function(t) { t.classList.remove('active'); });
+                this.classList.add('active');
+                
+                // Update current category
+                currentCategory = category;
+                
+                // Show/hide category blocks within current brand
+                var brandBlock = document.querySelector('.brand-block[data-brand="' + currentBrand + '"]');
+                if (!brandBlock) return;
+                
+                brandBlock.querySelectorAll('.cat-block').forEach(function(block) {
+                    if (category === 'all' || block.dataset.category === category) {
+                        block.style.display = '';
+                    } else {
+                        block.style.display = 'none';
+                    }
+                });
+                
+                // Handle dividers
+                brandBlock.querySelectorAll('.cat-divider').forEach(function(divider) {
+                    divider.style.display = category === 'all' ? '' : 'none';
+                });
             });
         });
     }
 
     function initHeroChips() {
-        var chips = document.querySelectorAll('.chip[data-filter]');
-        chips.forEach(function (chip) {
-            chip.addEventListener('click', function () {
-                var filter = this.dataset.filter;
-                chips.forEach(function (c) { c.classList.remove('active'); });
+        var chips = document.querySelectorAll('.chip[data-brand]');
+        chips.forEach(function(chip) {
+            chip.addEventListener('click', function() {
+                var brand = this.dataset.brand;
+                chips.forEach(function(c) { c.classList.remove('active'); });
                 this.classList.add('active');
-                var matchTab = document.querySelector('.ftab[data-filter="' + filter + '"]');
+                
+                // Click the corresponding brand tab
+                var matchTab = document.querySelector('.brand-tab[data-brand="' + brand + '"]');
                 if (matchTab) matchTab.click();
             });
         });
+    }
+
+    function scrollToProducts() {
+        var catSec = document.querySelector('.cat-section');
+        if (catSec) {
+            var offsetPos = catSec.getBoundingClientRect().top + window.pageYOffset - 100;
+            window.scrollTo({ top: offsetPos, behavior: 'smooth' });
+        }
     }
 
     function openModal(id) {
