@@ -391,7 +391,7 @@
                     <i class="bi bi-journal-richtext"></i>
                 </div>
                 <h4>Artikel Sedang Dalam Persiapan</h4>
-                <p>Nantikan tips memasak, resep lezat, dan edukasi menarik dari AROMAS!</p>
+                <p>Kami sedang menyiapkan konten menarik untuk Anda. Nantikan tips memasak, resep lezat, dan edukasi seputar minyak goreng berkualitas dari AROMAS!</p>
                 <div class="empty-state-decoration">
                     <span class="decoration-dot"></span>
                     <span class="decoration-dot"></span>
