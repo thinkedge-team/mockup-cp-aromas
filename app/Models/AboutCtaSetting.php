@@ -11,8 +11,10 @@ class AboutCtaSetting extends Model
         'subtext',
         'button_1_text',
         'button_1_url',
+        'button_1_icon',
         'button_2_text',
         'button_2_url',
+        'button_2_icon',
         'is_active',
     ];
 

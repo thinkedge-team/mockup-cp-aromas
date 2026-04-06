@@ -48,6 +48,7 @@ class AboutCtaSettingResource extends Resource
                     ]),
 
                 Forms\Components\Section::make('Tombol')
+                    ->description('Atur teks, URL, dan ikon untuk tombol CTA. Ikon menggunakan Bootstrap Icons.')
                     ->schema([
                         Forms\Components\TextInput::make('button_1_text')
                             ->label('Tombol 1 — Teks')
@@ -59,6 +60,18 @@ class AboutCtaSettingResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->placeholder('/#products'),
+                        Forms\Components\TextInput::make('button_1_icon')
+                            ->label('Tombol 1 — Ikon')
+                            ->placeholder('bi-bag-check-fill')
+                            ->default('bi-bag-check-fill')
+                            ->helperText('Masukkan nama icon dari Bootstrap Icons. Contoh: bi-bag-check-fill, bi-cart-fill')
+                            ->suffixAction(
+                                Forms\Components\Actions\Action::make('browse_icons_1')
+                                    ->label('Browse')
+                                    ->icon('heroicon-m-magnifying-glass')
+                                    ->url('https://icons.getbootstrap.com/', shouldOpenInNewTab: true)
+                                    ->color('primary')
+                            ),
                         Forms\Components\TextInput::make('button_2_text')
                             ->label('Tombol 2 — Teks')
                             ->required()
@@ -69,7 +82,19 @@ class AboutCtaSettingResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->placeholder('/#contact'),
-                    ])->columns(2),
+                        Forms\Components\TextInput::make('button_2_icon')
+                            ->label('Tombol 2 — Ikon')
+                            ->placeholder('bi-chat-dots-fill')
+                            ->default('bi-chat-dots-fill')
+                            ->helperText('Masukkan nama icon dari Bootstrap Icons. Contoh: bi-chat-dots-fill, bi-telephone-fill')
+                            ->suffixAction(
+                                Forms\Components\Actions\Action::make('browse_icons_2')
+                                    ->label('Browse')
+                                    ->icon('heroicon-m-magnifying-glass')
+                                    ->url('https://icons.getbootstrap.com/', shouldOpenInNewTab: true)
+                                    ->color('primary')
+                            ),
+                    ])->columns(3),
             ]);
     }
 

@@ -353,7 +353,7 @@
                 Bukti nyata komitmen kami terhadap kualitas, keamanan, dan kepercayaan konsumen.
             </p>
         </div>
-        <div class="row g-4">
+        <div class="row g-4 justify-content-center">
             @if($aboutCertifications->isNotEmpty())
                 @foreach($aboutCertifications as $index => $cert)
                 <div class="col-6 col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="{{ 50 * ($index + 1) }}">
@@ -400,10 +400,10 @@
             <div class="col-lg-5 text-lg-end" data-aos="fade-left">
                 <div class="d-flex gap-3 flex-wrap justify-content-lg-end">
                     <a href="{{ url($aboutCta?->button_1_url ?? '/#products') }}" class="btn-cta-white">
-                        <i class="bi bi-bag-check-fill"></i> {{ $aboutCta?->button_1_text ?? 'Lihat Produk' }}
+                        <i class="bi {{ $aboutCta?->button_1_icon ?? 'bi-bag-check-fill' }}"></i> {{ $aboutCta?->button_1_text ?? 'Lihat Produk' }}
                     </a>
                     <a href="{{ url($aboutCta?->button_2_url ?? '/#contact') }}" class="btn-cta-outline">
-                        <i class="bi bi-chat-dots-fill"></i> {{ $aboutCta?->button_2_text ?? 'Hubungi Kami' }}
+                        <i class="bi {{ $aboutCta?->button_2_icon ?? 'bi-chat-dots-fill' }}"></i> {{ $aboutCta?->button_2_text ?? 'Hubungi Kami' }}
                     </a>
                 </div>
             </div>
