@@ -91,11 +91,6 @@ class BrandCategoryResource extends Resource
                     ->badge()
                     ->color('info'),
 
-                Tables\Columns\TextColumn::make('category.icon')
-                    ->label('Icon')
-                    ->formatStateUsing(fn($state) => $state ? "<i class='bi {$state}'></i>" : '-')
-                    ->html(),
-
                 Tables\Columns\TextColumn::make('order')
                     ->label('Order')
                     ->numeric()
