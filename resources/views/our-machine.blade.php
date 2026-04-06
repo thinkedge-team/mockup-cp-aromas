@@ -11,6 +11,12 @@
     $capacityStats = CapacityStat::active()->orderBy('order')->get();
     $machineCta = MachineCta::active()->first();
     
+    // Count total active machines from active categories only
+    $totalActiveMachines = 0;
+    foreach ($categories as $cat) {
+        $totalActiveMachines += Machine::active()->where('category_id', $cat->id)->count();
+    }
+    
     // Get WhatsApp number from Footer Setting
     $footer = FooterSetting::getActive();
     $whatsappNumber = $footer && isset($footer->contact_info['whatsapp']) 
@@ -135,7 +141,7 @@
                         </button>
                     @endforeach
                 </div>
-                <span class="result-count">Menampilkan <strong id="machineCount">{{ Machine::active()->count() }}</strong>
+                <span class="result-count">Menampilkan <strong id="machineCount">{{ $totalActiveMachines }}</strong>
                     unit mesin</span>
             </div>
         </div>
