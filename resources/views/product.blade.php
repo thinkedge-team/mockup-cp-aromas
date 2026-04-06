@@ -653,13 +653,12 @@
 @endsection
 
 @push('scripts')
-<script>
-    // Brand and Category data from server
-    var brandsData = @json($brands->map(function($brand) {
+@php
+    $brandsDataArray = $brands->map(function($brand) {
         return [
             'slug' => $brand->slug,
             'name' => $brand->name,
-            'categories' => $brand->brandCategories->map(function($brandCategory) {
+            'categories' => $brand->brandCategories->map(function($brandCategory) use ($brand) {
                 $cat = $brandCategory->category;
                 return [
                     'slug' => $cat->slug,
@@ -670,7 +669,11 @@
                 ];
             })
         ];
-    }));
+    });
+@endphp
+<script>
+    // Brand and Category data from server
+    var brandsData = @json($brandsDataArray);
 
     var currentBrand = brandsData.length > 0 ? brandsData[0].slug : null;
     var currentCategory = 'all';
