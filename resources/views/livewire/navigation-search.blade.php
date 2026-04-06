@@ -208,10 +208,9 @@
         </div>
         @endif
     </div>
-</div>
 
-<style>
-[x-cloak] { display: none !important; }
+    <style>
+    [x-cloak] { display: none !important; }
 
 /* ============================================================
    INPUT ROW
@@ -633,4 +632,5 @@
     background-color: rgba(250,204,21,.18);
     color: #fde047;
 }
-</style>
+    </style>
+</div>
