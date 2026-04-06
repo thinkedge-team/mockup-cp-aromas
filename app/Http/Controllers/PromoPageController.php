@@ -39,8 +39,14 @@ class PromoPageController extends Controller
             ->featured()
             ->first();
 
-        // Count active promos
-        $activePromoCount = $promos->count();
+        // Count active promos (only from active categories)
+        $activePromoCount = 0;
+        foreach ($filterCategories as $category) {
+            $activePromoCount += $promos->where('promo_category_id', $category->id)->count();
+        }
+        
+        // Add promos without category (if any)
+        $activePromoCount += $promos->whereNull('promo_category_id')->count();
 
         // Get WhatsApp number from Footer Setting
         $footer = FooterSetting::getActive();

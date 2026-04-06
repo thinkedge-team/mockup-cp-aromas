@@ -53,7 +53,14 @@ class PromoCampaign extends Model
 
     public function scopeActive($query)
     {
-        return $query->where('is_active', true);
+        return $query->where('is_active', true)
+            ->whereHas('category', function ($q) {
+                $q->where('is_active', true);
+            })
+            ->where(function ($q) {
+                $q->whereNull('end_date')
+                    ->orWhere('end_date', '>=', now()->startOfDay());
+            });
     }
 
     public function scopeFeatured($query)
