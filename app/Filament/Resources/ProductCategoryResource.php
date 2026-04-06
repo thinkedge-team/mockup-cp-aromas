@@ -32,7 +32,14 @@ class ProductCategoryResource extends Resource
                         Forms\Components\TextInput::make('icon')
                             ->required()
                             ->placeholder('bi-box')
-                            ->helperText('Bootstrap Icon class (e.g., bi-box, bi-droplet)'),
+                            ->helperText('Masukkan nama icon dari Bootstrap Icons. Contoh: bi-box, bi-droplet, bi-cup-hot')
+                            ->suffixAction(
+                                Forms\Components\Actions\Action::make('browse_icons')
+                                    ->label('Browse')
+                                    ->icon('heroicon-m-magnifying-glass')
+                                    ->url('https://icons.getbootstrap.com/', shouldOpenInNewTab: true)
+                                    ->color('primary')
+                            ),
 
                         Forms\Components\TextInput::make('label')
                             ->required()
