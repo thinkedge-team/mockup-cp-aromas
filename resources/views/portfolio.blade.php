@@ -245,7 +245,10 @@
                     <img src="{{ Storage::url($logo->logo) }}" alt="{{ $logo->name }}" />
                     @endif
                 @else
-                <i class="bi bi-shop"></i>
+                    <div class="mitra-logo-placeholder">
+                        <i class="bi bi-camera-fill"></i>
+                        <span class="placeholder-text">No Logo</span>
+                    </div>
                 @endif
                 <span>{{ $logo->name }}</span>
             </div>
@@ -646,6 +649,55 @@ img { max-width: 100%; height: auto; }
 .cat-empty-icon { width: 70px; height: 70px; border-radius: 50%; background: rgba(34,139,34,.15); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--forest-green); margin: 0 auto 16px; }
 .cat-empty-state h5 { font-size: 1.1rem; color: var(--gray-800); margin-bottom: 8px; font-weight: 700; }
 .cat-empty-state p { color: var(--gray-600); font-size: .88rem; max-width: 500px; margin: 0 auto; line-height: 1.6; }
+
+/* Mitra Logo Placeholder */
+.mitra-logo-placeholder {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px dashed rgba(0,0,0,0.1);
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+    overflow: hidden;
+    min-width: 100px;
+    height: 70px;
+    padding: 8px;
+}
+
+.mitra-logo-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 15px,
+        rgba(0,0,0,0.02) 15px,
+        rgba(0,0,0,0.02) 30px
+    );
+    pointer-events: none;
+}
+
+.mitra-logo-placeholder i {
+    font-size: 1.3rem;
+    color: #6c757d;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.mitra-logo-placeholder .placeholder-text {
+    color: #6c757d;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    z-index: 1;
+    text-align: center;
+    white-space: nowrap;
+}
 
 /* TESTIMONIAL */
 .testimonial-section { background: var(--forest-green-pale); padding: var(--section-padding); overflow: hidden; }
