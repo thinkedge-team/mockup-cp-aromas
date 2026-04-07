@@ -28,7 +28,14 @@
                 <div class="card-img-wrap">
                     <span class="card-badge badge-{{ $catKey }}">{{ $partner->subcategory ?? ucfirst($catKey) }}</span>
                     <div class="card-rating"><span class="stars">{{ str_repeat('★', floor($partner->rating)) }}{{ $partner->rating % 1 >= 0.5 ? '½' : '' }}</span><span>{{ number_format($partner->rating, 1) }}</span></div>
-                    <img src="{{ $partner->image ? Storage::url($partner->image) : 'https://via.placeholder.com/600x350' }}" alt="{{ $partner->name }}" />
+                    @if($partner->image)
+                        <img src="{{ Storage::url($partner->image) }}" alt="{{ $partner->name }}" />
+                    @else
+                        <div class="portfolio-card-img-placeholder">
+                            <i class="bi bi-camera-fill"></i>
+                            <span class="placeholder-text">Image Not Available</span>
+                        </div>
+                    @endif
                 </div>
                 <div class="card-body-inner">
                     <div class="card-name">{{ $partner->name }}</div>

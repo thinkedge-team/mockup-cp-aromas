@@ -192,7 +192,14 @@
             @foreach($impactStats as $stat)
             <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="{{ 100 * $loop->index }}">
                 <div class="impact-card">
-                    <img src="{{ $stat->image ? Storage::url($stat->image) : 'https://via.placeholder.com/300x160' }}" alt="{{ $stat->label }}" class="impact-img" />
+                    @if($stat->image)
+                        <img src="{{ Storage::url($stat->image) }}" alt="{{ $stat->label }}" class="impact-img" />
+                    @else
+                        <div class="impact-img-placeholder">
+                            <i class="bi bi-camera-fill"></i>
+                            <span class="placeholder-text">Image Not Available</span>
+                        </div>
+                    @endif
                     <div class="impact-stat"><h3><span class="counter" data-target="{{ preg_replace('/[^0-9]/', '', $stat->number) }}">{{ $stat->number }}</span></h3><p>{{ $stat->label }}</p></div>
                 </div>
             </div>
@@ -526,6 +533,75 @@ img { max-width: 100%; height: auto; }
 .card-img-wrap { position: relative; overflow: hidden; border-radius: 20px 20px 0 0; height: 230px; background: linear-gradient(135deg, #f5faf5, #fafff5); }
 .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; filter: brightness(.9) saturate(1.05); }
 .port-card:hover .card-img-wrap img { transform: scale(1.08); filter: brightness(.95) saturate(1.1); }
+
+/* IMAGE PLACEHOLDERS - Unified Style */
+.portfolio-card-img-placeholder,
+.portfolio-modal-img-placeholder,
+.impact-img-placeholder {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px dashed rgba(0,0,0,0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-card-img-placeholder::before,
+.portfolio-modal-img-placeholder::before,
+.impact-img-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 20px,
+        rgba(0,0,0,0.02) 20px,
+        rgba(0,0,0,0.02) 40px
+    );
+    pointer-events: none;
+}
+
+.portfolio-card-img-placeholder i,
+.portfolio-modal-img-placeholder i,
+.impact-img-placeholder i {
+    font-size: 2.5rem;
+    color: #6c757d;
+    opacity: 0.6;
+    z-index: 1;
+}
+
+.portfolio-card-img-placeholder .placeholder-text,
+.portfolio-modal-img-placeholder .placeholder-text,
+.impact-img-placeholder .placeholder-text {
+    color: #6c757d;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    z-index: 1;
+}
+
+/* Specific heights for each placeholder type */
+.portfolio-card-img-placeholder {
+    height: 100%; /* Fill parent .card-img-wrap (230px) */
+    border-radius: 20px 20px 0 0; /* Match card top corners */
+}
+
+.portfolio-modal-img-placeholder {
+    height: 100%; /* Fill parent .modal-img-inline (280px) */
+    width: 100%;
+}
+
+.impact-img-placeholder {
+    height: 140px; /* Match .impact-img height */
+    width: 100%;
+    border-radius: 8px; /* Smaller radius for stats */
+}
 
 .card-badge { position: absolute; top: 16px; left: 16px; padding: 5px 14px; border-radius: 20px; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,.2); z-index: 5; }
 .badge-retail { background: linear-gradient(135deg, #ff9800, #f57c00); }

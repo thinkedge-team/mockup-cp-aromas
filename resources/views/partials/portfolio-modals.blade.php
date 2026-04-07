@@ -16,7 +16,16 @@
             <div class="modal-cat-tag">{{ $categoryLabels[$partner->category] ?? ucfirst($partner->category) }} · {{ $partner->subcategory ?? 'Partner' }}</div>
             <div class="modal-title">{{ $partner->name }}</div>
             <div class="modal-sub">{{ $partner->tagline }}</div>
-            <div class="modal-img-inline"><img src="{{ $partner->image ? Storage::url($partner->image) : 'https://via.placeholder.com/700x350' }}" alt="{{ $partner->name }}" /></div>
+            <div class="modal-img-inline">
+                @if($partner->image)
+                    <img src="{{ Storage::url($partner->image) }}" alt="{{ $partner->name }}" />
+                @else
+                    <div class="portfolio-modal-img-placeholder">
+                        <i class="bi bi-camera-fill"></i>
+                        <span class="placeholder-text">Image Not Available</span>
+                    </div>
+                @endif
+            </div>
             <div class="modal-grid">
                 @if($partner->location)<div class="modal-detail"><div class="modal-detail-label">Lokasi</div><div class="modal-detail-val">{{ $partner->location }}</div></div>@endif
                 @if($partner->products)<div class="modal-detail"><div class="modal-detail-label">Produk</div><div class="modal-detail-val">{{ $partner->products }}</div></div>@endif
