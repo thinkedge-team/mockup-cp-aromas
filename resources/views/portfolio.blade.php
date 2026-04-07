@@ -245,10 +245,7 @@
                     <img src="{{ Storage::url($logo->logo) }}" alt="{{ $logo->name }}" />
                     @endif
                 @else
-                    <div class="mitra-logo-placeholder">
-                        <i class="bi bi-camera-fill"></i>
-                        <span class="placeholder-text">No Logo</span>
-                    </div>
+                    <i class="bi bi-building"></i>
                 @endif
                 <span>{{ $logo->name }}</span>
             </div>
