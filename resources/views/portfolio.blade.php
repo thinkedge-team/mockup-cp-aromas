@@ -490,6 +490,7 @@ img { max-width: 100%; height: auto; }
 .cat-section-wrapper { display: block; margin-bottom: 64px; }
 .cat-section-wrapper.cat-hidden { display: none !important; }
 @keyframes catFadeIn { from { opacity: 0.4; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes catFadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-10px); } }
 
 .cat-section-header {
     display: flex; align-items: center; gap: 20px;
@@ -639,6 +640,12 @@ img { max-width: 100%; height: auto; }
 .empty-state p { color: var(--gray-500); font-size: .9rem; margin-bottom: 20px; }
 .btn-reset-filter { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--forest-green), var(--forest-green-dark)); color: var(--white); padding: 11px 26px; border-radius: var(--radius-md); font-size: .88rem; font-weight: 600; border: none; cursor: pointer; transition: all .25s ease; }
 .btn-reset-filter:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(34,139,34,.3); }
+
+/* Per-Category Empty State */
+.cat-empty-state { text-align: center; padding: 60px 20px; background: var(--forest-green-pale); border-radius: 16px; border: 2px dashed rgba(34,139,34,.2); margin-top: 20px; }
+.cat-empty-icon { width: 70px; height: 70px; border-radius: 50%; background: rgba(34,139,34,.15); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--forest-green); margin: 0 auto 16px; }
+.cat-empty-state h5 { font-size: 1.1rem; color: var(--gray-800); margin-bottom: 8px; font-weight: 700; }
+.cat-empty-state p { color: var(--gray-600); font-size: .88rem; max-width: 500px; margin: 0 auto; line-height: 1.6; }
 
 /* TESTIMONIAL */
 .testimonial-section { background: var(--forest-green-pale); padding: var(--section-padding); overflow: hidden; }
@@ -790,13 +797,36 @@ function applyFilter(filter) {
     currentFilter = filter;
 
     const blocks = document.querySelectorAll('.cat-block');
+    const sections = document.querySelectorAll('.cat-section-wrapper');
     const countEl = document.getElementById('portCount');
     const emptyState = document.getElementById('emptyState');
     const activeFilterPill = document.getElementById('activeFilterPill');
     const activeFilterLabel = document.getElementById('activeFilterLabel');
 
     let count = 0;
+    let visibleSectionCount = 0;
 
+    // Hide/show category sections with fade animation
+    sections.forEach(section => {
+        const sectionCat = section.dataset.section;
+        if (filter === 'all' || sectionCat === filter) {
+            section.classList.remove('cat-hidden');
+            visibleSectionCount++;
+            
+            // Trigger fade-in animation
+            setTimeout(() => {
+                section.style.animation = 'catFadeIn 0.4s ease forwards';
+            }, 50);
+        } else {
+            // Fade out before hiding
+            section.style.animation = 'catFadeOut 0.3s ease forwards';
+            setTimeout(() => {
+                section.classList.add('cat-hidden');
+            }, 300);
+        }
+    });
+
+    // Hide/show individual cards (backwards compatibility)
     blocks.forEach(block => {
         const cat = block.dataset.cat;
         if (filter === 'all' || cat === filter) {
@@ -809,6 +839,7 @@ function applyFilter(filter) {
 
     if (countEl) countEl.textContent = count;
 
+    // Update active filter pill
     if (filter === 'all') {
         if (activeFilterPill) activeFilterPill.classList.remove('visible');
     } else {
@@ -816,12 +847,14 @@ function applyFilter(filter) {
         if (activeFilterLabel) activeFilterLabel.textContent = FILTER_LABELS[filter] || filter;
     }
 
-    if (count === 0) {
+    // Show empty state only if no partners at all (global empty state hidden, per-section will show)
+    if (count === 0 && visibleSectionCount === 0) {
         if (emptyState) emptyState.style.display = 'block';
     } else {
         if (emptyState) emptyState.style.display = 'none';
     }
 
+    // Update filter button states
     document.querySelectorAll('.ftab').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.filter === filter);
     });
@@ -829,6 +862,20 @@ function applyFilter(filter) {
     document.querySelectorAll('.hchip').forEach(chip => {
         chip.classList.toggle('active', chip.dataset.filter === filter);
     });
+
+    // Auto-scroll to filtered section (only when specific category selected)
+    if (filter !== 'all') {
+        setTimeout(() => {
+            const targetSection = document.querySelector(`.cat-section-wrapper[data-section="${filter}"]`);
+            if (targetSection) {
+                const offsetTop = targetSection.offsetTop - 150; // Offset for sticky header
+                window.scrollTo({ 
+                    top: offsetTop, 
+                    behavior: 'smooth' 
+                });
+            }
+        }, 100);
+    }
 }
 
 function initFilter() {

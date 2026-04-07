@@ -8,7 +8,6 @@
 @endphp
 
 @foreach($categoryConfig as $catKey => $config)
-@if(isset($partners[$catKey]) && count($partners[$catKey]) > 0)
 <!-- {{ strtoupper($config['title']) }} -->
 <div class="cat-section-wrapper" data-section="{{ $catKey }}">
     <div class="cat-section-header">
@@ -21,6 +20,7 @@
     <p class="cat-desc">
         {{ $config['desc'] }}
     </p>
+    @if(isset($partners[$catKey]) && count($partners[$catKey]) > 0)
     <div class="row g-4">
         @foreach($partners[$catKey] as $partner)
         <div class="col-md-6 col-lg-4 cat-block" data-cat="{{ $catKey }}">
@@ -63,6 +63,13 @@
         </div>
         @endforeach
     </div>
+    @else
+    <!-- Per-Category Empty State -->
+    <div class="cat-empty-state">
+        <div class="cat-empty-icon"><i class="bi bi-inbox"></i></div>
+        <h5>Belum Ada Mitra di Kategori Ini</h5>
+        <p>Saat ini belum ada mitra yang terdaftar dalam kategori {{ $config['title'] }}. Kami terus berkembang dan akan segera menambahkan mitra baru!</p>
+    </div>
+    @endif
 </div>
-@endif
 @endforeach
