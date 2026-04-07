@@ -744,7 +744,7 @@ img { max-width: 100%; height: auto; }
 .keunggulan-section .container { position: relative; z-index: 2; }
 .kel-card { background: rgba(255,255,255,.07); backdrop-filter: blur(12px); border: 1px solid rgba(212,160,23,.2); border-radius: 18px; padding: 30px 24px; height: 100%; transition: all .3s ease; text-align: center; }
 .kel-card:hover { background: rgba(255,255,255,.12); border-color: rgba(212,160,23,.42); transform: translateY(-6px); }
-.kel-icon { width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); display: flex; align-items: center; justify-content: center; font-size: 1.7rem; color: #fff; margin: 0 auto 20px; box-shadow: 0 6px 20px rgba(212,160,23,.35); }
+.kel-icon { width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark)); display: flex; align-items: center; justify-content: center; font-size: 1.7rem; color: #fff; margin: 0 auto 20px; box-shadow: 0 6px 20px rgba(212,160,23,.35); }
 .kel-card h4 { color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
 .kel-card p { color: rgba(255,255,255,.68); font-size: .88rem; line-height: 1.7; margin: 0; }
 
