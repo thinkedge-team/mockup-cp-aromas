@@ -146,9 +146,6 @@ function renderInfoCards() {
     const container = document.getElementById("infoCards");
     if (!container) return;
 
-    // Center cards when only 1-2 active branches are available (desktop/tablet).
-    container.classList.toggle("center-two-cards", branches.length <= 2);
-
     container.innerHTML = branches
         .map((branch) => {
             const isOpen = checkBranchStatus(branch);

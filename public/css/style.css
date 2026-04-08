@@ -3665,6 +3665,7 @@ img {
     overflow-y: hidden;
     padding: 14px 16px;
     display: flex;
+    justify-content: center;
     gap: 12px;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
@@ -3698,19 +3699,6 @@ img {
     right: 0;
     border-radius: 0 18px 18px 0;
     background: linear-gradient(to left, rgba(13, 51, 32, 0.5), transparent);
-}
-
-/* Center cards cleanly when active branches are only 1-2 (desktop/tablet only). */
-@media (min-width: 768px) {
-    .info-cards-container.center-two-cards {
-        justify-content: center;
-        overflow-x: hidden;
-    }
-
-    .info-cards-container.center-two-cards::before,
-    .info-cards-container.center-two-cards::after {
-        display: none;
-    }
 }
 
 /* =============================================
