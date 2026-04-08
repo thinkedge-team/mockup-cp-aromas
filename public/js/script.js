@@ -46,6 +46,26 @@ function formatPhoneNumber(phone) {
     return phone.replace(/[^0-9]/g, "");
 }
 
+function shouldShowBranchOnMap(branch) {
+    const lat = Number(branch.latitude);
+    const lng = Number(branch.longitude);
+    const isIncoming = Boolean(branch.isUnderConstruction);
+    const isInactiveSnakeCase =
+        Object.prototype.hasOwnProperty.call(branch, "is_active") &&
+        !Boolean(branch.is_active);
+    const isInactiveCamelCase =
+        Object.prototype.hasOwnProperty.call(branch, "isActive") &&
+        !Boolean(branch.isActive);
+
+    return (
+        Number.isFinite(lat) &&
+        Number.isFinite(lng) &&
+        !isIncoming &&
+        !isInactiveSnakeCase &&
+        !isInactiveCamelCase
+    );
+}
+
 // Update branches with live status
 branches.forEach((branch) => {
     branch.isOpen = checkBranchStatus(branch);
@@ -418,8 +438,9 @@ function initInteractiveMap() {
     markers = {};
     radiusCircles = {};
 
-    // Render markers and radius circles
-    branches.forEach((branch) => {
+    // Render markers and radius circles (exclude incoming/inactive branches)
+    const mappableBranches = branches.filter(shouldShowBranchOnMap);
+    mappableBranches.forEach((branch) => {
         const marker = L.marker([branch.latitude, branch.longitude], {
             icon: createInactiveMarker(),
         }).addTo(map);
@@ -501,9 +522,10 @@ function initInteractiveMap() {
         });
     }
 
-    // Set initial active branch (first branch)
-    if (branches.length > 0) {
-        setActiveBranch(branches[0].id, false); // false = no scroll needed (already at start)
+    // Set initial active branch (first mappable branch if available)
+    const initialBranch = mappableBranches[0] || branches[0];
+    if (initialBranch) {
+        setActiveBranch(initialBranch.id, false); // false = no scroll needed (already at start)
     }
 
     // Handle card scroll (ONLY for manual user scroll)
