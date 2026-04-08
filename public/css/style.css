@@ -106,7 +106,9 @@ body {
     align-items: center;
     justify-content: center;
     background: var(--forest-green-darker);
-    transition: opacity .7s cubic-bezier(0.16,1,0.3,1), visibility .7s;
+    transition:
+        opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.7s;
 }
 .preloader.hidden {
     opacity: 0;
@@ -136,8 +138,8 @@ body {
     inset: 14px;
     border-radius: 50%;
     border: 2px solid transparent;
-    border-bottom-color: rgba(212,160,23,.4);
-    animation: pl-spin1 .9s linear infinite reverse;
+    border-bottom-color: rgba(212, 160, 23, 0.4);
+    animation: pl-spin1 0.9s linear infinite reverse;
 }
 .pl-dot {
     position: absolute;
@@ -147,7 +149,7 @@ body {
     justify-content: center;
 }
 .pl-dot::after {
-    content: '';
+    content: "";
     width: 10px;
     height: 10px;
     border-radius: 50%;
@@ -162,20 +164,36 @@ body {
     margin-bottom: 8px;
 }
 .pl-sub {
-    font-size: .68rem;
+    font-size: 0.68rem;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: rgba(255,255,255,.38);
+    color: rgba(255, 255, 255, 0.38);
     animation: pl-textBlink 1.6s ease-in-out infinite;
 }
-@keyframes pl-spin1 { to { transform: rotate(360deg); } }
+@keyframes pl-spin1 {
+    to {
+        transform: rotate(360deg);
+    }
+}
 @keyframes pl-dotPulse {
-    0%, 100% { transform: scale(.7); opacity: .5; }
-    50% { transform: scale(1); opacity: 1; }
+    0%,
+    100% {
+        transform: scale(0.7);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 @keyframes pl-textBlink {
-    0%, 100% { opacity: .3; }
-    50% { opacity: 1; }
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 h1,
@@ -1942,27 +1960,37 @@ img {
     background: var(--white);
     padding: 60px 50px;
     border-radius: 24px;
-    box-shadow: 0 10px 40px rgba(34, 139, 34, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+    box-shadow:
+        0 10px 40px rgba(34, 139, 34, 0.08),
+        0 4px 12px rgba(0, 0, 0, 0.04);
     border: 1px solid rgba(34, 139, 34, 0.08);
     position: relative;
     overflow: hidden;
 }
 
 .empty-state-content::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--forest-green) 0%, var(--primary-gold) 100%);
+    background: linear-gradient(
+        90deg,
+        var(--forest-green) 0%,
+        var(--primary-gold) 100%
+    );
 }
 
 .empty-state-icon {
     width: 120px;
     height: 120px;
     margin: 0 auto 30px;
-    background: linear-gradient(145deg, rgba(34, 139, 34, 0.08) 0%, rgba(34, 139, 34, 0.15) 100%);
+    background: linear-gradient(
+        145deg,
+        rgba(34, 139, 34, 0.08) 0%,
+        rgba(34, 139, 34, 0.15) 100%
+    );
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1971,7 +1999,7 @@ img {
 }
 
 .empty-state-icon::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: -8px;
     border-radius: 50%;
@@ -1980,8 +2008,12 @@ img {
 }
 
 @keyframes rotate-border {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .empty-state-icon i {
@@ -1991,7 +2023,8 @@ img {
 }
 
 @keyframes float-icon {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0);
     }
     50% {
@@ -2029,7 +2062,11 @@ img {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--forest-green) 0%, var(--forest-green-dark) 100%);
+    background: linear-gradient(
+        135deg,
+        var(--forest-green) 0%,
+        var(--forest-green-dark) 100%
+    );
     opacity: 0.25;
     animation: pulse-dot 1.6s ease-in-out infinite;
 }
@@ -2049,7 +2086,8 @@ img {
 }
 
 @keyframes pulse-dot {
-    0%, 100% {
+    0%,
+    100% {
         transform: scale(1);
         opacity: var(--dot-opacity, 0.25);
     }
@@ -2065,36 +2103,36 @@ img {
         padding: 50px 15px;
         min-height: 320px;
     }
-    
+
     .empty-state-content {
         padding: 40px 30px;
         border-radius: 20px;
     }
-    
+
     .empty-state-icon {
         width: 100px;
         height: 100px;
         margin-bottom: 24px;
     }
-    
+
     .empty-state-icon::before {
         inset: -6px;
     }
-    
+
     .empty-state-icon i {
         font-size: 2.5rem;
     }
-    
+
     .empty-state-content h4 {
         font-size: 1.25rem;
         margin-bottom: 12px;
     }
-    
+
     .empty-state-content p {
         font-size: 0.9rem;
         margin-bottom: 20px;
     }
-    
+
     .decoration-dot {
         width: 8px;
         height: 8px;
@@ -3662,6 +3700,19 @@ img {
     background: linear-gradient(to left, rgba(13, 51, 32, 0.5), transparent);
 }
 
+/* Center cards cleanly when active branches are only 1-2 (desktop/tablet only). */
+@media (min-width: 768px) {
+    .info-cards-container.center-two-cards {
+        justify-content: center;
+        overflow-x: hidden;
+    }
+
+    .info-cards-container.center-two-cards::before,
+    .info-cards-container.center-two-cards::after {
+        display: none;
+    }
+}
+
 /* =============================================
    SCROLL DOTS INDICATOR
    ============================================= */
@@ -3824,7 +3875,8 @@ img {
 }
 
 @keyframes comingSoonPulse {
-    0%, 100% {
+    0%,
+    100% {
         transform: scale(1);
     }
     50% {
@@ -4653,31 +4705,61 @@ img {
 /* Setiap slide punya overlay sendiri */
 .hero-slide .hero-overlay {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     pointer-events: none;
     z-index: 1;
 }
 
 .hero-slide:nth-child(1) .hero-overlay {
     background:
-        radial-gradient(ellipse at 70% 50%, rgba(212,160,23,0.2) 0%, transparent 50%),
-        radial-gradient(ellipse at 20% 80%, rgba(34,85,51,0.3) 0%, transparent 40%);
+        radial-gradient(
+            ellipse at 70% 50%,
+            rgba(212, 160, 23, 0.2) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            ellipse at 20% 80%,
+            rgba(34, 85, 51, 0.3) 0%,
+            transparent 40%
+        );
 }
 .hero-slide:nth-child(2) .hero-overlay {
     background:
-        radial-gradient(ellipse at 70% 50%, rgba(23,100,212,0.2) 0%, transparent 50%),
-        radial-gradient(ellipse at 20% 80%, rgba(34,51,85,0.3) 0%, transparent 40%);
+        radial-gradient(
+            ellipse at 70% 50%,
+            rgba(23, 100, 212, 0.2) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            ellipse at 20% 80%,
+            rgba(34, 51, 85, 0.3) 0%,
+            transparent 40%
+        );
 }
 .hero-slide:nth-child(3) .hero-overlay {
     background:
-        radial-gradient(ellipse at 70% 50%, rgba(212,80,23,0.2) 0%, transparent 50%),
-        radial-gradient(ellipse at 20% 80%, rgba(85,51,34,0.3) 0%, transparent 40%);
+        radial-gradient(
+            ellipse at 70% 50%,
+            rgba(212, 80, 23, 0.2) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            ellipse at 20% 80%,
+            rgba(85, 51, 34, 0.3) 0%,
+            transparent 40%
+        );
 }
 
 /* Decoration & container di dalam slide */
 .hero-slide .hero-decoration {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     overflow: hidden;
     pointer-events: none;
     z-index: 1;
@@ -4709,14 +4791,14 @@ img {
     justify-content: center;
     cursor: pointer;
     transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
 .hero-slider-arrow:hover {
     background: var(--primary-gold);
     border-color: var(--primary-gold);
     transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 6px 28px rgba(212,160,23,0.45);
+    box-shadow: 0 6px 28px rgba(212, 160, 23, 0.45);
 }
 
 .hero-slider-arrow-prev {
@@ -4749,7 +4831,7 @@ img {
     width: 8px;
     height: 8px;
     border-radius: 4px;
-    background: rgba(255,255,255,0.4);
+    background: rgba(255, 255, 255, 0.4);
     border: none;
     cursor: pointer;
     transition: all 0.35s ease;
@@ -4759,7 +4841,7 @@ img {
 .hero-dot.active {
     width: 28px;
     background: var(--primary-gold);
-    box-shadow: 0 0 10px rgba(212,160,23,0.5);
+    box-shadow: 0 0 10px rgba(212, 160, 23, 0.5);
 }
 
 /* ========== SLIDE COUNTER ========== */
@@ -4768,7 +4850,7 @@ img {
     bottom: 90px;
     right: 30px;
     z-index: 100;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255, 255, 255, 0.5);
     font-size: 0.78rem;
     font-weight: 600;
     letter-spacing: 2px;
@@ -4786,11 +4868,15 @@ img {
     bottom: 0;
     left: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--primary-gold), var(--primary-gold-light));
+    background: linear-gradient(
+        90deg,
+        var(--primary-gold),
+        var(--primary-gold-light)
+    );
     z-index: 100;
     width: 0%;
     transition: width 0s linear;
-    box-shadow: 0 0 8px rgba(212,160,23,0.5);
+    box-shadow: 0 0 8px rgba(212, 160, 23, 0.5);
 }
 
 .hero-progress-bar.animating {
@@ -4800,10 +4886,14 @@ img {
 
 /* ========== SLIDE-IN ANIMATIONS ========== */
 .hero-slide .hero-content-left {
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
 }
 .hero-slide .hero-product-wrapper {
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
 }
 
 /* Slide tidak aktif sembunyikan konten */
@@ -4821,12 +4911,24 @@ img {
 }
 
 @keyframes slideContentIn {
-    from { opacity: 0; transform: translateX(-40px); }
-    to   { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 @keyframes slideProductIn {
-    from { opacity: 0; transform: translateX(40px) scale(0.95); }
-    to   { opacity: 1; transform: translateX(0) scale(1); }
+    from {
+        opacity: 0;
+        transform: translateX(40px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
 }
 
 /* ========== RESPONSIVE SLIDER ========== */
@@ -4836,8 +4938,12 @@ img {
         height: 40px;
         font-size: 1rem;
     }
-    .hero-slider-arrow-prev { left: 12px; }
-    .hero-slider-arrow-next { right: 12px; }
+    .hero-slider-arrow-prev {
+        left: 12px;
+    }
+    .hero-slider-arrow-next {
+        right: 12px;
+    }
 
     .hero-slider-dots {
         bottom: 70px;
@@ -4873,10 +4979,14 @@ img {
     min-width: 0;
 }
 @media (max-width: 991px) {
-    .blog-slide { flex: 0 0 calc((100% - 24px) / 2); }
+    .blog-slide {
+        flex: 0 0 calc((100% - 24px) / 2);
+    }
 }
 @media (max-width: 575px) {
-    .blog-slide { flex: 0 0 100%; }
+    .blog-slide {
+        flex: 0 0 100%;
+    }
 }
 .blog-dots {
     display: flex;
@@ -4885,11 +4995,14 @@ img {
     margin-top: 12px;
 }
 .blog-dot {
-    width: 8px; height: 8px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: rgba(0,0,0,.15);
-    transition: all .3s;
-    border: none; cursor: pointer; padding: 0;
+    background: rgba(0, 0, 0, 0.15);
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    padding: 0;
 }
 .blog-dot.active {
     width: 24px;

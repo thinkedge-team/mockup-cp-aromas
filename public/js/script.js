@@ -23,7 +23,7 @@ function checkBranchStatus(branch) {
 
     const isWeekday = dayOfWeek >= 1 && dayOfWeek <= 5;
     const hours = branch.operatingHours || {};
-    const isOpenToday = hours.days 
+    const isOpenToday = hours.days
         ? hours.days.toLowerCase().includes("senin - jumat")
             ? isWeekday
             : true
@@ -108,7 +108,7 @@ function createPopupContent(branch) {
                         <span class="popup-status-dot ${statusClass}"></span>
                         <span class="popup-status-text ${statusClass}">${statusText}</span>
                         <span class="popup-meta-sep">·</span>
-                        <span>${hours.open || '08:00'}–${hours.close || '17:00'}</span>
+                        <span>${hours.open || "08:00"}–${hours.close || "17:00"}</span>
                     </div>
                 </div>
             </div>
@@ -146,6 +146,9 @@ function renderInfoCards() {
     const container = document.getElementById("infoCards");
     if (!container) return;
 
+    // Center cards when only 1-2 active branches are available (desktop/tablet).
+    container.classList.toggle("center-two-cards", branches.length <= 2);
+
     container.innerHTML = branches
         .map((branch) => {
             const isOpen = checkBranchStatus(branch);
@@ -153,20 +156,24 @@ function renderInfoCards() {
             const statusText = isOpen ? "Buka" : "Tutup";
             const hours = branch.operatingHours || {};
             const isComingSoon = branch.isUnderConstruction || false;
-            
+
             return `
         <div class="info-card" data-id="${branch.id}">
             <div class="card-image">
-                <img src="${branch.foto_url || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=300&h=200&fit=crop'}" alt="${branch.name}" class="card-photo" loading="lazy">
-                ${isComingSoon ? '<div class="coming-soon-overlay"><span class="coming-soon-badge"><i class="bi bi-star-fill"></i> Coming Soon</span></div>' : ''}
+                <img src="${branch.foto_url || "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=300&h=200&fit=crop"}" alt="${branch.name}" class="card-photo" loading="lazy">
+                ${isComingSoon ? '<div class="coming-soon-overlay"><span class="coming-soon-badge"><i class="bi bi-star-fill"></i> Coming Soon</span></div>' : ""}
             </div>
             <div class="card-info">
-                ${!isComingSoon ? `<span class="card-status-badge ${statusClass}">
+                ${
+                    !isComingSoon
+                        ? `<span class="card-status-badge ${statusClass}">
                     <span class="card-status-dot"></span>
-                    ${statusText} · ${hours.open || '08:00'}–${hours.close || '17:00'}
-                </span>` : ''}
+                    ${statusText} · ${hours.open || "08:00"}–${hours.close || "17:00"}
+                </span>`
+                        : ""
+                }
                 <h3 class="card-name">${branch.name}</h3>
-                <span class="card-category">${branch.category || 'Outlet'}</span>
+                <span class="card-category">${branch.category || "Outlet"}</span>
                 <p class="card-address">
                     <i class="bi bi-geo-alt-fill"></i>${branch.address}
                 </p>
@@ -518,7 +525,7 @@ function initInteractiveMap() {
 window.addEventListener("load", function () {
     const preloader = document.getElementById("preloader");
     if (preloader) {
-        preloader.classList.add('hidden');
+        preloader.classList.add("hidden");
         setTimeout(function () {
             preloader.style.display = "none";
         }, 700);
@@ -909,21 +916,21 @@ window.addEventListener(
 // ========================================================
 
 function initHeroSlider() {
-    const track        = document.getElementById('heroSlidesTrack');
-    const slides       = track ? track.querySelectorAll('.hero-slide') : [];
-    const dots         = document.querySelectorAll('.hero-dot');
-    const prevBtn      = document.getElementById('heroPrev');
-    const nextBtn      = document.getElementById('heroNext');
-    const counterEl    = document.getElementById('heroCurrent');
-    const progressBar  = document.getElementById('heroProgressBar');
+    const track = document.getElementById("heroSlidesTrack");
+    const slides = track ? track.querySelectorAll(".hero-slide") : [];
+    const dots = document.querySelectorAll(".hero-dot");
+    const prevBtn = document.getElementById("heroPrev");
+    const nextBtn = document.getElementById("heroNext");
+    const counterEl = document.getElementById("heroCurrent");
+    const progressBar = document.getElementById("heroProgressBar");
 
     if (!track || slides.length === 0) return;
 
-    const TOTAL        = slides.length;
-    const AUTOPLAY_MS  = 5000;
-    let current        = 0;
-    let autoplayTimer  = null;
-    let isAnimating    = false;
+    const TOTAL = slides.length;
+    const AUTOPLAY_MS = 5000;
+    let current = 0;
+    let autoplayTimer = null;
+    let isAnimating = false;
 
     // ── Go to slide ──
     function goTo(index, resetProgress = true) {
@@ -931,7 +938,7 @@ function initHeroSlider() {
         isAnimating = true;
 
         // Remove active class from current slide
-        slides[current].classList.remove('active-slide');
+        slides[current].classList.remove("active-slide");
 
         // Clamp index
         current = (index + TOTAL) % TOTAL;
@@ -940,18 +947,20 @@ function initHeroSlider() {
         track.style.transform = `translateX(-${current * 100}%)`;
 
         // Add active class to new slide
-        slides[current].classList.add('active-slide');
+        slides[current].classList.add("active-slide");
 
         // Update dots
-        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+        dots.forEach((d, i) => d.classList.toggle("active", i === current));
 
         // Update counter
         if (counterEl) {
-            counterEl.textContent = String(current + 1).padStart(2, '0');
+            counterEl.textContent = String(current + 1).padStart(2, "0");
         }
 
         // Reset animating flag after transition
-        setTimeout(() => { isAnimating = false; }, 750);
+        setTimeout(() => {
+            isAnimating = false;
+        }, 750);
 
         // Restart progress bar
         if (resetProgress) restartProgress();
@@ -970,20 +979,20 @@ function initHeroSlider() {
     // ── Progress bar ──
     function restartProgress() {
         if (!progressBar) return;
-        progressBar.classList.remove('animating');
-        progressBar.style.transition = 'none';
-        progressBar.style.width = '0%';
+        progressBar.classList.remove("animating");
+        progressBar.style.transition = "none";
+        progressBar.style.width = "0%";
 
         // Force reflow
         void progressBar.offsetWidth;
 
         progressBar.style.transition = `width ${AUTOPLAY_MS}ms linear`;
-        progressBar.classList.add('animating');
+        progressBar.classList.add("animating");
     }
 
     // ── Dot clicks ──
     dots.forEach((dot, i) => {
-        dot.addEventListener('click', () => {
+        dot.addEventListener("click", () => {
             stopAutoplay();
             goTo(i);
             startAutoplay();
@@ -992,14 +1001,14 @@ function initHeroSlider() {
 
     // ── Arrow buttons ──
     if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
+        prevBtn.addEventListener("click", () => {
             stopAutoplay();
             goTo(current - 1);
             startAutoplay();
         });
     }
     if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
+        nextBtn.addEventListener("click", () => {
             stopAutoplay();
             goTo(current + 1);
             startAutoplay();
@@ -1008,37 +1017,45 @@ function initHeroSlider() {
 
     // ── Touch / swipe support ──
     let touchStartX = 0;
-    let touchEndX   = 0;
+    let touchEndX = 0;
     const SWIPE_THRESHOLD = 50;
 
-    track.addEventListener('touchstart', e => {
-        touchStartX = e.touches[0].clientX;
-    }, { passive: true });
+    track.addEventListener(
+        "touchstart",
+        (e) => {
+            touchStartX = e.touches[0].clientX;
+        },
+        { passive: true },
+    );
 
-    track.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].clientX;
-        const delta = touchStartX - touchEndX;
+    track.addEventListener(
+        "touchend",
+        (e) => {
+            touchEndX = e.changedTouches[0].clientX;
+            const delta = touchStartX - touchEndX;
 
-        if (Math.abs(delta) > SWIPE_THRESHOLD) {
-            stopAutoplay();
-            goTo(delta > 0 ? current + 1 : current - 1);
-            startAutoplay();
-        }
-    }, { passive: true });
+            if (Math.abs(delta) > SWIPE_THRESHOLD) {
+                stopAutoplay();
+                goTo(delta > 0 ? current + 1 : current - 1);
+                startAutoplay();
+            }
+        },
+        { passive: true },
+    );
 
     // ── Keyboard navigation ──
-    document.addEventListener('keydown', e => {
+    document.addEventListener("keydown", (e) => {
         // Only when hero is in viewport
-        const heroEl = document.getElementById('home');
+        const heroEl = document.getElementById("home");
         if (!heroEl) return;
         const rect = heroEl.getBoundingClientRect();
         if (rect.bottom < 0 || rect.top > window.innerHeight) return;
 
-        if (e.key === 'ArrowLeft') {
+        if (e.key === "ArrowLeft") {
             stopAutoplay();
             goTo(current - 1);
             startAutoplay();
-        } else if (e.key === 'ArrowRight') {
+        } else if (e.key === "ArrowRight") {
             stopAutoplay();
             goTo(current + 1);
             startAutoplay();
@@ -1046,15 +1063,15 @@ function initHeroSlider() {
     });
 
     // ── Pause on hover (desktop) ──
-    const heroSection = document.getElementById('home');
+    const heroSection = document.getElementById("home");
     if (heroSection) {
-        heroSection.addEventListener('mouseenter', () => {
+        heroSection.addEventListener("mouseenter", () => {
             stopAutoplay();
             if (progressBar) {
-                progressBar.style.animationPlayState = 'paused';
+                progressBar.style.animationPlayState = "paused";
             }
         });
-        heroSection.addEventListener('mouseleave', () => {
+        heroSection.addEventListener("mouseleave", () => {
             startAutoplay();
             restartProgress();
         });
@@ -1064,26 +1081,26 @@ function initHeroSlider() {
     goTo(0, true);
     startAutoplay();
 
-    console.log('Hero Slider initialized —', TOTAL, 'slides');
+    console.log("Hero Slider initialized —", TOTAL, "slides");
 }
 
 /* ── BLOG SLIDER ── */
 (function () {
-    var track      = document.getElementById('blogSliderTrack');
-    var prevBtn    = document.getElementById('blogPrev');
-    var nextBtn    = document.getElementById('blogNext');
-    var dotsWrap   = document.getElementById('blogDots');
+    var track = document.getElementById("blogSliderTrack");
+    var prevBtn = document.getElementById("blogPrev");
+    var nextBtn = document.getElementById("blogNext");
+    var dotsWrap = document.getElementById("blogDots");
 
     if (!track || !prevBtn || !nextBtn) return;
 
-    var slides     = track.querySelectorAll('.blog-slide');
+    var slides = track.querySelectorAll(".blog-slide");
     var totalSlides = slides.length;
-    var current    = 0;
+    var current = 0;
 
     /* How many slides visible at once based on window width */
     function getVisible() {
-        if (window.innerWidth <= 575)  return 1;
-        if (window.innerWidth <= 991)  return 2;
+        if (window.innerWidth <= 575) return 1;
+        if (window.innerWidth <= 991) return 2;
         return 3;
     }
 
@@ -1094,21 +1111,27 @@ function initHeroSlider() {
 
     /* Build dots */
     function buildDots() {
-        dotsWrap.innerHTML = '';
+        dotsWrap.innerHTML = "";
         var pages = maxIndex() + 1;
         for (var i = 0; i < pages; i++) {
-            var dot = document.createElement('button');
-            dot.className = 'blog-dot' + (i === current ? ' active' : '');
-            dot.setAttribute('aria-label', 'Halaman ' + (i + 1));
-            (function(idx){ dot.addEventListener('click', function(){ goTo(idx); }); })(i);
+            var dot = document.createElement("button");
+            dot.className = "blog-dot" + (i === current ? " active" : "");
+            dot.setAttribute("aria-label", "Halaman " + (i + 1));
+            (function (idx) {
+                dot.addEventListener("click", function () {
+                    goTo(idx);
+                });
+            })(i);
             dotsWrap.appendChild(dot);
         }
     }
 
     /* Update dots */
     function updateDots() {
-        var dots = dotsWrap.querySelectorAll('.blog-dot');
-        dots.forEach(function(d, i){ d.classList.toggle('active', i === current); });
+        var dots = dotsWrap.querySelectorAll(".blog-dot");
+        dots.forEach(function (d, i) {
+            d.classList.toggle("active", i === current);
+        });
     }
 
     /* Calculate translateX for the current index */
@@ -1124,9 +1147,9 @@ function initHeroSlider() {
     /* Animate to index */
     function goTo(idx) {
         current = Math.max(0, Math.min(idx, maxIndex()));
-        track.style.transform = 'translateX(' + getOffset() + 'px)';
-        prevBtn.disabled = (current === 0);
-        nextBtn.disabled = (current >= maxIndex());
+        track.style.transform = "translateX(" + getOffset() + "px)";
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current >= maxIndex();
         updateDots();
     }
 
@@ -1134,12 +1157,16 @@ function initHeroSlider() {
     buildDots();
     goTo(0);
 
-    prevBtn.addEventListener('click', function () { goTo(current - 1); });
-    nextBtn.addEventListener('click', function () { goTo(current + 1); });
+    prevBtn.addEventListener("click", function () {
+        goTo(current - 1);
+    });
+    nextBtn.addEventListener("click", function () {
+        goTo(current + 1);
+    });
 
     /* Recalculate on resize */
     var resizeTimer;
-    window.addEventListener('resize', function () {
+    window.addEventListener("resize", function () {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function () {
             buildDots();
@@ -1149,9 +1176,21 @@ function initHeroSlider() {
 
     /* Touch/swipe support */
     var touchStartX = 0;
-    track.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
-    track.addEventListener('touchend',   function (e) {
-        var diff = touchStartX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) { goTo(diff > 0 ? current + 1 : current - 1); }
-    }, { passive: true });
+    track.addEventListener(
+        "touchstart",
+        function (e) {
+            touchStartX = e.touches[0].clientX;
+        },
+        { passive: true },
+    );
+    track.addEventListener(
+        "touchend",
+        function (e) {
+            var diff = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) {
+                goTo(diff > 0 ? current + 1 : current - 1);
+            }
+        },
+        { passive: true },
+    );
 })();
