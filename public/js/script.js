@@ -49,13 +49,18 @@ function formatPhoneNumber(phone) {
 function shouldShowBranchOnMap(branch) {
     const lat = Number(branch.latitude);
     const lng = Number(branch.longitude);
-    const isIncoming = Boolean(branch.isUnderConstruction);
+    const isIncoming =
+        branch.isUnderConstruction === true ||
+        branch.isUnderConstruction === 1 ||
+        branch.isUnderConstruction === "1";
     const isInactiveSnakeCase =
-        Object.prototype.hasOwnProperty.call(branch, "is_active") &&
-        !Boolean(branch.is_active);
+        branch.is_active === false ||
+        branch.is_active === 0 ||
+        branch.is_active === "0";
     const isInactiveCamelCase =
-        Object.prototype.hasOwnProperty.call(branch, "isActive") &&
-        !Boolean(branch.isActive);
+        branch.isActive === false ||
+        branch.isActive === 0 ||
+        branch.isActive === "0";
 
     return (
         Number.isFinite(lat) &&
@@ -172,7 +177,10 @@ function renderInfoCards() {
             const statusClass = isOpen ? "open" : "closed";
             const statusText = isOpen ? "Buka" : "Tutup";
             const hours = branch.operatingHours || {};
-            const isComingSoon = branch.isUnderConstruction || false;
+            const isComingSoon =
+                branch.isUnderConstruction === true ||
+                branch.isUnderConstruction === 1 ||
+                branch.isUnderConstruction === "1";
 
             return `
         <div class="info-card" data-id="${branch.id}">
