@@ -1650,7 +1650,7 @@
                                 data-brand="{{ $brand->slug }}">
                                 @if ($brand->logo)
                                     <img src="{{ Storage::url($brand->logo) }}" alt="{{ $brand->name }}"
-                                        style="width:60px;height40px;object-fit:contain;border-radius:4px;">
+                                        style="width:60px;height:40px;object-fit:contain;border-radius:4px;">
                                 @else
                                     <i class="bi bi-building-fill"></i>
                                 @endif
