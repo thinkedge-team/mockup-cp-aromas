@@ -27,6 +27,10 @@ Route::get('/our-machine', function () {
     return view('our-machine');
 });
 
+Route::get('/distributor', function () {
+    return view('distributor');
+});
+
 Route::get('/promo', [PromoPageController::class, 'index'])->name('promo');
 
 // Blog routes

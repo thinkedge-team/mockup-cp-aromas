@@ -45,6 +45,9 @@
                         <a class="nav-link {{ request()->is('portfolio') ? 'active' : '' }}" href="{{ url('/portfolio') }}">Portofolio</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {{ request()->is('distributor') ? 'active' : '' }}" href="{{ url('/distributor') }}">Distributor</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="{{ url('/contact') }}">Kontak</a>
                     </li>
                 </ul>
