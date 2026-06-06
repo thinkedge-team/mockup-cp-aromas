@@ -18,7 +18,7 @@
   </div>
   @foreach($popularPosts as $post)
   <div class="pop-post" onclick="location.href='{{ route('blog.show', $post->slug) }}'">
-    <div class="pop-thumb"><img src="{{ $post->featured_image }}" alt="{{ $post->title }}"/></div>
+    <div class="pop-thumb"><img src="{{ $post->featured_image }}" alt="{{ $post->title }}" loading="lazy"/></div>
     <div>
       <div class="pop-cat">{{ $post->category->name ?? 'Uncategorized' }}</div>
       <div class="pop-title">{{ Str::limit($post->title, 50) }}</div>

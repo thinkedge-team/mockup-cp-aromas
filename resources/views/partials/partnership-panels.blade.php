@@ -57,7 +57,7 @@
         <div class="pdetail-hero" data-aos="fade-up">
             <img class="pdetail-img"
                  src="{{ $prog->image_url ?: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=400&fit=crop' }}"
-                 alt="{{ $prog->panel_title }}" />
+                 alt="{{ $prog->panel_title }}" loading="lazy" />
             <div class="pdetail-img-overlay"
                  style="background:linear-gradient(135deg,rgba(13,51,32,.85) 0%,{{ $overlay }} 60%,transparent 100%);">
             </div>

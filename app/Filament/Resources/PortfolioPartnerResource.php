@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Forms\Components\ImageUpload;
 
 class PortfolioPartnerResource extends Resource
 {
@@ -70,7 +71,7 @@ class PortfolioPartnerResource extends Resource
 
                 Forms\Components\Section::make('Image & Details')
                     ->schema([
-                        Forms\Components\FileUpload::make('image')
+                        ImageUpload::make('image')
                             ->label('Partner Image')
                             ->image()
                             ->directory('portfolio/partners')

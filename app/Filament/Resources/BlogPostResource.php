@@ -12,7 +12,7 @@ use Filament\Tables\Table;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TagsInput;
-use Filament\Forms\Components\FileUpload;
+use App\Forms\Components\ImageUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -118,7 +118,7 @@ class BlogPostResource extends Resource
 
                 Forms\Components\Section::make('Media')
                     ->schema([
-                        FileUpload::make('featured_image')
+                        ImageUpload::make('featured_image')
                             ->label('Featured Image')
                             ->image()
                             ->directory('blog/featured')
@@ -127,7 +127,7 @@ class BlogPostResource extends Resource
                         Repeater::make('gallery_images')
                             ->label('Gallery Images')
                             ->schema([
-                                Forms\Components\FileUpload::make('url')
+                                ImageUpload::make('url')
                                     ->label('Image')
                                     ->image()
                                     ->directory('blog/gallery')

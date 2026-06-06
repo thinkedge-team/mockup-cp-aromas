@@ -548,17 +548,6 @@ function initInteractiveMap() {
     }, 100);
 }
 
-// ========== PRELOADER ==========
-window.addEventListener("load", function () {
-    const preloader = document.getElementById("preloader");
-    if (preloader) {
-        preloader.classList.add("hidden");
-        setTimeout(function () {
-            preloader.style.display = "none";
-        }, 700);
-    }
-});
-
 document.addEventListener("DOMContentLoaded", function () {
     // ========== INITIALIZATION ==========
     initNavbarScroll();
@@ -572,6 +561,16 @@ document.addEventListener("DOMContentLoaded", function () {
     initMobileMenu();
     initInteractiveMap();
     initHeroSlider();
+
+    // ========== PRELOADER ==========
+    // Hide after DOM + CSS are ready — no need to wait for all images
+    const preloader = document.getElementById("preloader");
+    if (preloader) {
+        preloader.classList.add("hidden");
+        setTimeout(function () {
+            preloader.style.display = "none";
+        }, 700);
+    }
 
     console.log("AROMAS website initialized successfully!");
 });

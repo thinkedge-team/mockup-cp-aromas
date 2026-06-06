@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Forms\Components\ImageUpload;
 
 class MachineResource extends Resource
 {
@@ -61,7 +62,7 @@ class MachineResource extends Resource
                 ->schema([
                     Forms\Components\Repeater::make("images")
                         ->schema([
-                            Forms\Components\FileUpload::make("url")
+                            ImageUpload::make("url")
                                 ->label("Image")
                                 ->image()
                                 ->directory("machines")

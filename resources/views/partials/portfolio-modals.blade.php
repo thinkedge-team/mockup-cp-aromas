@@ -18,7 +18,7 @@
             <div class="modal-sub">{{ $partner->tagline }}</div>
             <div class="modal-img-inline">
                 @if($partner->image)
-                    <img src="{{ Storage::url($partner->image) }}" alt="{{ $partner->name }}" />
+                    <img src="{{ Storage::url($partner->image) }}" alt="{{ $partner->name }}" loading="lazy" />
                 @else
                     <div class="portfolio-modal-img-placeholder">
                         <i class="bi bi-camera-fill"></i>

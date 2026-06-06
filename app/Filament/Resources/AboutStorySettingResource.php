@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Forms\Components\ImageUpload;
 
 class AboutStorySettingResource extends Resource
 {
@@ -71,7 +72,7 @@ class AboutStorySettingResource extends Resource
                 Forms\Components\Section::make('Gambar')
                     ->description('Foto perusahaan/pabrik yang tampil di sisi kanan')
                     ->schema([
-                        Forms\Components\FileUpload::make('story_image')
+                        ImageUpload::make('story_image')
                             ->label('Foto Story')
                             ->image()
                             ->directory('about/story')

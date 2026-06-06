@@ -281,7 +281,7 @@
           </div>
           @foreach($relatedPosts as $related)
           <div class="related-item" onclick="location.href='{{ route('blog.show', $related->slug) }}'">
-            <div class="ri-thumb"><img src="{{ Storage::url($related->featured_image) }}" alt="{{ $related->title }}"/></div>
+            <div class="ri-thumb"><img src="{{ Storage::url($related->featured_image) }}" alt="{{ $related->title }}" loading="lazy"/></div>
             <div>
               <div class="ri-cat">{{ $related->category->name ?? 'Uncategorized' }}</div>
               <div class="ri-title">{{ Str::limit($related->title, 50) }}</div>

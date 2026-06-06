@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Forms\Components\ImageUpload;
 
 class DistributorMapSettingResource extends Resource
 {
@@ -36,7 +37,7 @@ class DistributorMapSettingResource extends Resource
                         Forms\Components\TextInput::make('section_subtitle')
                             ->label('Sub-judul Bagian Peta')
                             ->maxLength(255),
-                        Forms\Components\FileUpload::make('default_pin_image')
+                        ImageUpload::make('default_pin_image')
                             ->label('Default Pin Image')
                             ->image()
                             ->directory('map-pins')

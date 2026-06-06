@@ -21,7 +21,7 @@
         </div>
         <div class="pc-img">
             @if($promo->images && count($promo->images) > 0)
-                <img src="{{ Storage::url($promo->images[0]['url']) }}" alt="{{ $promo->name }}" />
+                <img src="{{ Storage::url($promo->images[0]['url']) }}" alt="{{ $promo->name }}" loading="lazy" />
                 <div class="pc-img-overlay"></div>
             @else
                 <div class="pc-img-placeholder">

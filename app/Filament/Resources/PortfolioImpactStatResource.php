@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Forms\Components\ImageUpload;
 
 class PortfolioImpactStatResource extends Resource
 {
@@ -23,7 +24,7 @@ class PortfolioImpactStatResource extends Resource
         return $form->schema([
             Forms\Components\Section::make('Impact Stat')
                 ->schema([
-                    Forms\Components\FileUpload::make('image')->label('Background Image')->image()->directory('portfolio/impact')->maxSize(5120)->columnSpanFull(),
+                    ImageUpload::make('image')->label('Background Image')->image()->directory('portfolio/impact')->maxSize(5120)->columnSpanFull(),
                     Forms\Components\TextInput::make('number')->label('Number (e.g., "15+", "1Jt+")')->required()->maxLength(50)->columnSpan(1),
                     Forms\Components\TextInput::make('label')->label('Label')->required()->maxLength(255)->columnSpan(1),
                     Forms\Components\TextInput::make('sort_order')->label('Sort Order')->numeric()->default(0)->helperText('1-4 for display order')->columnSpan(1),

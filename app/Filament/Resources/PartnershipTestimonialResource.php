@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Forms\Components\ImageUpload;
 
 class PartnershipTestimonialResource extends Resource
 {
@@ -52,7 +53,7 @@ class PartnershipTestimonialResource extends Resource
                         ->numeric()
                         ->default(0),
 
-                    Forms\Components\FileUpload::make('avatar_url')
+                    ImageUpload::make('avatar_url')
                         ->label('Foto Profil')
                         ->image()
                         ->imageEditor()

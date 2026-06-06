@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Forms\Components\ImageUpload;
 
 class PartnerResource extends Resource
 {
@@ -37,7 +38,7 @@ class PartnerResource extends Resource
                             ->required()
                             ->maxLength(100)
                             ->placeholder('e.g., Indomaret'),
-                        Forms\Components\FileUpload::make('logo')
+                        ImageUpload::make('logo')
                             ->label('Partner Logo')
                             ->image()
                             ->directory('partners/logos')

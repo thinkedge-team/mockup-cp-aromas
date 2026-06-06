@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Forms\Components\ImageUpload;
 
 class MachineHeroResource extends Resource
 {
@@ -53,7 +54,7 @@ class MachineHeroResource extends Resource
                                     ->maxLength(100)
                                     ->placeholder('Kualitas Tanpa Kompromi'),
                             ])->columns(2),
-                        Forms\Components\FileUpload::make('production_line_image')
+                        ImageUpload::make('production_line_image')
                             ->label('Production Line Image')
                             ->image()
                             ->required()

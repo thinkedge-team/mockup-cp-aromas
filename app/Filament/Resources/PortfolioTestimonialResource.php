@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Forms\Components\ImageUpload;
 
 class PortfolioTestimonialResource extends Resource
 {
@@ -25,7 +26,7 @@ class PortfolioTestimonialResource extends Resource
                 ->schema([
                     Forms\Components\TextInput::make('author_name')->label('Author Name')->required()->maxLength(255)->columnSpan(1),
                     Forms\Components\TextInput::make('author_role')->label('Author Role')->maxLength(255)->columnSpan(1),
-                    Forms\Components\FileUpload::make('author_avatar')->label('Avatar')->image()->directory('portfolio/avatars')->maxSize(2048)->columnSpanFull(),
+                    ImageUpload::make('author_avatar')->label('Avatar')->image()->directory('portfolio/avatars')->maxSize(2048)->columnSpanFull(),
                     Forms\Components\Textarea::make('testimonial_text')->label('Testimonial Text')->required()->rows(4)->columnSpanFull(),
                     Forms\Components\TextInput::make('rating')->label('Rating')->numeric()->default(5.0)->minValue(0)->maxValue(5)->step(0.1)->columnSpan(1),
                     Forms\Components\TextInput::make('sort_order')->label('Sort Order')->numeric()->default(0)->columnSpan(1),

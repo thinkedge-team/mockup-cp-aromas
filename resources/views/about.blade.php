@@ -155,9 +155,9 @@
             <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
                 <div class="story-img-box">
                     @if($aboutStory?->story_image)
-                        <img src="{{ Storage::url($aboutStory->story_image) }}" alt="Pabrik AROMAS" />
+                        <img src="{{ Storage::url($aboutStory->story_image) }}" alt="Pabrik AROMAS" loading="lazy" />
                     @else
-                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop" alt="Pabrik AROMAS" />
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop" alt="Pabrik AROMAS" loading="lazy" />
                     @endif
                     <div class="story-img-badge">
                         <strong>{{ $aboutStory?->founded_year ?? '2009' }}</strong>

@@ -12,9 +12,9 @@
     <div class="machine-card" onclick="openMachineModal('m1')">
         <div class="card-gallery" id="gallery-m1">
             <div class="card-gallery-slides" id="slides-m1">
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=700&h=440&fit=crop" alt="Blowing Machine" /></div>
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=700&h=440&fit=crop" alt="Blowing Machine 2" /></div>
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=700&h=440&fit=crop&sat=-50" alt="Blowing Machine 3" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=700&h=440&fit=crop" alt="Blowing Machine" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=700&h=440&fit=crop" alt="Blowing Machine 2" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=700&h=440&fit=crop&sat=-50" alt="Blowing Machine 3" loading="lazy" /></div>
             </div>
             <span class="card-cat-badge cat-blowing"><i class="bi bi-wind"></i> Blowing</span>
             <span class="card-unit-badge"><i class="bi bi-check-circle-fill"></i> 1 Unit</span>
@@ -50,8 +50,8 @@
     <div class="machine-card" onclick="openMachineModal('m2')">
         <div class="card-gallery" id="gallery-m2">
             <div class="card-gallery-slides" id="slides-m2">
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=700&h=440&fit=crop" alt="Filling Machine" /></div>
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=700&h=440&fit=crop" alt="Filling Machine 2" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=700&h=440&fit=crop" alt="Filling Machine" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=700&h=440&fit=crop" alt="Filling Machine 2" loading="lazy" /></div>
             </div>
             <span class="card-cat-badge cat-filling"><i class="bi bi-droplet-half"></i> Filling</span>
             <span class="card-unit-badge"><i class="bi bi-check-circle-fill"></i> 2 Unit</span>
@@ -86,8 +86,8 @@
     <div class="machine-card" onclick="openMachineModal('m3')">
         <div class="card-gallery" id="gallery-m3">
             <div class="card-gallery-slides" id="slides-m3">
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=700&h=440&fit=crop" alt="Labeling Machine" /></div>
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&h=440&fit=crop" alt="Labeling Machine 2" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=700&h=440&fit=crop" alt="Labeling Machine" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&h=440&fit=crop" alt="Labeling Machine 2" loading="lazy" /></div>
             </div>
             <span class="card-cat-badge cat-labeling"><i class="bi bi-tag-fill"></i> Labeling</span>
             <span class="card-unit-badge"><i class="bi bi-check-circle-fill"></i> 1 Unit</span>
@@ -122,8 +122,8 @@
     <div class="machine-card" onclick="openMachineModal('m4')">
         <div class="card-gallery" id="gallery-m4">
             <div class="card-gallery-slides" id="slides-m4">
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=700&h=440&fit=crop" alt="CO2 Laser" /></div>
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=700&h=440&fit=crop" alt="CO2 Laser 2" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=700&h=440&fit=crop" alt="CO2 Laser" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=700&h=440&fit=crop" alt="CO2 Laser 2" loading="lazy" /></div>
             </div>
             <span class="card-cat-badge cat-labeling"><i class="bi bi-lightning"></i> Laser</span>
             <span class="card-unit-badge"><i class="bi bi-check-circle-fill"></i> 2 Unit</span>
@@ -158,8 +158,8 @@
     <div class="machine-card" onclick="openMachineModal('m5')">
         <div class="card-gallery" id="gallery-m5">
             <div class="card-gallery-slides" id="slides-m5">
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&h=440&fit=crop" alt="Film Packing" /></div>
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=700&h=440&fit=crop" alt="Film Packing 2" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&h=440&fit=crop" alt="Film Packing" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=700&h=440&fit=crop" alt="Film Packing 2" loading="lazy" /></div>
             </div>
             <span class="card-cat-badge cat-packaging"><i class="bi bi-box-seam-fill"></i> Packaging</span>
             <span class="card-unit-badge"><i class="bi bi-check-circle-fill"></i> 2 Unit</span>
@@ -194,8 +194,8 @@
     <div class="machine-card" onclick="openMachineModal('m6')">
         <div class="card-gallery" id="gallery-m6">
             <div class="card-gallery-slides" id="slides-m6">
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&h=440&fit=crop" alt="Air Conveyor" /></div>
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=700&h=440&fit=crop" alt="Air Conveyor 2" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&h=440&fit=crop" alt="Air Conveyor" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=700&h=440&fit=crop" alt="Air Conveyor 2" loading="lazy" /></div>
             </div>
             <span class="card-cat-badge cat-conveyor"><i class="bi bi-arrows-move"></i> Conveyor</span>
             <span class="card-unit-badge"><i class="bi bi-check-circle-fill"></i> 1 Set</span>
@@ -230,8 +230,8 @@
     <div class="machine-card" onclick="openMachineModal('m7')">
         <div class="card-gallery" id="gallery-m7">
             <div class="card-gallery-slides" id="slides-m7">
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1569517282132-25d22f4573e6?w=700&h=440&fit=crop" alt="Main Conveyor" /></div>
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=700&h=440&fit=crop" alt="Main Conveyor 2" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1569517282132-25d22f4573e6?w=700&h=440&fit=crop" alt="Main Conveyor" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=700&h=440&fit=crop" alt="Main Conveyor 2" loading="lazy" /></div>
             </div>
             <span class="card-cat-badge cat-conveyor"><i class="bi bi-arrows-move"></i> Conveyor</span>
             <span class="card-unit-badge"><i class="bi bi-check-circle-fill"></i> 1 Line</span>
@@ -266,9 +266,9 @@
     <div class="machine-card" onclick="openMachineModal('m8')">
         <div class="card-gallery" id="gallery-m8">
             <div class="card-gallery-slides" id="slides-m8">
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=700&h=440&fit=crop" alt="Oil Refinery" /></div>
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1595665593673-bf1ad72905c0?w=700&h=440&fit=crop" alt="Oil Refinery 2" /></div>
-                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=700&h=440&fit=crop" alt="Oil Refinery 3" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=700&h=440&fit=crop" alt="Oil Refinery" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1595665593673-bf1ad72905c0?w=700&h=440&fit=crop" alt="Oil Refinery 2" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=700&h=440&fit=crop" alt="Oil Refinery 3" loading="lazy" /></div>
             </div>
             <span class="card-cat-badge cat-refinery"><i class="bi bi-fire"></i> Refinery</span>
             <span class="card-unit-badge"><i class="bi bi-check-circle-fill"></i> 1 Line</span>

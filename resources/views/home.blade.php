@@ -224,7 +224,7 @@
                 <div class="col-lg-6" data-aos="fade-left">
                     <div class="services-image">
                         <img src="{{ asset('assets/images/ChatGPT Image Jan 19, 2026, 04_30_15 PM.png') }}"
-                            alt="Cooking Oil Production" class="img-fluid" />
+                            alt="Cooking Oil Production" class="img-fluid" loading="lazy" />
                         <div class="image-badge">
                             <i class="bi bi-arrow-right"></i>
                         </div>
@@ -251,7 +251,7 @@
                         <div class="impact-card">
                             @if ($stat->image)
                                 <img src="{{ Storage::url($stat->image) }}" alt="{{ $stat->label }}"
-                                    class="impact-img" />
+                                    class="impact-img" loading="lazy" />
                             @endif
                             <div class="impact-stat">
                                 <h3><span class="counter"
@@ -322,7 +322,7 @@
                         @endif
                         @if ($partner->logo)
                             <img src="{{ Storage::url($partner->logo) }}" alt="{{ $partner->name }}"
-                                style="max-width: 120px; max-height: 60px; object-fit: contain;" />
+                                style="max-width: 120px; max-height: 60px; object-fit: contain;" loading="lazy" />
                         @else
                             <i class="bi {{ $partner->icon }}"></i>
                         @endif
@@ -384,10 +384,10 @@
                                     <div class="blog-image">
                                         @if ($post->featured_image)
                                             <img src="{{ Storage::url($post->featured_image) }}"
-                                                alt="{{ $post->title }}" />
+                                                alt="{{ $post->title }}" loading="lazy" />
                                         @else
                                             <img src="{{ asset('assets/images/blog-placeholder.jpg') }}"
-                                                alt="{{ $post->title }}" />
+                                                alt="{{ $post->title }}" loading="lazy" />
                                         @endif
                                         <span class="blog-tag">{{ $post->category->name ?? 'Artikel' }}</span>
                                     </div>

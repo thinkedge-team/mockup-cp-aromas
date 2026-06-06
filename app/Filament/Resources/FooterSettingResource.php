@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Forms\Components\ImageUpload;
 
 class FooterSettingResource extends Resource
 {
@@ -27,7 +28,7 @@ class FooterSettingResource extends Resource
         return $form->schema([
             Forms\Components\Section::make("Footer Content")
                 ->schema([
-                    Forms\Components\FileUpload::make("logo")
+                    ImageUpload::make("logo")
                         ->label("Site Logo (Navbar & Footer)")
                         ->helperText("Logo ini akan ditampilkan di navbar dan footer website")
                         ->image()

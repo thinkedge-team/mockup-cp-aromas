@@ -35,9 +35,9 @@
             <div class="col-lg-4 col-md-6">
                 <div class="footer-brand-name">
                     @if($footer && $footer->logo)
-                        <img src="{{ Storage::url($footer->logo) }}" alt="AROMAS" style="height:50px;width:auto;" />
+                        <img src="{{ Storage::url($footer->logo) }}" alt="AROMAS" style="height:50px;width:auto;" loading="lazy" />
                     @else
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="AROMAS" style="height:50px;width:auto;" />
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="AROMAS" style="height:50px;width:auto;" loading="lazy" />
                     @endif
                 </div>
                 <p class="footer-desc">{{ $footer->company_description ?? 'Minyak goreng sawit premium berkualitas tinggi untuk keluarga dan industri Indonesia. Dipercaya sejak 1994.' }}</p>

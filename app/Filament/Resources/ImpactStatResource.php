@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Forms\Components\ImageUpload;
 
 class ImpactStatResource extends Resource
 {
@@ -32,7 +33,7 @@ class ImpactStatResource extends Resource
                 Forms\Components\Section::make('Impact Stat')
                     ->description('Configure statistics for the impact section')
                     ->schema([
-                        Forms\Components\FileUpload::make('image')
+                        ImageUpload::make('image')
                             ->label('Background Image')
                             ->image()
                             ->directory('impact-stats')

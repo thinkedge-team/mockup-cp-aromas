@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Forms\Components\ImageUpload;
 
 class PromoCampaignResource extends Resource
 {
@@ -116,7 +117,7 @@ class PromoCampaignResource extends Resource
                 ->schema([
                     Forms\Components\Repeater::make("images")
                         ->schema([
-                            Forms\Components\FileUpload::make("url")
+                            ImageUpload::make("url")
                                 ->label("Image")
                                 ->image()
                                 ->directory("promos")

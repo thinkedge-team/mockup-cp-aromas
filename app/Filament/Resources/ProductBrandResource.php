@@ -10,6 +10,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use App\Forms\Components\ImageUpload;
 
 class ProductBrandResource extends Resource
 {
@@ -42,7 +43,7 @@ class ProductBrandResource extends Resource
                             ->unique(ignoreRecord: true)
                             ->helperText('URL-friendly version of the name'),
 
-                        Forms\Components\FileUpload::make('logo')
+                        ImageUpload::make('logo')
                             ->image()
                             ->directory('brands')
                             ->imageEditor()

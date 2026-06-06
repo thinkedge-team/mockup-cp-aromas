@@ -1650,7 +1650,7 @@
                                 data-brand="{{ $brand->slug }}">
                                 @if ($brand->logo)
                                     <img src="{{ Storage::url($brand->logo) }}" alt="{{ $brand->name }}"
-                                        style="width:60px;height:40px;object-fit:contain;border-radius:4px;">
+                                        style="width:60px;height:40px;object-fit:contain;border-radius:4px;" loading="lazy">
                                 @else
                                     <i class="bi bi-building-fill"></i>
                                 @endif
@@ -1694,7 +1694,7 @@
                             <button class="brand-tab @if ($loop->first) active @endif"
                                 data-brand="{{ $brand->slug }}">
                                 @if ($brand->logo)
-                                    <img src="{{ Storage::url($brand->logo) }}" alt="{{ $brand->name }}">
+                                    <img src="{{ Storage::url($brand->logo) }}" alt="{{ $brand->name }}" loading="lazy">
                                 @endif
                                 <span>{{ $brand->name }}</span>
                             </button>
@@ -1761,7 +1761,7 @@
                                                     <span class="card-badge">{{ $product->badge_text }}</span>
                                                     @if ($product->banner_image)
                                                         <img src="{{ Storage::url($product->banner_image) }}"
-                                                            alt="{{ $product->name }}" />
+                                                            alt="{{ $product->name }}" loading="lazy" />
                                                     @else
                                                         <div class="product-card-img-placeholder">
                                                             <i class="bi bi-camera-fill"></i>
@@ -1924,7 +1924,7 @@
                                                     <div class="slider-image {{ $index === $bannerIndex ? 'active' : '' }}"
                                                         data-index="{{ $index }}">
                                                         <img src="{{ Storage::url($image['url']) }}"
-                                                            alt="{{ $product->name }} {{ $index + 1 }}" />
+                                                            alt="{{ $product->name }} {{ $index + 1 }}" loading="lazy" />
                                                     </div>
                                                 @endif
                                             @endforeach
@@ -1950,7 +1950,7 @@
                                         </div>
                                     @else
                                         <!-- Single Image -->
-                                        <img src="{{ Storage::url($images[0]['url']) }}" alt="{{ $product->name }}" />
+                                        <img src="{{ Storage::url($images[0]['url']) }}" alt="{{ $product->name }}" loading="lazy" />
                                     @endif
                                 @else
                                     <!-- No Image Placeholder -->

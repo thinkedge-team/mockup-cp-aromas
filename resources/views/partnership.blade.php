@@ -264,7 +264,7 @@ try {
                             <div class="testi-author">
                                 <div class="testi-avatar">
                                     @if($testi->avatar_url)
-                                    <img src="{{ \Str::startsWith($testi->avatar_url, 'http') ? $testi->avatar_url : \Illuminate\Support\Facades\Storage::url($testi->avatar_url) }}" alt="{{ $testi->name }}" />
+                                    <img src="{{ \Str::startsWith($testi->avatar_url, 'http') ? $testi->avatar_url : \Illuminate\Support\Facades\Storage::url($testi->avatar_url) }}" alt="{{ $testi->name }}" loading="lazy" />
                                     @else
                                     <div class="testi-avatar-placeholder"><i class="bi bi-person-fill"></i></div>
                                     @endif

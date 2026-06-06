@@ -151,7 +151,7 @@
                         <p class="testi-text">{{ $testimonial->testimonial_text }}</p>
                         <div class="testi-author">
                             @if($testimonial->author_avatar)
-                            <div class="testi-avatar"><img src="{{ Storage::url($testimonial->author_avatar) }}" alt="{{ $testimonial->author_name }}" /></div>
+                            <div class="testi-avatar"><img src="{{ Storage::url($testimonial->author_avatar) }}" alt="{{ $testimonial->author_name }}" loading="lazy" /></div>
                             @else
                             <div class="testi-avatar">{{ substr($testimonial->author_name, 0, 1) }}</div>
                             @endif
@@ -193,7 +193,7 @@
             <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="{{ 100 * $loop->index }}">
                 <div class="impact-card">
                     @if($stat->image)
-                        <img src="{{ Storage::url($stat->image) }}" alt="{{ $stat->label }}" class="impact-img" />
+                        <img src="{{ Storage::url($stat->image) }}" alt="{{ $stat->label }}" class="impact-img" loading="lazy" />
                     @else
                         <div class="impact-img-placeholder">
                             <i class="bi bi-camera-fill"></i>
@@ -239,10 +239,10 @@
                 @if($logo->logo)
                     @if($logo->url)
                     <a href="{{ $logo->url }}" target="_blank" rel="noopener">
-                        <img src="{{ Storage::url($logo->logo) }}" alt="{{ $logo->name }}" />
+                        <img src="{{ Storage::url($logo->logo) }}" alt="{{ $logo->name }}" loading="lazy" />
                     </a>
                     @else
-                    <img src="{{ Storage::url($logo->logo) }}" alt="{{ $logo->name }}" />
+                    <img src="{{ Storage::url($logo->logo) }}" alt="{{ $logo->name }}" loading="lazy" />
                     @endif
                 @else
                     <i class="bi bi-building"></i>

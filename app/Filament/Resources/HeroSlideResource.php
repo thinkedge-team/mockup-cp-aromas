@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Forms\Components\ImageUpload;
 
 class HeroSlideResource extends Resource
 {
@@ -38,10 +39,10 @@ class HeroSlideResource extends Resource
                         Forms\Components\Toggle::make('is_active')
                             ->required()
                             ->default(true),
-                        Forms\Components\FileUpload::make('background_image')
+                        ImageUpload::make('background_image')
                             ->image()
                             ->directory('hero-slides/backgrounds'),
-                        Forms\Components\FileUpload::make('product_image')
+                        ImageUpload::make('product_image')
                             ->image()
                             ->directory('hero-slides/products')
                             ->helperText('Main product image shown on the right side'),

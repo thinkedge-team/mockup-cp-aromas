@@ -38,7 +38,7 @@
                 <div class="carousel-inner">
                     @foreach($promo->images as $index => $image)
                     <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                        <img src="{{ Storage::url($image['url']) }}" class="d-block w-100" alt="{{ $promo->name }}" style="height:300px;object-fit:cover;" />
+                        <img src="{{ Storage::url($image['url']) }}" class="d-block w-100" alt="{{ $promo->name }}" style="height:300px;object-fit:cover;" loading="lazy" />
                         @if(isset($image['caption']))
                         <div class="carousel-caption d-none d-md-block">
                             <p>{{ $image['caption'] }}</p>

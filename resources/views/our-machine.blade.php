@@ -184,7 +184,7 @@
                                         <div class="card-gallery-slides" id="slides-machine-{{ $machine->id }}">
                                             @foreach ($machine->images as $index => $image)
                                                 <div class="gallery-slide {{ $index === 0 ? 'active' : '' }}">
-                                                    <img src="{{ Storage::url($image['url']) }}" alt="{{ $machine->name }}" />
+                                                    <img src="{{ Storage::url($image['url']) }}" alt="{{ $machine->name }}" loading="lazy" />
                                                 </div>
                                             @endforeach
                                         </div>

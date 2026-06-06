@@ -96,7 +96,7 @@
     <div class="section-eyebrow">Artikel Pilihan</div>
     <div class="featured-card" data-reveal>
       <div class="fc-media">
-        <img src="{{ Storage::url($featuredPost->featured_image) }}" alt="{{ $featuredPost->title }}"/>
+        <img src="{{ Storage::url($featuredPost->featured_image) }}" alt="{{ $featuredPost->title }}" loading="lazy"/>
         <div class="fc-media-overlay"></div>
         <div class="fc-ribbon"><i class="bi bi-star-fill"></i> Featured</div>
         <div class="fc-reading-badge"><i class="bi bi-clock"></i> {{ $featuredPost->reading_time }} menit baca</div>
@@ -144,7 +144,7 @@
           <div class="col-md-6 col-lg-6">
             <article class="article-card">
               <div class="ac-img-wrap">
-                <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->title }}"/>
+                <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->title }}" loading="lazy"/>
                 <div class="ac-category cat-{{ $post->category->slug ?? 'tips' }}">{{ $post->category->name ?? 'Uncategorized' }}</div>
                 <div class="ac-read-pill"><i class="bi bi-clock"></i> {{ $post->reading_time }} min</div>
                 <div class="ac-hover-overlay">

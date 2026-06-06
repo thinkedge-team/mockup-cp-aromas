@@ -29,7 +29,7 @@
                     <span class="card-badge badge-{{ $catKey }}">{{ $partner->subcategory ?? ucfirst($catKey) }}</span>
                     <div class="card-rating"><span class="stars">{{ str_repeat('★', floor($partner->rating)) }}{{ $partner->rating % 1 >= 0.5 ? '½' : '' }}</span><span>{{ number_format($partner->rating, 1) }}</span></div>
                     @if($partner->image)
-                        <img src="{{ Storage::url($partner->image) }}" alt="{{ $partner->name }}" />
+                        <img src="{{ Storage::url($partner->image) }}" alt="{{ $partner->name }}" loading="lazy" />
                     @else
                         <div class="portfolio-card-img-placeholder">
                             <i class="bi bi-camera-fill"></i>

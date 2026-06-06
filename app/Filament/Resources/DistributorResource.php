@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Forms\Components\ImageUpload;
 
 class DistributorResource extends Resource
 {
@@ -60,7 +61,7 @@ class DistributorResource extends Resource
                             ->label('Longitude')
                             ->numeric()
                             ->step('0.00000001'),
-                        Forms\Components\FileUpload::make('custom_pin_image')
+                        ImageUpload::make('custom_pin_image')
                             ->label('Custom Pin Image')
                             ->image()
                             ->directory('map-pins')

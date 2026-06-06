@@ -12,6 +12,7 @@ use Filament\Tables\Table;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
+use App\Forms\Components\ImageUpload;
 
 class BlogAuthorResource extends Resource
 {
@@ -43,7 +44,7 @@ class BlogAuthorResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->unique(ignoreRecord: true),
-                        Forms\Components\FileUpload::make('avatar')
+                        ImageUpload::make('avatar')
                             ->label('Avatar')
                             ->image()
                             ->directory('blog/authors')

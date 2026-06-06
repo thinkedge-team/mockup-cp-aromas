@@ -22,7 +22,7 @@
                         <div class="modal-gallery-slides" id="mslides-machine-{{ $machine->id }}">
                             @foreach($machine->images as $index => $image)
                             <div class="modal-gallery-slide {{ $index === 0 ? 'active' : '' }}">
-                                <img src="{{ Storage::url($image['url']) }}" alt="{{ $machine->name }}" />
+                                <img src="{{ Storage::url($image['url']) }}" alt="{{ $machine->name }}" loading="lazy" />
                             </div>
                             @endforeach
                         </div>

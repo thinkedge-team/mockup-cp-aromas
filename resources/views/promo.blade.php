@@ -69,7 +69,7 @@
                 <div class="banner-img-grid">
                     @if($featuredPromo->images && count($featuredPromo->images) > 0)
                         @foreach(array_slice($featuredPromo->images, 0, 2) as $image)
-                        <img src="{{ $image['url'] }}" alt="{{ $featuredPromo->name }}" />
+                        <img src="{{ $image['url'] }}" alt="{{ $featuredPromo->name }}" loading="lazy" />
                         @endforeach
                     @else
                         <div class="banner-img-placeholder">

@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Forms\Components\ImageUpload;
 
 class PortfolioMitraLogoResource extends Resource
 {
@@ -24,7 +25,7 @@ class PortfolioMitraLogoResource extends Resource
             Forms\Components\Section::make('Mitra Logo')
                 ->schema([
                     Forms\Components\TextInput::make('name')->label('Company Name')->required()->maxLength(255)->columnSpan(1),
-                    Forms\Components\FileUpload::make('logo')->label('Logo Image')->image()->directory('portfolio/logos')->maxSize(2048)->columnSpan(1),
+                    ImageUpload::make('logo')->label('Logo Image')->image()->directory('portfolio/logos')->maxSize(2048)->columnSpan(1),
                     Forms\Components\TextInput::make('url')->label('Website URL')->maxLength(500)->columnSpanFull(),
                     Forms\Components\TextInput::make('sort_order')->label('Sort Order')->numeric()->default(0)->columnSpan(1),
                     Forms\Components\Toggle::make('is_active')->label('Active')->default(true)->columnSpan(1),
