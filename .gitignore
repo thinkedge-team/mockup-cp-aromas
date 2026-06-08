@@ -25,3 +25,5 @@ Thumbs.db
 
 # Static files backup
 # temp-static/
+
+.playwright-mcp

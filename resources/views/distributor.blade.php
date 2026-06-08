@@ -116,8 +116,10 @@
             <div class="row g-3 justify-content-center">
                 <div class="col-md-4">
                     <div class="input-group">
-                        <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
-                        <input type="text" class="form-control border-start-0 ps-0" id="searchInput" placeholder="Cari nama toko atau kota...">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Cari nama toko atau kota...">
+                        <button class="btn btn-outline-secondary" type="button" id="searchBtn">
+                            <i class="bi bi-search"></i>
+                        </button>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -339,68 +341,52 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('Distributor page initialized');
 
-        // Dynamic Map Data from PHP
-        var mapLocations = {!! $mapLocations ?? '[]' !!};
+        // Shared state — populated by map init, read by filterDistributors
+        var leafletMap = null;
+        var markerData = []; // [{marker, name, city, province}]
 
-        // Initialize Leaflet Map
-        var map = L.map('distributorMap').setView([-2.5489, 118.0149], 5); // Center of Indonesia
+        // ── Filter / Search ───────────────────────────────────────────────────
+        const provinceFilter = document.getElementById('provinceFilter');
+        const searchInput    = document.getElementById('searchInput');
+        const cards          = document.querySelectorAll('.dist-card-wrapper');
+        const countDisplay   = document.getElementById('distributorCount');
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        // Dummy Locations Fallback (if no real data in DB)
-        if (mapLocations.length === 0) {
-            mapLocations = [
-                { name: "PT Sumber Rezeki Aromas", city: "Jakarta Selatan", province: "DKI Jakarta", lat: -6.2088, lng: 106.8456, icon: '{{ $defaultPinUrl }}' },
-                { name: "CV Berkah Sawit", city: "Bandung", province: "Jawa Barat", lat: -6.9175, lng: 107.6191, icon: '{{ $defaultPinUrl }}' },
-                { name: "PT Aroma Pangan Nusantara", city: "Surabaya", province: "Jawa Timur", lat: -7.2504, lng: 112.7688, icon: '{{ $defaultPinUrl }}' },
-                { name: "Toko Sembako Maju", city: "Semarang", province: "Jawa Tengah", lat: -6.9667, lng: 110.4167, icon: '{{ $defaultPinUrl }}' }
-            ];
+        // Populate province filter from DOM when server-side had no province data
+        if (provinceFilter && provinceFilter.options.length <= 1) {
+            const provinces = new Set();
+            cards.forEach(card => {
+                const prov = (card.getAttribute('data-province') || '').trim();
+                if (prov) provinces.add(prov);
+            });
+            [...provinces].sort().forEach(prov => {
+                const opt = document.createElement('option');
+                opt.value = prov;
+                opt.textContent = prov;
+                provinceFilter.appendChild(opt);
+            });
         }
 
-        var markers = [];
-
-        mapLocations.forEach(function(loc) {
-            // Check if icon exists, otherwise fallback to default
-            var iconUrl = loc.icon ? loc.icon : '{{ $defaultPinUrl }}';
-            
-            var customIcon = L.icon({
-                iconUrl: iconUrl,
-                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                iconSize: [25, 41],
-                iconAnchor: [12, 41],
-                popupAnchor: [1, -34],
-                shadowSize: [41, 41]
-            });
-
-            var marker = L.marker([loc.lat, loc.lng], {icon: customIcon}).addTo(map);
-            marker.bindPopup(`<h6>${loc.name}</h6><p><i class="bi bi-geo-alt-fill text-danger"></i> ${loc.city}, ${loc.province}</p>`);
-            markers.push(marker);
-        });
-
-        // Filter Functionality
-        const provinceFilter = document.getElementById('provinceFilter');
-        const searchInput = document.getElementById('searchInput');
-        const cards = document.querySelectorAll('.dist-card-wrapper');
-        const countDisplay = document.getElementById('distributorCount');
+        // Sync initial count to actual rendered cards
+        if (countDisplay) {
+            countDisplay.textContent = `Menampilkan ${cards.length} distributor`;
+        }
 
         function filterDistributors() {
             const province = provinceFilter.value.toLowerCase();
-            const search = searchInput.value.toLowerCase();
+            const search   = searchInput.value.toLowerCase().trim();
             let visibleCount = 0;
 
+            // ── Filter list cards ──
             cards.forEach(card => {
-                const cardProvince = card.getAttribute('data-province') ? card.getAttribute('data-province').toLowerCase() : '';
-                const cardText = card.textContent.toLowerCase();
+                const cardProvince = (card.getAttribute('data-province') || '').trim().toLowerCase();
+                const cardText     = card.textContent.toLowerCase();
 
-                const matchProvince = province === "" || cardProvince === province;
-                const matchSearch = search === "" || cardText.includes(search);
+                const matchProvince = province === '' || cardProvince === province;
+                const matchSearch   = search === '' || cardText.includes(search);
 
                 if (matchProvince && matchSearch) {
-                    card.style.display = 'block';
+                    card.style.display = '';
                     visibleCount++;
                 } else {
                     card.style.display = 'none';
@@ -408,11 +394,73 @@
             });
 
             countDisplay.textContent = `Menampilkan ${visibleCount} distributor`;
+
+            // ── Filter map markers ──
+            if (leafletMap) {
+                markerData.forEach(function(item) {
+                    const markerProvince = (item.province || '').trim().toLowerCase();
+                    const markerText     = (item.name + ' ' + item.city + ' ' + item.province).toLowerCase();
+
+                    const matchProvince = province === '' || markerProvince === province;
+                    const matchSearch   = search === '' || markerText.includes(search);
+
+                    if (matchProvince && matchSearch) {
+                        if (!leafletMap.hasLayer(item.marker)) item.marker.addTo(leafletMap);
+                    } else {
+                        if (leafletMap.hasLayer(item.marker)) leafletMap.removeLayer(item.marker);
+                    }
+                });
+            }
         }
 
-        if(provinceFilter && searchInput) {
+        if (provinceFilter && searchInput) {
             provinceFilter.addEventListener('change', filterDistributors);
             searchInput.addEventListener('input', filterDistributors);
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') { e.preventDefault(); filterDistributors(); }
+            });
+            const searchBtn = document.getElementById('searchBtn');
+            if (searchBtn) searchBtn.addEventListener('click', filterDistributors);
+        }
+
+        // ── Leaflet Map ───────────────────────────────────────────────────────
+        try {
+            var mapLocations = {!! $mapLocations ?? '[]' !!};
+
+            leafletMap = L.map('distributorMap').setView([-2.5489, 118.0149], 5);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(leafletMap);
+
+            if (mapLocations.length === 0) {
+                mapLocations = [
+                    { name: "PT Sumber Rezeki Aromas", city: "Jakarta Selatan", province: "DKI Jakarta", lat: -6.2088, lng: 106.8456, icon: '{{ $defaultPinUrl }}' },
+                    { name: "CV Berkah Sawit",          city: "Bandung",         province: "Jawa Barat",  lat: -6.9175, lng: 107.6191, icon: '{{ $defaultPinUrl }}' },
+                    { name: "PT Aroma Pangan Nusantara",city: "Surabaya",        province: "Jawa Timur",  lat: -7.2504, lng: 112.7688, icon: '{{ $defaultPinUrl }}' },
+                    { name: "Toko Sembako Maju",         city: "Semarang",        province: "Jawa Tengah", lat: -6.9667, lng: 110.4167, icon: '{{ $defaultPinUrl }}' }
+                ];
+            }
+
+            mapLocations.forEach(function(loc) {
+                try {
+                    var customIcon = L.icon({
+                        iconUrl:    loc.icon || '{{ $defaultPinUrl }}',
+                        shadowUrl:  'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                        iconSize:   [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor:[1, -34],
+                        shadowSize: [41, 41]
+                    });
+                    var marker = L.marker([parseFloat(loc.lat), parseFloat(loc.lng)], {icon: customIcon}).addTo(leafletMap);
+                    marker.bindPopup(`<h6>${loc.name}</h6><p><i class="bi bi-geo-alt-fill text-danger"></i> ${loc.city}, ${loc.province}</p>`);
+                    markerData.push({ marker: marker, name: loc.name, city: loc.city, province: loc.province });
+                } catch (e) {
+                    console.warn('Skipping marker for ' + loc.name + ':', e.message);
+                }
+            });
+        } catch (e) {
+            console.error('Map initialization failed:', e.message);
         }
     });
 </script>
