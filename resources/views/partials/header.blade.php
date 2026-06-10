@@ -142,7 +142,7 @@
         padding-left: 20px;
         padding-top: 0;
     }
-    .navbar .dropdown.show .dropdown-menu.custom-dropdown {
+    .navbar .dropdown-menu.custom-dropdown.show {
         display: block;
     }
     .custom-dropdown .dropdown-item {
