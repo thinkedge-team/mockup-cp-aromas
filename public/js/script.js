@@ -613,9 +613,9 @@ function updateActiveNavLink() {
 
     navLinks.forEach((link) => {
         const href = link.getAttribute("href");
-        if (href && href.startsWith("#")) {
+        if (href && href.startsWith("#") && href !== "#") {
             link.classList.remove("active");
-            if (href === `#${currentSection}`) {
+            if (currentSection && href === `#${currentSection}`) {
                 link.classList.add("active");
             }
         }
@@ -624,38 +624,42 @@ function updateActiveNavLink() {
 
 // ========== SMOOTH SCROLL ==========
 function initSmoothScroll() {
-    const links = document.querySelectorAll('a[href^="#"]');
+    document.addEventListener("click", function (e) {
+        const link = e.target.closest('a[href^="#"]');
+        if (!link) return;
+        
+        // Allow default behavior for carousel controls or tabs if they use hashes
+        if (link.hasAttribute('data-bs-slide') || link.hasAttribute('data-bs-toggle')) return;
 
-    links.forEach((link) => {
-        link.addEventListener("click", function (e) {
-            e.preventDefault();
+        const targetId = link.getAttribute("href");
+        
+        // Prevent default browser jump
+        e.preventDefault();
 
-            const targetId = this.getAttribute("href");
-            if (targetId === "#") return;
+        // If it's just '#' or '#close' (like Leaflet popup), don't scroll
+        if (targetId === "#" || targetId === "#close") return;
 
-            const targetElement = document.querySelector(targetId);
-            if (!targetElement) return;
+        const targetElement = document.querySelector(targetId);
+        if (!targetElement) return;
 
-            const headerOffset = 80;
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition =
-                elementPosition + window.pageYOffset - headerOffset;
+        const headerOffset = 80;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition =
+            elementPosition + window.pageYOffset - headerOffset;
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth",
-            });
-
-            // Close mobile menu if open
-            const navbarCollapse = document.querySelector(".navbar-collapse");
-            if (navbarCollapse.classList.contains("show")) {
-                const bsCollapse =
-                    bootstrap.Collapse.getInstance(navbarCollapse);
-                if (bsCollapse) {
-                    bsCollapse.hide();
-                }
-            }
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
         });
+
+        // Close mobile menu if open
+        const navbarCollapse = document.querySelector(".navbar-collapse");
+        if (navbarCollapse && navbarCollapse.classList.contains("show")) {
+            const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+            if (bsCollapse) {
+                bsCollapse.hide();
+            }
+        }
     });
 }
 

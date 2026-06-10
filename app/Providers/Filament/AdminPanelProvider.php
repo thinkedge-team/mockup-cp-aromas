@@ -44,22 +44,28 @@ class AdminPanelProvider extends PanelProvider
                     ->label("Tentang Kami")
                     ->collapsed(true),
                 \Filament\Navigation\NavigationGroup::make()
-                    ->label("Produk")
-                    ->collapsed(true),
-                \Filament\Navigation\NavigationGroup::make()
                     ->label("Mesin")
-                    ->collapsed(true),
-                \Filament\Navigation\NavigationGroup::make()
-                    ->label("Promo")
-                    ->collapsed(true),
-                \Filament\Navigation\NavigationGroup::make()
-                    ->label("Blog")
                     ->collapsed(true),
                 \Filament\Navigation\NavigationGroup::make()
                     ->label("Portofolio")
                     ->collapsed(true),
                 \Filament\Navigation\NavigationGroup::make()
+                    ->label("Produk")
+                    ->collapsed(true),
+                \Filament\Navigation\NavigationGroup::make()
+                    ->label("Promo")
+                    ->collapsed(true),
+                \Filament\Navigation\NavigationGroup::make()
+                    ->label("Distributor Page")
+                    ->collapsed(true),
+                \Filament\Navigation\NavigationGroup::make()
+                    ->label("Cabang Page")
+                    ->collapsed(true),
+                \Filament\Navigation\NavigationGroup::make()
                     ->label("Kontak")
+                    ->collapsed(true),
+                \Filament\Navigation\NavigationGroup::make()
+                    ->label("Blog")
                     ->collapsed(true),
                 \Filament\Navigation\NavigationGroup::make()
                     ->label("Partnership")

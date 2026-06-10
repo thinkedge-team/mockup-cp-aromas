@@ -19,7 +19,7 @@ class BranchResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-building-storefront';
 
-    protected static ?string $navigationGroup = 'Beranda';
+    protected static ?string $navigationGroup = 'Cabang Page';
 
     protected static ?int $navigationSort = 9;
 

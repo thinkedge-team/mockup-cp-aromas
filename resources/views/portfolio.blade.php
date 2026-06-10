@@ -45,10 +45,10 @@
 
                 @php
                     $totalPartners = $partners->flatten()->count();
-                    $retailCount = $partners['retail']?->count() ?? 0;
-                    $horecaCount = $partners['horeca']?->count() ?? 0;
-                    $industriCount = $partners['industri']?->count() ?? 0;
-                    $cateringCount = $partners['catering']?->count() ?? 0;
+                    $retailCount = $partners->get('retail')?->count() ?? 0;
+                    $horecaCount = $partners->get('horeca')?->count() ?? 0;
+                    $industriCount = $partners->get('industri')?->count() ?? 0;
+                    $cateringCount = $partners->get('catering')?->count() ?? 0;
                 @endphp
 
                 <!-- Hero filter chips — synced with sticky bar -->

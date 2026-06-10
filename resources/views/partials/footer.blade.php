@@ -73,14 +73,14 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-6 col-6">
-                <div class="footer-col-title">Navigasi</div>
+                <div class="footer-col-title">Perusahaan</div>
                 <ul class="footer-links">
-                    <li><a href="{{ url('/') }}">Beranda</a></li>
                     <li><a href="{{ url('/about') }}">Tentang Kami</a></li>
-                    <li><a href="{{ url('/product') }}">Produk</a></li>
-                    <li><a href="{{ url('/promo') }}">Promo</a></li>
-                    <li><a href="{{ url('/blog') }}">Blog</a></li>
-                    <li><a href="{{ url('/contact') }}">Kontak</a></li>
+                    <li><a href="{{ url('/our-machine') }}">Teknologi Mesin</a></li>
+                    <li><a href="{{ url('/portfolio') }}">Portofolio</a></li>
+                    <li><a href="{{ url('/distributor') }}">Distributor</a></li>
+                    <li><a href="{{ url('/branch') }}">Cabang</a></li>
+                    <li><a href="{{ url('/blog') }}">Artikel/Blog</a></li>
                 </ul>
             </div>
             @if($footerBrands->count() > 0)

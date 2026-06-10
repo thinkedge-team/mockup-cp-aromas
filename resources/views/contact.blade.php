@@ -468,39 +468,10 @@ $ctaWaUrl    = 'https://wa.me/' . $ctaWaNum . '?text=' . urlencode($ctaWaMsg);
             </div>
         </div>
 
-        <div class="branch-grid" data-aos="fade-up" data-aos-delay="120">
-            @forelse($branches as $branch)
-            <div class="branch-card {{ $branch->is_under_construction ? 'coming-soon-card' : '' }}">
-                @if($branch->is_under_construction)
-                <div class="branch-coming-soon-badge">
-                    <i class="bi bi-star-fill"></i> Coming Soon
-                </div>
-                @endif
-                <div class="bc-top">
-                    <div class="bc-avatar"><i class="bi bi-building"></i></div>
-                    <div>
-                        <div class="bc-name">{{ $branch->name }}</div>
-                        <div class="bc-type">{{ $branch->category }}</div>
-                    </div>
-                </div>
-                <p class="bc-detail">{{ $branch->address }}<br/>
-                @if(isset($branch->operating_hours['days']) && !$branch->is_under_construction)
-                <i class="bi bi-clock me-1" style="color:var(--gold);"></i>{{ $branch->operating_hours['days'] }}
-                {{ isset($branch->operating_hours['open']) ? $branch->operating_hours['open'] : '' }}–{{ isset($branch->operating_hours['close']) ? $branch->operating_hours['close'] : '' }}
-                @endif
-                </p>
-                <div class="bc-actions">
-                    @if($branch->whatsapp)
-                    <a href="https://wa.me/{{ $branch->whatsapp }}" target="_blank" class="bc-btn wa"><i class="bi bi-whatsapp"></i> WA</a>
-                    @endif
-                    @if($branch->map_link)
-                    <a href="{{ $branch->map_link }}" target="_blank" class="bc-btn maps"><i class="bi bi-map-fill"></i> Maps</a>
-                    @endif
-                </div>
-            </div>
-            @empty
-            <p class="text-center" style="color:var(--g500);">Tidak ada data cabang aktif saat ini.</p>
-            @endforelse
+        <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="120">
+            <a href="{{ url('/branch') }}" class="btn-cta-w" style="display:inline-flex; align-items:center; gap:8px; padding:12px 28px; border-radius:50px; font-weight:600; text-decoration:none; background:linear-gradient(135deg,var(--green),var(--green-dk)); color:#fff; box-shadow:0 6px 20px rgba(34,139,34,0.3);">
+                <i class="bi bi-building"></i> Lihat Semua Cabang Kami
+            </a>
         </div>
     </div>
 </section>

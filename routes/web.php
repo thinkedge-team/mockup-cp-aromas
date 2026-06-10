@@ -23,6 +23,10 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+Route::get('/branch', function () {
+    return view('branch');
+});
+
 Route::get('/our-machine', function () {
     return view('our-machine');
 });
